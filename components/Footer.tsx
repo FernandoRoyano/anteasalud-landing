@@ -1,0 +1,88 @@
+import Link from 'next/link';
+
+export default function Footer() {
+  return (
+    <footer className="w-full bg-slate-950 text-slate-300 py-16 px-4">
+      <div className="max-w-7xl mx-auto">
+        
+        {/* Grid principal */}
+        <div className="grid md:grid-cols-4 gap-12 mb-12">
+          
+          {/* Columna 1: Brand */}
+          <div className="space-y-4">
+            <h3 className="text-2xl font-black text-white">ANTEA</h3>
+            <p className="text-slate-400 text-sm leading-relaxed">
+              Ejercicio funcional y fisioterapia profesional para personas mayores. Recupera movilidad, autonomía y confianza en casa.
+            </p>
+            <div className="flex gap-4 pt-4">
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-2xl hover:text-orange-400 transition">f</a>
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-2xl hover:text-orange-400 transition">📷</a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-2xl hover:text-orange-400 transition">in</a>
+            </div>
+          </div>
+
+          {/* Columna 2: Servicios */}
+          <div className="space-y-4">
+            <h4 className="font-bold text-white text-lg">Servicios</h4>
+            <ul className="space-y-2 text-sm">
+              <li><Link href="#servicios" className="hover:text-orange-400 transition">Entrenamiento funcional</Link></li>
+              <li><Link href="#servicios" className="hover:text-orange-400 transition">Fisioterapia a domicilio</Link></li>
+              <li><Link href="#servicios" className="hover:text-orange-400 transition">Prevención de caídas</Link></li>
+              <li><Link href="#servicios" className="hover:text-orange-400 transition">Seguimiento personalizado</Link></li>
+            </ul>
+          </div>
+
+          {/* Columna 3: Información */}
+          <div className="space-y-4">
+            <h4 className="font-bold text-white text-lg">Información</h4>
+            <ul className="space-y-2 text-sm">
+              <li><Link href="/" className="hover:text-orange-400 transition">Sobre nosotros</Link></li>
+              <li><Link href="/" className="hover:text-orange-400 transition">Preguntas frecuentes</Link></li>
+              <li><Link href="/" className="hover:text-orange-400 transition">Blog</Link></li>
+              <li><Link href="/" className="hover:text-orange-400 transition">Contacto</Link></li>
+            </ul>
+          </div>
+
+          {/* Columna 4: Contacto */}
+          <div className="space-y-4">
+            <h4 className="font-bold text-white text-lg">Contacto</h4>
+            <ul className="space-y-3 text-sm">
+              <li>
+                <a href="tel:+34633261963" className="hover:text-orange-400 transition flex items-center gap-2">
+                  <span>📞</span> 633 261 963
+                </a>
+              </li>
+              <li>
+                <a href="mailto:info@anteasalud.com" className="hover:text-orange-400 transition flex items-center gap-2">
+                  <span>✉️</span> info@anteasalud.com
+                </a>
+              </li>
+              <li>
+                <a href="https://wa.me/34633261963" target="_blank" rel="noopener noreferrer" className="hover:text-orange-400 transition flex items-center gap-2">
+                  <span>💬</span> WhatsApp
+                </a>
+              </li>
+              <li className="text-slate-400 mt-4">
+                Disponible de lunes a viernes<br/>
+                9:00 - 19:00 CET
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Línea separadora */}
+        <div className="h-px bg-slate-800 mb-8"></div>
+
+        {/* Bottom */}
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-400">
+          <p>© 2025 ANTEASalud. Todos los derechos reservados.</p>
+          <div className="flex gap-6">
+            <Link href="/privacidad" className="hover:text-orange-400 transition">Política de privacidad</Link>
+            <Link href="/legal" className="hover:text-orange-400 transition">Aviso legal</Link>
+            <Link href="/cookies" className="hover:text-orange-400 transition">Cookies</Link>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}

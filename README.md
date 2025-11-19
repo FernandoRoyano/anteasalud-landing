@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🏃‍♂️ ANTEASalud · Landing Page
 
-## Getting Started
+Landing profesional para captación de familias que buscan ejercicio funcional y fisioterapia a domicilio para mayores.
 
-First, run the development server:
+Desarrollado con **Next.js, Tailwind CSS** y **EmailJS** para recepción de contactos instantánea sin backend.
 
-```bash
+---
+
+## 🚀 Instalación y Arranque
+
+Instala dependencias
+npm install
+
+Inicia el servidor de desarrollo
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+text
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📦 Estructura principal
 
-## Learn More
+- **Menú móvil tipo bottom sheet** (moderno y ultra usable)
+- **Secciones premium:** Hero, Beneficios, Solución, Servicios, Proceso, Opiniones, Cobertura, FAQs, CTA y Footer
+- **Formulario profesional:** con EmailJS y feedback visual
+- **WhatsApp flotante y contacto directo**
+- **100% responsive y accesible**
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## ✉️ EmailJS: Integración y configuración
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Crea cuenta y servicio en [EmailJS](https://www.emailjs.com/)
+2. Configura en el Dashboard el correo de recepción
+3. Copia tus claves en `components/Contacto.tsx`:
+   - `service_antea_contacto`
+   - `Antea Salud` (nombre de plantilla)
+   - Tu Public Key (ejemplo: `GkuifuSj9iMoXN9fw`)
+4. Los campos enviados están mapeados en la plantilla HTML de EmailJS
+5. Puedes personalizar el asunto, cuerpo y destinatario desde el panel
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🛡️ Seguridad y buenas prácticas
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Todas las claves (.env, .env.local) y archivos de entorno están excluidos con `.gitignore`
+- No se expone información sensible en el repo
+- Los emails llegan solo a la cuenta configurada en EmailJS (modificable en el Dashboard)
+
+---
+
+## 📱 Despliegue y Producción
+
+Puedes desplegar en **Vercel, Netlify, Render** o cualquier host compatible con Next.js  
+Solo necesitas configurar tus variables de entorno y clave pública de EmailJS.
+
+---
+
+## 🔗 Links útiles
+
+- [Anteasalud.com (preview)](https://anteasalud.com)  <!-- Opcional, añade si tienes Live Demo -->
+- [EmailJS Dashboard](https://dashboard.emailjs.com/)
+- [Tailwind CSS docs](https://tailwindcss.com/docs)
+
+---
+
+## 📞 Contacto & soporte
+
+¿Dudas? ¿Feedback?  
+Abre un issue en GitHub, o usa el propio formulario de contacto de la landing para pruebas en real.
+
+---

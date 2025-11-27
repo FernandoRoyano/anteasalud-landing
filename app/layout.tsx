@@ -2,12 +2,13 @@ import './globals.css';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import WhatsAppButton from '../components/WhatsAppButton';
+import CookieBanner from "@/components/CookieBanner";
 
 export const metadata = {
-  title: 'ANTEASalud - Ejercicio y Fisioterapia a Domicilio para Mayores',
+  title: 'ANTEA Salud - Ejercicio y Fisioterapia a Domicilio para Mayores',
   description: 'Ejercicio funcional y fisioterapia profesional en tu casa. Recupera movilidad, autonomía y confianza. +200 familias confían en nosotros. Valoración gratuita.',
   keywords: 'fisioterapia domicilio, ejercicio mayores, rehabilitación en casa, fisioterapeuta',
-  authors: [{ name: 'ANTEASalud' }],
+  authors: [{ name: 'ANTEA Salud' }],
   openGraph: {
     type: 'website',
     locale: 'es_ES',
@@ -31,6 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="font-sans antialiased">
         <Header />
         {children}
+        <CookieBanner/>
         <WhatsAppButton />
         <Footer />
       </body>

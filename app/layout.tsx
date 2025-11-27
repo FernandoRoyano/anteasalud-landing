@@ -13,7 +13,7 @@ export const metadata = {
     locale: 'es_ES',
     url: 'https://anteasalud.com',
     siteName: 'ANTEASalud',
-    title: 'ANTEASalud - Ejercicio y Fisioterapia a Domicilio',
+    title: 'Antea Salud - Ejercicio y Fisioterapia a Domicilio',
     description: 'Ejercicio funcional y fisioterapia profesional en tu casa.',
   },
 };

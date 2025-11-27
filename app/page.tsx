@@ -13,6 +13,7 @@ import Testimonial from '@/components/Testimonial';
 import TrustBadges from '@/components/TrustBadges';
 import WhyUs from '@/components/WhyUs';
 import Contacto from '@/components/Contacto';
+import Pricing from '@/components/Pricing';
 
 export default function Home() {
   return (
@@ -24,6 +25,7 @@ export default function Home() {
       <Solution />
       <Services />
       <Process />
+      <Pricing/>
       <Testimonial />
       <WhyUs />
       <Coverage />

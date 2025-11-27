@@ -58,13 +58,13 @@ export default function FAQs() {
 
         {/* Header */}
         <div className="text-center mb-16 space-y-4">
-          <div className="inline-block px-4 py-2 bg-purple-100 rounded-full">
-            <span className="text-sm font-semibold text-purple-600">Preguntas frecuentes</span>
+          <div className="inline-block px-4 py-2 bg-[rgb(191,231,249)] rounded-full">
+            <span className="text-sm font-semibold text-[rgb(0,94,184)]">Preguntas frecuentes</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-black text-slate-900">
+          <h2 className="text-4xl md:text-5xl font-black text-[rgb(31,41,51)]">
             Respuestas a tus dudas
           </h2>
-          <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+          <p className="text-xl text-[rgb(130,131,130)] max-w-2xl mx-auto">
             Todo lo que necesitas saber sobre nuestro servicio de ejercicio y fisioterapia a domicilio
           </p>
         </div>
@@ -75,24 +75,24 @@ export default function FAQs() {
             <div
               key={index}
               className={`rounded-2xl border-2 transition-all duration-300 ${openIndex === index
-                ? 'border-orange-400 bg-orange-50 shadow-lg'
-                : 'border-slate-200 bg-white shadow-md hover:shadow-lg'
+                ? 'border-[rgb(0,94,184)] bg-[rgb(191,231,249)] shadow-lg'
+                : 'border-[rgb(200,207,210)] bg-white shadow-md hover:shadow-lg'
                 }`}
             >
               {/* Header acordeón */}
               <button
                 onClick={() => toggleAccordion(index)}
-                className={`w-full flex items-center justify-between p-7 text-left transition-colors rounded-2xl ${openIndex === index ? 'bg-orange-50' : 'hover:bg-slate-50'
+                className={`w-full flex items-center justify-between p-7 text-left transition-colors rounded-2xl ${openIndex === index ? 'bg-[rgb(191,231,249)]' : 'hover:bg-[rgb(232,237,238)]'
                   }`}
               >
-                <h3 className={`text-lg font-bold pr-6 flex-1 ${openIndex === index ? 'text-orange-600' : 'text-slate-900'
+                <h3 className={`text-lg font-bold pr-6 flex-1 ${openIndex === index ? 'text-[rgb(0,94,184)]' : 'text-[rgb(31,41,51)]'
                   }`}>
                   {faq.question}
                 </h3>
                 <span
                   className={`flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-full font-bold text-lg transition-all duration-300 ${openIndex === index
-                    ? 'bg-orange-500 text-white rotate-180'
-                    : 'bg-slate-200 text-slate-700'
+                    ? 'bg-[rgb(0,94,184)] text-white rotate-180'
+                    : 'bg-[rgb(232,237,238)] text-[rgb(130,131,130)]'
                     }`}
                 >
                   ▼
@@ -101,8 +101,8 @@ export default function FAQs() {
 
               {/* Respuesta (desplegable) */}
               {openIndex === index && (
-                <div className="px-7 pb-7 pt-0 text-slate-700 leading-relaxed">
-                  <div className="border-t-2 border-orange-200 pt-6">
+                <div className="px-7 pb-7 pt-0 text-[rgb(31,41,51)] leading-relaxed">
+                  <div className="border-t-2 border-[rgb(0,94,184)]/30 pt-6">
                     <p className="text-base md:text-lg">{faq.answer}</p>
                   </div>
                 </div>
@@ -112,17 +112,17 @@ export default function FAQs() {
         </div>
 
         {/* CTA pequeño */}
-        <div className="mt-16 bg-gradient-to-r from-blue-50 to-blue-100 rounded-3xl p-12 text-center border-2 border-blue-300">
-          <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">
+        <div className="mt-16 bg-gradient-to-r from-[rgb(191,231,249)] to-[rgb(232,237,238)] rounded-3xl p-12 text-center border-2 border-[rgb(0,94,184)]/30">
+          <h3 className="text-2xl md:text-3xl font-bold text-[rgb(31,41,51)] mb-4">
             ¿Tienes otra pregunta?
           </h3>
-          <p className="text-lg text-slate-700 mb-8">
-            Nuestro equipo te responderá en <span className="font-bold">menos de 24 horas</span>
+          <p className="text-lg text-[rgb(130,131,130)] mb-8">
+            Nuestro equipo te responderá en <span className="font-bold text-[rgb(31,41,51)]">menos de 24 horas</span>
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="tel:+34633261963"
-              className="inline-flex items-center justify-center px-8 py-4 bg-white border-2 border-slate-300 text-slate-900 font-bold text-lg rounded-2xl hover:bg-slate-50 hover:border-slate-400 shadow-md hover:shadow-lg transition-all"
+              className="inline-flex items-center justify-center px-8 py-4 bg-white border-2 border-[rgb(200,207,210)] text-[rgb(31,41,51)] font-bold text-lg rounded-2xl hover:bg-[rgb(232,237,238)] hover:border-[rgb(0,94,184)] shadow-md hover:shadow-lg transition-all"
             >
               📞 Llamar ahora
             </a>
@@ -130,7 +130,7 @@ export default function FAQs() {
               href="https://wa.me/34633261963?text=Tengo%20una%20pregunta%20sobre%20ANTEA"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-8 py-4 bg-green-500 text-white font-bold text-lg rounded-2xl hover:bg-green-600 shadow-md hover:shadow-lg transition-all"
+              className="inline-flex items-center justify-center px-8 py-4 bg-[rgb(0,94,184)] text-white font-bold text-lg rounded-2xl hover:bg-[rgb(32,113,188)] shadow-md hover:shadow-lg transition-all"
             >
               💬 WhatsApp
             </a>

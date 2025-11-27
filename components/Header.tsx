@@ -36,7 +36,7 @@ export default function Header() {
         <nav className="max-w-7xl mx-auto flex items-center justify-between py-3 md:py-4 px-4 md:px-6">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 flex-shrink-0">
-            <span className="text-2xl md:text-3xl font-black text-blue-800 tracking-tight">
+            <span className="text-2xl md:text-3xl font-black text-[rgb(0,94,184)] tracking-tight">
               ANTEA
             </span>
           </Link>
@@ -46,7 +46,7 @@ export default function Header() {
               <a
                 href="#servicios"
                 onClick={(e) => scrollToSection(e, '#servicios')}
-                className="text-blue-900 hover:text-orange-600 transition cursor-pointer text-base"
+                className="text-[rgb(31,41,51)] hover:text-[rgb(0,94,184)] transition cursor-pointer text-base"
               >
                 Servicios
               </a>
@@ -55,7 +55,7 @@ export default function Header() {
               <a
                 href="#testimonios"
                 onClick={(e) => scrollToSection(e, '#testimonios')}
-                className="text-blue-900 hover:text-orange-600 transition cursor-pointer text-base"
+                className="text-[rgb(31,41,51)] hover:text-[rgb(0,94,184)] transition cursor-pointer text-base"
               >
                 Testimonios
               </a>
@@ -64,7 +64,7 @@ export default function Header() {
               <a
                 href="#contacto"
                 onClick={(e) => scrollToSection(e, '#contacto')}
-                className="text-blue-900 hover:text-orange-600 transition cursor-pointer text-base"
+                className="text-[rgb(31,41,51)] hover:text-[rgb(0,94,184)] transition cursor-pointer text-base"
               >
                 Contacto
               </a>
@@ -73,7 +73,7 @@ export default function Header() {
               <a
                 href="#contacto"
                 onClick={(e) => scrollToSection(e, '#contacto')}
-                className="px-5 py-2.5 bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-bold rounded-full shadow-md hover:shadow-lg hover:scale-105 active:scale-100 transition-all cursor-pointer text-sm"
+                className="px-5 py-2.5 bg-gradient-to-r from-[rgb(32,113,188)] to-[rgb(0,94,184)] text-white font-bold rounded-full shadow-md hover:shadow-lg hover:scale-105 active:scale-100 transition-all cursor-pointer text-sm"
               >
                 Solicita info
               </a>
@@ -81,14 +81,14 @@ export default function Header() {
           </ul>
           {/* Móvil: botón de menú */}
           <button
-            className="lg:hidden flex flex-col justify-center items-center w-10 h-10 rounded-lg bg-slate-100 hover:bg-slate-200 active:bg-slate-300 transition-colors z-50 relative"
+            className="lg:hidden flex flex-col justify-center items-center w-10 h-10 rounded-lg bg-[rgb(232,237,238)] hover:bg-[rgb(200,207,210)] active:bg-[rgb(191,231,249)] transition-colors z-50 relative"
             onClick={() => setMenuOpen(true)}
             aria-label="Abrir menú"
             aria-expanded={menuOpen}
           >
-            <span className="block w-6 h-0.5 bg-blue-900 rounded transition-all duration-300"></span>
-            <span className="block w-6 h-0.5 bg-blue-900 rounded my-1 transition-all duration-300"></span>
-            <span className="block w-6 h-0.5 bg-blue-900 rounded transition-all duration-300"></span>
+            <span className="block w-6 h-0.5 bg-[rgb(0,94,184)] rounded transition-all duration-300"></span>
+            <span className="block w-6 h-0.5 bg-[rgb(0,94,184)] rounded my-1 transition-all duration-300"></span>
+            <span className="block w-6 h-0.5 bg-[rgb(0,94,184)] rounded transition-all duration-300"></span>
           </button>
         </nav>
       </header>
@@ -103,14 +103,14 @@ export default function Header() {
           />
           {/* Bottom sheet */}
           <div className="fixed bottom-0 left-0 w-full z-50 flex lg:hidden">
-            <div className="relative w-full bg-white rounded-t-3xl shadow-2xl max-w-md mx-auto animate-slide-up px-8 pt-8 pb-6 border-t-2 border-slate-200">
+            <div className="relative w-full bg-white rounded-t-3xl shadow-2xl max-w-md mx-auto animate-slide-up px-8 pt-8 pb-6 border-t-2 border-[rgb(200,207,210)]">
               {/* Botón Cerrar */}
               <button
-                className="absolute top-3 right-3 w-9 h-9 rounded-full flex items-center justify-center bg-slate-100 hover:bg-slate-200 transition ring-1 ring-slate-200"
+                className="absolute top-3 right-3 w-9 h-9 rounded-full flex items-center justify-center bg-[rgb(232,237,238)] hover:bg-[rgb(200,207,210)] transition ring-1 ring-[rgb(200,207,210)]"
                 onClick={() => setMenuOpen(false)}
                 aria-label="Cerrar menú"
               >
-                <span className="text-xl text-slate-700">✕</span>
+                <span className="text-xl text-[rgb(130,131,130)]">✕</span>
               </button>
               {/* Enlaces menú, grandes y centrados */}
               <nav>
@@ -119,7 +119,7 @@ export default function Header() {
                     <a
                       href="#servicios"
                       onClick={(e) => scrollToSection(e, '#servicios')}
-                      className="block px-4 py-4 text-xl font-bold text-blue-900 hover:text-orange-600 transition cursor-pointer rounded-xl"
+                      className="block px-4 py-4 text-xl font-bold text-[rgb(31,41,51)] hover:text-[rgb(0,94,184)] transition cursor-pointer rounded-xl"
                     >
                       Servicios
                     </a>
@@ -128,7 +128,7 @@ export default function Header() {
                     <a
                       href="#testimonios"
                       onClick={(e) => scrollToSection(e, '#testimonios')}
-                      className="block px-4 py-4 text-xl font-bold text-blue-900 hover:text-orange-600 transition cursor-pointer rounded-xl"
+                      className="block px-4 py-4 text-xl font-bold text-[rgb(31,41,51)] hover:text-[rgb(0,94,184)] transition cursor-pointer rounded-xl"
                     >
                       Testimonios
                     </a>
@@ -137,7 +137,7 @@ export default function Header() {
                     <a
                       href="#contacto"
                       onClick={(e) => scrollToSection(e, '#contacto')}
-                      className="block px-4 py-4 text-xl font-bold text-blue-900 hover:text-orange-600 transition cursor-pointer rounded-xl"
+                      className="block px-4 py-4 text-xl font-bold text-[rgb(31,41,51)] hover:text-[rgb(0,94,184)] transition cursor-pointer rounded-xl"
                     >
                       Contacto
                     </a>
@@ -146,18 +146,18 @@ export default function Header() {
                     <a
                       href="#contacto"
                       onClick={(e) => scrollToSection(e, '#contacto')}
-                      className="block w-full text-center px-6 py-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-bold rounded-2xl shadow-lg hover:shadow-xl active:scale-95 transition-all cursor-pointer text-lg"
+                      className="block w-full text-center px-6 py-4 bg-gradient-to-r from-[rgb(32,113,188)] to-[rgb(0,94,184)] text-white font-bold rounded-2xl shadow-lg hover:shadow-xl active:scale-95 transition-all cursor-pointer text-lg"
                     >
                       Solicita info
                     </a>
                   </li>
                 </ul>
-                <hr className="my-5 border-slate-100" />
+                <hr className="my-5 border-[rgb(200,207,210)]" />
                 {/* Info de contacto */}
                 <div className="flex flex-col items-center gap-2">
                   <a
                     href="tel:+34633261963"
-                    className="flex items-center gap-3 text-blue-900 text-base hover:text-orange-600 transition"
+                    className="flex items-center gap-3 text-[rgb(31,41,51)] text-base hover:text-[rgb(0,94,184)] transition"
                   >
                     <span className="text-xl">📞</span>
                     <span>633 261 963</span>
@@ -166,7 +166,7 @@ export default function Header() {
                     href="https://wa.me/34633261963?text=Hola,%20me%20gustaría%20información%20sobre%20ANTEASalud"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-3 text-green-600 text-base hover:text-green-700 transition"
+                    className="flex items-center gap-3 text-[rgb(0,94,184)] text-base hover:text-[rgb(32,113,188)] transition"
                   >
                     <span className="text-xl">💬</span>
                     <span>WhatsApp</span>

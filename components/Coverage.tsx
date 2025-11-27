@@ -14,13 +14,13 @@ export default function Coverage() {
         
         {/* Header */}
         <div className="text-center mb-16 space-y-4">
-          <div className="inline-block px-4 py-2 bg-blue-100 rounded-full">
-            <span className="text-sm font-semibold text-blue-600">Disponibilidad</span>
+          <div className="inline-block px-4 py-2 bg-[rgb(191,231,249)] rounded-full">
+            <span className="text-sm font-semibold text-[rgb(0,94,184)]">Disponibilidad</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-black text-slate-900">
+          <h2 className="text-4xl md:text-5xl font-black text-[rgb(31,41,51)]">
             Operamos en toda España
           </h2>
-          <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+          <p className="text-xl text-[rgb(130,131,130)] max-w-2xl mx-auto">
             Presente en más de 100 ciudades. ¿Está la tuya?
           </p>
         </div>
@@ -30,15 +30,15 @@ export default function Coverage() {
           {regions.map((region, index) => (
             <div
               key={index}
-              className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-8 shadow-lg border-2 border-blue-200 hover:shadow-xl hover:border-blue-400 transition-all"
+              className="bg-gradient-to-br from-[rgb(232,237,238)] to-[rgb(191,231,249)] rounded-2xl p-8 shadow-lg border-2 border-[rgb(200,207,210)] hover:shadow-xl hover:border-[rgb(0,94,184)] transition-all"
             >
-              <h3 className="text-2xl font-black text-blue-900 mb-3">
+              <h3 className="text-2xl font-black text-[rgb(0,94,184)] mb-3">
                 {region.name}
               </h3>
-              <p className="text-slate-700 text-sm md:text-base leading-relaxed">
+              <p className="text-[rgb(31,41,51)] text-sm md:text-base leading-relaxed">
                 {region.cities}
               </p>
-              <div className="mt-4 inline-block px-3 py-1 bg-blue-500 text-white text-xs font-bold rounded-full">
+              <div className="mt-4 inline-block px-3 py-1 bg-[rgb(0,94,184)] text-white text-xs font-bold rounded-full">
                 ✓ Servicio disponible
               </div>
             </div>
@@ -46,16 +46,16 @@ export default function Coverage() {
         </div>
 
         {/* Info adicional */}
-        <div className="bg-gradient-to-r from-orange-50 to-yellow-50 rounded-3xl p-12 border-2 border-orange-200 text-center">
-          <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">
+        <div className="bg-gradient-to-r from-[rgb(191,231,249)] to-[rgb(232,237,238)] rounded-3xl p-12 border-2 border-[rgb(0,94,184)]/30 text-center">
+          <h3 className="text-2xl md:text-3xl font-bold text-[rgb(31,41,51)] mb-4">
             ¿Tu ciudad no aparece?
           </h3>
-          <p className="text-lg text-slate-700 mb-8">
+          <p className="text-lg text-[rgb(130,131,130)] mb-8">
             Estamos expandiendo constantemente. Contacta con nosotros y te diremos si pronto llegaremos a tu zona.
           </p>
           <a
             href="tel:+34633261963"
-            className="inline-flex items-center justify-center px-8 py-4 bg-orange-500 text-white font-bold rounded-2xl hover:bg-orange-600 shadow-lg hover:shadow-xl transition-all"
+            className="inline-flex items-center justify-center px-8 py-4 bg-[rgb(0,94,184)] text-white font-bold rounded-2xl hover:bg-[rgb(32,113,188)] shadow-lg hover:shadow-xl transition-all"
           >
             📞 Consulta disponibilidad
           </a>

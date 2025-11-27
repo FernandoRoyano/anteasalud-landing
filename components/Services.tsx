@@ -32,13 +32,13 @@ export default function Services() {
         
         {/* Header */}
         <div className="text-center mb-20 space-y-4">
-          <div className="inline-block px-4 py-2 bg-orange-100 rounded-full">
-            <span className="text-sm font-semibold text-orange-600">Nuestros servicios</span>
+          <div className="inline-block px-4 py-2 bg-[rgb(191,231,249)] rounded-full">
+            <span className="text-sm font-semibold text-[rgb(0,94,184)]">Nuestros servicios</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-black text-slate-900">
+          <h2 className="text-4xl md:text-5xl font-black text-[rgb(31,41,51)]">
             Ejercicio y fisioterapia adaptada
           </h2>
-          <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+          <p className="text-xl text-[rgb(130,131,130)] max-w-2xl mx-auto">
             Soluciones profesionales diseñadas para recuperar movilidad, autonomía y confianza en casa
           </p>
         </div>
@@ -48,7 +48,7 @@ export default function Services() {
           {services.map((service, index) => (
             <div
               key={index}
-              className="group bg-gradient-to-br from-slate-50 to-blue-50 rounded-2xl p-8 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-slate-100 hover:border-orange-300"
+              className="group bg-gradient-to-br from-[rgb(232,237,238)] to-[rgb(191,231,249)] rounded-2xl p-8 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-[rgb(200,207,210)] hover:border-[rgb(0,94,184)]"
             >
               {/* Icono */}
               <div className="text-5xl mb-6 group-hover:scale-110 transition-transform duration-300">
@@ -56,24 +56,24 @@ export default function Services() {
               </div>
 
               {/* Titulo */}
-              <h3 className="text-xl font-bold text-slate-900 mb-3">
+              <h3 className="text-xl font-bold text-[rgb(31,41,51)] mb-3">
                 {service.title}
               </h3>
 
               {/* Descripción */}
-              <p className="text-slate-600 text-sm md:text-base leading-relaxed mb-6">
+              <p className="text-[rgb(130,131,130)] text-sm md:text-base leading-relaxed mb-6">
                 {service.description}
               </p>
 
               {/* Highlight */}
-              <div className="inline-block px-3 py-1 bg-orange-100 rounded-full">
-                <span className="text-xs font-semibold text-orange-700">
+              <div className="inline-block px-3 py-1 bg-[rgb(191,231,249)] rounded-full">
+                <span className="text-xs font-semibold text-[rgb(0,94,184)]">
                   ✓ {service.highlight}
                 </span>
               </div>
 
               {/* Link/arrow hover */}
-              <div className="mt-6 flex items-center text-orange-600 font-semibold group-hover:gap-3 gap-2 transition-all duration-300">
+              <div className="mt-6 flex items-center text-[rgb(0,94,184)] font-semibold group-hover:gap-3 gap-2 transition-all duration-300">
                 <span>Más info</span>
                 <span className="text-xl group-hover:translate-x-1 transition-transform">→</span>
               </div>

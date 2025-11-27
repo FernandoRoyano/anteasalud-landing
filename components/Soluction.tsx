@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 export default function Solution() {
   return (
-    <section className="w-full bg-gradient-to-b from-blue-600 to-blue-700 py-24 px-4">
+    <section className="w-full bg-gradient-to-b from-[rgb(0,94,184)] to-[rgb(0,60,115)] py-24 px-4">
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
         
         {/* Columna imagen - CON IMAGEN REAL */}
@@ -25,7 +25,7 @@ export default function Solution() {
             Profesionales expertos que vienen a casa
           </h2>
           
-          <div className="space-y-6 text-lg md:text-xl text-blue-50 leading-relaxed">
+          <div className="space-y-6 text-lg md:text-xl text-[rgb(191,231,249)] leading-relaxed">
             <p>
               Imagina la <span className="font-bold text-white">tranquilidad de saber</span> que tu padre o tu madre 
               recibe ejercicio adaptado y fisioterapia profesional <span className="font-bold text-white">sin salir de casa</span>.
@@ -45,12 +45,12 @@ export default function Solution() {
           
           <div className="grid grid-cols-2 gap-6 pt-4">
             <div className="space-y-2">
-              <div className="text-4xl font-black text-orange-400">100%</div>
-              <p className="text-sm text-blue-100">Profesionales titulados</p>
+              <div className="text-4xl font-black text-white">100%</div>
+              <p className="text-sm text-[rgb(191,231,249)]">Profesionales titulados</p>
             </div>
             <div className="space-y-2">
-              <div className="text-4xl font-black text-orange-400">24/7</div>
-              <p className="text-sm text-blue-100">Seguimiento continuo</p>
+              <div className="text-4xl font-black text-white">24/7</div>
+              <p className="text-sm text-[rgb(191,231,249)]">Seguimiento continuo</p>
             </div>
           </div>
         </div>

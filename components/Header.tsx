@@ -37,7 +37,7 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 flex-shrink-0">
             <span className="text-2xl md:text-3xl font-black text-[rgb(0,94,184)] tracking-tight">
-              ANTEA SALUD
+              VITALIA SALUD
             </span>
           </Link>
           {/* Desktop menu */}

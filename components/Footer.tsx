@@ -10,7 +10,7 @@ export default function Footer() {
           
           {/* Columna 1: Brand */}
           <div className="space-y-4">
-            <h3 className="text-2xl font-black text-white">ANTEA</h3>
+            <h3 className="text-2xl font-black text-white">VITALIA</h3>
             <p className="text-[rgb(130,131,130)] text-sm leading-relaxed">
               Ejercicio funcional y fisioterapia profesional para personas mayores. Recupera movilidad, autonomía y confianza en casa.
             </p>
@@ -54,7 +54,7 @@ export default function Footer() {
               </li>
               <li>
                 <a href="mailto:info@anteasalud.com" className="hover:text-[rgb(0,94,184)] transition flex items-center gap-2">
-                  <span>✉️</span> info@anteasalud.com
+                  <span>✉️</span> info@vitaliasalud.com
                 </a>
               </li>
               <li>
@@ -75,7 +75,7 @@ export default function Footer() {
 
         {/* Bottom */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-[rgb(130,131,130)]">
-          <p>© 2025 ANTEASalud. Todos los derechos reservados.</p>
+          <p>© 2025 VITALIA SALUD. Todos los derechos reservados.</p>
           <div className="flex gap-6">
             <Link href="/privacidad" className="hover:text-[rgb(0,94,184)] transition">Política de privacidad</Link>
             <Link href="/aviso-legal" className="hover:text-[rgb(0,94,184)] transition">Aviso legal</Link>

@@ -35,7 +35,7 @@ export default function CTAFinal() {
 
           {/* Botón 2: WhatsApp */}
           <a
-            href="https://wa.me/34633261963?text=Hola,%20me%20gustaría%20información%20sobre%20ANTEASalud"
+            href="https://wa.me/34633261963?text=Hola,%20me%20gustaría%20información%20sobre%20VITALIASalud"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center px-10 py-6 bg-gradient-to-r from-green-500 to-green-600 text-white font-bold text-xl rounded-3xl shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-300"
@@ -82,7 +82,7 @@ export default function CTAFinal() {
         {/* Testimonio destacado */}
         <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20">
           <p className="text-lg md:text-xl text-white italic mb-4">
-            "En 6 semanas recuperé toda la movilidad. No solo volví a andar, volví a vivir. Gracias ANTEA."
+            "En 6 semanas recuperé toda la movilidad. No solo volví a andar, volví a vivir. Gracias VITALIA."
           </p>
           <p className="text-blue-200 font-semibold">
             — Isabel M., Madrid • Cliente desde hace 1 año

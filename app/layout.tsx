@@ -5,16 +5,16 @@ import WhatsAppButton from '../components/WhatsAppButton';
 import CookieBanner from "@/components/CookieBanner";
 
 export const metadata = {
-  title: 'ANTEA Salud - Ejercicio y Fisioterapia a Domicilio para Mayores',
+  title: 'VITALIA Salud - Ejercicio y Fisioterapia a Domicilio para Mayores',
   description: 'Ejercicio funcional y fisioterapia profesional en tu casa. Recupera movilidad, autonomía y confianza. +200 familias confían en nosotros. Valoración gratuita.',
   keywords: 'fisioterapia domicilio, ejercicio mayores, rehabilitación en casa, fisioterapeuta',
-  authors: [{ name: 'ANTEA Salud' }],
+  authors: [{ name: 'VITALIA Salud' }],
   openGraph: {
     type: 'website',
     locale: 'es_ES',
     url: 'https://anteasalud.com',
-    siteName: 'ANTEA Salud',
-    title: 'Antea Salud - Ejercicio y Fisioterapia a Domicilio',
+    siteName: 'VITALIA Salud',
+    title: 'VITALIA Salud - Ejercicio y Fisioterapia a Domicilio',
     description: 'Ejercicio funcional y fisioterapia profesional en tu casa.',
   },
 };

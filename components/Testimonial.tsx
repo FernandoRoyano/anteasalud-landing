@@ -5,7 +5,7 @@ export default function Testimonials() {
       city: "Madrid",
       relation: "Hija de usuaria",
       stars: 5,
-      text: "Mi madre tenía mucho miedo a caerse después de la operación de cadera. Con ANTEA recuperó la confianza en solo 6 semanas. Ahora camina sola por casa sin ayuda. ¡Increíble!",
+      text: "Mi madre tenía mucho miedo a caerse después de la operación de cadera. Con VITALIA recuperó la confianza en solo 6 semanas. Ahora camina sola por casa sin ayuda. ¡Increíble!",
       initial: "MG",
       color: "bg-blue-400"
     },
@@ -23,7 +23,7 @@ export default function Testimonials() {
       city: "Valencia",
       relation: "Hija",
       stars: 5,
-      text: "Llevaba meses sin poder levantarse del sofá. Ahora sube escaleras, camina por la calle y hasta va a pasear al parque. ANTEA ha sido un cambio radical en su vida. ¡Gracias!",
+      text: "Llevaba meses sin poder levantarse del sofá. Ahora sube escaleras, camina por la calle y hasta va a pasear al parque. VITALIA ha sido un cambio radical en su vida. ¡Gracias!",
       initial: "CR",
       color: "bg-green-400"
     },
@@ -41,7 +41,7 @@ export default function Testimonials() {
       city: "Bilbao",
       relation: "Cónyuge",
       stars: 5,
-      text: "Tras la caída, pensé que mi marido no volvería a ser el mismo. ANTEA me ha devuelto la esperanza. Ahora recupera movilidad cada semana. ¡Increíble profesionalidad!",
+      text: "Tras la caída, pensé que mi marido no volvería a ser el mismo. VITALIA me ha devuelto la esperanza. Ahora recupera movilidad cada semana. ¡Increíble profesionalidad!",
       initial: "AF",
       color: "bg-pink-400"
     },
@@ -50,7 +50,7 @@ export default function Testimonials() {
       city: "Zaragoza",
       relation: "Hijo",
       stars: 5,
-      text: "Llevo 3 meses con ANTEA y puedo confirmar que mi madre está como nunca. Más autónoma, más fuerte, más feliz. El equipo es extraordinario. Mejor decisión que hemos tomado.",
+      text: "Llevo 3 meses con VITALIA y puedo confirmar que mi madre está como nunca. Más autónoma, más fuerte, más feliz. El equipo es extraordinario. Mejor decisión que hemos tomado.",
       initial: "LS",
       color: "bg-indigo-400"
     }

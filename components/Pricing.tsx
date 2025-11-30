@@ -136,7 +136,7 @@ export default function Pricing() {
             </ul>
 
             <a
-              href="https://wa.me/34633261963?text=Hola,%20me%20gustaría%20un%20plan%20personalizado%20de%20ANTEA%20Salud"
+              href="https://wa.me/34633261963?text=Hola,%20me%20gustaría%20un%20plan%20personalizado%20de%VITALIA%20Salud"
               target="_blank"
               rel="noopener noreferrer"
               className="block w-full text-center py-4 rounded-xl font-bold bg-[rgb(232,237,238)] text-[rgb(31,41,51)] hover:bg-[rgb(200,207,210)] transition-all"

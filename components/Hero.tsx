@@ -43,7 +43,7 @@ export default function Hero() {
             </div>
             <div>
               <p className="text-sm font-bold text-slate-900">+200 familias</p>
-              <p className="text-sm text-[rgb(130,131,130)]">ya confían en ANTEA</p>
+              <p className="text-sm text-[rgb(130,131,130)]">ya confían en VITALIA</p>
             </div>
           </div>
         </div>
@@ -53,7 +53,7 @@ export default function Hero() {
           <div className="absolute inset-0 bg-gradient-to-br from-[rgb(0,94,184)]/20 to-[rgb(191,231,249)]/30"></div>
           <Image
             src="/hero-realistic.png"
-            alt="Profesional de ANTEA cuidando a persona mayor"
+            alt="Profesional de VITALIA cuidando a persona mayor"
             fill
             className="object-cover"
             priority

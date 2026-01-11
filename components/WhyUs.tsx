@@ -51,7 +51,7 @@ export default function WhyUs() {
             Lo que nos diferencia
           </h2>
           <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-            6 razones por las que +200 familias confían en VITALIA Salud
+            6 razones por las que +200 familias confían en ANTEA Salud
           </p>
         </div>
 

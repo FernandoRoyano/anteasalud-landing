@@ -37,7 +37,7 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 flex-shrink-0">
             <span className="text-2xl md:text-3xl font-black text-[rgb(0,94,184)] tracking-tight">
-              VITALIA SALUD
+              ANTEA SALUD
             </span>
           </Link>
           {/* Desktop menu */}
@@ -163,7 +163,7 @@ export default function Header() {
                     <span>633 261 963</span>
                   </a>
                   <a
-                    href="https://wa.me/34633261963?text=Hola,%20me%20gustaría%20información%20sobre%20VITALIASalud"
+                    href="https://wa.me/34633261963?text=Hola,%20me%20gustaría%20información%20sobre%20ANTEA%Salud"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 text-[rgb(0,94,184)] text-base hover:text-[rgb(32,113,188)] transition"

@@ -1,7 +1,7 @@
 export default function WhatsAppButton() {
   return (
     <a
-      href="https://wa.me/34633261963?text=Hola,%20me%20gustaría%20información%20sobre%20ANTEA%Salud"
+      href="https://wa.me/34633261963?text=Hola,%20me%20gustaría%20información%20sobre%20ANTEA%20Salud"
       target="_blank"
       rel="noopener noreferrer"
       className="fixed bottom-8 right-8 z-40 flex items-center justify-center w-16 h-16 rounded-full bg-green-500 text-white shadow-2xl hover:bg-green-600 hover:scale-110 transition-all duration-300 animate-bounce"

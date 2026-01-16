@@ -44,8 +44,8 @@ export default function WhyUs() {
         
         {/* Header */}
         <div className="text-center mb-20 space-y-4">
-          <div className="inline-block px-4 py-2 bg-green-100 rounded-full">
-            <span className="text-sm font-semibold text-green-600">¿Por qué elegirnos?</span>
+          <div className="inline-block px-4 py-2 bg-[rgb(191,231,249)] rounded-full">
+            <span className="text-sm font-semibold text-[rgb(0,94,184)]">¿Por qué elegirnos?</span>
           </div>
           <h2 className="text-4xl md:text-5xl font-black text-slate-900">
             Lo que nos diferencia
@@ -60,7 +60,7 @@ export default function WhyUs() {
           {reasons.map((reason, index) => (
             <div
               key={index}
-              className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-slate-100 hover:border-green-300 group"
+              className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-slate-100 hover:border-[rgb(0,94,184)] group"
             >
               {/* Icono grande */}
               <div className="text-6xl mb-6 group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300">
@@ -78,8 +78,8 @@ export default function WhyUs() {
               </p>
 
               {/* Highlight badge */}
-              <div className="inline-block px-4 py-2 bg-green-100 rounded-full">
-                <span className="text-sm font-bold text-green-700">
+              <div className="inline-block px-4 py-2 bg-[rgb(191,231,249)] rounded-full">
+                <span className="text-sm font-bold text-[rgb(0,94,184)]">
                   ✓ {reason.highlight}
                 </span>
               </div>

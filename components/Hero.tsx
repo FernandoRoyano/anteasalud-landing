@@ -58,10 +58,6 @@ export default function Hero() {
             className="object-cover"
             priority
           />
-
-          <div className="w-full h-full bg-gradient-to-br from-[rgb(191,231,249)] to-[rgb(232,237,238)] flex items-center justify-center">
-            <p className="text-2xl font-bold text-[rgb(130,131,130)]">Imagen profesional aquí</p>
-          </div>
         </div>
       </div>
     </section>

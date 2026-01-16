@@ -8,27 +8,25 @@ export default function Contacto() {
     const [enviando, setEnviando] = useState(false);
     const [estado, setEstado] = useState<'ok' | 'error' | ''>('');
 
-    const actualizarOpciones = () => {
-        if (!form.current) return;
-        const seleccionadas = Array.from(
-            form.current.querySelectorAll<HTMLInputElement>('input[name="opciones"]:checked')
-        ).map((input) => input.value);
-        const campo = form.current.querySelector<HTMLInputElement>('input[name="opciones_resumen"]');
-        if (campo) campo.value = seleccionadas.join(', ');
-    };
-
     const enviarCorreo = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!form.current) return;
 
-        actualizarOpciones();
+        // Recopilar opciones seleccionadas manualmente antes de enviar
+        const formData = new FormData(form.current);
+        const opciones = formData.getAll('opciones');
+        const opcionesResumenInput = form.current.querySelector<HTMLInputElement>('input[name="opciones_resumen"]');
+        if (opcionesResumenInput) {
+            opcionesResumenInput.value = opciones.join(', ');
+        }
+
         setEnviando(true);
         setEstado('');
 
         try {
             await emailjs.sendForm(
                 'service_antea_contacto', // <-- pon tu service ID aquí
-                'Antea Salud',            // <-- pon tu template ID aquí
+                'Antea Salud',            // <-- ¡IMPORTANTE! Verifica que este sea el ID (ej. template_x9x9x9) y no solo el nombre
                 form.current,
                 'GkuifuSj9iMoXN9fw'       // <-- pon tu public key aquí
             );
@@ -46,8 +44,8 @@ export default function Contacto() {
     return (
         <section id="contacto" className="w-full py-16 px-4 bg-white">
             <div className="max-w-4xl mx-auto">
-                <h2 className="text-3xl md:text-4xl font-black text-blue-800 mb-4 text-center">
-                    Solicita tu Evaluación Gratuita de Ejercicio para Mayores en Madrid
+                <h2 className="text-3xl md:text-4xl font-black text-[rgb(0,94,184)] mb-4 text-center">
+                    Solicita tu Evaluación Gratuita de Ejercicio para Mayores
                 </h2>
                 <p className="text-lg text-slate-600 mb-10 text-center">
                     Primera valoración sin compromiso. Solo 5 nuevas familias al mes.
@@ -55,7 +53,7 @@ export default function Contacto() {
                 <div className="grid md:grid-cols-2 gap-10 items-start">
                     {/* Contacto Directo */}
                     <div className="bg-white rounded-2xl shadow-lg p-8 flex flex-col gap-6">
-                        <h3 className="font-bold text-blue-800 text-lg mb-4">📞 Contacto Inmediato</h3>
+                        <h3 className="font-bold text-[rgb(0,94,184)] text-lg mb-4">📞 Contacto Inmediato</h3>
                         <a
                             href="https://wa.me/34633261963?text=Hola,%20quiero%20información%20sobre%20ejercicio%20para%20personas%20mayores%20a%20domicilio"
                             target="_blank"
@@ -79,21 +77,21 @@ export default function Contacto() {
                             </div>
                             <div>
                                 <h4 className="font-bold text-slate-700">📍 Zona Servicio</h4>
-                                <p className="text-sm text-slate-900">Madrid Capital y alrededores</p>
-                                <small className="text-slate-500">Pozuelo • Las Rozas • Majadahonda • Alcobendas</small>
+                                <p className="text-sm text-slate-900">Toda España</p>
+                                <small className="text-slate-500">Madrid • Barcelona • Valencia • Sevilla • Bilbao y más</small>
                             </div>
                         </div>
                     </div>
                     {/* Formulario */}
                     <div className="bg-white rounded-2xl shadow-lg p-8">
-                        <h3 className="font-bold text-blue-800 text-lg mb-4">✍️ O escríbenos aquí</h3>
+                        <h3 className="font-bold text-[rgb(0,94,184)] text-lg mb-4">✍️ O escríbenos aquí</h3>
                         <form ref={form} onSubmit={enviarCorreo} className="flex flex-col gap-4 text-slate-900">
                             <input
                                 type="text"
                                 name="user_name"
                                 placeholder="Tu nombre completo"
                                 required
-                                className="px-4 py-3 rounded-xl border border-slate-300 focus:border-orange-500 focus:ring-1 focus:ring-orange-300 transition text-slate-900"
+                                className="px-4 py-3 rounded-xl border border-slate-300 focus:border-[rgb(0,94,184)] focus:ring-1 focus:ring-[rgb(191,231,249)] transition text-slate-900"
                                 disabled={enviando}
                             />
                             <input
@@ -101,40 +99,39 @@ export default function Contacto() {
                                 name="user_email"
                                 placeholder="Tu email"
                                 required
-                                className="px-4 py-3 rounded-xl border border-slate-300 focus:border-orange-500 focus:ring-1 focus:ring-orange-300 transition text-slate-900"
+                                className="px-4 py-3 rounded-xl border border-slate-300 focus:border-[rgb(0,94,184)] focus:ring-1 focus:ring-[rgb(191,231,249)] transition text-slate-900"
                                 disabled={enviando}
                             />
                             <input
                                 type="tel"
                                 name="user_phone"
                                 placeholder="Teléfono de contacto"
-                                className="px-4 py-3 rounded-xl border border-slate-300 focus:border-orange-500 focus:ring-1 focus:ring-orange-300 transition text-slate-900"
+                                required
+                                className="px-4 py-3 rounded-xl border border-slate-300 focus:border-[rgb(0,94,184)] focus:ring-1 focus:ring-[rgb(191,231,249)] transition text-slate-900"
                                 disabled={enviando}
                             />
                             <select
                                 name="ubicacion"
                                 required
                                 disabled={enviando}
-                                className="px-4 py-3 rounded-xl border border-slate-300 focus:border-orange-500 focus:ring-1 focus:ring-orange-300 transition text-slate-900"
+                                className="px-4 py-3 rounded-xl border border-slate-300 focus:border-[rgb(0,94,184)] focus:ring-1 focus:ring-[rgb(191,231,249)] transition text-slate-900"
                             >
                                 <option value="">¿En qué zona necesitas el servicio?</option>
-                                <option value="Madrid Centro">Madrid Centro</option>
-                                <option value="Madrid Norte">Madrid Norte</option>
-                                <option value="Madrid Sur">Madrid Sur</option>
-                                <option value="Madrid Este">Madrid Este</option>
-                                <option value="Madrid Oeste">Madrid Oeste</option>
-                                <option value="Pozuelo">Pozuelo de Alarcón</option>
-                                <option value="Las Rozas">Las Rozas</option>
-                                <option value="Majadahonda">Majadahonda</option>
-                                <option value="Alcobendas">Alcobendas</option>
-                                <option value="Otra">Otra zona</option>
+                                <option value="Madrid">Madrid y alrededores</option>
+                                <option value="Barcelona">Barcelona y alrededores</option>
+                                <option value="Valencia">Valencia y alrededores</option>
+                                <option value="Sevilla">Sevilla y alrededores</option>
+                                <option value="Bilbao">Bilbao / País Vasco</option>
+                                <option value="Zaragoza">Zaragoza</option>
+                                <option value="Málaga">Málaga / Costa del Sol</option>
+                                <option value="Otra">Otra ciudad</option>
                             </select>
                             <textarea
                                 name="message"
                                 placeholder="Cuéntanos: ¿edad?, ¿situación actual?, ¿objetivos?..."
                                 required
                                 rows={4}
-                                className="px-4 py-3 rounded-xl border border-slate-300 focus:border-orange-500 focus:ring-1 focus:ring-orange-300 transition resize-none text-slate-900"
+                                className="px-4 py-3 rounded-xl border border-slate-300 focus:border-[rgb(0,94,184)] focus:ring-1 focus:ring-[rgb(191,231,249)] transition resize-none text-slate-900"
                                 disabled={enviando}
                             />
                             <div>
@@ -145,9 +142,8 @@ export default function Contacto() {
                                             type="checkbox"
                                             name="opciones"
                                             value="Evaluación gratuita"
-                                            onChange={actualizarOpciones}
                                             disabled={enviando}
-                                            className="accent-orange-500"
+                                            className="accent-[rgb(0,94,184)]"
                                         />
                                         <span className="text-slate-900">🔍 Evaluación gratuita</span>
                                     </label>
@@ -155,32 +151,29 @@ export default function Contacto() {
                                         <input
                                             type="checkbox"
                                             name="opciones"
-                                            value="Programa básico"
-                                            onChange={actualizarOpciones}
+                                            value="Sesión suelta"
                                             disabled={enviando}
-                                            className="accent-orange-500"
+                                            className="accent-[rgb(0,94,184)]"
                                         />
-                                        <span className="text-slate-900">💪 Programa básico (4 sesiones)</span>
+                                        <span className="text-slate-900">💪 Sesión suelta (45€)</span>
                                     </label>
                                     <label className="flex items-center gap-1">
                                         <input
                                             type="checkbox"
                                             name="opciones"
-                                            value="Programa integral"
-                                            onChange={actualizarOpciones}
+                                            value="Plan semanal"
                                             disabled={enviando}
-                                            className="accent-orange-500"
+                                            className="accent-[rgb(0,94,184)]"
                                         />
-                                        <span className="text-slate-900">🎯 Programa integral (8 sesiones)</span>
+                                        <span className="text-slate-900">🎯 Plan 2 días/semana (70€)</span>
                                     </label>
                                     <label className="flex items-center gap-1">
                                         <input
                                             type="checkbox"
                                             name="opciones"
                                             value="Solo información"
-                                            onChange={actualizarOpciones}
                                             disabled={enviando}
-                                            className="accent-orange-500"
+                                            className="accent-[rgb(0,94,184)]"
                                         />
                                         <span className="text-slate-900">ℹ️ Solo información y precios</span>
                                     </label>
@@ -189,7 +182,7 @@ export default function Contacto() {
                             <input type="hidden" name="opciones_resumen" />
                             <button
                                 type="submit"
-                                className="mt-4 w-full py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold rounded-xl shadow-lg hover:shadow-2xl hover:scale-105 active:scale-100 transition"
+                                className="mt-4 w-full py-3 bg-gradient-to-r from-[rgb(32,113,188)] to-[rgb(0,94,184)] text-white font-bold rounded-xl shadow-lg hover:shadow-2xl hover:scale-105 active:scale-100 transition"
                                 disabled={enviando}
                             >
                                 {enviando ? '⏳ Enviando...' : '📧 Solicitar información'}
@@ -212,11 +205,11 @@ export default function Contacto() {
                 </div>
                 {/* Garantías */}
                 <div className="mt-16">
-                    <h3 className="text-center font-bold text-blue-800 text-lg mb-8">🛡️ Tu Tranquilidad es Nuestra Prioridad</h3>
+                    <h3 className="text-center font-bold text-[rgb(0,94,184)] text-lg mb-8">🛡️ Tu Tranquilidad es Nuestra Prioridad</h3>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div className="bg-white rounded-2xl shadow p-6 flex flex-col items-center">
                             <span className="text-3xl">🆓</span>
-                            <h4 className="font-bold mt-2 mb-1 text-slate-900">Primera Sesión Gratis</h4>
+                            <h4 className="font-bold mt-2 mb-1 text-slate-900">Valoración Gratuita</h4>
                             <p className="text-sm text-slate-600 text-center">Sin compromiso ni letra pequeña</p>
                         </div>
                         <div className="bg-white rounded-2xl shadow p-6 flex flex-col items-center">

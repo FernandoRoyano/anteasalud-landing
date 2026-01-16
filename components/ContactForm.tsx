@@ -1,10 +1,10 @@
 "use client";
 
 import { useRef, useState } from "react";
-import emailjs from "emailjs-com";
+import emailjs from "@emailjs/browser";
 
 export default function ContactForm() {
-  const formRef = useRef(null);
+  const formRef = useRef<HTMLFormElement>(null);
   const [status, setStatus] = useState("");
 
   // Sustituye estos valores por los tuyos de EmailJS dashboard
@@ -14,11 +14,15 @@ export default function ContactForm() {
 
   const enviarEmail = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!formRef.current) return;
     setStatus("Enviando...");
 
-    emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, formRef.current!, USER_ID)
+    emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, formRef.current, USER_ID)
       .then(
-        () => setStatus("¡Mensaje enviado correctamente!"),
+        () => {
+          setStatus("¡Mensaje enviado correctamente!");
+          formRef.current?.reset();
+        },
         () => setStatus("Error al enviar, inténtalo de nuevo.")
       );
   };

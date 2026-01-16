@@ -9,7 +9,7 @@ export default function TrustBadges() {
           {/* Placeholder badges - reemplaza con logos reales cuando los tengas */}
           <div className="text-center">
             <div className="text-4xl mb-2 text-[rgb(0,94,184)]">🏆</div>
-            <p className="text-xs font-semibold text-[rgb(31,41,51)]">Mejor servicio<br/>salud 2024</p>
+            <p className="text-xs font-semibold text-[rgb(31,41,51)]">Mejor servicio<br/>salud 2025</p>
           </div>
           <div className="text-center">
             <div className="text-4xl mb-2 text-[rgb(0,94,184)]">⭐</div>

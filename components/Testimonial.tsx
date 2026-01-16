@@ -7,7 +7,7 @@ export default function Testimonials() {
       stars: 5,
       text: "Mi madre tenía mucho miedo a caerse después de la operación de cadera. Con ANTEA recuperó la confianza en solo 6 semanas. Ahora camina sola por casa sin ayuda. ¡Increíble!",
       initial: "MG",
-      color: "bg-blue-400"
+      color: "bg-[rgb(0,94,184)]"
     },
     {
       name: "Juan López",
@@ -16,7 +16,7 @@ export default function Testimonials() {
       stars: 5,
       text: "Mi esposa está mucho más fuerte y activa. Los profesionales son muy cuidadosos y adaptan los ejercicios a su ritmo. Además, el trato es excepcional. Los recomendaría sin dudarlo.",
       initial: "JL",
-      color: "bg-orange-400"
+      color: "bg-[rgb(32,113,188)]"
     },
     {
       name: "Carmen Rodríguez",
@@ -25,7 +25,7 @@ export default function Testimonials() {
       stars: 5,
       text: "Llevaba meses sin poder levantarse del sofá. Ahora sube escaleras, camina por la calle y hasta va a pasear al parque. ANTEA ha sido un cambio radical en su vida. ¡Gracias!",
       initial: "CR",
-      color: "bg-green-400"
+      color: "bg-[rgb(0,94,184)]"
     },
     {
       name: "Roberto Martínez",
@@ -34,7 +34,7 @@ export default function Testimonials() {
       stars: 5,
       text: "La valoración fue muy completa y personalizada. No es un servicio genérico, cada sesión es diferente según mi padre mejora. Muy profesionales y humanos a la vez.",
       initial: "RM",
-      color: "bg-purple-400"
+      color: "bg-[rgb(32,113,188)]"
     },
     {
       name: "Ana Fernández",
@@ -43,7 +43,7 @@ export default function Testimonials() {
       stars: 5,
       text: "Tras la caída, pensé que mi marido no volvería a ser el mismo. ANTEA me ha devuelto la esperanza. Ahora recupera movilidad cada semana. ¡Increíble profesionalidad!",
       initial: "AF",
-      color: "bg-pink-400"
+      color: "bg-[rgb(0,94,184)]"
     },
     {
       name: "Luis Sánchez",
@@ -52,7 +52,7 @@ export default function Testimonials() {
       stars: 5,
       text: "Llevo 3 meses con ANTEA y puedo confirmar que mi madre está como nunca. Más autónoma, más fuerte, más feliz. El equipo es extraordinario. Mejor decisión que hemos tomado.",
       initial: "LS",
-      color: "bg-indigo-400"
+      color: "bg-[rgb(32,113,188)]"
     }
   ];
 
@@ -62,8 +62,8 @@ export default function Testimonials() {
 
         {/* Header */}
         <div className="text-center mb-20 space-y-4">
-          <div className="inline-block px-4 py-2 bg-green-100 rounded-full">
-            <span className="text-sm font-semibold text-green-600">Opiniones reales</span>
+          <div className="inline-block px-4 py-2 bg-[rgb(191,231,249)] rounded-full">
+            <span className="text-sm font-semibold text-[rgb(0,94,184)]">Opiniones reales</span>
           </div>
           <h2 className="text-4xl md:text-5xl font-black text-slate-900">
             Lo que dicen nuestros clientes
@@ -78,7 +78,7 @@ export default function Testimonials() {
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-100 hover:border-orange-300 hover:-translate-y-1"
+              className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-100 hover:border-[rgb(0,94,184)] hover:-translate-y-1"
             >
               {/* Rating estrellas */}
               <div className="flex gap-1 mb-6">
@@ -93,7 +93,7 @@ export default function Testimonials() {
               </p>
 
               {/* Separador */}
-              <div className="h-1 bg-gradient-to-r from-orange-400 to-transparent mb-6"></div>
+              <div className="h-1 bg-gradient-to-r from-[rgb(0,94,184)] to-transparent mb-6"></div>
 
               {/* Info del cliente */}
               <div className="flex items-center gap-4">
@@ -114,8 +114,8 @@ export default function Testimonials() {
               </div>
 
               {/* Badge verificado */}
-              <div className="mt-6 inline-block px-3 py-1 bg-green-50 rounded-full border border-green-200">
-                <span className="text-xs font-semibold text-green-700">
+              <div className="mt-6 inline-block px-3 py-1 bg-[rgb(191,231,249)] rounded-full border border-[rgb(0,94,184)]/30">
+                <span className="text-xs font-semibold text-[rgb(0,94,184)]">
                   ✓ Cliente verificado
                 </span>
               </div>

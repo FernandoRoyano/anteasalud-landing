@@ -73,10 +73,10 @@ export default function Services() {
               </div>
 
               {/* Link/arrow hover */}
-              <div className="mt-6 flex items-center text-[rgb(0,94,184)] font-semibold group-hover:gap-3 gap-2 transition-all duration-300">
+              <a href="#contacto" className="mt-6 flex items-center text-[rgb(0,94,184)] font-semibold group-hover:gap-3 gap-2 transition-all duration-300">
                 <span>Más info</span>
                 <span className="text-xl group-hover:translate-x-1 transition-transform">→</span>
-              </div>
+              </a>
             </div>
           ))}
         </div>

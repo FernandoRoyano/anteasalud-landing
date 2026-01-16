@@ -8,7 +8,7 @@ import FAQs from '@/components/FAQs';
 import Problem from '@/components/Problem';
 import Process from '@/components/Process';
 import Services from '@/components/Services';
-import Solution from '@/components/Soluction';
+import Solution from '@/components/Solution';
 import Testimonial from '@/components/Testimonial';
 import TrustBadges from '@/components/TrustBadges';
 import WhyUs from '@/components/WhyUs';
@@ -32,9 +32,6 @@ export default function Home() {
       <FAQs />
       <Contacto />
       <CTAFinal />
-
-
-      {/* Aquí irán tus siguientes bloques (servicios, testimonios, etc.) */}
     </main>
   );
 }

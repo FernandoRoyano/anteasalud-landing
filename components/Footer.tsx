@@ -14,10 +14,17 @@ export default function Footer() {
             <p className="text-[rgb(130,131,130)] text-sm leading-relaxed">
               Ejercicio funcional y fisioterapia profesional para personas mayores. Recupera movilidad, autonomía y confianza en casa.
             </p>
+            {/* TODO: Actualizar con URLs reales de redes sociales de ANTEA */}
             <div className="flex gap-4 pt-4">
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-2xl hover:text-[rgb(0,94,184)] transition">f</a>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-2xl hover:text-[rgb(0,94,184)] transition">📷</a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-2xl hover:text-[rgb(0,94,184)] transition">in</a>
+              <a href="https://facebook.com/anteasalud" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-[rgb(0,94,184)] rounded-full flex items-center justify-center text-white hover:bg-[rgb(32,113,188)] transition" aria-label="Facebook">
+                <span className="text-lg font-bold">f</span>
+              </a>
+              <a href="https://instagram.com/anteasalud" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-[rgb(0,94,184)] rounded-full flex items-center justify-center text-white hover:bg-[rgb(32,113,188)] transition" aria-label="Instagram">
+                <span className="text-lg">📷</span>
+              </a>
+              <a href="https://linkedin.com/company/anteasalud" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-[rgb(0,94,184)] rounded-full flex items-center justify-center text-white hover:bg-[rgb(32,113,188)] transition" aria-label="LinkedIn">
+                <span className="text-sm font-bold">in</span>
+              </a>
             </div>
           </div>
 
@@ -36,10 +43,10 @@ export default function Footer() {
           <div className="space-y-4">
             <h4 className="font-bold text-white text-lg">Información</h4>
             <ul className="space-y-2 text-sm">
-              <li><Link href="/" className="hover:text-[rgb(0,94,184)] transition">Sobre nosotros</Link></li>
-              <li><Link href="/" className="hover:text-[rgb(0,94,184)] transition">Preguntas frecuentes</Link></li>
-              <li><Link href="/" className="hover:text-[rgb(0,94,184)] transition">Blog</Link></li>
-              <li><Link href="/" className="hover:text-[rgb(0,94,184)] transition">Contacto</Link></li>
+              <li><Link href="/#testimonios" className="hover:text-[rgb(0,94,184)] transition">Sobre nosotros</Link></li>
+              <li><Link href="/#faqs" className="hover:text-[rgb(0,94,184)] transition">Preguntas frecuentes</Link></li>
+              <li><Link href="/#precios" className="hover:text-[rgb(0,94,184)] transition">Precios</Link></li>
+              <li><Link href="/#contacto" className="hover:text-[rgb(0,94,184)] transition">Contacto</Link></li>
             </ul>
           </div>
 
@@ -75,7 +82,7 @@ export default function Footer() {
 
         {/* Bottom */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-[rgb(130,131,130)]">
-          <p>© 2025 ANTEA SALUD. Todos los derechos reservados.</p>
+          <p>© 2026 ANTEA SALUD. Todos los derechos reservados.</p>
           <div className="flex gap-6">
             <Link href="/privacidad" className="hover:text-[rgb(0,94,184)] transition">Política de privacidad</Link>
             <Link href="/aviso-legal" className="hover:text-[rgb(0,94,184)] transition">Aviso legal</Link>

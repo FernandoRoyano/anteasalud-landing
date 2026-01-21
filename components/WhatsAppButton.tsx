@@ -4,13 +4,15 @@ export default function WhatsAppButton() {
       href="https://wa.me/34633261963?text=Hola,%20me%20gustaría%20información%20sobre%20ANTEA%20Salud"
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-8 right-8 z-40 flex items-center justify-center w-16 h-16 rounded-full bg-green-500 text-white shadow-2xl hover:bg-green-600 hover:scale-110 transition-all duration-300 animate-bounce"
-      title="Contactar por WhatsApp"
+      className="fixed bottom-8 right-8 z-40 flex items-center justify-center w-16 h-16 rounded-full bg-green-500 text-white shadow-2xl hover:bg-green-600 hover:scale-110 transition-all duration-300 motion-safe:animate-bounce"
+      aria-label="Contactar por WhatsApp"
+      role="button"
     >
       <svg
         className="w-8 h-8"
         fill="currentColor"
         viewBox="0 0 32 32"
+        aria-hidden="true"
       >
         <path d="M16.004 0h-.008C7.174 0 0 7.176 0 16c0 3.5 1.132 6.742 3.054 9.378L1.054 31.29l6.166-1.976C9.756 30.998 12.77 32 16.004 32 24.826 32 32 24.822 32 16S24.826 0 16.004 0zm9.316 22.59c-.39 1.1-1.932 2.014-3.182 2.28-.854.182-1.968.326-5.72-1.23-4.8-1.99-7.888-6.87-8.126-7.188-.228-.318-1.926-2.566-1.926-4.894 0-2.328 1.218-3.47 1.65-3.946.39-.432 1.024-.634 1.632-.634.198 0 .376.01.536.018.432.018.648.044.934.724.356.85 1.224 2.986 1.33 3.204.108.218.216.51.07.806-.136.306-.256.442-.474.694-.218.252-.424.446-.642.718-.198.238-.42.492-.172.924.248.432 1.104 1.82 2.372 2.948 1.632 1.452 2.962 1.916 3.436 2.116.356.152.78.118 1.036-.152.324-.342.724-.908 1.132-1.466.29-.398.656-.448 1.048-.298.396.142 2.508 1.182 2.94 1.398.432.218.718.326.826.51.106.182.106 1.064-.284 2.164z"/>
       </svg>

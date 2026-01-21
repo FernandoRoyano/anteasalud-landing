@@ -110,7 +110,7 @@ export default function Header() {
                 onClick={() => setMenuOpen(false)}
                 aria-label="Cerrar menú"
               >
-                <span className="text-xl text-[rgb(130,131,130)]">✕</span>
+                <span className="text-xl text-[rgb(130,131,130)]" aria-hidden="true">✕</span>
               </button>
               {/* Enlaces menú, grandes y centrados */}
               <nav>
@@ -159,7 +159,7 @@ export default function Header() {
                     href="tel:+34633261963"
                     className="flex items-center gap-3 text-[rgb(31,41,51)] text-base hover:text-[rgb(0,94,184)] transition"
                   >
-                    <span className="text-xl">📞</span>
+                    <span className="text-xl" aria-hidden="true">📞</span>
                     <span>633 261 963</span>
                   </a>
                   <a
@@ -168,7 +168,7 @@ export default function Header() {
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 text-[rgb(0,94,184)] text-base hover:text-[rgb(32,113,188)] transition"
                   >
-                    <span className="text-xl">💬</span>
+                    <span className="text-xl" aria-hidden="true">💬</span>
                     <span>WhatsApp</span>
                   </a>
                 </div>

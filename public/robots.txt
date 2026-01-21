@@ -1,0 +1,12 @@
+# Robots.txt para ANTEA Salud
+# https://www.anteasalud.com
+
+User-agent: *
+Allow: /
+
+# Archivos del sistema
+Disallow: /_next/
+Disallow: /api/
+
+# Sitemap
+Sitemap: https://www.anteasalud.com/sitemap.xml

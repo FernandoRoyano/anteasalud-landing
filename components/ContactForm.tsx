@@ -29,35 +29,38 @@ export default function ContactForm() {
 
   return (
     <form ref={formRef} onSubmit={enviarEmail} className="max-w-md mx-auto bg-white shadow-xl rounded-3xl p-8 space-y-6">
-      <h3 className="text-2xl font-bold text-blue-900 mb-2">Solicita información</h3>
+      <h3 className="text-2xl font-bold text-[rgb(0,60,115)] mb-2">Solicita información</h3>
       <input
         type="text"
         name="user_name"
         placeholder="Tu nombre"
-        className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-orange-400"
+        aria-label="Tu nombre"
+        className="w-full px-4 py-3 rounded-xl border border-[rgb(200,207,210)] focus:outline-none focus:ring-2 focus:ring-[rgb(0,94,184)] focus:border-transparent"
         required
       />
       <input
         type="email"
         name="user_email"
         placeholder="Tu email"
-        className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-orange-400"
+        aria-label="Tu email"
+        className="w-full px-4 py-3 rounded-xl border border-[rgb(200,207,210)] focus:outline-none focus:ring-2 focus:ring-[rgb(0,94,184)] focus:border-transparent"
         required
       />
       <textarea
         name="message"
         rows={5}
         placeholder="¿En qué te podemos ayudar?"
-        className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-orange-400 resize-none"
+        aria-label="Tu mensaje"
+        className="w-full px-4 py-3 rounded-xl border border-[rgb(200,207,210)] focus:outline-none focus:ring-2 focus:ring-[rgb(0,94,184)] focus:border-transparent resize-none"
         required
       />
       <button
         type="submit"
-        className="w-full py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold rounded-xl hover:shadow-xl hover:scale-105 transition-all"
+        className="w-full py-3 bg-gradient-to-r from-[rgb(32,113,188)] to-[rgb(0,94,184)] text-white font-bold rounded-xl hover:shadow-xl hover:scale-105 transition-all"
       >
         Enviar mensaje
       </button>
-      {status && <p className="text-center mt-4">{status}</p>}
+      {status && <p className="text-center mt-4 text-[rgb(31,41,51)]">{status}</p>}
     </form>
   );
 }

@@ -48,6 +48,23 @@ export async function POST(req: NextRequest) {
     const spreadsheet = await sheets.spreadsheets.get({ spreadsheetId });
     const sheetName = spreadsheet.data.sheets?.[0]?.properties?.title ?? 'Hoja 1';
 
+    // Comprobar si la hoja tiene cabeceras, si no, crearlas
+    const existing = await sheets.spreadsheets.values.get({
+      spreadsheetId,
+      range: `${sheetName}!A1:H1`,
+    });
+
+    if (!existing.data.values || existing.data.values.length === 0) {
+      await sheets.spreadsheets.values.update({
+        spreadsheetId,
+        range: `${sheetName}!A1:H1`,
+        valueInputOption: 'USER_ENTERED',
+        requestBody: {
+          values: [['Fecha', 'Nombre', 'Email', 'Teléfono', 'Zona', 'Interés', 'Estado', 'Notas']],
+        },
+      });
+    }
+
     // Escribir fila en Google Sheets
     await sheets.spreadsheets.values.append({
       spreadsheetId,

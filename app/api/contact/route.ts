@@ -70,10 +70,9 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ ok: true });
   } catch (error) {
-    const message = error instanceof Error ? error.message : 'Unknown error';
-    console.error('Error al guardar en Google Sheets:', message);
+    console.error('Error al guardar en Google Sheets:', error);
     return NextResponse.json(
-      { error: 'Error interno del servidor', debug: message },
+      { error: 'Error interno del servidor' },
       { status: 500 }
     );
   }

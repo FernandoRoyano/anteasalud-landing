@@ -58,6 +58,25 @@ export async function POST(req: NextRequest) {
       },
     });
 
+    // Notificación por email vía EmailJS
+    await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        service_id: 'service_antea_contacto',
+        template_id: 'Antea Salud',
+        user_id: 'GkuifuSj9iMoXN9fw',
+        template_params: {
+          user_name: nombre,
+          user_email: email || 'No proporcionado',
+          phone: telefono,
+          zona: zona || 'No especificada',
+          interes: interes || 'No especificado',
+          fecha,
+        },
+      }),
+    });
+
     // Webhook de Make (activar cuando esté configurado)
     // const MAKE_WEBHOOK_URL = process.env.MAKE_WEBHOOK_URL;
     // if (MAKE_WEBHOOK_URL) {

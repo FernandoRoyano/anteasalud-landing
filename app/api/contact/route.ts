@@ -25,11 +25,19 @@ export async function POST(req: NextRequest) {
     });
 
     // Autenticación con Google Sheets
-    const auth = new google.auth.GoogleAuth({
-      credentials: {
+    // Soporta tanto GOOGLE_CREDENTIALS (JSON completo) como variables separadas
+    let credentials;
+    if (process.env.GOOGLE_CREDENTIALS) {
+      credentials = JSON.parse(process.env.GOOGLE_CREDENTIALS);
+    } else {
+      credentials = {
         client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
         private_key: (process.env.GOOGLE_PRIVATE_KEY || '').replace(/\\n/g, '\n'),
-      },
+      };
+    }
+
+    const auth = new google.auth.GoogleAuth({
+      credentials,
       scopes: ['https://www.googleapis.com/auth/spreadsheets'],
     });
 

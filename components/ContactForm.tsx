@@ -68,63 +68,78 @@ export default function ContactForm() {
         Solicita información
       </h3>
 
-      <input
-        type="text"
-        placeholder="Tu nombre *"
-        aria-label="Tu nombre"
-        value={nombre}
-        onChange={(e) => setNombre(e.target.value)}
-        className={inputClass}
-        required
-        disabled={status === "sending"}
-      />
+      <div>
+        <label htmlFor="nombre" className="block text-sm font-semibold text-[rgb(31,41,51)] mb-1">Nombre <span className="text-red-500">*</span></label>
+        <input
+          id="nombre"
+          type="text"
+          placeholder="Ej: María García"
+          value={nombre}
+          onChange={(e) => setNombre(e.target.value)}
+          className={inputClass}
+          required
+          disabled={status === "sending"}
+        />
+      </div>
 
-      <input
-        type="email"
-        placeholder="Tu email"
-        aria-label="Tu email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        className={inputClass}
-        disabled={status === "sending"}
-      />
+      <div>
+        <label htmlFor="email" className="block text-sm font-semibold text-[rgb(31,41,51)] mb-1">Email</label>
+        <input
+          id="email"
+          type="email"
+          placeholder="Ej: maria@email.com"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className={inputClass}
+          disabled={status === "sending"}
+        />
+      </div>
 
-      <input
-        type="tel"
-        placeholder="Tu teléfono *"
-        aria-label="Tu teléfono"
-        value={telefono}
-        onChange={(e) => setTelefono(e.target.value)}
-        className={inputClass}
-        required
-        disabled={status === "sending"}
-      />
+      <div>
+        <label htmlFor="telefono" className="block text-sm font-semibold text-[rgb(31,41,51)] mb-1">Teléfono <span className="text-red-500">*</span></label>
+        <input
+          id="telefono"
+          type="tel"
+          placeholder="Ej: 633 261 963"
+          value={telefono}
+          onChange={(e) => setTelefono(e.target.value)}
+          className={inputClass}
+          required
+          disabled={status === "sending"}
+        />
+      </div>
 
-      <select
-        aria-label="Tu zona"
-        value={zona}
-        onChange={(e) => setZona(e.target.value)}
-        className={selectClass}
-        disabled={status === "sending"}
-      >
-        <option value="">Selecciona tu zona</option>
-        {ZONAS.map((z) => (
-          <option key={z} value={z}>{z}</option>
-        ))}
-      </select>
+      <div>
+        <label htmlFor="zona" className="block text-sm font-semibold text-[rgb(31,41,51)] mb-1">Zona</label>
+        <select
+          id="zona"
+          value={zona}
+          onChange={(e) => setZona(e.target.value)}
+          className={selectClass}
+          disabled={status === "sending"}
+        >
+          <option value="">Selecciona tu zona</option>
+          {ZONAS.map((z) => (
+            <option key={z} value={z}>{z}</option>
+          ))}
+        </select>
+      </div>
 
-      <select
-        aria-label="Tu interés"
-        value={interes}
-        onChange={(e) => setInteres(e.target.value)}
-        className={selectClass}
-        disabled={status === "sending"}
-      >
-        <option value="">¿Qué te interesa?</option>
-        {INTERESES.map((i) => (
-          <option key={i} value={i}>{i}</option>
-        ))}
-      </select>
+      <div>
+        <label htmlFor="interes" className="block text-sm font-semibold text-[rgb(31,41,51)] mb-1">¿Qué te interesa?</label>
+        <select
+          id="interes"
+          value={interes}
+          onChange={(e) => setInteres(e.target.value)}
+          className={selectClass}
+          disabled={status === "sending"}
+        >
+          <option value="">Selecciona una opción</option>
+          {INTERESES.map((i) => (
+            <option key={i} value={i}>{i}</option>
+          ))}
+        </select>
+      </div>
 
       <button
         type="submit"

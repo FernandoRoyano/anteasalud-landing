@@ -1,8 +1,40 @@
+"use client";
+
 import { Phone, MessageCircle, Mail, Clock, Check, HeartPulse } from 'lucide-react';
+import { useRef } from 'react';
+import { useGSAP } from '@gsap/react';
+import { gsap, ScrollTrigger } from '@/lib/gsap';
 
 export default function CTAFinal() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useGSAP(
+    () => {
+      if (!sectionRef.current) return;
+
+      const elements = sectionRef.current.querySelectorAll(".cta-anim");
+      gsap.set(elements, { opacity: 0, y: 50 });
+
+      ScrollTrigger.create({
+        trigger: sectionRef.current,
+        start: "top 75%",
+        once: true,
+        onEnter: () => {
+          gsap.to(elements, {
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+            stagger: 0.12,
+            ease: "power3.out",
+          });
+        },
+      });
+    },
+    { scope: sectionRef }
+  );
+
   return (
-    <section id="cta-final" className="w-full bg-gradient-to-b from-slate-900 via-blue-900 to-slate-900 py-24 px-4 relative overflow-hidden">
+    <section ref={sectionRef} id="cta-final" className="w-full bg-gradient-to-b from-slate-900 via-blue-900 to-slate-900 py-24 px-4 relative overflow-hidden">
       {/* Fondo decorativo */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-10 right-10 w-96 h-96 rounded-full bg-orange-500 blur-3xl"></div>
@@ -12,17 +44,17 @@ export default function CTAFinal() {
       <div className="max-w-4xl mx-auto text-center relative z-10">
 
         {/* Headline */}
-        <h2 className="text-4xl md:text-6xl font-black text-white mb-6 leading-tight">
+        <h2 className="cta-anim text-4xl md:text-6xl font-black text-white mb-6 leading-tight">
           ¿Listo para recuperar tu autonomía?
         </h2>
 
-        <p className="text-xl md:text-2xl text-blue-100 mb-12 max-w-2xl mx-auto leading-relaxed">
+        <p className="cta-anim text-xl md:text-2xl text-blue-100 mb-12 max-w-2xl mx-auto leading-relaxed">
           Solicita una valoración <span className="font-bold text-white">gratuita y sin compromiso</span>.
           Te acompañaremos en cada paso de tu recuperación.
         </p>
 
         {/* Botones principales */}
-        <div className="flex flex-col sm:flex-row gap-6 justify-center mb-12">
+        <div className="cta-anim flex flex-col sm:flex-row gap-6 justify-center mb-12">
           {/* Botón 1: Teléfono */}
           <a
             href="tel:+34633261963"
@@ -63,7 +95,7 @@ export default function CTAFinal() {
         </div>
 
         {/* Info adicional */}
-        <div className="space-y-4 text-blue-100 mb-12">
+        <div className="cta-anim space-y-4 text-blue-100 mb-12">
           <p className="flex items-center justify-center gap-2">
             <Clock className="w-5 h-5" />
             Valoración inicial en menos de 24 horas
@@ -82,7 +114,7 @@ export default function CTAFinal() {
         <div className="h-1 bg-gradient-to-r from-transparent via-orange-400 to-transparent mb-12"></div>
 
         {/* Testimonio destacado */}
-        <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20">
+        <div className="cta-anim bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20">
           <p className="text-lg md:text-xl text-white italic mb-4">
             "En 6 semanas recuperé toda la movilidad. No solo volví a andar, volví a vivir. Gracias ANTEA."
           </p>

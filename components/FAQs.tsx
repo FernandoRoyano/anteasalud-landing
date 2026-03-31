@@ -2,9 +2,12 @@
 
 import { useState } from 'react';
 import { Phone, MessageCircle } from 'lucide-react';
+import { useScrollAnimation } from '@/lib/useScrollAnimation';
 
 export default function FAQs() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const headerRef = useScrollAnimation();
+  const faqsRef = useScrollAnimation({ stagger: ".faq-item", staggerDelay: 0.08 });
 
   const faqs = [
     {
@@ -58,7 +61,7 @@ export default function FAQs() {
       <div className="max-w-4xl mx-auto">
 
         {/* Header */}
-        <div className="text-center mb-16 space-y-4">
+        <div ref={headerRef} className="text-center mb-16 space-y-4">
           <div className="inline-block px-4 py-2 bg-[rgb(191,231,249)] rounded-full">
             <span className="text-sm font-semibold text-[rgb(0,94,184)]">Preguntas frecuentes</span>
           </div>
@@ -71,11 +74,11 @@ export default function FAQs() {
         </div>
 
         {/* Acordeón FAQs */}
-        <div className="space-y-5">
+        <div ref={faqsRef} className="space-y-5">
           {faqs.map((faq, index) => (
             <div
               key={index}
-              className={`rounded-2xl border-2 transition-all duration-300 ${openIndex === index
+              className={`faq-item rounded-2xl border-2 transition-all duration-300 ${openIndex === index
                 ? 'border-[rgb(0,94,184)] bg-[rgb(191,231,249)] shadow-lg'
                 : 'border-[rgb(200,207,210)] bg-white shadow-md hover:shadow-lg'
                 }`}

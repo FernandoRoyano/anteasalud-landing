@@ -1,7 +1,13 @@
+"use client";
+
 import { Dumbbell, HeartPulse, ShieldCheck, BarChart3, Check } from 'lucide-react';
 import { ReactNode } from 'react';
+import { useScrollAnimation } from '@/lib/useScrollAnimation';
 
 export default function Services() {
+  const headerRef = useScrollAnimation();
+  const gridRef = useScrollAnimation({ stagger: ".service-card", staggerDelay: 0.12 });
+
   const services: { icon: ReactNode; title: string; description: string; highlight: string }[] = [
     {
       icon: <Dumbbell className="w-10 h-10 text-[rgb(0,94,184)]" />,
@@ -34,7 +40,7 @@ export default function Services() {
       <div className="max-w-7xl mx-auto">
 
         {/* Header */}
-        <div className="text-center mb-20 space-y-4">
+        <div ref={headerRef} className="text-center mb-20 space-y-4">
           <div className="inline-block px-4 py-2 bg-[rgb(191,231,249)] rounded-full">
             <span className="text-sm font-semibold text-[rgb(0,94,184)]">Nuestros servicios</span>
           </div>
@@ -47,11 +53,11 @@ export default function Services() {
         </div>
 
         {/* Grid de servicios */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div ref={gridRef} className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service, index) => (
             <div
               key={index}
-              className="group bg-gradient-to-br from-[rgb(232,237,238)] to-[rgb(191,231,249)] rounded-2xl p-8 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-[rgb(200,207,210)] hover:border-[rgb(0,94,184)]"
+              className="service-card group bg-gradient-to-br from-[rgb(232,237,238)] to-[rgb(191,231,249)] rounded-2xl p-8 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-[rgb(200,207,210)] hover:border-[rgb(0,94,184)]"
             >
               {/* Icono */}
               <div className="mb-6 group-hover:scale-110 transition-transform duration-300">

@@ -1,7 +1,14 @@
+"use client";
+
 import { HeartPulse, Home, BarChart3, Clock, BadgePercent, TrendingUp, Check } from 'lucide-react';
 import { ReactNode } from 'react';
+import { useScrollAnimation, useCountUp } from '@/lib/useScrollAnimation';
 
 export default function WhyUs() {
+  const headerRef = useScrollAnimation();
+  const gridRef = useScrollAnimation({ stagger: ".reason-card", staggerDelay: 0.1 });
+  const statsRef = useCountUp();
+
   const reasons: { icon: ReactNode; title: string; description: string; highlight: string }[] = [
     {
       icon: <HeartPulse className="w-12 h-12 text-[rgb(0,94,184)]" />,
@@ -46,7 +53,7 @@ export default function WhyUs() {
       <div className="max-w-7xl mx-auto">
 
         {/* Header */}
-        <div className="text-center mb-20 space-y-4">
+        <div ref={headerRef} className="text-center mb-20 space-y-4">
           <div className="inline-block px-4 py-2 bg-[rgb(191,231,249)] rounded-full">
             <span className="text-sm font-semibold text-[rgb(0,94,184)]">¿Por qué elegirnos?</span>
           </div>
@@ -59,11 +66,11 @@ export default function WhyUs() {
         </div>
 
         {/* Grid 3 columnas */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div ref={gridRef} className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {reasons.map((reason, index) => (
             <div
               key={index}
-              className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-slate-100 hover:border-[rgb(0,94,184)] group"
+              className="reason-card bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-slate-100 hover:border-[rgb(0,94,184)] group"
             >
               {/* Icono grande */}
               <div className="mb-6 group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300">
@@ -92,25 +99,25 @@ export default function WhyUs() {
         </div>
 
         {/* Stats comparativo */}
-        <div className="mt-20 bg-gradient-to-r from-blue-600 to-blue-700 rounded-3xl p-12 text-white">
+        <div ref={statsRef} className="mt-20 bg-gradient-to-r from-blue-600 to-blue-700 rounded-3xl p-12 text-white">
           <h3 className="text-3xl font-black mb-12 text-center">
             Números que hablan por sí solos
           </h3>
           <div className="grid md:grid-cols-4 gap-8 text-center">
             <div>
-              <div className="text-5xl font-black mb-2">+200</div>
+              <div className="text-5xl font-black mb-2" data-count="200" data-prefix="+">+0</div>
               <p className="text-blue-100">Familias atendidas</p>
             </div>
             <div>
-              <div className="text-5xl font-black mb-2">97%</div>
+              <div className="text-5xl font-black mb-2" data-count="97" data-suffix="%">0%</div>
               <p className="text-blue-100">Tasa de satisfacción</p>
             </div>
             <div>
-              <div className="text-5xl font-black mb-2">4.9★</div>
+              <div className="text-5xl font-black mb-2" data-count="4.9" data-suffix="★">0★</div>
               <p className="text-blue-100">Valoración media</p>
             </div>
             <div>
-              <div className="text-5xl font-black mb-2">6 años</div>
+              <div className="text-5xl font-black mb-2" data-count="6" data-suffix=" años">0 años</div>
               <p className="text-blue-100">Experiencia</p>
             </div>
           </div>

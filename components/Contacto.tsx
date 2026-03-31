@@ -3,11 +3,15 @@
 import { useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
 import { Phone, Smartphone, Clock, MapPin, PenLine, Search, Dumbbell, Target, Info, Loader2, Mail, CircleCheck, CircleX, ShieldCheck, BadgeCheck, UserCheck, BarChart3 } from 'lucide-react';
+import { useScrollAnimation } from '@/lib/useScrollAnimation';
 
 export default function Contacto() {
     const form = useRef<HTMLFormElement>(null);
     const [enviando, setEnviando] = useState(false);
     const [estado, setEstado] = useState<'ok' | 'error' | ''>('');
+    const headerRef = useScrollAnimation();
+    const columnsRef = useScrollAnimation({ stagger: ".contacto-col", staggerDelay: 0.2, y: 50 });
+    const garantiasRef = useScrollAnimation({ stagger: ".garantia-card", staggerDelay: 0.12 });
 
     const enviarCorreo = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -45,15 +49,17 @@ export default function Contacto() {
     return (
         <section id="contacto" className="w-full py-16 px-4 bg-white">
             <div className="max-w-4xl mx-auto">
+                <div ref={headerRef}>
                 <h2 className="text-3xl md:text-4xl font-black text-[rgb(0,94,184)] mb-4 text-center">
                     Solicita tu Evaluación Gratuita de Ejercicio para Mayores
                 </h2>
                 <p className="text-lg text-slate-600 mb-10 text-center">
                     Primera valoración sin compromiso. Solo 5 nuevas familias al mes.
                 </p>
-                <div className="grid md:grid-cols-2 gap-10 items-start">
+                </div>
+                <div ref={columnsRef} className="grid md:grid-cols-2 gap-10 items-start">
                     {/* Contacto Directo */}
-                    <div className="bg-white rounded-2xl shadow-lg p-8 flex flex-col gap-6">
+                    <div className="contacto-col bg-white rounded-2xl shadow-lg p-8 flex flex-col gap-6">
                         <h3 className="font-bold text-[rgb(0,94,184)] text-lg mb-4 flex items-center gap-2">
                             <Phone className="w-5 h-5" /> Contacto Inmediato
                         </h3>
@@ -90,7 +96,7 @@ export default function Contacto() {
                         </div>
                     </div>
                     {/* Formulario */}
-                    <div className="bg-white rounded-2xl shadow-lg p-8">
+                    <div className="contacto-col bg-white rounded-2xl shadow-lg p-8">
                         <h3 className="font-bold text-[rgb(0,94,184)] text-lg mb-4 flex items-center gap-2">
                             <PenLine className="w-5 h-5" /> O escríbenos aquí
                         </h3>
@@ -217,18 +223,18 @@ export default function Contacto() {
                     <h3 className="text-center font-bold text-[rgb(0,94,184)] text-lg mb-8 flex items-center justify-center gap-2">
                         <ShieldCheck className="w-5 h-5" /> Tu Tranquilidad es Nuestra Prioridad
                     </h3>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div className="bg-white rounded-2xl shadow p-6 flex flex-col items-center">
+                    <div ref={garantiasRef} className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div className="garantia-card bg-white rounded-2xl shadow p-6 flex flex-col items-center">
                             <BadgeCheck className="w-8 h-8 text-[rgb(0,94,184)]" />
                             <h4 className="font-bold mt-2 mb-1 text-slate-900">Valoración Gratuita</h4>
                             <p className="text-sm text-slate-600 text-center">Sin compromiso ni letra pequeña</p>
                         </div>
-                        <div className="bg-white rounded-2xl shadow p-6 flex flex-col items-center">
+                        <div className="garantia-card bg-white rounded-2xl shadow p-6 flex flex-col items-center">
                             <UserCheck className="w-8 h-8 text-[rgb(0,94,184)]" />
                             <h4 className="font-bold mt-2 mb-1 text-slate-900">Profesional Titulado</h4>
                             <p className="text-sm text-slate-600 text-center">Especializado en personas mayores</p>
                         </div>
-                        <div className="bg-white rounded-2xl shadow p-6 flex flex-col items-center">
+                        <div className="garantia-card bg-white rounded-2xl shadow p-6 flex flex-col items-center">
                             <BarChart3 className="w-8 h-8 text-[rgb(0,94,184)]" />
                             <h4 className="font-bold mt-2 mb-1 text-slate-900">Resultados Medibles</h4>
                             <p className="text-sm text-slate-600 text-center">Progreso documentado cada semana</p>

@@ -1,6 +1,13 @@
+"use client";
+
 import { Star, Check } from 'lucide-react';
+import { useScrollAnimation, useCountUp } from '@/lib/useScrollAnimation';
 
 export default function Testimonials() {
+  const headerRef = useScrollAnimation();
+  const gridRef = useScrollAnimation({ stagger: ".testimonial-card", staggerDelay: 0.12 });
+  const statsRef = useCountUp();
+
   const testimonials = [
     {
       name: "María García",
@@ -63,7 +70,7 @@ export default function Testimonials() {
       <div className="max-w-7xl mx-auto">
 
         {/* Header */}
-        <div className="text-center mb-20 space-y-4">
+        <div ref={headerRef} className="text-center mb-20 space-y-4">
           <div className="inline-block px-4 py-2 bg-[rgb(191,231,249)] rounded-full">
             <span className="text-sm font-semibold text-[rgb(0,94,184)]">Opiniones reales</span>
           </div>
@@ -76,11 +83,11 @@ export default function Testimonials() {
         </div>
 
         {/* Grid de testimonios */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        <div ref={gridRef} className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-100 hover:border-[rgb(0,94,184)] hover:-translate-y-1"
+              className="testimonial-card bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-100 hover:border-[rgb(0,94,184)] hover:-translate-y-1"
             >
               {/* Rating estrellas */}
               <div className="flex gap-1 mb-6">
@@ -127,22 +134,22 @@ export default function Testimonials() {
         </div>
 
         {/* Estadísticas */}
-        <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-3xl p-12 text-white">
+        <div ref={statsRef} className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-3xl p-12 text-white">
           <div className="grid md:grid-cols-4 gap-8 text-center">
             <div>
-              <div className="text-5xl font-black mb-2">9/10</div>
+              <div className="text-5xl font-black mb-2" data-count="9" data-suffix="/10">0/10</div>
               <p className="text-blue-100">Clientes nos recomiendan</p>
             </div>
             <div>
-              <div className="text-5xl font-black mb-2">+200</div>
+              <div className="text-5xl font-black mb-2" data-count="200" data-prefix="+">+0</div>
               <p className="text-blue-100">Familias atendidas</p>
             </div>
             <div>
-              <div className="text-5xl font-black mb-2 flex items-center justify-center gap-1">4.9<Star className="w-8 h-8 fill-white" /></div>
+              <div className="text-5xl font-black mb-2" data-count="4.9" data-suffix="★">0★</div>
               <p className="text-blue-100">Valoración media</p>
             </div>
             <div>
-              <div className="text-5xl font-black mb-2">6 años</div>
+              <div className="text-5xl font-black mb-2" data-count="6" data-suffix=" años">0 años</div>
               <p className="text-blue-100">De experiencia</p>
             </div>
           </div>
@@ -156,7 +163,6 @@ export default function Testimonials() {
           <a
             href="#contacto"
             className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-[rgb(32,113,188)] to-[rgb(0,94,184)] text-white font-bold rounded-2xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200"
-
           >
             Solicita valoración gratuita
           </a>

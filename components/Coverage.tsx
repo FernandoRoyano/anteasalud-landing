@@ -1,6 +1,12 @@
+"use client";
+
 import { Check, Phone } from 'lucide-react';
+import { useScrollAnimation } from '@/lib/useScrollAnimation';
 
 export default function Coverage() {
+  const headerRef = useScrollAnimation();
+  const gridRef = useScrollAnimation({ stagger: ".region-card", staggerDelay: 0.1 });
+
   const regions = [
     { name: "Madrid", cities: "Madrid, Fuenlabrada, Alcalá de Henares, Móstoles" },
     { name: "Cataluña", cities: "Barcelona, Tarragona, Girona, L'Hospitalet" },
@@ -15,7 +21,7 @@ export default function Coverage() {
       <div className="max-w-6xl mx-auto">
 
         {/* Header */}
-        <div className="text-center mb-16 space-y-4">
+        <div ref={headerRef} className="text-center mb-16 space-y-4">
           <div className="inline-block px-4 py-2 bg-[rgb(191,231,249)] rounded-full">
             <span className="text-sm font-semibold text-[rgb(0,94,184)]">Disponibilidad</span>
           </div>
@@ -28,11 +34,11 @@ export default function Coverage() {
         </div>
 
         {/* Grid de regiones */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        <div ref={gridRef} className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {regions.map((region, index) => (
             <div
               key={index}
-              className="bg-gradient-to-br from-[rgb(232,237,238)] to-[rgb(191,231,249)] rounded-2xl p-8 shadow-lg border-2 border-[rgb(200,207,210)] hover:shadow-xl hover:border-[rgb(0,94,184)] transition-all"
+              className="region-card bg-gradient-to-br from-[rgb(232,237,238)] to-[rgb(191,231,249)] rounded-2xl p-8 shadow-lg border-2 border-[rgb(200,207,210)] hover:shadow-xl hover:border-[rgb(0,94,184)] transition-all"
             >
               <h3 className="text-2xl font-black text-[rgb(0,94,184)] mb-3">
                 {region.name}

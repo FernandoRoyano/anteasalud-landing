@@ -1,7 +1,13 @@
+"use client";
+
 import { ClipboardList, FileText, Handshake, TrendingUp, Clock } from 'lucide-react';
 import { ReactNode } from 'react';
+import { useScrollAnimation } from '@/lib/useScrollAnimation';
 
 export default function Process() {
+  const headerRef = useScrollAnimation();
+  const stepsRef = useScrollAnimation({ stagger: ".step-card", staggerDelay: 0.2, y: 80 });
+
   const steps: { number: string; title: string; description: string; icon: ReactNode; time: string }[] = [
     {
       number: "01",
@@ -38,7 +44,7 @@ export default function Process() {
       <div className="max-w-7xl mx-auto">
 
         {/* Header */}
-        <div className="text-center mb-20 space-y-4">
+        <div ref={headerRef} className="text-center mb-20 space-y-4">
           <div className="inline-block px-4 py-2 bg-[rgb(191,231,249)] rounded-full">
             <span className="text-sm font-semibold text-[rgb(0,94,184)]">¿Cómo funciona?</span>
           </div>
@@ -51,9 +57,9 @@ export default function Process() {
         </div>
 
         {/* Steps */}
-        <div className="grid md:grid-cols-4 gap-8 mb-12">
+        <div ref={stepsRef} className="grid md:grid-cols-4 gap-8 mb-12">
           {steps.map((step, index) => (
-            <div key={index} className="relative">
+            <div key={index} className="relative step-card">
               {/* Conectar pasos (línea visual) */}
               {index < steps.length - 1 && (
                 <div className="hidden md:block absolute top-24 left-[60%] w-[calc(100%-60%)] h-1 bg-gradient-to-r from-[rgb(0,94,184)] to-transparent"></div>

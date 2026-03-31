@@ -1,13 +1,19 @@
+"use client";
+
 // components/Pricing.tsx
 import { Check, ShieldCheck } from 'lucide-react';
+import { useScrollAnimation } from '@/lib/useScrollAnimation';
 
 export default function Pricing() {
+  const headerRef = useScrollAnimation();
+  const cardsRef = useScrollAnimation({ stagger: ".pricing-card", staggerDelay: 0.15, y: 80 });
+
   return (
     <section id="precios" className="w-full bg-[rgb(232,237,238)] py-24 px-4">
       <div className="max-w-5xl mx-auto">
 
         {/* Header */}
-        <div className="text-center mb-16 space-y-4">
+        <div ref={headerRef} className="text-center mb-16 space-y-4">
           <div className="inline-block px-4 py-2 bg-[rgb(191,231,249)] rounded-full">
             <span className="text-sm font-semibold text-[rgb(0,94,184)]">Precios claros</span>
           </div>
@@ -20,10 +26,10 @@ export default function Pricing() {
         </div>
 
         {/* Pricing cards */}
-        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-12">
+        <div ref={cardsRef} className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-12">
 
           {/* Opción 1: Sesión suelta */}
-          <div className="bg-white rounded-3xl p-8 shadow-lg border-2 border-[rgb(200,207,210)] hover:border-[rgb(0,94,184)] transition-all">
+          <div className="pricing-card bg-white rounded-3xl p-8 shadow-lg border-2 border-[rgb(200,207,210)] hover:border-[rgb(0,94,184)] transition-all">
             <h3 className="text-xl font-bold text-[rgb(31,41,51)] mb-2">
               Sesión suelta
             </h3>
@@ -59,7 +65,7 @@ export default function Pricing() {
           </div>
 
           {/* Opción 2: 2 días por semana (DESTACADO) */}
-          <div className="relative bg-gradient-to-b from-[rgb(0,94,184)] to-[rgb(0,60,115)] rounded-3xl p-8 shadow-2xl text-white md:scale-105 z-10">
+          <div className="pricing-card relative bg-gradient-to-b from-[rgb(0,94,184)] to-[rgb(0,60,115)] rounded-3xl p-8 shadow-2xl text-white md:scale-105 z-10">
             {/* Badge */}
             <div className="absolute -top-4 left-1/2 -translate-x-1/2">
               <span className="bg-white text-[rgb(0,94,184)] text-sm font-bold px-4 py-1 rounded-full shadow-md whitespace-nowrap">
@@ -110,7 +116,7 @@ export default function Pricing() {
           </div>
 
           {/* Opción 3: Pack Personalizado */}
-          <div className="bg-white rounded-3xl p-8 shadow-lg border-2 border-[rgb(200,207,210)] hover:border-[rgb(0,94,184)] transition-all">
+          <div className="pricing-card bg-white rounded-3xl p-8 shadow-lg border-2 border-[rgb(200,207,210)] hover:border-[rgb(0,94,184)] transition-all">
             <h3 className="text-xl font-bold text-[rgb(31,41,51)] mb-2">
               Pack personalizado
             </h3>

@@ -1,37 +1,40 @@
+import { HeartPulse, Home, BarChart3, Clock, BadgePercent, TrendingUp, Check } from 'lucide-react';
+import { ReactNode } from 'react';
+
 export default function WhyUs() {
-  const reasons = [
+  const reasons: { icon: ReactNode; title: string; description: string; highlight: string }[] = [
     {
-      icon: "🏥",
+      icon: <HeartPulse className="w-12 h-12 text-[rgb(0,94,184)]" />,
       title: "Profesionales titulados",
       description: "100% colegiados y especializados en personas mayores. Verificamos credenciales antes de trabajar con nosotros.",
       highlight: "Máxima seguridad"
     },
     {
-      icon: "🏠",
+      icon: <Home className="w-12 h-12 text-[rgb(0,94,184)]" />,
       title: "Ejercicio en tu casa",
       description: "Sin traslados, sin estrés. El profesional va a ti. Más cómodo, más seguro y más efectivo.",
       highlight: "Comodidad garantizada"
     },
     {
-      icon: "📊",
+      icon: <BarChart3 className="w-12 h-12 text-[rgb(0,94,184)]" />,
       title: "Planes personalizados",
       description: "Cada persona es única. Diseñamos un programa adaptado a tu situación, objetivos y ritmo.",
       highlight: "Hecho para ti"
     },
     {
-      icon: "⏱️",
+      icon: <Clock className="w-12 h-12 text-[rgb(0,94,184)]" />,
       title: "Flexibilidad horaria",
       description: "Elige cuándo y cuántas veces a la semana. Lunes a domingo, mañanas o tardes.",
       highlight: "Tú decides"
     },
     {
-      icon: "💰",
+      icon: <BadgePercent className="w-12 h-12 text-[rgb(0,94,184)]" />,
       title: "Sin compromiso",
       description: "Valoración gratuita, sin obligación de contratar. Tú controlas tu plan y puedes cambiar cuando quieras.",
       highlight: "Libertad total"
     },
     {
-      icon: "📈",
+      icon: <TrendingUp className="w-12 h-12 text-[rgb(0,94,184)]" />,
       title: "Resultados reales",
       description: "Seguimiento continuo y evaluaciones regulares. Ves la evolución semana a semana.",
       highlight: "Progreso visible"
@@ -41,7 +44,7 @@ export default function WhyUs() {
   return (
     <section className="w-full bg-gradient-to-b from-slate-50 to-white py-24 px-4">
       <div className="max-w-7xl mx-auto">
-        
+
         {/* Header */}
         <div className="text-center mb-20 space-y-4">
           <div className="inline-block px-4 py-2 bg-[rgb(191,231,249)] rounded-full">
@@ -63,7 +66,7 @@ export default function WhyUs() {
               className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-slate-100 hover:border-[rgb(0,94,184)] group"
             >
               {/* Icono grande */}
-              <div className="text-6xl mb-6 group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300">
+              <div className="mb-6 group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300">
                 {reason.icon}
               </div>
 
@@ -78,9 +81,10 @@ export default function WhyUs() {
               </p>
 
               {/* Highlight badge */}
-              <div className="inline-block px-4 py-2 bg-[rgb(191,231,249)] rounded-full">
+              <div className="inline-flex items-center gap-1.5 px-4 py-2 bg-[rgb(191,231,249)] rounded-full">
+                <Check className="w-4 h-4 text-[rgb(0,94,184)]" />
                 <span className="text-sm font-bold text-[rgb(0,94,184)]">
-                  ✓ {reason.highlight}
+                  {reason.highlight}
                 </span>
               </div>
             </div>

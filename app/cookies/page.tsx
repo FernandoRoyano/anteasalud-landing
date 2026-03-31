@@ -1,5 +1,6 @@
 // app/cookies/page.tsx
 import type { Metadata } from "next";
+import { Check } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: "Política de Cookies | ANTEA Salud",
@@ -75,8 +76,8 @@ export default function PoliticaCookies() {
               Cookies de terceros
             </h2>
             <div className="bg-[rgb(191,231,249)] rounded-xl p-6">
-              <p className="font-semibold text-[rgb(0,94,184)]">
-                ✓ No utilizamos cookies de seguimiento ni publicidad
+              <p className="font-semibold text-[rgb(0,94,184)] flex items-center gap-2">
+                <Check className="w-5 h-5 flex-shrink-0" /> No utilizamos cookies de seguimiento ni publicidad
               </p>
               <p className="mt-2 text-[rgb(31,41,51)]">
                 Esta web no utiliza Google Analytics, Facebook Pixel, ni ninguna otra 

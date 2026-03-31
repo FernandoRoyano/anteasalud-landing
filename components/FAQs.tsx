@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from 'react';
+import { Phone, MessageCircle } from 'lucide-react';
 
 export default function FAQs() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -122,17 +123,17 @@ export default function FAQs() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="tel:+34633261963"
-              className="inline-flex items-center justify-center px-8 py-4 bg-white border-2 border-[rgb(200,207,210)] text-[rgb(31,41,51)] font-bold text-lg rounded-2xl hover:bg-[rgb(232,237,238)] hover:border-[rgb(0,94,184)] shadow-md hover:shadow-lg transition-all"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white border-2 border-[rgb(200,207,210)] text-[rgb(31,41,51)] font-bold text-lg rounded-2xl hover:bg-[rgb(232,237,238)] hover:border-[rgb(0,94,184)] shadow-md hover:shadow-lg transition-all"
             >
-              📞 Llamar ahora
+              <Phone className="w-5 h-5" /> Llamar ahora
             </a>
             <a
               href="https://wa.me/34633261963?text=Tengo%20una%20pregunta%20sobre%20ANTEA"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-8 py-4 bg-[rgb(0,94,184)] text-white font-bold text-lg rounded-2xl hover:bg-[rgb(32,113,188)] shadow-md hover:shadow-lg transition-all"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[rgb(0,94,184)] text-white font-bold text-lg rounded-2xl hover:bg-[rgb(32,113,188)] shadow-md hover:shadow-lg transition-all"
             >
-              💬 WhatsApp
+              <MessageCircle className="w-5 h-5" /> WhatsApp
             </a>
           </div>
         </div>

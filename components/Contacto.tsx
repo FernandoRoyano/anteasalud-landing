@@ -2,6 +2,7 @@
 
 import { useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
+import { Phone, Smartphone, Clock, MapPin, PenLine, Search, Dumbbell, Target, Info, Loader2, Mail, CircleCheck, CircleX, ShieldCheck, BadgeCheck, UserCheck, BarChart3 } from 'lucide-react';
 
 export default function Contacto() {
     const form = useRef<HTMLFormElement>(null);
@@ -53,30 +54,36 @@ export default function Contacto() {
                 <div className="grid md:grid-cols-2 gap-10 items-start">
                     {/* Contacto Directo */}
                     <div className="bg-white rounded-2xl shadow-lg p-8 flex flex-col gap-6">
-                        <h3 className="font-bold text-[rgb(0,94,184)] text-lg mb-4">📞 Contacto Inmediato</h3>
+                        <h3 className="font-bold text-[rgb(0,94,184)] text-lg mb-4 flex items-center gap-2">
+                            <Phone className="w-5 h-5" /> Contacto Inmediato
+                        </h3>
                         <a
                             href="https://wa.me/34633261963?text=Hola,%20quiero%20información%20sobre%20ejercicio%20para%20personas%20mayores%20a%20domicilio"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-block py-3 px-5 bg-green-500 text-white rounded-xl font-semibold text-lg shadow hover:bg-green-600 transition mb-2"
+                            className="inline-flex items-center gap-2 py-3 px-5 bg-green-500 text-white rounded-xl font-semibold text-lg shadow hover:bg-green-600 transition mb-2"
                         >
-                            📱 WhatsApp: 633 261 963
+                            <Smartphone className="w-5 h-5" /> WhatsApp: 633 261 963
                         </a>
                         <a
                             href="tel:+34633261963"
-                            className="inline-block py-3 px-5 bg-blue-100 text-blue-900 rounded-xl font-semibold text-lg shadow hover:bg-blue-200 transition"
+                            className="inline-flex items-center gap-2 py-3 px-5 bg-blue-100 text-blue-900 rounded-xl font-semibold text-lg shadow hover:bg-blue-200 transition"
                         >
-                            📞 Llamar ahora: 633 261 963
+                            <Phone className="w-5 h-5" /> Llamar ahora: 633 261 963
                         </a>
 
                         <div className="flex flex-col gap-6 mt-6">
                             <div>
-                                <h4 className="font-bold text-slate-700">⏰ Horario</h4>
+                                <h4 className="font-bold text-slate-700 flex items-center gap-2">
+                                    <Clock className="w-4 h-4" /> Horario
+                                </h4>
                                 <p className="text-sm text-slate-900"><strong>L-V:</strong> 9:00-13:00 | 16:00-19:00</p>
                                 <p className="text-sm text-slate-900"><strong>Sáb:</strong> 9:00-13:00</p>
                             </div>
                             <div>
-                                <h4 className="font-bold text-slate-700">📍 Zona Servicio</h4>
+                                <h4 className="font-bold text-slate-700 flex items-center gap-2">
+                                    <MapPin className="w-4 h-4" /> Zona Servicio
+                                </h4>
                                 <p className="text-sm text-slate-900">Toda España</p>
                                 <small className="text-slate-500">Madrid • Barcelona • Valencia • Sevilla • Bilbao y más</small>
                             </div>
@@ -84,7 +91,9 @@ export default function Contacto() {
                     </div>
                     {/* Formulario */}
                     <div className="bg-white rounded-2xl shadow-lg p-8">
-                        <h3 className="font-bold text-[rgb(0,94,184)] text-lg mb-4">✍️ O escríbenos aquí</h3>
+                        <h3 className="font-bold text-[rgb(0,94,184)] text-lg mb-4 flex items-center gap-2">
+                            <PenLine className="w-5 h-5" /> O escríbenos aquí
+                        </h3>
                         <form ref={form} onSubmit={enviarCorreo} className="flex flex-col gap-4 text-slate-900">
                             <input
                                 type="text"
@@ -145,7 +154,7 @@ export default function Contacto() {
                                             disabled={enviando}
                                             className="accent-[rgb(0,94,184)]"
                                         />
-                                        <span className="text-slate-900">🔍 Evaluación gratuita</span>
+                                        <span className="text-slate-900 inline-flex items-center gap-1"><Search className="w-4 h-4" /> Evaluación gratuita</span>
                                     </label>
                                     <label className="flex items-center gap-1">
                                         <input
@@ -155,7 +164,7 @@ export default function Contacto() {
                                             disabled={enviando}
                                             className="accent-[rgb(0,94,184)]"
                                         />
-                                        <span className="text-slate-900">💪 Sesión suelta (45€)</span>
+                                        <span className="text-slate-900 inline-flex items-center gap-1"><Dumbbell className="w-4 h-4" /> Sesión suelta (45€)</span>
                                     </label>
                                     <label className="flex items-center gap-1">
                                         <input
@@ -165,7 +174,7 @@ export default function Contacto() {
                                             disabled={enviando}
                                             className="accent-[rgb(0,94,184)]"
                                         />
-                                        <span className="text-slate-900">🎯 Plan 2 días/semana (70€)</span>
+                                        <span className="text-slate-900 inline-flex items-center gap-1"><Target className="w-4 h-4" /> Plan 2 días/semana (70€)</span>
                                     </label>
                                     <label className="flex items-center gap-1">
                                         <input
@@ -175,27 +184,27 @@ export default function Contacto() {
                                             disabled={enviando}
                                             className="accent-[rgb(0,94,184)]"
                                         />
-                                        <span className="text-slate-900">ℹ️ Solo información y precios</span>
+                                        <span className="text-slate-900 inline-flex items-center gap-1"><Info className="w-4 h-4" /> Solo información y precios</span>
                                     </label>
                                 </div>
                             </div>
                             <input type="hidden" name="opciones_resumen" />
                             <button
                                 type="submit"
-                                className="mt-4 w-full py-3 bg-gradient-to-r from-[rgb(32,113,188)] to-[rgb(0,94,184)] text-white font-bold rounded-xl shadow-lg hover:shadow-2xl hover:scale-105 active:scale-100 transition"
+                                className="mt-4 w-full py-3 bg-gradient-to-r from-[rgb(32,113,188)] to-[rgb(0,94,184)] text-white font-bold rounded-xl shadow-lg hover:shadow-2xl hover:scale-105 active:scale-100 transition inline-flex items-center justify-center gap-2"
                                 disabled={enviando}
                             >
-                                {enviando ? '⏳ Enviando...' : '📧 Solicitar información'}
+                                {enviando ? <><Loader2 className="w-5 h-5 animate-spin" /> Enviando...</> : <><Mail className="w-5 h-5" /> Solicitar información</>}
                             </button>
                             {estado === 'ok' && (
                                 <div className="bg-green-50 border border-green-200 text-green-800 rounded-xl px-5 py-4 mt-2 text-center font-semibold">
-                                    <h4>✅ ¡Mensaje enviado!</h4>
+                                    <h4 className="flex items-center justify-center gap-2"><CircleCheck className="w-5 h-5" /> ¡Mensaje enviado!</h4>
                                     <p>Te contactaremos en menos de 24h para programar tu evaluación gratuita.</p>
                                 </div>
                             )}
                             {estado === 'error' && (
                                 <div className="bg-red-50 border border-red-200 text-red-800 rounded-xl px-5 py-4 mt-2 text-center font-semibold">
-                                    <h4>❌ Error al enviar</h4>
+                                    <h4 className="flex items-center justify-center gap-2"><CircleX className="w-5 h-5" /> Error al enviar</h4>
                                     <p>Por favor, inténtalo de nuevo o contáctanos por WhatsApp.</p>
                                     <small>Revisa la consola del navegador (F12) para ver detalles del error.</small>
                                 </div>
@@ -205,20 +214,22 @@ export default function Contacto() {
                 </div>
                 {/* Garantías */}
                 <div className="mt-16">
-                    <h3 className="text-center font-bold text-[rgb(0,94,184)] text-lg mb-8">🛡️ Tu Tranquilidad es Nuestra Prioridad</h3>
+                    <h3 className="text-center font-bold text-[rgb(0,94,184)] text-lg mb-8 flex items-center justify-center gap-2">
+                        <ShieldCheck className="w-5 h-5" /> Tu Tranquilidad es Nuestra Prioridad
+                    </h3>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div className="bg-white rounded-2xl shadow p-6 flex flex-col items-center">
-                            <span className="text-3xl">🆓</span>
+                            <BadgeCheck className="w-8 h-8 text-[rgb(0,94,184)]" />
                             <h4 className="font-bold mt-2 mb-1 text-slate-900">Valoración Gratuita</h4>
                             <p className="text-sm text-slate-600 text-center">Sin compromiso ni letra pequeña</p>
                         </div>
                         <div className="bg-white rounded-2xl shadow p-6 flex flex-col items-center">
-                            <span className="text-3xl">👨‍⚕️</span>
+                            <UserCheck className="w-8 h-8 text-[rgb(0,94,184)]" />
                             <h4 className="font-bold mt-2 mb-1 text-slate-900">Profesional Titulado</h4>
                             <p className="text-sm text-slate-600 text-center">Especializado en personas mayores</p>
                         </div>
                         <div className="bg-white rounded-2xl shadow p-6 flex flex-col items-center">
-                            <span className="text-3xl">📊</span>
+                            <BarChart3 className="w-8 h-8 text-[rgb(0,94,184)]" />
                             <h4 className="font-bold mt-2 mb-1 text-slate-900">Resultados Medibles</h4>
                             <p className="text-sm text-slate-600 text-center">Progreso documentado cada semana</p>
                         </div>

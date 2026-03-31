@@ -1,3 +1,5 @@
+import { Phone, MessageCircle, Mail, Clock, Check, HeartPulse } from 'lucide-react';
+
 export default function CTAFinal() {
   return (
     <section id="cta-final" className="w-full bg-gradient-to-b from-slate-900 via-blue-900 to-slate-900 py-24 px-4 relative overflow-hidden">
@@ -8,14 +10,14 @@ export default function CTAFinal() {
       </div>
 
       <div className="max-w-4xl mx-auto text-center relative z-10">
-        
+
         {/* Headline */}
         <h2 className="text-4xl md:text-6xl font-black text-white mb-6 leading-tight">
           ¿Listo para recuperar tu autonomía?
         </h2>
-        
+
         <p className="text-xl md:text-2xl text-blue-100 mb-12 max-w-2xl mx-auto leading-relaxed">
-          Solicita una valoración <span className="font-bold text-white">gratuita y sin compromiso</span>. 
+          Solicita una valoración <span className="font-bold text-white">gratuita y sin compromiso</span>.
           Te acompañaremos en cada paso de tu recuperación.
         </p>
 
@@ -26,7 +28,7 @@ export default function CTAFinal() {
             href="tel:+34633261963"
             className="group inline-flex items-center justify-center px-10 py-6 bg-white text-slate-900 font-bold text-xl rounded-3xl shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-300"
           >
-            <span className="text-2xl mr-3">📞</span>
+            <Phone className="w-6 h-6 mr-3 text-[rgb(0,94,184)]" />
             <div className="text-left">
               <div className="text-xs text-slate-500">Llama ahora</div>
               <div className="font-black text-lg">633 261 963</div>
@@ -40,7 +42,7 @@ export default function CTAFinal() {
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center px-10 py-6 bg-gradient-to-r from-green-500 to-green-600 text-white font-bold text-xl rounded-3xl shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-300"
           >
-            <span className="text-2xl mr-3">💬</span>
+            <MessageCircle className="w-6 h-6 mr-3" />
             <div className="text-left">
               <div className="text-xs text-green-100">Envía mensaje</div>
               <div className="font-black text-lg">WhatsApp</div>
@@ -52,7 +54,7 @@ export default function CTAFinal() {
             href="mailto:info@anteasalud.com"
             className="inline-flex items-center justify-center px-10 py-6 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold text-xl rounded-3xl shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-300"
           >
-            <span className="text-2xl mr-3">✉️</span>
+            <Mail className="w-6 h-6 mr-3" />
             <div className="text-left">
               <div className="text-xs text-orange-100">Escribe</div>
               <div className="font-black text-lg">Email</div>
@@ -63,15 +65,15 @@ export default function CTAFinal() {
         {/* Info adicional */}
         <div className="space-y-4 text-blue-100 mb-12">
           <p className="flex items-center justify-center gap-2">
-            <span className="text-2xl">⏱️</span>
+            <Clock className="w-5 h-5" />
             Valoración inicial en menos de 24 horas
           </p>
           <p className="flex items-center justify-center gap-2">
-            <span className="text-2xl">✓</span>
+            <Check className="w-5 h-5" />
             Sin compromiso, totalmente gratuito
           </p>
           <p className="flex items-center justify-center gap-2">
-            <span className="text-2xl">🏥</span>
+            <HeartPulse className="w-5 h-5" />
             Profesionales titulados y verificados
           </p>
         </div>

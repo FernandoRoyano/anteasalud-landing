@@ -1,3 +1,5 @@
+import { Star, Check } from 'lucide-react';
+
 export default function Testimonials() {
   const testimonials = [
     {
@@ -83,7 +85,7 @@ export default function Testimonials() {
               {/* Rating estrellas */}
               <div className="flex gap-1 mb-6">
                 {[...Array(testimonial.stars)].map((_, i) => (
-                  <span key={i} className="text-2xl text-yellow-400">★</span>
+                  <Star key={i} className="w-5 h-5 text-yellow-400 fill-yellow-400" />
                 ))}
               </div>
 
@@ -114,9 +116,10 @@ export default function Testimonials() {
               </div>
 
               {/* Badge verificado */}
-              <div className="mt-6 inline-block px-3 py-1 bg-[rgb(191,231,249)] rounded-full border border-[rgb(0,94,184)]/30">
+              <div className="mt-6 inline-flex items-center gap-1.5 px-3 py-1 bg-[rgb(191,231,249)] rounded-full border border-[rgb(0,94,184)]/30">
+                <Check className="w-3.5 h-3.5 text-[rgb(0,94,184)]" />
                 <span className="text-xs font-semibold text-[rgb(0,94,184)]">
-                  ✓ Cliente verificado
+                  Cliente verificado
                 </span>
               </div>
             </div>
@@ -135,7 +138,7 @@ export default function Testimonials() {
               <p className="text-blue-100">Familias atendidas</p>
             </div>
             <div>
-              <div className="text-5xl font-black mb-2">4.9★</div>
+              <div className="text-5xl font-black mb-2 flex items-center justify-center gap-1">4.9<Star className="w-8 h-8 fill-white" /></div>
               <p className="text-blue-100">Valoración media</p>
             </div>
             <div>
@@ -153,7 +156,7 @@ export default function Testimonials() {
           <a
             href="#contacto"
             className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-[rgb(32,113,188)] to-[rgb(0,94,184)] text-white font-bold rounded-2xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200"
-  
+
           >
             Solicita valoración gratuita
           </a>

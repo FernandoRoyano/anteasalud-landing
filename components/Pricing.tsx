@@ -1,9 +1,11 @@
 // components/Pricing.tsx
+import { Check, ShieldCheck } from 'lucide-react';
+
 export default function Pricing() {
   return (
     <section id="precios" className="w-full bg-[rgb(232,237,238)] py-24 px-4">
       <div className="max-w-5xl mx-auto">
-        
+
         {/* Header */}
         <div className="text-center mb-16 space-y-4">
           <div className="inline-block px-4 py-2 bg-[rgb(191,231,249)] rounded-full">
@@ -19,7 +21,7 @@ export default function Pricing() {
 
         {/* Pricing cards */}
         <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-12">
-          
+
           {/* Opción 1: Sesión suelta */}
           <div className="bg-white rounded-3xl p-8 shadow-lg border-2 border-[rgb(200,207,210)] hover:border-[rgb(0,94,184)] transition-all">
             <h3 className="text-xl font-bold text-[rgb(31,41,51)] mb-2">
@@ -28,22 +30,22 @@ export default function Pricing() {
             <p className="text-[rgb(130,131,130)] text-sm mb-6">
               Para probar o puntualmente
             </p>
-            
+
             <div className="mb-6">
               <span className="text-5xl font-black text-[rgb(0,94,184)]">45€</span>
             </div>
 
             <ul className="space-y-3 mb-8">
               <li className="flex items-center gap-3 text-sm text-[rgb(31,41,51)]">
-                <span className="text-[rgb(0,94,184)]">✓</span>
+                <Check className="w-4 h-4 text-[rgb(0,94,184)] flex-shrink-0" />
                 1 sesión de 30 minutos
               </li>
               <li className="flex items-center gap-3 text-sm text-[rgb(31,41,51)]">
-                <span className="text-[rgb(0,94,184)]">✓</span>
+                <Check className="w-4 h-4 text-[rgb(0,94,184)] flex-shrink-0" />
                 Profesional titulado
               </li>
               <li className="flex items-center gap-3 text-sm text-[rgb(31,41,51)]">
-                <span className="text-[rgb(0,94,184)]">✓</span>
+                <Check className="w-4 h-4 text-[rgb(0,94,184)] flex-shrink-0" />
                 En tu domicilio
               </li>
             </ul>
@@ -71,7 +73,7 @@ export default function Pricing() {
             <p className="text-white/80 text-sm mb-6">
               El ritmo ideal para ver resultados
             </p>
-            
+
             <div className="mb-2">
               <span className="text-5xl font-black text-white">70€</span>
               <span className="text-white/80"> / semana</span>
@@ -82,19 +84,19 @@ export default function Pricing() {
 
             <ul className="space-y-3 mb-8">
               <li className="flex items-center gap-3 text-sm text-white/90">
-                <span className="text-white">✓</span>
+                <Check className="w-4 h-4 text-white flex-shrink-0" />
                 2 sesiones semanales
               </li>
               <li className="flex items-center gap-3 text-sm text-white/90">
-                <span className="text-white">✓</span>
+                <Check className="w-4 h-4 text-white flex-shrink-0" />
                 Plan personalizado
               </li>
               <li className="flex items-center gap-3 text-sm text-white/90">
-                <span className="text-white">✓</span>
+                <Check className="w-4 h-4 text-white flex-shrink-0" />
                 Seguimiento de evolución
               </li>
               <li className="flex items-center gap-3 text-sm text-white/90">
-                <span className="text-white">✓</span>
+                <Check className="w-4 h-4 text-white flex-shrink-0" />
                 Sin permanencia
               </li>
             </ul>
@@ -115,22 +117,22 @@ export default function Pricing() {
             <p className="text-[rgb(130,131,130)] text-sm mb-6">
               Adaptado a tus necesidades
             </p>
-            
+
             <div className="mb-6">
               <span className="text-4xl font-black text-[rgb(0,94,184)]">A medida</span>
             </div>
 
             <ul className="space-y-3 mb-8">
               <li className="flex items-center gap-3 text-sm text-[rgb(31,41,51)]">
-                <span className="text-[rgb(0,94,184)]">✓</span>
+                <Check className="w-4 h-4 text-[rgb(0,94,184)] flex-shrink-0" />
                 Frecuencia a tu ritmo
               </li>
               <li className="flex items-center gap-3 text-sm text-[rgb(31,41,51)]">
-                <span className="text-[rgb(0,94,184)]">✓</span>
+                <Check className="w-4 h-4 text-[rgb(0,94,184)] flex-shrink-0" />
                 Sesiones de 30 o 60 min
               </li>
               <li className="flex items-center gap-3 text-sm text-[rgb(31,41,51)]">
-                <span className="text-[rgb(0,94,184)]">✓</span>
+                <Check className="w-4 h-4 text-[rgb(0,94,184)] flex-shrink-0" />
                 Intensivo o mantenimiento
               </li>
             </ul>
@@ -150,12 +152,12 @@ export default function Pricing() {
         {/* Garantía */}
         <div className="text-center space-y-6">
           <div className="inline-flex items-center gap-3 bg-[rgb(191,231,249)] px-6 py-3 rounded-full">
-            <span className="text-2xl">🛡️</span>
+            <ShieldCheck className="w-6 h-6 text-[rgb(0,94,184)]" />
             <p className="text-[rgb(0,94,184)] font-semibold text-sm md:text-base">
               Si la primera sesión no te convence, te devolvemos el dinero
             </p>
           </div>
-          
+
           <p className="text-[rgb(130,131,130)]">
             ¿Dudas? Llámanos al <a href="tel:+34633261963" className="text-[rgb(0,94,184)] font-semibold hover:underline">633 261 963</a>
           </p>

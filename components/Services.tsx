@@ -1,25 +1,28 @@
+import { Dumbbell, HeartPulse, ShieldCheck, BarChart3, Check } from 'lucide-react';
+import { ReactNode } from 'react';
+
 export default function Services() {
-  const services = [
+  const services: { icon: ReactNode; title: string; description: string; highlight: string }[] = [
     {
-      icon: "💪",
+      icon: <Dumbbell className="w-10 h-10 text-[rgb(0,94,184)]" />,
       title: "Entrenamiento funcional",
       description: "Ejercicio pautado y supervisado para recuperar fuerza, equilibrio y movilidad en personas mayores.",
       highlight: "Planes personalizados"
     },
     {
-      icon: "🏥",
+      icon: <HeartPulse className="w-10 h-10 text-[rgb(0,94,184)]" />,
       title: "Fisioterapia a domicilio",
       description: "Rehabilitación profesional tras operaciones, caídas o accidentes. Recuperación optimizada en casa.",
       highlight: "Profesionales titulados"
     },
     {
-      icon: "🛡️",
+      icon: <ShieldCheck className="w-10 h-10 text-[rgb(0,94,184)]" />,
       title: "Prevención de caídas",
       description: "Evaluación de riesgos en el hogar y ejercicios específicos para mejorar equilibrio y confianza.",
       highlight: "Seguridad garantizada"
     },
     {
-      icon: "📊",
+      icon: <BarChart3 className="w-10 h-10 text-[rgb(0,94,184)]" />,
       title: "Seguimiento personalizado",
       description: "Evaluación continua de progreso, ajuste de rutinas y coordinación con profesionales sanitarios.",
       highlight: "Evolución controlada"
@@ -29,7 +32,7 @@ export default function Services() {
   return (
     <section id="servicios" className="w-full bg-white py-24 px-4">
       <div className="max-w-7xl mx-auto">
-        
+
         {/* Header */}
         <div className="text-center mb-20 space-y-4">
           <div className="inline-block px-4 py-2 bg-[rgb(191,231,249)] rounded-full">
@@ -51,7 +54,7 @@ export default function Services() {
               className="group bg-gradient-to-br from-[rgb(232,237,238)] to-[rgb(191,231,249)] rounded-2xl p-8 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-[rgb(200,207,210)] hover:border-[rgb(0,94,184)]"
             >
               {/* Icono */}
-              <div className="text-5xl mb-6 group-hover:scale-110 transition-transform duration-300">
+              <div className="mb-6 group-hover:scale-110 transition-transform duration-300">
                 {service.icon}
               </div>
 
@@ -66,9 +69,10 @@ export default function Services() {
               </p>
 
               {/* Highlight */}
-              <div className="inline-block px-3 py-1 bg-[rgb(191,231,249)] rounded-full">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-[rgb(191,231,249)] rounded-full">
+                <Check className="w-3.5 h-3.5 text-[rgb(0,94,184)]" />
                 <span className="text-xs font-semibold text-[rgb(0,94,184)]">
-                  ✓ {service.highlight}
+                  {service.highlight}
                 </span>
               </div>
 

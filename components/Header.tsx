@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { Phone, MessageCircle } from 'lucide-react';
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -159,7 +160,7 @@ export default function Header() {
                     href="tel:+34633261963"
                     className="flex items-center gap-3 text-[rgb(31,41,51)] text-base hover:text-[rgb(0,94,184)] transition"
                   >
-                    <span className="text-xl" aria-hidden="true">📞</span>
+                    <Phone className="w-5 h-5" aria-hidden="true" />
                     <span>633 261 963</span>
                   </a>
                   <a
@@ -168,7 +169,7 @@ export default function Header() {
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 text-[rgb(0,94,184)] text-base hover:text-[rgb(32,113,188)] transition"
                   >
-                    <span className="text-xl" aria-hidden="true">💬</span>
+                    <MessageCircle className="w-5 h-5" aria-hidden="true" />
                     <span>WhatsApp</span>
                   </a>
                 </div>

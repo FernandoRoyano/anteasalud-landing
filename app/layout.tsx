@@ -1,8 +1,5 @@
 import './globals.css';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import WhatsAppButton from '../components/WhatsAppButton';
-import CookieBanner from "@/components/CookieBanner";
+import PublicChrome from '@/components/PublicChrome';
 import GoogleAnalytics from '@/components/GoogleAnalytics';
 
 export const metadata = {
@@ -138,11 +135,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="font-sans antialiased">
         <GoogleAnalytics />
-        <Header />
-        {children}
-        <CookieBanner/>
-        <WhatsAppButton />
-        <Footer />
+        <PublicChrome>{children}</PublicChrome>
       </body>
     </html>
   );

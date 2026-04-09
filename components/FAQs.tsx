@@ -37,10 +37,6 @@ export default function FAQs() {
       answer: "Claro. El objetivo es que recuperes autonomía y confianza. Una vez alcanzados tus objetivos, puedes seguir con sesiones de mantenimiento menos frecuentes o parar. Tú controlas tu plan."
     },
     {
-      question: "¿Qué pasa si no me siento cómodo con el profesional?",
-      answer: "Sin problema. Si en la primera sesión sientes que no es el adecuado, lo comunicamos y buscamos otro. Tu comodidad y confianza son prioritarias. Queremos que te sientas seguro."
-    },
-    {
       question: "¿Hacéis coordinación con mi médico?",
       answer: "Sí, si lo necesitas. Podemos coordinarnos con tu médico o fisioterapeuta del hospital para alinear objetivos y compartir evolución. Trabajamos en equipo por tu salud."
     },
@@ -53,8 +49,8 @@ export default function FAQs() {
       answer: "Madrid capital sin recargo. Para el resto de la Comunidad de Madrid aplicamos un recargo de +5€ por sesión por desplazamiento. Por ejemplo, una sesión suelta en Móstoles cuesta 50€ (45€ + 5€). Es una cantidad fija por sesión, sin sorpresas."
     },
     {
-      question: "¿Hay opciones de pago flexible?",
-      answer: "Sí. Ofrecemos planes de pago mensuales, quincenales o por sesión suelta. También aceptamos domiciliaciones bancarias para mayor comodidad. Consulta las opciones disponibles en tu zona."
+      question: "¿Cómo se paga?",
+      answer: "Tienes dos opciones: pago por sesión suelta o pago mensual con la parte proporcional según las sesiones del mes. Aceptamos Bizum, transferencia bancaria y efectivo. No trabajamos con domiciliaciones bancarias."
     }
   ];
 

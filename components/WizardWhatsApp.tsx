@@ -44,12 +44,21 @@ const SITUACIONES = [
   { value: 'otro', label: 'Otra situación' },
 ];
 
-const ZONAS_MADRID = [
-  { value: 'capital', label: 'Madrid capital' },
-  { value: 'sur', label: 'Sur (Móstoles, Fuenlabrada, Getafe, Leganés...)' },
-  { value: 'norte', label: 'Norte (Alcobendas, San Sebastián de los Reyes...)' },
-  { value: 'este', label: 'Este (Alcalá de Henares, Torrejón de Ardoz...)' },
-  { value: 'oeste', label: 'Oeste (Pozuelo, Las Rozas, Majadahonda...)' },
+const PRECIO_SESION = 45;
+const PRECIO_PLAN_SEMANA = 70;
+
+interface Zona {
+  value: string;
+  label: string;
+  recargo: number;
+}
+
+const ZONAS_MADRID: Zona[] = [
+  { value: 'capital', label: 'Madrid capital', recargo: 0 },
+  { value: 'sur', label: 'Sur (Móstoles, Fuenlabrada, Getafe, Leganés, Alcorcón...)', recargo: 5 },
+  { value: 'oeste', label: 'Oeste (Pozuelo, Las Rozas, Majadahonda, Boadilla...)', recargo: 5 },
+  { value: 'este', label: 'Este (Torrejón de Ardoz, Coslada, Rivas-Vaciamadrid...)', recargo: 5 },
+  { value: 'norte', label: 'Norte (Alcobendas, Tres Cantos)', recargo: 5 },
 ];
 
 // =============================================================================
@@ -132,7 +141,15 @@ function WizardModal({ onClose }: { onClose: () => void }) {
     const paraQuienLabel = PARA_QUIEN.find((p) => p.value === data.paraQuien)?.label || data.paraQuien;
     const edadLabel = EDADES.find((e) => e.value === data.edad)?.label || data.edad;
     const situacionLabel = SITUACIONES.find((s) => s.value === data.situacion)?.label || data.situacion;
-    const zonaLabel = ZONAS_MADRID.find((z) => z.value === data.zona)?.label || data.zona;
+    const zonaObj = ZONAS_MADRID.find((z) => z.value === data.zona);
+    const zonaLabel = zonaObj?.label || data.zona;
+    const recargo = zonaObj?.recargo || 0;
+    const precioSesion = PRECIO_SESION + recargo;
+    const precioPlan = PRECIO_PLAN_SEMANA + recargo * 2;
+
+    const lineaRecargo = recargo > 0
+      ? `\n💰 Precios para tu zona (incluye recargo de +${recargo}€/sesión por desplazamiento):\n• Sesión suelta: ${precioSesion}€\n• Plan 2 días/semana: ${precioPlan}€/semana`
+      : `\n💰 Precios:\n• Sesión suelta: ${precioSesion}€\n• Plan 2 días/semana: ${precioPlan}€/semana`;
 
     // Mensaje pre-rellenado para WhatsApp
     const mensaje = `Hola, soy ${data.nombre}. Vengo de la web y ya he visto los precios.
@@ -142,6 +159,7 @@ function WizardModal({ onClose }: { onClose: () => void }) {
 • Edad: ${edadLabel}
 • Situación: ${situacionLabel}
 • Zona: ${zonaLabel}
+${lineaRecargo}
 
 Mi teléfono: ${data.telefono}`;
 
@@ -155,7 +173,7 @@ Mi teléfono: ${data.telefono}`;
           email: '',
           telefono: data.telefono,
           zona: zonaLabel,
-          interes: `${situacionLabel} (${paraQuienLabel}, ${edadLabel})`,
+          interes: `${situacionLabel} (${paraQuienLabel}, ${edadLabel})${recargo > 0 ? ` · +${recargo}€ desplaz.` : ''}`,
         }),
       });
     } catch {
@@ -274,12 +292,14 @@ Mi teléfono: ${data.telefono}`;
             <Step
               icon={MapPin}
               title="¿En qué zona de Madrid?"
-              subtitle="Trabajamos en toda la Comunidad de Madrid"
+              subtitle="Cubrimos hasta 22 km del centro de Madrid"
             >
               {ZONAS_MADRID.map((opt) => (
                 <OptionButton
                   key={opt.value}
                   label={opt.label}
+                  badge={opt.recargo === 0 ? 'Sin recargo' : `+${opt.recargo}€/sesión`}
+                  badgeColor={opt.recargo === 0 ? 'green' : 'orange'}
                   selected={data.zona === opt.value}
                   onClick={() => {
                     update('zona', opt.value);
@@ -287,29 +307,43 @@ Mi teléfono: ${data.telefono}`;
                   }}
                 />
               ))}
+              <p className="text-xs text-[rgb(130,131,130)] text-center mt-3">
+                El recargo cubre el desplazamiento fuera de Madrid capital.
+              </p>
             </Step>
           )}
 
-          {step === 5 && (
+          {step === 5 && (() => {
+            const zonaActual = ZONAS_MADRID.find((z) => z.value === data.zona);
+            const recargoZona = zonaActual?.recargo || 0;
+            const precioSesionFinal = PRECIO_SESION + recargoZona;
+            const precioPlanFinal = PRECIO_PLAN_SEMANA + recargoZona * 2;
+
+            return (
             <Step
               icon={Send}
               title="Resumen y datos de contacto"
-              subtitle="Antes de hablar, mira nuestros precios"
+              subtitle="Antes de hablar, mira los precios para tu zona"
             >
               {/* Resumen de precios */}
               <div className="bg-gradient-to-br from-[rgb(191,231,249)] to-[rgb(232,237,238)] rounded-2xl p-5 mb-4 border border-[rgb(0,94,184)]/20">
                 <h3 className="font-bold text-[rgb(0,94,184)] mb-3 text-sm">
-                  Nuestros precios
+                  Precios para {zonaActual?.label.split(' (')[0] || 'tu zona'}
                 </h3>
                 <ul className="space-y-2 text-sm text-[rgb(31,41,51)]">
                   <li className="flex justify-between">
                     <span>Sesión suelta (30 min)</span>
-                    <strong>45€</strong>
+                    <strong>{precioSesionFinal}€</strong>
                   </li>
                   <li className="flex justify-between">
                     <span>Plan 2 días/semana</span>
-                    <strong>70€/sem</strong>
+                    <strong>{precioPlanFinal}€/sem</strong>
                   </li>
+                  {recargoZona > 0 && (
+                    <li className="text-xs text-orange-700 italic">
+                      Incluye +{recargoZona}€ por sesión de desplazamiento
+                    </li>
+                  )}
                   <li className="flex justify-between text-green-700 font-semibold border-t border-[rgb(0,94,184)]/20 pt-2 mt-2">
                     <span>Primera valoración</span>
                     <span>GRATIS</span>
@@ -350,7 +384,8 @@ Mi teléfono: ${data.telefono}`;
                 </div>
               )}
             </Step>
-          )}
+            );
+          })()}
         </div>
 
         {/* Footer / Botones */}
@@ -435,22 +470,38 @@ function OptionButton({
   label,
   selected,
   onClick,
+  badge,
+  badgeColor = 'green',
 }: {
   label: string;
   selected: boolean;
   onClick: () => void;
+  badge?: string;
+  badgeColor?: 'green' | 'orange';
 }) {
+  const badgeClass =
+    badgeColor === 'green'
+      ? 'bg-green-100 text-green-700 border-green-200'
+      : 'bg-orange-100 text-orange-700 border-orange-200';
+
   return (
     <button
       onClick={onClick}
-      className={`w-full text-left px-4 py-3.5 rounded-xl border-2 transition-all flex items-center justify-between ${
+      className={`w-full text-left px-4 py-3.5 rounded-xl border-2 transition-all flex items-center justify-between gap-2 ${
         selected
           ? 'border-[rgb(0,94,184)] bg-[rgb(191,231,249)] text-[rgb(0,94,184)]'
           : 'border-[rgb(200,207,210)] bg-white text-[rgb(31,41,51)] hover:border-[rgb(0,94,184)] hover:bg-[rgb(232,237,238)]'
       }`}
     >
-      <span className="font-semibold text-sm md:text-base">{label}</span>
-      {selected && <Check className="w-5 h-5 flex-shrink-0" />}
+      <span className="font-semibold text-sm md:text-base flex-1">{label}</span>
+      <div className="flex items-center gap-2 flex-shrink-0">
+        {badge && (
+          <span className={`text-[10px] md:text-xs font-bold px-2 py-0.5 rounded-full border ${badgeClass}`}>
+            {badge}
+          </span>
+        )}
+        {selected && <Check className="w-5 h-5" />}
+      </div>
     </button>
   );
 }

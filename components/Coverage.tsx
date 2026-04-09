@@ -8,12 +8,31 @@ export default function Coverage() {
   const gridRef = useScrollAnimation({ stagger: ".region-card", staggerDelay: 0.1 });
 
   const regions = [
-    { name: "Madrid capital", cities: "Centro, Salamanca, Chamberí, Retiro, Tetuán, Chamartín, Latina, Carabanchel..." },
-    { name: "Sur", cities: "Móstoles, Fuenlabrada, Getafe, Leganés, Alcorcón, Parla, Pinto, Valdemoro" },
-    { name: "Norte", cities: "Alcobendas, San Sebastián de los Reyes, Tres Cantos, Colmenar Viejo" },
-    { name: "Este", cities: "Alcalá de Henares, Torrejón de Ardoz, Coslada, San Fernando, Rivas-Vaciamadrid" },
-    { name: "Oeste", cities: "Pozuelo de Alarcón, Las Rozas, Majadahonda, Boadilla, Villaviciosa de Odón" },
-    { name: "Sierra", cities: "Collado Villalba, Galapagar, Torrelodones, El Escorial, Guadarrama" },
+    {
+      name: "Madrid capital",
+      cities: "Centro, Salamanca, Chamberí, Retiro, Tetuán, Chamartín, Latina, Carabanchel, Vallecas, Hortaleza...",
+      recargo: 0,
+    },
+    {
+      name: "Sur",
+      cities: "Leganés, Alcorcón, Getafe, Móstoles, Fuenlabrada, Parla, Pinto",
+      recargo: 5,
+    },
+    {
+      name: "Oeste",
+      cities: "Pozuelo de Alarcón, Majadahonda, Boadilla del Monte, Villaviciosa de Odón, Las Rozas",
+      recargo: 5,
+    },
+    {
+      name: "Este",
+      cities: "Coslada, San Fernando de Henares, Rivas-Vaciamadrid, Torrejón de Ardoz",
+      recargo: 5,
+    },
+    {
+      name: "Norte",
+      cities: "Alcobendas, Tres Cantos",
+      recargo: 5,
+    },
   ];
 
   return (
@@ -26,10 +45,10 @@ export default function Coverage() {
             <span className="text-sm font-semibold text-[rgb(0,94,184)]">Disponibilidad</span>
           </div>
           <h2 className="text-4xl md:text-5xl font-black text-[rgb(31,41,51)]">
-            Vamos a tu casa en toda la Comunidad de Madrid
+            Vamos a tu casa en la Comunidad de Madrid
           </h2>
           <p className="text-xl text-[rgb(130,131,130)] max-w-2xl mx-auto">
-            Cubrimos Madrid capital y todos los municipios de la comunidad
+            Cubrimos Madrid capital y municipios hasta 22 km del centro
           </p>
         </div>
 
@@ -40,9 +59,18 @@ export default function Coverage() {
               key={index}
               className="region-card bg-gradient-to-br from-[rgb(232,237,238)] to-[rgb(191,231,249)] rounded-2xl p-8 shadow-lg border-2 border-[rgb(200,207,210)] hover:shadow-xl hover:border-[rgb(0,94,184)] transition-all"
             >
-              <h3 className="text-2xl font-black text-[rgb(0,94,184)] mb-3">
-                {region.name}
-              </h3>
+              <div className="flex items-start justify-between gap-2 mb-3">
+                <h3 className="text-2xl font-black text-[rgb(0,94,184)]">{region.name}</h3>
+                {region.recargo === 0 ? (
+                  <span className="text-xs font-bold bg-green-500 text-white px-2.5 py-1 rounded-full whitespace-nowrap">
+                    Sin recargo
+                  </span>
+                ) : (
+                  <span className="text-xs font-bold bg-orange-500 text-white px-2.5 py-1 rounded-full whitespace-nowrap">
+                    +{region.recargo}€ /sesión
+                  </span>
+                )}
+              </div>
               <p className="text-[rgb(31,41,51)] text-sm md:text-base leading-relaxed">
                 {region.cities}
               </p>
@@ -53,13 +81,20 @@ export default function Coverage() {
           ))}
         </div>
 
+        {/* Aviso de recargo */}
+        <div className="bg-orange-50 border-2 border-orange-200 rounded-2xl p-6 mb-8 text-center">
+          <p className="text-[rgb(31,41,51)] text-sm md:text-base">
+            <strong className="text-orange-700">Recargo por desplazamiento:</strong> Madrid capital sin recargo. Resto de zonas <strong>+5€ por sesión</strong> para cubrir el desplazamiento.
+          </p>
+        </div>
+
         {/* Info adicional */}
         <div className="bg-gradient-to-r from-[rgb(191,231,249)] to-[rgb(232,237,238)] rounded-3xl p-12 border-2 border-[rgb(0,94,184)]/30 text-center">
           <h3 className="text-2xl md:text-3xl font-bold text-[rgb(31,41,51)] mb-4">
             ¿Tu municipio no aparece?
           </h3>
           <p className="text-lg text-[rgb(130,131,130)] mb-8">
-            Cubrimos toda la Comunidad de Madrid. Llámanos y te confirmamos disponibilidad en tu zona.
+            Trabajamos en un radio de hasta 22 km del centro de Madrid. Llámanos y te confirmamos disponibilidad en tu zona.
           </p>
           <a
             href="tel:+34633261963"

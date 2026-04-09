@@ -155,6 +155,22 @@ export default function Pricing() {
 
         </div>
 
+        {/* Aviso de recargo por desplazamiento */}
+        <div className="max-w-3xl mx-auto bg-orange-50 border-2 border-orange-200 rounded-2xl p-6 mb-8">
+          <div className="flex items-start gap-3">
+            <div className="w-10 h-10 rounded-xl bg-orange-500 flex items-center justify-center flex-shrink-0">
+              <span className="text-white font-black text-lg">€</span>
+            </div>
+            <div>
+              <h4 className="font-bold text-[rgb(31,41,51)] mb-1">Recargo por desplazamiento</h4>
+              <p className="text-sm text-[rgb(31,41,51)]">
+                <strong>Madrid capital:</strong> sin recargo. <br />
+                <strong>Resto de la Comunidad de Madrid</strong> (Móstoles, Leganés, Getafe, Pozuelo, Alcobendas, Torrejón...): <strong className="text-orange-700">+5€ por sesión</strong> para cubrir el desplazamiento.
+              </p>
+            </div>
+          </div>
+        </div>
+
         {/* Garantía */}
         <div className="text-center space-y-6">
           <div className="inline-flex items-center gap-3 bg-[rgb(191,231,249)] px-6 py-3 rounded-full">

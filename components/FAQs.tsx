@@ -46,7 +46,11 @@ export default function FAQs() {
     },
     {
       question: "¿Dónde operáis?",
-      answer: "Operamos en toda la Comunidad de Madrid: Madrid capital y municipios (Móstoles, Alcalá de Henares, Getafe, Leganés, Fuenlabrada, Alcobendas, Pozuelo, Las Rozas y muchos más). Vamos a tu domicilio. Consulta con nosotros si tu zona está incluida."
+      answer: "Operamos en Madrid capital y municipios de la Comunidad de Madrid en un radio de hasta 22 km del centro: Móstoles, Leganés, Alcorcón, Getafe, Fuenlabrada, Parla, Pinto, Pozuelo, Majadahonda, Las Rozas, Boadilla, Villaviciosa de Odón, Coslada, San Fernando de Henares, Rivas-Vaciamadrid, Torrejón de Ardoz, Alcobendas y Tres Cantos. Vamos a tu domicilio."
+    },
+    {
+      question: "¿Cobráis desplazamiento?",
+      answer: "Madrid capital sin recargo. Para el resto de la Comunidad de Madrid aplicamos un recargo de +5€ por sesión por desplazamiento. Por ejemplo, una sesión suelta en Móstoles cuesta 50€ (45€ + 5€). Es una cantidad fija por sesión, sin sorpresas."
     },
     {
       question: "¿Hay opciones de pago flexible?",

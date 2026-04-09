@@ -1,7 +1,11 @@
+"use client";
+
 import Link from 'next/link';
 import { Camera, Phone, Mail, MessageCircle } from 'lucide-react';
+import { useWizard } from './WizardWhatsApp';
 
 export default function Footer() {
+  const { open: openWizard } = useWizard();
   return (
     <footer className="w-full bg-[rgb(31,41,51)] text-[rgb(200,207,210)] py-16 px-4">
       <div className="max-w-7xl mx-auto">
@@ -66,9 +70,9 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="https://wa.me/34633261963" target="_blank" rel="noopener noreferrer" className="hover:text-[rgb(0,94,184)] transition flex items-center gap-2">
+                <button onClick={openWizard} className="hover:text-[rgb(0,94,184)] transition flex items-center gap-2 text-left">
                   <MessageCircle className="w-4 h-4" /> WhatsApp
-                </a>
+                </button>
               </li>
               <li className="text-[rgb(130,131,130)] mt-4">
                 Disponible de lunes a viernes<br/>

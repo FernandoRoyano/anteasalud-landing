@@ -3,11 +3,13 @@
 import { useState } from 'react';
 import { Phone, MessageCircle } from 'lucide-react';
 import { useScrollAnimation } from '@/lib/useScrollAnimation';
+import { useWizard } from './WizardWhatsApp';
 
 export default function FAQs() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const headerRef = useScrollAnimation();
   const faqsRef = useScrollAnimation({ stagger: ".faq-item", staggerDelay: 0.08 });
+  const { open: openWizard } = useWizard();
 
   const faqs = [
     {
@@ -44,7 +46,7 @@ export default function FAQs() {
     },
     {
       question: "¿Dónde operáis?",
-      answer: "Operamos en toda España. Vamos a domicilio, así que nos desplazamos donde tú estés. Consulta con nosotros si tu ciudad está incluida."
+      answer: "Operamos en toda la Comunidad de Madrid: Madrid capital y municipios (Móstoles, Alcalá de Henares, Getafe, Leganés, Fuenlabrada, Alcobendas, Pozuelo, Las Rozas y muchos más). Vamos a tu domicilio. Consulta con nosotros si tu zona está incluida."
     },
     {
       question: "¿Hay opciones de pago flexible?",
@@ -130,14 +132,12 @@ export default function FAQs() {
             >
               <Phone className="w-5 h-5" /> Llamar ahora
             </a>
-            <a
-              href="https://wa.me/34633261963?text=Tengo%20una%20pregunta%20sobre%20ANTEA"
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              onClick={openWizard}
               className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[rgb(0,94,184)] text-white font-bold text-lg rounded-2xl hover:bg-[rgb(32,113,188)] shadow-md hover:shadow-lg transition-all"
             >
               <MessageCircle className="w-5 h-5" /> WhatsApp
-            </a>
+            </button>
           </div>
         </div>
       </div>

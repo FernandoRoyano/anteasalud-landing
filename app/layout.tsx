@@ -5,7 +5,7 @@ import GoogleAnalytics from '@/components/GoogleAnalytics';
 export const metadata = {
   title: 'ANTEA Salud - Ejercicio y Fisioterapia a Domicilio para Mayores',
   description: 'Ejercicio funcional y fisioterapia profesional en tu casa. Recupera movilidad, autonomía y confianza. +200 familias confían en nosotros. Valoración gratuita.',
-  keywords: 'fisioterapia domicilio, ejercicio mayores, rehabilitación en casa, fisioterapeuta, fisioterapia a domicilio Madrid, ejercicio terapéutico mayores, rehabilitación domiciliaria',
+  keywords: 'fisioterapia a domicilio Madrid, ejercicio para mayores Madrid, rehabilitación en casa Madrid, fisioterapeuta a domicilio Madrid, ejercicio terapéutico mayores, rehabilitación domiciliaria Comunidad de Madrid',
   authors: [{ name: 'ANTEA Salud' }],
   metadataBase: new URL('https://www.anteasalud.com'),
   alternates: {
@@ -85,6 +85,10 @@ const jsonLd = {
     'https://www.facebook.com/anteasalud',
     'https://www.instagram.com/anteasalud',
   ],
+  areaServed: {
+    '@type': 'AdministrativeArea',
+    name: 'Comunidad de Madrid',
+  },
   serviceArea: {
     '@type': 'GeoCircle',
     geoMidpoint: {

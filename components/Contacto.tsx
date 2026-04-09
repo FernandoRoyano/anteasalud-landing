@@ -4,6 +4,7 @@ import { useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
 import { Phone, Smartphone, Clock, MapPin, PenLine, Search, Dumbbell, Target, Info, Loader2, Mail, CircleCheck, CircleX, ShieldCheck, BadgeCheck, UserCheck, BarChart3 } from 'lucide-react';
 import { useScrollAnimation } from '@/lib/useScrollAnimation';
+import { useWizard } from './WizardWhatsApp';
 
 export default function Contacto() {
     const form = useRef<HTMLFormElement>(null);
@@ -12,6 +13,7 @@ export default function Contacto() {
     const headerRef = useScrollAnimation();
     const columnsRef = useScrollAnimation({ stagger: ".contacto-col", staggerDelay: 0.2, y: 50 });
     const garantiasRef = useScrollAnimation({ stagger: ".garantia-card", staggerDelay: 0.12 });
+    const { open: openWizard } = useWizard();
 
     const enviarCorreo = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -63,14 +65,12 @@ export default function Contacto() {
                         <h3 className="font-bold text-[rgb(0,94,184)] text-lg mb-4 flex items-center gap-2">
                             <Phone className="w-5 h-5" /> Contacto Inmediato
                         </h3>
-                        <a
-                            href="https://wa.me/34633261963?text=Hola,%20quiero%20información%20sobre%20ejercicio%20para%20personas%20mayores%20a%20domicilio"
-                            target="_blank"
-                            rel="noopener noreferrer"
+                        <button
+                            onClick={openWizard}
                             className="inline-flex items-center gap-2 py-3 px-5 bg-green-500 text-white rounded-xl font-semibold text-lg shadow hover:bg-green-600 transition mb-2"
                         >
                             <Smartphone className="w-5 h-5" /> WhatsApp: 633 261 963
-                        </a>
+                        </button>
                         <a
                             href="tel:+34633261963"
                             className="inline-flex items-center gap-2 py-3 px-5 bg-blue-100 text-blue-900 rounded-xl font-semibold text-lg shadow hover:bg-blue-200 transition"
@@ -90,8 +90,8 @@ export default function Contacto() {
                                 <h4 className="font-bold text-slate-700 flex items-center gap-2">
                                     <MapPin className="w-4 h-4" /> Zona Servicio
                                 </h4>
-                                <p className="text-sm text-slate-900">Toda España</p>
-                                <small className="text-slate-500">Madrid • Barcelona • Valencia • Sevilla • Bilbao y más</small>
+                                <p className="text-sm text-slate-900">Comunidad de Madrid</p>
+                                <small className="text-slate-500">Madrid capital • Móstoles • Alcalá • Getafe • Leganés y más</small>
                             </div>
                         </div>
                     </div>
@@ -131,15 +131,12 @@ export default function Contacto() {
                                 disabled={enviando}
                                 className="px-4 py-3 rounded-xl border border-slate-300 focus:border-[rgb(0,94,184)] focus:ring-1 focus:ring-[rgb(191,231,249)] transition text-slate-900"
                             >
-                                <option value="">¿En qué zona necesitas el servicio?</option>
-                                <option value="Madrid">Madrid y alrededores</option>
-                                <option value="Barcelona">Barcelona y alrededores</option>
-                                <option value="Valencia">Valencia y alrededores</option>
-                                <option value="Sevilla">Sevilla y alrededores</option>
-                                <option value="Bilbao">Bilbao / País Vasco</option>
-                                <option value="Zaragoza">Zaragoza</option>
-                                <option value="Málaga">Málaga / Costa del Sol</option>
-                                <option value="Otra">Otra ciudad</option>
+                                <option value="">¿En qué zona de Madrid?</option>
+                                <option value="Madrid capital">Madrid capital</option>
+                                <option value="Sur Madrid">Sur (Móstoles, Fuenlabrada, Getafe, Leganés...)</option>
+                                <option value="Norte Madrid">Norte (Alcobendas, San Sebastián de los Reyes...)</option>
+                                <option value="Este Madrid">Este (Alcalá de Henares, Torrejón de Ardoz...)</option>
+                                <option value="Oeste Madrid">Oeste (Pozuelo, Las Rozas, Majadahonda...)</option>
                             </select>
                             <textarea
                                 name="message"

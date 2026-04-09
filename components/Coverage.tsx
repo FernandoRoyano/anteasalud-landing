@@ -8,12 +8,12 @@ export default function Coverage() {
   const gridRef = useScrollAnimation({ stagger: ".region-card", staggerDelay: 0.1 });
 
   const regions = [
-    { name: "Madrid", cities: "Madrid, Fuenlabrada, Alcalá de Henares, Móstoles" },
-    { name: "Cataluña", cities: "Barcelona, Tarragona, Girona, L'Hospitalet" },
-    { name: "País Vasco", cities: "Bilbao, San Sebastián, Vitoria" },
-    { name: "Valencia", cities: "Valencia, Alicante, Elche, Castellón" },
-    { name: "Andalucía", cities: "Sevilla, Málaga, Córdoba, Granada" },
-    { name: "Otras ciudades", cities: "Zaragoza, Valladolid, Oviedo, Palma de Mallorca y más" }
+    { name: "Madrid capital", cities: "Centro, Salamanca, Chamberí, Retiro, Tetuán, Chamartín, Latina, Carabanchel..." },
+    { name: "Sur", cities: "Móstoles, Fuenlabrada, Getafe, Leganés, Alcorcón, Parla, Pinto, Valdemoro" },
+    { name: "Norte", cities: "Alcobendas, San Sebastián de los Reyes, Tres Cantos, Colmenar Viejo" },
+    { name: "Este", cities: "Alcalá de Henares, Torrejón de Ardoz, Coslada, San Fernando, Rivas-Vaciamadrid" },
+    { name: "Oeste", cities: "Pozuelo de Alarcón, Las Rozas, Majadahonda, Boadilla, Villaviciosa de Odón" },
+    { name: "Sierra", cities: "Collado Villalba, Galapagar, Torrelodones, El Escorial, Guadarrama" },
   ];
 
   return (
@@ -26,10 +26,10 @@ export default function Coverage() {
             <span className="text-sm font-semibold text-[rgb(0,94,184)]">Disponibilidad</span>
           </div>
           <h2 className="text-4xl md:text-5xl font-black text-[rgb(31,41,51)]">
-            Operamos en toda España
+            Vamos a tu casa en toda la Comunidad de Madrid
           </h2>
           <p className="text-xl text-[rgb(130,131,130)] max-w-2xl mx-auto">
-            Presente en más de 100 ciudades. ¿Está la tuya?
+            Cubrimos Madrid capital y todos los municipios de la comunidad
           </p>
         </div>
 
@@ -56,10 +56,10 @@ export default function Coverage() {
         {/* Info adicional */}
         <div className="bg-gradient-to-r from-[rgb(191,231,249)] to-[rgb(232,237,238)] rounded-3xl p-12 border-2 border-[rgb(0,94,184)]/30 text-center">
           <h3 className="text-2xl md:text-3xl font-bold text-[rgb(31,41,51)] mb-4">
-            ¿Tu ciudad no aparece?
+            ¿Tu municipio no aparece?
           </h3>
           <p className="text-lg text-[rgb(130,131,130)] mb-8">
-            Estamos expandiendo constantemente. Contacta con nosotros y te diremos si pronto llegaremos a tu zona.
+            Cubrimos toda la Comunidad de Madrid. Llámanos y te confirmamos disponibilidad en tu zona.
           </p>
           <a
             href="tel:+34633261963"

@@ -20,7 +20,7 @@ export default function Testimonials() {
     },
     {
       name: "Juan López",
-      city: "Barcelona",
+      city: "Móstoles",
       relation: "Esposo",
       stars: 5,
       text: "Mi esposa está mucho más fuerte y activa. Los profesionales son muy cuidadosos y adaptan los ejercicios a su ritmo. Además, el trato es excepcional. Los recomendaría sin dudarlo.",
@@ -29,7 +29,7 @@ export default function Testimonials() {
     },
     {
       name: "Carmen Rodríguez",
-      city: "Valencia",
+      city: "Alcalá de Henares",
       relation: "Hija",
       stars: 5,
       text: "Llevaba meses sin poder levantarse del sofá. Ahora sube escaleras, camina por la calle y hasta va a pasear al parque. ANTEA ha sido un cambio radical en su vida. ¡Gracias!",
@@ -38,7 +38,7 @@ export default function Testimonials() {
     },
     {
       name: "Roberto Martínez",
-      city: "Sevilla",
+      city: "Getafe",
       relation: "Hijo",
       stars: 5,
       text: "La valoración fue muy completa y personalizada. No es un servicio genérico, cada sesión es diferente según mi padre mejora. Muy profesionales y humanos a la vez.",
@@ -47,7 +47,7 @@ export default function Testimonials() {
     },
     {
       name: "Ana Fernández",
-      city: "Bilbao",
+      city: "Leganés",
       relation: "Cónyuge",
       stars: 5,
       text: "Tras la caída, pensé que mi marido no volvería a ser el mismo. ANTEA me ha devuelto la esperanza. Ahora recupera movilidad cada semana. ¡Increíble profesionalidad!",
@@ -56,7 +56,7 @@ export default function Testimonials() {
     },
     {
       name: "Luis Sánchez",
-      city: "Zaragoza",
+      city: "Fuenlabrada",
       relation: "Hijo",
       stars: 5,
       text: "Llevo 3 meses con ANTEA y puedo confirmar que mi madre está como nunca. Más autónoma, más fuerte, más feliz. El equipo es extraordinario. Mejor decisión que hemos tomado.",

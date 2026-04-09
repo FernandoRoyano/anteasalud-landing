@@ -3,10 +3,12 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Phone, MessageCircle } from 'lucide-react';
+import { useWizard } from './WizardWhatsApp';
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { open: openWizard } = useWizard();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -163,15 +165,16 @@ export default function Header() {
                     <Phone className="w-5 h-5" aria-hidden="true" />
                     <span>633 261 963</span>
                   </a>
-                  <a
-                    href="https://wa.me/34633261963?text=Hola,%20me%20gustaría%20información%20sobre%20ANTEA%20Salud"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <button
+                    onClick={() => {
+                      setMenuOpen(false);
+                      openWizard();
+                    }}
                     className="flex items-center gap-3 text-[rgb(0,94,184)] text-base hover:text-[rgb(32,113,188)] transition"
                   >
                     <MessageCircle className="w-5 h-5" aria-hidden="true" />
                     <span>WhatsApp</span>
-                  </a>
+                  </button>
                 </div>
               </nav>
             </div>

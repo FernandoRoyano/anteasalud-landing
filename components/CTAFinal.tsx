@@ -4,9 +4,11 @@ import { Phone, MessageCircle, Mail, Clock, Check, HeartPulse } from 'lucide-rea
 import { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import { gsap, ScrollTrigger } from '@/lib/gsap';
+import { useWizard } from './WizardWhatsApp';
 
 export default function CTAFinal() {
   const sectionRef = useRef<HTMLElement>(null);
+  const { open: openWizard } = useWizard();
 
   useGSAP(
     () => {
@@ -68,10 +70,8 @@ export default function CTAFinal() {
           </a>
 
           {/* Botón 2: WhatsApp */}
-          <a
-            href="https://wa.me/34633261963?text=Hola,%20me%20gustaría%20información%20sobre%20ANTEA%20Salud"
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            onClick={openWizard}
             className="inline-flex items-center justify-center px-10 py-6 bg-gradient-to-r from-green-500 to-green-600 text-white font-bold text-xl rounded-3xl shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-300"
           >
             <MessageCircle className="w-6 h-6 mr-3" />
@@ -79,7 +79,7 @@ export default function CTAFinal() {
               <div className="text-xs text-green-100">Envía mensaje</div>
               <div className="font-black text-lg">WhatsApp</div>
             </div>
-          </a>
+          </button>
 
           {/* Botón 3: Email */}
           <a

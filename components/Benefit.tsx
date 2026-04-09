@@ -6,7 +6,7 @@ export default function Benefit() {
         <p className="text-[rgb(31,41,51)] font-bold text-xl md:text-2xl text-center">
           familias han recuperado su autonomía física<br />gracias a <span className="text-[rgb(0,94,184)]">ANTEA Salud</span>
         </p>
-        <span className="block mt-2 text-[rgb(130,131,130)] text-base md:text-lg">Servicios en toda España</span>
+        <span className="block mt-2 text-[rgb(130,131,130)] text-base md:text-lg">Servicios en toda la Comunidad de Madrid</span>
       </div>
     </section>
   );

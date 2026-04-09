@@ -5,6 +5,7 @@ import Header from './Header';
 import Footer from './Footer';
 import WhatsAppButton from './WhatsAppButton';
 import CookieBanner from './CookieBanner';
+import { WizardProvider } from './WizardWhatsApp';
 
 /**
  * Renderiza el header, footer, banner de cookies y botón de WhatsApp
@@ -19,12 +20,12 @@ export default function PublicChrome({ children }: { children: React.ReactNode }
   }
 
   return (
-    <>
+    <WizardProvider>
       <Header />
       {children}
       <CookieBanner />
       <WhatsAppButton />
       <Footer />
-    </>
+    </WizardProvider>
   );
 }

@@ -82,12 +82,21 @@ async function ensureSheet(
   );
 
   if (!found) {
-    await sheets.spreadsheets.batchUpdate({
-      spreadsheetId,
-      requestBody: {
-        requests: [{ addSheet: { properties: { title: sheetName } } }],
-      },
-    });
+    try {
+      await sheets.spreadsheets.batchUpdate({
+        spreadsheetId,
+        requestBody: {
+          requests: [{ addSheet: { properties: { title: sheetName } } }],
+        },
+      });
+    } catch (err: unknown) {
+      // Race condition: otra lambda concurrente ya creó la hoja.
+      // Ignoramos el error "already exists" y continuamos.
+      const message = err instanceof Error ? err.message : String(err);
+      if (!message.toLowerCase().includes('already exists')) {
+        throw err;
+      }
+    }
   }
 
   // Asegurar cabeceras
@@ -102,7 +111,7 @@ async function ensureSheet(
     await sheets.spreadsheets.values.update({
       spreadsheetId,
       range: headerRange,
-      valueInputOption: 'USER_ENTERED',
+      valueInputOption: 'RAW',
       requestBody: { values: [headers] },
     });
   }
@@ -317,16 +326,16 @@ export async function getAllSessions(): Promise<Session[]> {
 
   return rows.map((row, index) => ({
     row: index + 2,
-    id: row[0] || '',
-    clientId: row[1] || '',
-    date: row[2] || '',
-    status: (row[3] as SessionStatus) || 'scheduled',
-    isPending: row[4] === 'TRUE' || row[4] === 'true',
-    missedReason: row[5] || '',
-    linkedToSessionId: row[6] || '',
-    notes: row[7] || '',
-    createdAt: row[8] || '',
-    updatedAt: row[9] || '',
+    id: String(row[0] ?? '').trim(),
+    clientId: String(row[1] ?? '').trim(),
+    date: String(row[2] ?? '').trim(),
+    status: (String(row[3] ?? 'scheduled').trim() as SessionStatus) || 'scheduled',
+    isPending: String(row[4] ?? '').toUpperCase() === 'TRUE',
+    missedReason: String(row[5] ?? ''),
+    linkedToSessionId: String(row[6] ?? '').trim(),
+    notes: String(row[7] ?? ''),
+    createdAt: String(row[8] ?? ''),
+    updatedAt: String(row[9] ?? ''),
   }));
 }
 
@@ -345,10 +354,11 @@ export async function createSession(
   const id = `sess_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
   const now = new Date().toISOString();
 
-  await sheets.spreadsheets.values.append({
+  const result = await sheets.spreadsheets.values.append({
     spreadsheetId,
     range: `${SESIONES_SHEET}!A:J`,
-    valueInputOption: 'USER_ENTERED',
+    valueInputOption: 'RAW',
+    insertDataOption: 'INSERT_ROWS',
     requestBody: {
       values: [
         [
@@ -367,6 +377,8 @@ export async function createSession(
     },
   });
 
+  console.log(`[createSession] Created id=${id}, updatedRange=${result.data.updates?.updatedRange}`);
+
   return { ...data, id, createdAt: now, updatedAt: now };
 }
 
@@ -376,14 +388,23 @@ export async function updateSession(id: string, updates: Partial<Session>): Prom
 
   const existing = await getAllSessions();
   const session = existing.find((s) => s.id === id);
-  if (!session || !session.row) throw new Error(`Sesión ${id} no encontrada`);
+  if (!session || !session.row) {
+    const availableIds = existing.map((s) => s.id).filter(Boolean);
+    console.error(
+      `[updateSession] Sesión "${id}" no encontrada. ` +
+        `${availableIds.length} sesiones en el sheet: ${JSON.stringify(availableIds)}`
+    );
+    throw new Error(
+      `Sesión ${id} no encontrada en el sheet (hay ${availableIds.length} sesiones guardadas)`
+    );
+  }
 
   const merged = { ...session, ...updates, updatedAt: new Date().toISOString() };
 
   await sheets.spreadsheets.values.update({
     spreadsheetId,
     range: `${SESIONES_SHEET}!A${session.row}:J${session.row}`,
-    valueInputOption: 'USER_ENTERED',
+    valueInputOption: 'RAW',
     requestBody: {
       values: [
         [
@@ -409,13 +430,18 @@ export async function deleteSession(id: string): Promise<void> {
 
   const existing = await getAllSessions();
   const session = existing.find((s) => s.id === id);
-  if (!session || !session.row) return;
+  if (!session || !session.row) {
+    const availableIds = existing.map((s) => s.id).filter(Boolean);
+    throw new Error(
+      `Sesión ${id} no encontrada en el sheet (hay ${availableIds.length} sesiones guardadas)`
+    );
+  }
 
   // Limpiar la fila (dejarla vacía). No borro la fila físicamente para no mover índices.
   await sheets.spreadsheets.values.update({
     spreadsheetId,
     range: `${SESIONES_SHEET}!A${session.row}:J${session.row}`,
-    valueInputOption: 'USER_ENTERED',
+    valueInputOption: 'RAW',
     requestBody: {
       values: [['', '', '', '', '', '', '', '', '', '']],
     },

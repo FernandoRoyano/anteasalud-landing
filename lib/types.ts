@@ -65,6 +65,9 @@ export interface Client {
   notes: string;
   active: boolean;
   createdAt: string;
+  /** Nombre del contacto de facturación si es distinto al cliente
+   *  (p.ej. una hija que gestiona los pagos de su padre) */
+  contactName: string;
 }
 
 export type SessionStatus =

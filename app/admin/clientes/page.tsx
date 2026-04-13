@@ -158,6 +158,11 @@ export default function ClientesPage() {
                     {client.phone && (
                       <span className="inline-flex items-center gap-1">
                         <Phone className="w-3.5 h-3.5" /> {client.phone}
+                        {client.contactName && (
+                          <span className="text-[rgb(0,94,184)] font-semibold ml-1">
+                            · {client.contactName}
+                          </span>
+                        )}
                       </span>
                     )}
                     <span className="inline-flex items-center gap-1">
@@ -228,6 +233,7 @@ function ClientFormModal({
 }) {
   const [name, setName] = useState(client?.name || '');
   const [phone, setPhone] = useState(client?.phone || '');
+  const [contactName, setContactName] = useState(client?.contactName || '');
   const [address, setAddress] = useState(client?.address || '');
   const [zone, setZone] = useState<Zone>(client?.zone || 'capital');
   const [modalidad, setModalidad] = useState<'pack' | 'suelta' | 'custom'>(
@@ -249,6 +255,7 @@ function ClientFormModal({
     await onSave({
       name: name.trim(),
       phone: phone.trim(),
+      contactName: contactName.trim(),
       address: address.trim(),
       zone,
       pricePerSession: finalPrice,
@@ -301,6 +308,9 @@ function ClientFormModal({
                 placeholder="600 000 000"
                 className="w-full px-4 py-3 rounded-xl border border-[rgb(200,207,210)] focus:border-[rgb(0,94,184)] outline-none text-[rgb(31,41,51)]"
               />
+              <p className="text-xs text-[rgb(130,131,130)] mt-1">
+                Teléfono al que se envían los cobros por WhatsApp
+              </p>
             </div>
             <div>
               <label className="block text-sm font-semibold text-[rgb(31,41,51)] mb-1.5">Zona</label>
@@ -316,6 +326,24 @@ function ClientFormModal({
                 ))}
               </select>
             </div>
+          </div>
+
+          <div>
+            <label className="block text-sm font-semibold text-[rgb(31,41,51)] mb-1.5">
+              Contacto para pagos{' '}
+              <span className="text-xs font-normal text-[rgb(130,131,130)]">(opcional)</span>
+            </label>
+            <input
+              type="text"
+              value={contactName}
+              onChange={(e) => setContactName(e.target.value)}
+              placeholder="Ej: Lola (hija de Tino)"
+              className="w-full px-4 py-3 rounded-xl border border-[rgb(200,207,210)] focus:border-[rgb(0,94,184)] outline-none text-[rgb(31,41,51)]"
+            />
+            <p className="text-xs text-[rgb(130,131,130)] mt-1">
+              Si otra persona gestiona los pagos del cliente, pon su nombre aquí.
+              Los mensajes de cobro se dirigirán a ella.
+            </p>
           </div>
 
           <div>

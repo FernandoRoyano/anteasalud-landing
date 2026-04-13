@@ -36,6 +36,7 @@ export async function POST(req: NextRequest) {
       color: body.color || '#1e4a6d',
       notes: body.notes || '',
       active: body.active !== false,
+      contactName: body.contactName || '',
     });
 
     return NextResponse.json({ client });

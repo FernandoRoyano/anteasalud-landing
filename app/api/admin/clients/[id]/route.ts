@@ -23,6 +23,7 @@ export async function PATCH(
     if (typeof body.color === 'string') updates.color = body.color;
     if (typeof body.notes === 'string') updates.notes = body.notes;
     if (typeof body.active === 'boolean') updates.active = body.active;
+    if (typeof body.contactName === 'string') updates.contactName = body.contactName;
 
     await updateClient(id, updates);
     return NextResponse.json({ ok: true });

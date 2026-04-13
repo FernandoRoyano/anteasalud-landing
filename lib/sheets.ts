@@ -22,6 +22,7 @@ const CLIENTES_HEADERS = [
   'notes',
   'active',
   'createdAt',
+  'contactName',
 ];
 
 const SESIONES_HEADERS = [
@@ -202,23 +203,24 @@ export async function getAllClients(): Promise<Client[]> {
 
   const response = await sheets.spreadsheets.values.get({
     spreadsheetId,
-    range: `${CLIENTES_SHEET}!A2:J`,
+    range: `${CLIENTES_SHEET}!A2:K`,
   });
 
   const rows = response.data.values || [];
 
   return rows.map((row, index) => ({
     row: index + 2,
-    id: row[0] || '',
-    name: row[1] || '',
-    phone: row[2] || '',
-    address: row[3] || '',
-    zone: (row[4] as Zone) || 'capital',
+    id: String(row[0] ?? '').trim(),
+    name: String(row[1] ?? '').trim(),
+    phone: String(row[2] ?? '').trim(),
+    address: String(row[3] ?? ''),
+    zone: (String(row[4] ?? 'capital').trim() as Zone) || 'capital',
     pricePerSession: Number(row[5]) || 35,
-    color: row[6] || '#1e4a6d',
-    notes: row[7] || '',
-    active: row[8] === 'TRUE' || row[8] === 'true' || row[8] === '1',
-    createdAt: row[9] || '',
+    color: String(row[6] ?? '#1e4a6d').trim(),
+    notes: String(row[7] ?? ''),
+    active: String(row[8] ?? '').toUpperCase() === 'TRUE',
+    createdAt: String(row[9] ?? ''),
+    contactName: String(row[10] ?? '').trim(),
   }));
 }
 
@@ -247,8 +249,9 @@ export async function createClient(data: Omit<Client, 'id' | 'row' | 'createdAt'
 
   await sheets.spreadsheets.values.append({
     spreadsheetId,
-    range: `${CLIENTES_SHEET}!A:J`,
-    valueInputOption: 'USER_ENTERED',
+    range: `${CLIENTES_SHEET}!A:K`,
+    valueInputOption: 'RAW',
+    insertDataOption: 'INSERT_ROWS',
     requestBody: {
       values: [
         [
@@ -262,6 +265,7 @@ export async function createClient(data: Omit<Client, 'id' | 'row' | 'createdAt'
           data.notes || '',
           data.active ? 'TRUE' : 'FALSE',
           createdAt,
+          data.contactName || '',
         ],
       ],
     },
@@ -282,8 +286,8 @@ export async function updateClient(id: string, updates: Partial<Client>): Promis
 
   await sheets.spreadsheets.values.update({
     spreadsheetId,
-    range: `${CLIENTES_SHEET}!A${client.row}:J${client.row}`,
-    valueInputOption: 'USER_ENTERED',
+    range: `${CLIENTES_SHEET}!A${client.row}:K${client.row}`,
+    valueInputOption: 'RAW',
     requestBody: {
       values: [
         [
@@ -297,6 +301,7 @@ export async function updateClient(id: string, updates: Partial<Client>): Promis
           merged.notes || '',
           merged.active ? 'TRUE' : 'FALSE',
           merged.createdAt,
+          merged.contactName || '',
         ],
       ],
     },

@@ -212,8 +212,16 @@ export default function SesionesPage() {
       .join(', ');
 
     const monthName = MONTH_LABELS[month];
-    let mensaje = `Hola ${selectedClient.name}! 👋\n\n`;
-    mensaje += `Te paso el resumen de *${monthName} ${year}*:\n\n`;
+    // Si hay contacto de pagos distinto al cliente, dirigir el mensaje al contacto
+    // e indicar que el resumen es de las sesiones del cliente
+    const greeting = selectedClient.contactName
+      ? `Hola ${selectedClient.contactName}! 👋`
+      : `Hola ${selectedClient.name}! 👋`;
+    const descripcion = selectedClient.contactName
+      ? `Te paso el resumen de las sesiones de ${selectedClient.name} en *${monthName} ${year}*:`
+      : `Te paso el resumen de *${monthName} ${year}*:`;
+
+    let mensaje = `${greeting}\n\n${descripcion}\n\n`;
     mensaje += `📅 ${sesionesDelMes} ${sesionesDelMes === 1 ? 'sesión' : 'sesiones'}: ${diasLista}\n`;
     mensaje += `💰 ${sesionesDelMes} × ${price}€ = ${ingresoBruto}€\n`;
 

@@ -118,7 +118,10 @@ export default function SesionesPage() {
   }, [clientSessions, month, year]);
 
   const price = selectedClient?.pricePerSession || 0;
-  const ingresoBruto = monthStats.completed * price;
+  // Modelo de compromiso: cuentan TODAS las sesiones del mes (realizadas + programadas + falladas).
+  // Las falladas del mes anterior (sin recuperar) se descuentan como crédito.
+  const sesionesDelMes = monthStats.completed + monthStats.scheduled + monthStats.missed;
+  const ingresoBruto = sesionesDelMes * price;
   const credito = monthStats.prevMonthMissed * price;
   const totalACobrar = Math.max(0, ingresoBruto - credito);
 
@@ -162,40 +165,90 @@ export default function SesionesPage() {
 
   const handleAddSession = async (date: string) => {
     if (!selectedClientId) return;
-    const res = await fetch('/api/admin/sessions', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        clientId: selectedClientId,
-        date,
-        status: 'scheduled',
-        isPending: false,
-      }),
-    });
-    if (res.ok) {
-      setAddingDate(null);
-      loadAll();
+
+    const tempId = `temp_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`;
+    const now = new Date().toISOString();
+    const optimistic: Session = {
+      id: tempId,
+      clientId: selectedClientId,
+      date,
+      status: 'scheduled',
+      isPending: false,
+      missedReason: '',
+      linkedToSessionId: '',
+      notes: '',
+      createdAt: now,
+      updatedAt: now,
+    };
+
+    // Cierra modal y añade al estado de inmediato
+    setAddingDate(null);
+    setSessions((prev) => [...prev, optimistic]);
+
+    try {
+      const res = await fetch('/api/admin/sessions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          clientId: selectedClientId,
+          date,
+          status: 'scheduled',
+          isPending: false,
+        }),
+      });
+      if (res.ok) {
+        const { session } = await res.json();
+        setSessions((prev) => prev.map((s) => (s.id === tempId ? session : s)));
+      } else {
+        setSessions((prev) => prev.filter((s) => s.id !== tempId));
+        alert('Error al crear la sesión');
+      }
+    } catch {
+      setSessions((prev) => prev.filter((s) => s.id !== tempId));
+      alert('Error de conexión al crear la sesión');
     }
   };
 
   const handleUpdateSession = async (id: string, updates: Partial<Session>) => {
-    const res = await fetch(`/api/admin/sessions/${id}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(updates),
-    });
-    if (res.ok) {
-      setSelectedSession(null);
-      loadAll();
+    // Optimistic update local
+    const previous = sessions.find((s) => s.id === id);
+    setSessions((prev) =>
+      prev.map((s) => (s.id === id ? { ...s, ...updates, updatedAt: new Date().toISOString() } : s))
+    );
+    setSelectedSession(null);
+
+    try {
+      const res = await fetch(`/api/admin/sessions/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updates),
+      });
+      if (!res.ok && previous) {
+        setSessions((prev) => prev.map((s) => (s.id === id ? previous : s)));
+        alert('Error al actualizar');
+      }
+    } catch {
+      if (previous) setSessions((prev) => prev.map((s) => (s.id === id ? previous : s)));
+      alert('Error de conexión');
     }
   };
 
   const handleDeleteSession = async (id: string) => {
-    if (!confirm('¿Borrar esta sesión?')) return;
-    const res = await fetch(`/api/admin/sessions/${id}`, { method: 'DELETE' });
-    if (res.ok) {
-      setSelectedSession(null);
-      loadAll();
+    if (!confirm('¿Anular esta sesión?')) return;
+
+    const previous = sessions.find((s) => s.id === id);
+    setSessions((prev) => prev.filter((s) => s.id !== id));
+    setSelectedSession(null);
+
+    try {
+      const res = await fetch(`/api/admin/sessions/${id}`, { method: 'DELETE' });
+      if (!res.ok && previous) {
+        setSessions((prev) => [...prev, previous]);
+        alert('Error al anular');
+      }
+    } catch {
+      if (previous) setSessions((prev) => [...prev, previous]);
+      alert('Error de conexión');
     }
   };
 
@@ -274,32 +327,41 @@ export default function SesionesPage() {
               <div>
                 <p className="text-sm text-blue-100">Total a cobrar este mes</p>
                 <p className="text-4xl md:text-5xl font-black mt-1">{totalACobrar}€</p>
+                <p className="text-xs text-blue-200 mt-1">
+                  {sesionesDelMes} {sesionesDelMes === 1 ? 'sesión' : 'sesiones'} × {price}€
+                </p>
               </div>
               <div className="w-12 h-12 rounded-xl bg-white/15 flex items-center justify-center">
                 <span className="text-2xl font-black">€</span>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-4 border-t border-white/20">
-              <div className="bg-white/10 rounded-xl p-3">
-                <p className="text-xs text-blue-100">Ingreso bruto</p>
-                <p className="text-lg font-bold mt-0.5">+{ingresoBruto}€</p>
-                <p className="text-xs text-blue-200 mt-0.5">
-                  {monthStats.completed} realizadas × {price}€
-                </p>
+            <div className="grid grid-cols-3 gap-2 pt-4 border-t border-white/20">
+              <div className="bg-green-500/20 rounded-xl p-2.5 text-center">
+                <p className="text-xs text-blue-100">Realizadas</p>
+                <p className="text-lg font-bold mt-0.5">{monthStats.completed}</p>
               </div>
-              <div
-                className={`rounded-xl p-3 ${credito > 0 ? 'bg-orange-500/20' : 'bg-white/10'}`}
-              >
-                <p className="text-xs text-blue-100">Crédito mes anterior</p>
-                <p className="text-lg font-bold mt-0.5">
-                  {credito > 0 ? `−${credito}€` : '0€'}
-                </p>
-                <p className="text-xs text-blue-200 mt-0.5">
-                  {monthStats.prevMonthMissed} fallidas sin recuperar
-                </p>
+              <div className="bg-white/10 rounded-xl p-2.5 text-center">
+                <p className="text-xs text-blue-100">Programadas</p>
+                <p className="text-lg font-bold mt-0.5">{monthStats.scheduled}</p>
+              </div>
+              <div className="bg-red-500/20 rounded-xl p-2.5 text-center">
+                <p className="text-xs text-blue-100">Faltó</p>
+                <p className="text-lg font-bold mt-0.5">{monthStats.missed}</p>
               </div>
             </div>
+
+            {credito > 0 && (
+              <div className="mt-3 bg-orange-500/20 rounded-xl p-3 flex items-center justify-between">
+                <div>
+                  <p className="text-xs text-blue-100">Crédito mes anterior</p>
+                  <p className="text-xs text-blue-200 mt-0.5">
+                    {monthStats.prevMonthMissed} fallida(s) sin recuperar
+                  </p>
+                </div>
+                <p className="text-lg font-bold">−{credito}€</p>
+              </div>
+            )}
           </div>
 
           {/* Calendario */}

@@ -10,6 +10,7 @@ import {
   Check,
   AlertCircle,
   Trash2,
+  CalendarDays,
 } from 'lucide-react';
 import {
   type Client,
@@ -92,13 +93,34 @@ export default function SesionesPage() {
       const d = new Date(s.date);
       return d.getMonth() === month && d.getFullYear() === year;
     });
+
+    // Sesiones falladas del mes anterior (sin recuperar) → crédito a descontar
+    const prevMonthDate = new Date(year, month - 1, 1);
+    const prevMonth = prevMonthDate.getMonth();
+    const prevYear = prevMonthDate.getFullYear();
+    const prevMissed = clientSessions.filter((s) => {
+      const d = new Date(s.date);
+      return (
+        d.getMonth() === prevMonth &&
+        d.getFullYear() === prevYear &&
+        s.status === 'missed' &&
+        s.isPending
+      );
+    });
+
     return {
       total: ms.length,
       completed: ms.filter((s) => s.status === 'completed').length,
       scheduled: ms.filter((s) => s.status === 'scheduled').length,
       missed: ms.filter((s) => s.status === 'missed').length,
+      prevMonthMissed: prevMissed.length,
     };
   }, [clientSessions, month, year]);
+
+  const price = selectedClient?.pricePerSession || 0;
+  const ingresoBruto = monthStats.completed * price;
+  const credito = monthStats.prevMonthMissed * price;
+  const totalACobrar = Math.max(0, ingresoBruto - credito);
 
   const prevMonth = () => {
     if (month === 0) {
@@ -246,15 +268,38 @@ export default function SesionesPage() {
             <StatBadge label="Faltó" value={monthStats.missed} color="red" />
           </div>
 
-          {/* Ingresos estimados */}
-          <div className="bg-gradient-to-r from-[rgb(0,94,184)] to-[rgb(32,113,188)] rounded-2xl p-5 text-white">
-            <p className="text-sm text-blue-100">Ingresos realizados este mes</p>
-            <p className="text-3xl font-black mt-1">
-              {monthStats.completed * selectedClient.pricePerSession}€
-              <span className="text-base font-normal text-blue-100 ml-2">
-                ({monthStats.completed} sesiones × {selectedClient.pricePerSession}€)
-              </span>
-            </p>
+          {/* Balance del mes */}
+          <div className="bg-gradient-to-br from-[rgb(0,94,184)] to-[rgb(0,60,115)] rounded-2xl p-6 text-white shadow-lg">
+            <div className="flex items-start justify-between mb-4">
+              <div>
+                <p className="text-sm text-blue-100">Total a cobrar este mes</p>
+                <p className="text-4xl md:text-5xl font-black mt-1">{totalACobrar}€</p>
+              </div>
+              <div className="w-12 h-12 rounded-xl bg-white/15 flex items-center justify-center">
+                <span className="text-2xl font-black">€</span>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-4 border-t border-white/20">
+              <div className="bg-white/10 rounded-xl p-3">
+                <p className="text-xs text-blue-100">Ingreso bruto</p>
+                <p className="text-lg font-bold mt-0.5">+{ingresoBruto}€</p>
+                <p className="text-xs text-blue-200 mt-0.5">
+                  {monthStats.completed} realizadas × {price}€
+                </p>
+              </div>
+              <div
+                className={`rounded-xl p-3 ${credito > 0 ? 'bg-orange-500/20' : 'bg-white/10'}`}
+              >
+                <p className="text-xs text-blue-100">Crédito mes anterior</p>
+                <p className="text-lg font-bold mt-0.5">
+                  {credito > 0 ? `−${credito}€` : '0€'}
+                </p>
+                <p className="text-xs text-blue-200 mt-0.5">
+                  {monthStats.prevMonthMissed} fallidas sin recuperar
+                </p>
+              </div>
+            </div>
           </div>
 
           {/* Calendario */}
@@ -292,6 +337,7 @@ export default function SesionesPage() {
                 const iso = toISODate(day);
                 const sessionsOnDay = clientSessions.filter((s) => s.date === iso && s.status);
                 const isToday = isSameDay(iso, new Date());
+                const mainSession = sessionsOnDay[0];
 
                 return (
                   <button
@@ -303,7 +349,7 @@ export default function SesionesPage() {
                         setAddingDate(iso);
                       }
                     }}
-                    className={`aspect-square rounded-lg border-2 p-1 md:p-2 flex flex-col justify-between transition ${
+                    className={`aspect-square rounded-lg border-2 p-1 md:p-1.5 flex flex-col justify-between items-stretch transition relative overflow-hidden ${
                       isToday
                         ? 'border-[rgb(0,94,184)] bg-[rgb(191,231,249)]'
                         : sessionsOnDay.length > 0
@@ -312,21 +358,39 @@ export default function SesionesPage() {
                     }`}
                   >
                     <span
-                      className={`text-xs md:text-sm font-semibold ${
+                      className={`text-xs md:text-sm font-semibold text-left ${
                         isToday ? 'text-[rgb(0,94,184)]' : 'text-[rgb(31,41,51)]'
                       }`}
                     >
                       {day.getDate()}
                     </span>
-                    {sessionsOnDay.length > 0 && (
-                      <div className="flex flex-wrap gap-0.5">
-                        {sessionsOnDay.map((s) => (
-                          <div
-                            key={s.id}
-                            className="h-1.5 md:h-2 flex-1 min-w-[8px] rounded-full"
-                            style={{ backgroundColor: SESSION_STATUS_COLORS[s.status] }}
-                          />
-                        ))}
+
+                    {mainSession && (
+                      <div className="flex-1 flex flex-col justify-end gap-0.5">
+                        {mainSession.status === 'completed' && (
+                          <span className="text-[10px] md:text-xs font-black text-green-600 leading-none">
+                            +{price}€
+                          </span>
+                        )}
+                        {mainSession.status === 'missed' && (
+                          <span className="text-[10px] md:text-xs font-black text-red-600 leading-none">
+                            −{price}€
+                          </span>
+                        )}
+                        {mainSession.status === 'scheduled' && (
+                          <span className="text-[10px] md:text-xs font-semibold text-[rgb(130,131,130)] leading-none">
+                            {price}€
+                          </span>
+                        )}
+                        <div className="flex gap-0.5">
+                          {sessionsOnDay.map((s) => (
+                            <div
+                              key={s.id}
+                              className="h-1 md:h-1.5 flex-1 min-w-[6px] rounded-full"
+                              style={{ backgroundColor: SESSION_STATUS_COLORS[s.status] }}
+                            />
+                          ))}
+                        </div>
                       </div>
                     )}
                   </button>
@@ -459,6 +523,8 @@ function SessionActionsModal({
 }) {
   const [reason, setReason] = useState(session.missedReason || '');
   const [showMissedInput, setShowMissedInput] = useState(false);
+  const [showMoveInput, setShowMoveInput] = useState(false);
+  const [newDate, setNewDate] = useState(session.date);
   const [saving, setSaving] = useState(false);
 
   const date = new Date(session.date);
@@ -485,6 +551,16 @@ function SessionActionsModal({
   const handleRevertToScheduled = async () => {
     setSaving(true);
     await onUpdate({ status: 'scheduled', isPending: false, missedReason: '' });
+    setSaving(false);
+  };
+
+  const handleMove = async () => {
+    if (!newDate || newDate === session.date) {
+      setShowMoveInput(false);
+      return;
+    }
+    setSaving(true);
+    await onUpdate({ date: newDate });
     setSaving(false);
   };
 
@@ -518,26 +594,39 @@ function SessionActionsModal({
 
         {/* Acciones */}
         <div className="p-6 space-y-3">
-          {session.status === 'scheduled' && isPastOr && !showMissedInput && (
-            <>
-              <button
-                onClick={handleCompleted}
-                disabled={saving}
-                className="w-full px-4 py-3 rounded-xl font-bold bg-green-500 text-white hover:bg-green-600 transition inline-flex items-center justify-center gap-2 disabled:opacity-60"
-              >
-                <Check className="w-5 h-5" /> Marcar como realizada
-              </button>
-              <button
-                onClick={() => setShowMissedInput(true)}
-                disabled={saving}
-                className="w-full px-4 py-3 rounded-xl font-bold bg-red-500 text-white hover:bg-red-600 transition inline-flex items-center justify-center gap-2 disabled:opacity-60"
-              >
-                <AlertCircle className="w-5 h-5" /> No pudo venir
-              </button>
-            </>
-          )}
-
-          {showMissedInput && (
+          {/* Modo: mover día */}
+          {showMoveInput ? (
+            <div className="space-y-3">
+              <label className="block text-sm font-semibold text-[rgb(31,41,51)]">
+                Nueva fecha
+              </label>
+              <input
+                type="date"
+                value={newDate}
+                onChange={(e) => setNewDate(e.target.value)}
+                className="w-full px-4 py-3 rounded-xl border border-[rgb(200,207,210)] focus:border-[rgb(0,94,184)] outline-none text-[rgb(31,41,51)]"
+                autoFocus
+              />
+              <div className="flex gap-2">
+                <button
+                  onClick={() => {
+                    setShowMoveInput(false);
+                    setNewDate(session.date);
+                  }}
+                  className="flex-1 px-4 py-3 rounded-xl font-semibold text-[rgb(31,41,51)] bg-[rgb(232,237,238)] hover:bg-[rgb(200,207,210)] transition"
+                >
+                  Cancelar
+                </button>
+                <button
+                  onClick={handleMove}
+                  disabled={saving || !newDate || newDate === session.date}
+                  className="flex-1 px-4 py-3 rounded-xl font-bold bg-[rgb(0,94,184)] text-white hover:bg-[rgb(32,113,188)] transition disabled:opacity-60"
+                >
+                  {saving ? 'Moviendo...' : 'Mover'}
+                </button>
+              </div>
+            </div>
+          ) : showMissedInput ? (
             <div className="space-y-3">
               <label className="block text-sm font-semibold text-[rgb(31,41,51)]">
                 Motivo (opcional)
@@ -566,38 +655,69 @@ function SessionActionsModal({
                 </button>
               </div>
             </div>
-          )}
+          ) : (
+            <>
+              {session.status === 'scheduled' && isPastOr && (
+                <>
+                  <button
+                    onClick={handleCompleted}
+                    disabled={saving}
+                    className="w-full px-4 py-3 rounded-xl font-bold bg-green-500 text-white hover:bg-green-600 transition inline-flex items-center justify-center gap-2 disabled:opacity-60"
+                  >
+                    <Check className="w-5 h-5" /> Validar (realizada)
+                  </button>
+                  <button
+                    onClick={() => setShowMissedInput(true)}
+                    disabled={saving}
+                    className="w-full px-4 py-3 rounded-xl font-bold bg-red-500 text-white hover:bg-red-600 transition inline-flex items-center justify-center gap-2 disabled:opacity-60"
+                  >
+                    <AlertCircle className="w-5 h-5" /> No pudo venir
+                  </button>
+                </>
+              )}
 
-          {session.status === 'scheduled' && !isPastOr && (
-            <p className="text-sm text-[rgb(130,131,130)] text-center">
-              Esta sesión es futura. Podrás marcarla como realizada o fallida cuando llegue el día.
-            </p>
-          )}
+              {session.status === 'scheduled' && !isPastOr && (
+                <p className="text-sm text-[rgb(130,131,130)] text-center bg-[rgb(232,237,238)] rounded-xl p-3">
+                  Sesión futura. Podrás validarla cuando llegue el día.
+                </p>
+              )}
 
-          {(session.status === 'completed' || session.status === 'missed') && (
-            <button
-              onClick={handleRevertToScheduled}
-              disabled={saving}
-              className="w-full px-4 py-3 rounded-xl font-semibold text-[rgb(31,41,51)] bg-[rgb(232,237,238)] hover:bg-[rgb(200,207,210)] transition disabled:opacity-60"
-            >
-              Revertir a programada
-            </button>
-          )}
+              {(session.status === 'completed' || session.status === 'missed') && (
+                <button
+                  onClick={handleRevertToScheduled}
+                  disabled={saving}
+                  className="w-full px-4 py-3 rounded-xl font-semibold text-[rgb(31,41,51)] bg-[rgb(232,237,238)] hover:bg-[rgb(200,207,210)] transition disabled:opacity-60"
+                >
+                  Revertir a programada
+                </button>
+              )}
 
-          {session.status === 'missed' && session.missedReason && (
-            <div className="bg-red-50 border border-red-200 rounded-xl p-3 text-sm">
-              <strong className="text-red-700">Motivo:</strong>{' '}
-              <span className="text-red-600">{session.missedReason}</span>
-            </div>
-          )}
+              {session.status === 'missed' && session.missedReason && (
+                <div className="bg-red-50 border border-red-200 rounded-xl p-3 text-sm">
+                  <strong className="text-red-700">Motivo:</strong>{' '}
+                  <span className="text-red-600">{session.missedReason}</span>
+                </div>
+              )}
 
-          <button
-            onClick={onDelete}
-            disabled={saving}
-            className="w-full px-4 py-2 rounded-xl text-sm text-red-600 hover:bg-red-50 transition inline-flex items-center justify-center gap-2 disabled:opacity-60"
-          >
-            <Trash2 className="w-4 h-4" /> Eliminar sesión
-          </button>
+              {/* Mover día — siempre disponible */}
+              <button
+                onClick={() => setShowMoveInput(true)}
+                disabled={saving}
+                className="w-full px-4 py-3 rounded-xl font-semibold text-[rgb(0,94,184)] bg-[rgb(191,231,249)] hover:bg-[rgb(191,231,249)]/70 transition inline-flex items-center justify-center gap-2 disabled:opacity-60"
+              >
+                <CalendarDays className="w-4 h-4" /> Mover a otro día
+              </button>
+
+              {/* Eliminar */}
+              <button
+                onClick={onDelete}
+                disabled={saving}
+                className="w-full px-4 py-2 rounded-xl text-sm text-red-600 hover:bg-red-50 transition inline-flex items-center justify-center gap-2 disabled:opacity-60"
+              >
+                <Trash2 className="w-4 h-4" /> Anular sesión
+              </button>
+            </>
+          )}
         </div>
       </div>
     </div>

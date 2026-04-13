@@ -54,15 +54,24 @@ export default function ClientesPage() {
   const handleSave = async (data: Partial<Client>) => {
     const url = editing ? `/api/admin/clients/${editing.id}` : '/api/admin/clients';
     const method = editing ? 'PATCH' : 'POST';
-    const res = await fetch(url, {
-      method,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    });
-    if (res.ok) {
-      setModalOpen(false);
-      setEditing(null);
-      loadClients();
+    try {
+      const res = await fetch(url, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      if (res.ok) {
+        setModalOpen(false);
+        setEditing(null);
+        loadClients();
+      } else {
+        const errData = await res.json().catch(() => ({}));
+        console.error('Error guardando cliente:', res.status, errData);
+        alert(`Error al guardar: ${errData.error || `HTTP ${res.status}`}`);
+      }
+    } catch (err) {
+      console.error('Error de red guardando cliente:', err);
+      alert('Error de conexión al guardar el cliente');
     }
   };
 

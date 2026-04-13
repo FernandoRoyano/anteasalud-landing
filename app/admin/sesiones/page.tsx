@@ -12,6 +12,7 @@ import {
   Trash2,
   CalendarDays,
   MessageCircle,
+  RefreshCw,
 } from 'lucide-react';
 import {
   type Client,
@@ -79,6 +80,10 @@ export default function SesionesPage() {
 
   useEffect(() => {
     loadAll();
+    // Refrescar automáticamente cuando el usuario vuelve a la pestaña
+    const onFocus = () => loadAll();
+    window.addEventListener('focus', onFocus);
+    return () => window.removeEventListener('focus', onFocus);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -382,8 +387,8 @@ export default function SesionesPage() {
       </div>
 
       {/* Selector de cliente */}
-      <div className="bg-white rounded-2xl shadow-md border border-[rgb(200,207,210)] p-4">
-        <div className="flex flex-wrap gap-2">
+      <div className="bg-white rounded-2xl shadow-md border border-[rgb(200,207,210)] p-4 flex items-start gap-2">
+        <div className="flex-1 flex flex-wrap gap-2">
           {clients.map((c) => (
             <button
               key={c.id}
@@ -403,6 +408,14 @@ export default function SesionesPage() {
             </button>
           ))}
         </div>
+        <button
+          onClick={() => loadAll()}
+          className="w-10 h-10 rounded-xl bg-[rgb(232,237,238)] hover:bg-[rgb(200,207,210)] flex items-center justify-center transition flex-shrink-0"
+          title="Recargar datos"
+          aria-label="Recargar datos"
+        >
+          <RefreshCw className="w-4 h-4 text-[rgb(31,41,51)]" />
+        </button>
       </div>
 
       {selectedClient && (

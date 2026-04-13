@@ -11,6 +11,7 @@ import {
   AlertCircle,
   Trash2,
   CalendarDays,
+  MessageCircle,
 } from 'lucide-react';
 import {
   type Client,
@@ -179,6 +180,57 @@ export default function SesionesPage() {
 
     return days;
   }, [month, year]);
+
+  const handleSendInvoice = () => {
+    if (!selectedClient) return;
+    if (!selectedClient.phone) {
+      alert('Este cliente no tiene teléfono registrado. Edítalo en /admin/clientes.');
+      return;
+    }
+    if (sesionesDelMes === 0) {
+      alert('No hay sesiones programadas este mes.');
+      return;
+    }
+
+    // Sesiones del mes actual que se cobran (completed + scheduled + missed)
+    // Parseamos la fecha manualmente para evitar problemas de timezone
+    const sesionesMes = clientSessions
+      .filter((s) => {
+        if (!s.date || !s.id) return false;
+        const [y, mo] = s.date.split('-').map(Number);
+        return mo - 1 === month && y === year && ['completed', 'scheduled', 'missed'].includes(s.status);
+      })
+      .sort((a, b) => a.date.localeCompare(b.date));
+
+    const dayNames = ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'];
+    const diasLista = sesionesMes
+      .map((s) => {
+        const [y, mo, d] = s.date.split('-').map(Number);
+        const fecha = new Date(y, mo - 1, d);
+        return `${dayNames[fecha.getDay()]} ${d}`;
+      })
+      .join(', ');
+
+    const monthName = MONTH_LABELS[month];
+    let mensaje = `Hola ${selectedClient.name}! 👋\n\n`;
+    mensaje += `Te paso el resumen de *${monthName} ${year}*:\n\n`;
+    mensaje += `📅 ${sesionesDelMes} ${sesionesDelMes === 1 ? 'sesión' : 'sesiones'}: ${diasLista}\n`;
+    mensaje += `💰 ${sesionesDelMes} × ${price}€ = ${ingresoBruto}€\n`;
+
+    if (credito > 0) {
+      mensaje += `↩️ Crédito mes anterior (${monthStats.prevMonthMissed} sin recuperar): −${credito}€\n`;
+    }
+
+    mensaje += `\n*TOTAL A PAGAR: ${totalACobrar}€*\n\n`;
+    mensaje += `Puedes pagarlo por Bizum al 633 261 963, transferencia bancaria o efectivo.\n\n`;
+    mensaje += `¡Muchas gracias! 🙏`;
+
+    // Normalizar teléfono: quitar no-dígitos y asegurar prefijo 34
+    const phoneDigits = selectedClient.phone.replace(/\D/g, '');
+    const waPhone = phoneDigits.startsWith('34') ? phoneDigits : `34${phoneDigits}`;
+    const url = `https://wa.me/${waPhone}?text=${encodeURIComponent(mensaje)}`;
+    window.open(url, '_blank');
+  };
 
   const handleAddSession = async (date: string) => {
     if (!selectedClientId) return;
@@ -395,6 +447,19 @@ export default function SesionesPage() {
                 </div>
                 <p className="text-lg font-bold">−{credito}€</p>
               </div>
+            )}
+
+            {/* Botón enviar cobro */}
+            {sesionesDelMes > 0 && (
+              <button
+                onClick={handleSendInvoice}
+                disabled={!selectedClient?.phone}
+                className="mt-4 w-full py-3 rounded-xl font-bold bg-green-500 hover:bg-green-600 text-white shadow-md hover:shadow-lg transition inline-flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                title={!selectedClient?.phone ? 'El cliente no tiene teléfono registrado' : ''}
+              >
+                <MessageCircle className="w-5 h-5" />
+                Enviar cobro de {MONTH_LABELS[month]} por WhatsApp
+              </button>
             )}
           </div>
 

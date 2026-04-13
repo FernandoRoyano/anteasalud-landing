@@ -81,6 +81,23 @@ export default function SesionesPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Mantener selectedSession sincronizado con la lista de sesiones.
+  // Cuando una sesión optimista (temp_xxx) se reemplaza con la real tras
+  // sincronizar con el servidor, refrescamos la referencia del modal.
+  useEffect(() => {
+    if (!selectedSession) return;
+    const real = sessions.find(
+      (s) =>
+        s.clientId === selectedSession.clientId &&
+        s.date === selectedSession.date &&
+        !!s.id &&
+        !s.id.startsWith('temp_')
+    );
+    if (real && real.id !== selectedSession.id) {
+      setSelectedSession(real);
+    }
+  }, [sessions, selectedSession]);
+
   const selectedClient = clients.find((c) => c.id === selectedClientId);
   const clientSessions = useMemo(
     () => sessions.filter((s) => s.clientId === selectedClientId),
@@ -210,6 +227,12 @@ export default function SesionesPage() {
   };
 
   const handleUpdateSession = async (id: string, updates: Partial<Session>) => {
+    // Si el id es temporal, la sesión aún no se ha sincronizado con Sheets
+    if (id.startsWith('temp_')) {
+      alert('La sesión aún se está guardando, espera 1-2 segundos e inténtalo de nuevo.');
+      return;
+    }
+
     // Optimistic update local
     const previous = sessions.find((s) => s.id === id);
     setSessions((prev) =>
@@ -223,17 +246,25 @@ export default function SesionesPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updates),
       });
-      if (!res.ok && previous) {
-        setSessions((prev) => prev.map((s) => (s.id === id ? previous : s)));
-        alert('Error al actualizar');
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        console.error('PATCH session failed:', res.status, errData);
+        if (previous) setSessions((prev) => prev.map((s) => (s.id === id ? previous : s)));
+        alert(`Error al actualizar: ${errData.error || `HTTP ${res.status}`}`);
       }
-    } catch {
+    } catch (err) {
+      console.error('PATCH session network error:', err);
       if (previous) setSessions((prev) => prev.map((s) => (s.id === id ? previous : s)));
-      alert('Error de conexión');
+      alert('Error de conexión al actualizar');
     }
   };
 
   const handleDeleteSession = async (id: string) => {
+    if (id.startsWith('temp_')) {
+      alert('La sesión aún se está guardando, espera 1-2 segundos e inténtalo de nuevo.');
+      return;
+    }
+
     if (!confirm('¿Anular esta sesión?')) return;
 
     const previous = sessions.find((s) => s.id === id);
@@ -242,13 +273,16 @@ export default function SesionesPage() {
 
     try {
       const res = await fetch(`/api/admin/sessions/${id}`, { method: 'DELETE' });
-      if (!res.ok && previous) {
-        setSessions((prev) => [...prev, previous]);
-        alert('Error al anular');
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        console.error('DELETE session failed:', res.status, errData);
+        if (previous) setSessions((prev) => [...prev, previous]);
+        alert(`Error al anular: ${errData.error || `HTTP ${res.status}`}`);
       }
-    } catch {
+    } catch (err) {
+      console.error('DELETE session network error:', err);
       if (previous) setSessions((prev) => [...prev, previous]);
-      alert('Error de conexión');
+      alert('Error de conexión al anular');
     }
   };
 

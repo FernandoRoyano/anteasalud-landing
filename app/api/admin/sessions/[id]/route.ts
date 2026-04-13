@@ -26,7 +26,8 @@ export async function PATCH(
     return NextResponse.json({ ok: true });
   } catch (error) {
     console.error('Error actualizando sesión:', error);
-    return NextResponse.json({ error: 'Error al actualizar' }, { status: 500 });
+    const message = error instanceof Error ? error.message : 'Error al actualizar';
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }
 
@@ -44,6 +45,7 @@ export async function DELETE(
     return NextResponse.json({ ok: true });
   } catch (error) {
     console.error('Error borrando sesión:', error);
-    return NextResponse.json({ error: 'Error al borrar' }, { status: 500 });
+    const message = error instanceof Error ? error.message : 'Error al borrar';
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }

@@ -220,23 +220,25 @@ export default function SesionesPage() {
     // Si hay contacto de pagos distinto al cliente, dirigir el mensaje al contacto
     // e indicar que el resumen es de las sesiones del cliente
     const greeting = selectedClient.contactName
-      ? `Hola ${selectedClient.contactName}! 👋`
-      : `Hola ${selectedClient.name}! 👋`;
+      ? `Hola ${selectedClient.contactName}!`
+      : `Hola ${selectedClient.name}!`;
     const descripcion = selectedClient.contactName
       ? `Te paso el resumen de las sesiones de ${selectedClient.name} en *${monthName} ${year}*:`
       : `Te paso el resumen de *${monthName} ${year}*:`;
 
+    const sesionLabel = sesionesDelMes === 1 ? 'sesión' : 'sesiones';
+
     let mensaje = `${greeting}\n\n${descripcion}\n\n`;
-    mensaje += `📅 ${sesionesDelMes} ${sesionesDelMes === 1 ? 'sesión' : 'sesiones'}: ${diasLista}\n`;
-    mensaje += `💰 ${sesionesDelMes} × ${price}€ = ${ingresoBruto}€\n`;
+    mensaje += `*${sesionesDelMes} ${sesionLabel}:* ${diasLista}\n`;
+    mensaje += `*Precio:* ${sesionesDelMes} x ${price}€ = ${ingresoBruto}€\n`;
 
     if (credito > 0) {
-      mensaje += `↩️ Crédito mes anterior (${monthStats.prevMonthMissed} sin recuperar): −${credito}€\n`;
+      mensaje += `*Crédito mes anterior* (${monthStats.prevMonthMissed} sin recuperar): -${credito}€\n`;
     }
 
     mensaje += `\n*TOTAL A PAGAR: ${totalACobrar}€*\n\n`;
     mensaje += `Puedes pagarlo por Bizum al 633 261 963, transferencia bancaria o efectivo.\n\n`;
-    mensaje += `¡Muchas gracias! 🙏`;
+    mensaje += `¡Muchas gracias!`;
 
     // Normalizar teléfono: quitar no-dígitos y asegurar prefijo 34
     const phoneDigits = selectedClient.phone.replace(/\D/g, '');

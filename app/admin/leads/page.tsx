@@ -70,18 +70,24 @@ export default function LeadsPage() {
     });
   }, [leads, search, filterEstado, filterZona]);
 
-  const handleUpdate = async (row: number, updates: { estado?: string; notas?: string }) => {
-    const res = await fetch(`/api/admin/leads/${row}`, {
+  const handleUpdate = async (
+    lead: Lead,
+    updates: { estado?: string; notas?: string }
+  ) => {
+    const res = await fetch(`/api/admin/leads/${lead.row}?source=${lead.source}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(updates),
     });
     if (res.ok) {
-      // Actualizar local sin recargar todo
+      // Actualizar local sin recargar todo. Importante: matchear por row+source
+      // porque dos leads pueden tener la misma row en pestañas distintas.
       setLeads((prev) =>
-        prev.map((l) => (l.row === row ? { ...l, ...updates } : l))
+        prev.map((l) =>
+          l.row === lead.row && l.source === lead.source ? { ...l, ...updates } : l
+        )
       );
-      if (selectedLead && selectedLead.row === row) {
+      if (selectedLead && selectedLead.row === lead.row && selectedLead.source === lead.source) {
         setSelectedLead({ ...selectedLead, ...updates });
       }
     }
@@ -176,12 +182,21 @@ export default function LeadsPage() {
               ) : (
                 filtered.map((lead) => (
                   <tr
-                    key={lead.row}
+                    key={`${lead.source}-${lead.row}`}
                     className="border-b border-[rgb(232,237,238)] hover:bg-[rgb(232,237,238)]/50 cursor-pointer transition"
                     onClick={() => setSelectedLead(lead)}
                   >
                     <td className="px-4 py-3 text-[rgb(130,131,130)] whitespace-nowrap">{lead.fecha}</td>
-                    <td className="px-4 py-3 font-semibold text-[rgb(31,41,51)]">{lead.nombre}</td>
+                    <td className="px-4 py-3 font-semibold text-[rgb(31,41,51)]">
+                      <div className="flex items-center gap-2">
+                        <span>{lead.nombre}</span>
+                        {lead.source === 'guia' && (
+                          <span className="inline-block px-2 py-0.5 rounded-full text-[10px] font-bold border bg-purple-100 text-purple-700 border-purple-200 whitespace-nowrap">
+                            GUÍA
+                          </span>
+                        )}
+                      </div>
+                    </td>
                     <td className="px-4 py-3 text-[rgb(130,131,130)]">
                       <div>{lead.telefono}</div>
                       {lead.email && <div className="text-xs">{lead.email}</div>}
@@ -253,7 +268,7 @@ function LeadDetailModal({
 }: {
   lead: Lead;
   onClose: () => void;
-  onUpdate: (row: number, updates: { estado?: string; notas?: string }) => Promise<void>;
+  onUpdate: (lead: Lead, updates: { estado?: string; notas?: string }) => Promise<void>;
 }) {
   const [estado, setEstado] = useState(lead.estado || 'Nuevo');
   const [notas, setNotas] = useState(lead.notas || '');
@@ -261,7 +276,7 @@ function LeadDetailModal({
 
   const handleSave = async () => {
     setSaving(true);
-    await onUpdate(lead.row, { estado, notas });
+    await onUpdate(lead, { estado, notas });
     setSaving(false);
     onClose();
   };

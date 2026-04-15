@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { updateLead } from '@/lib/sheets';
 import { isAuthenticated } from '@/lib/auth';
+import type { LeadSource } from '@/lib/types';
 
 export async function PATCH(
   req: NextRequest,
@@ -18,6 +19,10 @@ export async function PATCH(
       return NextResponse.json({ error: 'Fila inválida' }, { status: 400 });
     }
 
+    // Source: de qué pestaña viene el lead (formulario o guia). Default: formulario.
+    const sourceParam = req.nextUrl.searchParams.get('source');
+    const source: LeadSource = sourceParam === 'guia' ? 'guia' : 'formulario';
+
     const body = await req.json();
     const updates: { estado?: string; notas?: string } = {};
 
@@ -28,7 +33,7 @@ export async function PATCH(
       return NextResponse.json({ error: 'Nada que actualizar' }, { status: 400 });
     }
 
-    await updateLead(rowNumber, updates);
+    await updateLead(rowNumber, source, updates);
     return NextResponse.json({ ok: true });
   } catch (error) {
     console.error('Error actualizando lead:', error);

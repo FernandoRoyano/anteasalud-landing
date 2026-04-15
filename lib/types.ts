@@ -1,6 +1,10 @@
+export type LeadSource = 'formulario' | 'guia';
+
 export interface Lead {
   /** Número de fila en Google Sheets (2 = primera fila de datos, ya que 1 son cabeceras) */
   row: number;
+  /** Origen del lead: de qué pestaña de Google Sheets viene */
+  source: LeadSource;
   fecha: string;
   nombre: string;
   email: string;

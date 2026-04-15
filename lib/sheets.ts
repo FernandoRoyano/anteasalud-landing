@@ -1,13 +1,15 @@
 import { google, sheets_v4 } from 'googleapis';
-import type { Client, Lead, Session, SessionStatus, Zone } from './types';
+import type { Client, Lead, LeadSource, Session, SessionStatus, Zone } from './types';
 
-export type { Client, Lead, Session, SessionStatus, Zone };
+export type { Client, Lead, LeadSource, Session, SessionStatus, Zone };
 
 // =============================================================================
 // CONFIG
 // =============================================================================
 
 const LEADS_SHEET = 'Hoja 1'; // Se detecta automáticamente si no coincide
+const GUIA_CAIDAS_SHEET = 'Guía caídas';
+const LEADS_HEADERS = ['Fecha', 'Nombre', 'Email', 'Teléfono', 'Zona', 'Interés', 'Estado', 'Notas'];
 const CLIENTES_SHEET = 'Clientes';
 const SESIONES_SHEET = 'Sesiones';
 
@@ -131,38 +133,137 @@ async function getLeadsSheetName(sheets: sheets_v4.Sheets, spreadsheetId: string
   return cachedLeadsSheetName;
 }
 
+/** Decide en qué pestaña guardar un lead según el valor de interés */
+function getSheetForInterest(interes: string): LeadSource {
+  if (interes.toLowerCase().includes('descarga guía')) return 'guia';
+  return 'formulario';
+}
+
+/** Lee leads de una pestaña concreta con un source etiquetado */
+async function readLeadsFromSheet(
+  sheets: sheets_v4.Sheets,
+  spreadsheetId: string,
+  sheetName: string,
+  source: LeadSource
+): Promise<Lead[]> {
+  try {
+    const response = await sheets.spreadsheets.values.get({
+      spreadsheetId,
+      range: `${sheetName}!A2:H`,
+    });
+    const rows = response.data.values || [];
+
+    return rows.map((row, index) => ({
+      row: index + 2,
+      source,
+      fecha: String(row[0] ?? ''),
+      nombre: String(row[1] ?? ''),
+      email: String(row[2] ?? ''),
+      telefono: String(row[3] ?? ''),
+      zona: String(row[4] ?? ''),
+      interes: String(row[5] ?? ''),
+      estado: String(row[6] ?? 'Nuevo'),
+      notas: String(row[7] ?? ''),
+    }));
+  } catch {
+    // Si la pestaña no existe todavía, devolvemos lista vacía
+    return [];
+  }
+}
+
 export async function getAllLeads(): Promise<Lead[]> {
   const sheets = getSheetsClient();
   const spreadsheetId = process.env.GOOGLE_SHEET_ID!;
-  const sheetName = await getLeadsSheetName(sheets, spreadsheetId);
 
-  const response = await sheets.spreadsheets.values.get({
-    spreadsheetId,
-    range: `${sheetName}!A2:H`,
+  // Leer de la pestaña principal (primera hoja del spreadsheet)
+  const formSheetName = await getLeadsSheetName(sheets, spreadsheetId);
+  const formLeads = await readLeadsFromSheet(sheets, spreadsheetId, formSheetName, 'formulario');
+
+  // Leer de la pestaña de la guía (si existe)
+  const guiaLeads = await readLeadsFromSheet(sheets, spreadsheetId, GUIA_CAIDAS_SHEET, 'guia');
+
+  return [...formLeads, ...guiaLeads];
+}
+
+/** Guarda un lead en la pestaña correcta según el tipo de interés */
+export async function saveLead(data: {
+  nombre: string;
+  email?: string;
+  telefono?: string;
+  zona?: string;
+  interes?: string;
+}): Promise<{ source: LeadSource }> {
+  const sheets = getSheetsClient();
+  const spreadsheetId = process.env.GOOGLE_SHEET_ID!;
+
+  const source = getSheetForInterest(data.interes || '');
+
+  const fecha = new Date().toLocaleString('es-ES', {
+    timeZone: 'Europe/Madrid',
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
   });
 
-  const rows = response.data.values || [];
+  const row = [
+    fecha,
+    data.nombre,
+    data.email || '',
+    data.telefono || '',
+    data.zona || '',
+    data.interes || '',
+    'Nuevo',
+    '',
+  ];
 
-  return rows.map((row, index) => ({
-    row: index + 2,
-    fecha: row[0] || '',
-    nombre: row[1] || '',
-    email: row[2] || '',
-    telefono: row[3] || '',
-    zona: row[4] || '',
-    interes: row[5] || '',
-    estado: row[6] || 'Nuevo',
-    notas: row[7] || '',
-  }));
+  let sheetName: string;
+
+  if (source === 'guia') {
+    sheetName = GUIA_CAIDAS_SHEET;
+    await ensureSheet(sheets, spreadsheetId, sheetName, LEADS_HEADERS);
+  } else {
+    sheetName = await getLeadsSheetName(sheets, spreadsheetId);
+    // Asegurar cabeceras en Hoja 1 (código antiguo que dependía del inline)
+    const existing = await sheets.spreadsheets.values.get({
+      spreadsheetId,
+      range: `${sheetName}!A1:H1`,
+    });
+    if (!existing.data.values || existing.data.values.length === 0) {
+      await sheets.spreadsheets.values.update({
+        spreadsheetId,
+        range: `${sheetName}!A1:H1`,
+        valueInputOption: 'USER_ENTERED',
+        requestBody: { values: [LEADS_HEADERS] },
+      });
+    }
+  }
+
+  await sheets.spreadsheets.values.append({
+    spreadsheetId,
+    range: `${sheetName}!A:H`,
+    valueInputOption: 'USER_ENTERED',
+    requestBody: { values: [row] },
+  });
+
+  return { source };
 }
 
 export async function updateLead(
   rowNumber: number,
+  source: LeadSource,
   updates: { estado?: string; notas?: string }
 ): Promise<void> {
   const sheets = getSheetsClient();
   const spreadsheetId = process.env.GOOGLE_SHEET_ID!;
-  const sheetName = await getLeadsSheetName(sheets, spreadsheetId);
+
+  let sheetName: string;
+  if (source === 'guia') {
+    sheetName = GUIA_CAIDAS_SHEET;
+  } else {
+    sheetName = await getLeadsSheetName(sheets, spreadsheetId);
+  }
 
   const current = await sheets.spreadsheets.values.get({
     spreadsheetId,

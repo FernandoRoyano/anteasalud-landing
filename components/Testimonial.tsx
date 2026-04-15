@@ -65,8 +65,43 @@ export default function Testimonials() {
     }
   ];
 
+  // JSON-LD Review schema para que aparezcan estrellas en los resultados de Google
+  const reviewSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    '@id': 'https://www.anteasalud.com#reviews',
+    name: 'ANTEA Salud',
+    url: 'https://www.anteasalud.com',
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '4.9',
+      reviewCount: String(testimonials.length),
+      bestRating: '5',
+      worstRating: '1',
+    },
+    review: testimonials.map((t) => ({
+      '@type': 'Review',
+      author: { '@type': 'Person', name: t.name },
+      reviewRating: {
+        '@type': 'Rating',
+        ratingValue: String(t.stars),
+        bestRating: '5',
+        worstRating: '1',
+      },
+      reviewBody: t.text,
+      itemReviewed: {
+        '@type': 'Service',
+        name: 'Ejercicio para personas mayores a domicilio',
+      },
+    })),
+  };
+
   return (
     <section id="testimonios" className="w-full bg-gradient-to-b from-white to-slate-50 py-24 px-4">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(reviewSchema) }}
+      />
       <div className="max-w-7xl mx-auto">
 
         {/* Header */}

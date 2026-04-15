@@ -37,21 +37,21 @@ export default function Footer() {
           <div className="space-y-4">
             <h4 className="font-bold text-white text-lg">Servicios</h4>
             <ul className="space-y-2 text-sm">
-              <li><Link href="#servicios" className="hover:text-[rgb(0,94,184)] transition">Entrenamiento funcional</Link></li>
-              <li><Link href="#servicios" className="hover:text-[rgb(0,94,184)] transition">Readaptación a domicilio</Link></li>
-              <li><Link href="#servicios" className="hover:text-[rgb(0,94,184)] transition">Prevención de caídas</Link></li>
-              <li><Link href="#servicios" className="hover:text-[rgb(0,94,184)] transition">Seguimiento personalizado</Link></li>
+              <li><Link href="/ejercicio-personas-mayores-madrid" className="hover:text-[rgb(0,94,184)] transition">Ejercicio para mayores</Link></li>
+              <li><Link href="/prevencion-caidas-mayores-madrid" className="hover:text-[rgb(0,94,184)] transition">Prevención de caídas</Link></li>
+              <li><Link href="/recuperar-autonomia-mayores-madrid" className="hover:text-[rgb(0,94,184)] transition">Recuperar autonomía</Link></li>
+              <li><Link href="/#precios" className="hover:text-[rgb(0,94,184)] transition">Precios</Link></li>
             </ul>
           </div>
 
-          {/* Columna 3: Información */}
+          {/* Columna 3: Zonas */}
           <div className="space-y-4">
-            <h4 className="font-bold text-white text-lg">Información</h4>
+            <h4 className="font-bold text-white text-lg">Zonas</h4>
             <ul className="space-y-2 text-sm">
-              <li><Link href="/#testimonios" className="hover:text-[rgb(0,94,184)] transition">Sobre nosotros</Link></li>
+              <li><Link href="/ejercicio-mayores-madrid-capital" className="hover:text-[rgb(0,94,184)] transition">Madrid capital</Link></li>
+              <li><Link href="/ejercicio-mayores-mostoles" className="hover:text-[rgb(0,94,184)] transition">Móstoles</Link></li>
+              <li><Link href="/ejercicio-mayores-getafe" className="hover:text-[rgb(0,94,184)] transition">Getafe</Link></li>
               <li><Link href="/#faqs" className="hover:text-[rgb(0,94,184)] transition">Preguntas frecuentes</Link></li>
-              <li><Link href="/#precios" className="hover:text-[rgb(0,94,184)] transition">Precios</Link></li>
-              <li><Link href="/#contacto" className="hover:text-[rgb(0,94,184)] transition">Contacto</Link></li>
             </ul>
           </div>
 

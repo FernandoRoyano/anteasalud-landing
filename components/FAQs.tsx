@@ -58,8 +58,26 @@ export default function FAQs() {
     setOpenIndex(openIndex === index ? null : index);
   };
 
+  // JSON-LD FAQPage para que Google muestre las preguntas desplegables en SERPs
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  };
+
   return (
     <section id="faqs" className="w-full bg-white py-24 px-4">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <div className="max-w-4xl mx-auto">
 
         {/* Header */}

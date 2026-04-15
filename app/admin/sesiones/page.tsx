@@ -20,6 +20,7 @@ import {
   type SessionStatus,
   SESSION_STATUS_COLORS,
 } from '@/lib/types';
+import SessionReminders from '@/components/admin/SessionReminders';
 
 const DAY_LABELS = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
 const MONTH_LABELS = [
@@ -387,6 +388,9 @@ export default function SesionesPage() {
         <h1 className="text-3xl md:text-4xl font-black text-[rgb(31,41,51)]">Sesiones</h1>
         <p className="text-[rgb(130,131,130)] mt-1">Calendario mensual por cliente</p>
       </div>
+
+      {/* Recordatorios de sesión */}
+      <SessionReminders clients={clients} sessions={sessions} />
 
       {/* Selector de cliente */}
       <div className="bg-white rounded-2xl shadow-md border border-[rgb(200,207,210)] p-4 flex items-start gap-2">

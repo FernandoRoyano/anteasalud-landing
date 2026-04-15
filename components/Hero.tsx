@@ -30,17 +30,17 @@ export default function Hero() {
         <div className="space-y-8">
           <div className="hero-badge inline-flex items-center gap-1.5 px-4 py-2 bg-[rgb(191,231,249)] rounded-full">
             <Check className="w-4 h-4 text-[rgb(0,94,184)]" />
-            <span className="text-sm font-semibold text-[rgb(0,94,184)]">Profesionales titulados</span>
+            <span className="text-sm font-semibold text-[rgb(0,94,184)]">Graduado en Ciencias del Deporte · 14 años de experiencia</span>
           </div>
 
           <h1 className="hero-title text-5xl md:text-6xl lg:text-7xl font-black text-slate-900 leading-[1.1] tracking-tight">
-            Ejercicio y fisioterapia para mejorar la vida de los mayores
-            <span className="block text-[rgb(0,94,184)] mt-2">en casa</span>
+            Ejercicio a domicilio para personas mayores
+            <span className="block text-[rgb(0,94,184)] mt-2">en Madrid</span>
           </h1>
 
           <p className="hero-subtitle text-xl md:text-2xl text-slate-600 leading-relaxed max-w-xl">
             Recupera autonomía, fuerza y confianza sin salir de casa.
-            Profesionales expertos en personas mayores y recuperación funcional.
+            Entrenador titulado especializado en personas mayores, prevención de caídas y readaptación funcional.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 pt-4">

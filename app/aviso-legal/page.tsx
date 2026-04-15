@@ -34,7 +34,7 @@ export default function AvisoLegal() {
               <p><strong>Domicilio:</strong> [Tu dirección fiscal]</p>
               <p><strong>Email:</strong> info@anteasalud.com</p>
               <p><strong>Teléfono:</strong> 633 261 963</p>
-              <p><strong>Actividad:</strong> Servicios de fisioterapia y entrenamiento funcional a domicilio</p>
+              <p><strong>Actividad:</strong> Servicios de entrenamiento funcional y ejercicio terapéutico a domicilio para personas mayores</p>
             </div>
           </section>
 

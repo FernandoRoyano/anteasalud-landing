@@ -82,8 +82,8 @@ export default function PoliticaPrivacidad() {
                 <strong>Interés legítimo:</strong> para gestionar consultas y ofrecer nuestros servicios.
               </li>
               <li>
-                <strong>Ejecución de contrato:</strong> si decides contratar nuestros servicios de 
-                fisioterapia o entrenamiento a domicilio.
+                <strong>Ejecución de contrato:</strong> si decides contratar nuestros servicios de
+                entrenamiento funcional o ejercicio terapéutico a domicilio.
               </li>
             </ul>
           </section>

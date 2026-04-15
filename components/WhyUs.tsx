@@ -13,7 +13,7 @@ export default function WhyUs() {
     {
       icon: <HeartPulse className="w-12 h-12 text-[rgb(0,94,184)]" />,
       title: "Profesionales titulados",
-      description: "100% colegiados y especializados en personas mayores. Verificamos credenciales antes de trabajar con nosotros.",
+      description: "Titulación universitaria en Ciencias de la Actividad Física y el Deporte. 14 años de experiencia especializados en personas mayores y ejercicio adaptado.",
       highlight: "Máxima seguridad"
     },
     {

@@ -15,9 +15,9 @@ export default function Problem() {
             </p>
             
             <p>
-              Sabes que necesita <span className="font-semibold text-[rgb(0,94,184)]">ejercicio adaptado y fisioterapia profesional</span>, 
-              pero no tienes tiempo para llevarlo cada semana a la clínica. 
-              Y tampoco quieres que pierda más autonomía esperando "a ver qué pasa".
+              Sabes que necesita <span className="font-semibold text-[rgb(0,94,184)]">ejercicio adaptado y supervisado por un profesional</span>,
+              pero no tienes tiempo para llevarlo cada semana a un centro.
+              Y tampoco quieres que pierda más autonomía esperando &quot;a ver qué pasa&quot;.
             </p>
             
             <div className="bg-[rgb(191,231,249)] border-l-4 border-[rgb(0,94,184)] p-6 rounded-r-2xl">

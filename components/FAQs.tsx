@@ -18,15 +18,15 @@ export default function FAQs() {
     },
     {
       question: "¿Cuánto cuesta una sesión?",
-      answer: "Los precios varían según la duración, la frecuencia y el tipo de servicio (entrenamiento funcional, fisioterapia especializada, etc.). Tras la valoración inicial, te presentamos un plan personalizado con presupuesto exacto. Puedes elegir planes de 1-3 sesiones por semana."
+      answer: "Sesión suelta 45€ (30 minutos). Plan de 2 días por semana 35€/sesión (70€/semana). Para zonas fuera de Madrid capital se añaden 5€ por sesión por desplazamiento. Primera valoración siempre gratuita y sin compromiso."
     },
     {
       question: "¿Qué documentación necesito?",
       answer: "Solo nos interesa entender tu estado de salud actual. Si tienes informes médicos recientes (resonancias, operaciones, etc.), nos ayuda a diseñar un mejor plan. Pero no es obligatorio. Realizaremos una evaluación completa en la primera sesión."
     },
     {
-      question: "¿Los profesionales están titulados?",
-      answer: "Sí, 100%. Todos nuestros fisioterapeutas y entrenadores están titulados universitarios, colegiados y especializados en personas mayores. Verificamos sus credenciales antes de trabajar con nosotros."
+      question: "¿Qué titulación tenéis?",
+      answer: "Graduado en Ciencias de la Actividad Física y el Deporte (CCAFYD), titulación universitaria oficial, con 14 años de experiencia especializado en ejercicio para personas mayores, readaptación y prevención de caídas. Formación continua en ejercicio adaptado y envejecimiento saludable."
     },
     {
       question: "¿Cuántas sesiones necesita?",
@@ -71,7 +71,7 @@ export default function FAQs() {
             Respuestas a tus dudas
           </h2>
           <p className="text-xl text-[rgb(130,131,130)] max-w-2xl mx-auto">
-            Todo lo que necesitas saber sobre nuestro servicio de ejercicio y fisioterapia a domicilio
+            Todo lo que necesitas saber sobre nuestro servicio de ejercicio a domicilio para personas mayores
           </p>
         </div>
 

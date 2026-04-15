@@ -83,7 +83,7 @@ export default function Solution() {
           <div className="space-y-6 text-lg md:text-xl text-[rgb(191,231,249)] leading-relaxed">
             <p className="solution-text">
               Imagina la <span className="font-bold text-white">tranquilidad de saber</span> que tu padre o tu madre
-              recibe ejercicio adaptado y fisioterapia profesional <span className="font-bold text-white">sin salir de casa</span>.
+              recibe ejercicio adaptado por un profesional titulado <span className="font-bold text-white">sin salir de casa</span>.
             </p>
 
             <p className="solution-text">

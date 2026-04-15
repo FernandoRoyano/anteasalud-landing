@@ -12,14 +12,14 @@ export default function Process() {
     {
       number: "01",
       title: "Valoración inicial",
-      description: "Llamada gratuita y sin compromiso. Conocemos tu situación, necesidades y objetivos de rehabilitación.",
+      description: "Llamada gratuita y sin compromiso. Conocemos tu situación, necesidades y objetivos de recuperación.",
       icon: <ClipboardList className="w-10 h-10 text-[rgb(0,94,184)]" />,
       time: "Menos de 24h"
     },
     {
       number: "02",
       title: "Plan personalizado",
-      description: "Nuestro equipo diseña un programa de ejercicio y fisioterapia adaptado a tus necesidades específicas.",
+      description: "Nuestro equipo diseña un programa de ejercicio funcional y readaptación adaptado a tus necesidades específicas.",
       icon: <FileText className="w-10 h-10 text-[rgb(0,94,184)]" />,
       time: "En 48h"
     },

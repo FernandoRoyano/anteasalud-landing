@@ -17,9 +17,9 @@ export default function Services() {
     },
     {
       icon: <HeartPulse className="w-10 h-10 text-[rgb(0,94,184)]" />,
-      title: "Fisioterapia a domicilio",
-      description: "Rehabilitación profesional tras operaciones, caídas o accidentes. Recuperación optimizada en casa.",
-      highlight: "Profesionales titulados"
+      title: "Readaptación a domicilio",
+      description: "Ejercicio adaptado en la vuelta a la actividad tras operaciones o caídas. Coordinado con tu fisioterapeuta médico si es necesario.",
+      highlight: "Entrenador titulado"
     },
     {
       icon: <ShieldCheck className="w-10 h-10 text-[rgb(0,94,184)]" />,
@@ -45,7 +45,7 @@ export default function Services() {
             <span className="text-sm font-semibold text-[rgb(0,94,184)]">Nuestros servicios</span>
           </div>
           <h2 className="text-4xl md:text-5xl font-black text-[rgb(31,41,51)]">
-            Ejercicio y fisioterapia adaptada
+            Ejercicio y readaptación para personas mayores
           </h2>
           <p className="text-xl text-[rgb(130,131,130)] max-w-2xl mx-auto">
             Soluciones profesionales diseñadas para recuperar movilidad, autonomía y confianza en casa

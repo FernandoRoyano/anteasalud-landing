@@ -3,34 +3,34 @@ import PublicChrome from '@/components/PublicChrome';
 import GoogleAnalytics from '@/components/GoogleAnalytics';
 
 export const metadata = {
-  title: 'ANTEA Salud - Ejercicio y Fisioterapia a Domicilio para Mayores',
-  description: 'Ejercicio funcional y fisioterapia profesional en tu casa. Recupera movilidad, autonomía y confianza. +200 familias confían en nosotros. Valoración gratuita.',
-  keywords: 'fisioterapia a domicilio Madrid, ejercicio para mayores Madrid, rehabilitación en casa Madrid, fisioterapeuta a domicilio Madrid, ejercicio terapéutico mayores, rehabilitación domiciliaria Comunidad de Madrid',
+  title: 'Ejercicio para Mayores a Domicilio en Madrid | ANTEA Salud',
+  description: 'Entrenamiento funcional y ejercicio terapéutico a domicilio para personas mayores en Madrid. Recupera autonomía, fuerza y confianza en casa. Graduado en Ciencias del Deporte con 14 años de experiencia. Valoración gratuita.',
+  keywords: 'ejercicio para mayores Madrid, entrenamiento personal mayores a domicilio, ejercicio terapéutico personas mayores, prevención caídas mayores Madrid, readaptación funcional domicilio, entrenador personas mayores Madrid, ejercicio post operación cadera, recuperar autonomía mayores, entrenamiento funcional mayores Madrid, ejercicio adaptado tercera edad Madrid',
   authors: [{ name: 'ANTEA Salud' }],
   metadataBase: new URL('https://www.anteasalud.com'),
   alternates: {
-    canonical: '/',
+    canonical: 'https://www.anteasalud.com',
   },
   openGraph: {
     type: 'website',
     locale: 'es_ES',
     url: 'https://www.anteasalud.com',
     siteName: 'ANTEA Salud',
-    title: 'ANTEA Salud - Ejercicio y Fisioterapia a Domicilio para Mayores',
-    description: 'Ejercicio funcional y fisioterapia profesional en tu casa. Recupera movilidad, autonomía y confianza. +200 familias confían en nosotros.',
+    title: 'Ejercicio para Mayores a Domicilio en Madrid | ANTEA Salud',
+    description: 'Entrenamiento funcional para personas mayores en tu casa. Recupera autonomía y confianza. +200 familias en Madrid confían en nosotros.',
     images: [
       {
         url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'ANTEA Salud - Fisioterapia a Domicilio',
+        alt: 'ANTEA Salud - Ejercicio para Mayores a Domicilio en Madrid',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'ANTEA Salud - Ejercicio y Fisioterapia a Domicilio',
-    description: 'Ejercicio funcional y fisioterapia profesional en tu casa. +200 familias confían en nosotros.',
+    title: 'Ejercicio para Mayores a Domicilio en Madrid | ANTEA Salud',
+    description: 'Entrenamiento funcional para personas mayores en tu casa. +200 familias en Madrid confían en nosotros.',
     images: ['/og-image.jpg'],
   },
   robots: {
@@ -49,15 +49,30 @@ export const metadata = {
 // JSON-LD Schema para SEO
 const jsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
+  '@type': ['LocalBusiness', 'HealthAndBeautyBusiness', 'SportsActivityLocation'],
   '@id': 'https://www.anteasalud.com',
   name: 'ANTEA Salud',
-  description: 'Servicio de ejercicio funcional y fisioterapia a domicilio para personas mayores. Profesionales titulados y colegiados.',
+  description: 'Entrenamiento funcional y ejercicio terapéutico a domicilio para personas mayores en Madrid. Graduado en Ciencias de la Actividad Física y el Deporte con 14 años de experiencia especializado en la recuperación de autonomía, prevención de caídas y readaptación funcional.',
   url: 'https://www.anteasalud.com',
   telephone: '+34633261963',
   email: 'info@anteasalud.com',
   priceRange: '€€',
   image: 'https://www.anteasalud.com/og-image.jpg',
+  founder: {
+    '@type': 'Person',
+    name: 'Fernando Royano',
+    jobTitle: 'Graduado en Ciencias de la Actividad Física y el Deporte (CCAFYD)',
+    description: 'Entrenador titulado con 14 años de experiencia especializado en ejercicio funcional para personas mayores, readaptación y prevención de caídas.',
+  },
+  knowsAbout: [
+    'Ejercicio para personas mayores',
+    'Entrenamiento funcional',
+    'Prevención de caídas',
+    'Readaptación funcional',
+    'Ejercicio terapéutico',
+    'Recuperación de autonomía',
+    'Ejercicio adaptado post-operación',
+  ],
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Madrid',
@@ -100,22 +115,38 @@ const jsonLd = {
   },
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
-    name: 'Servicios de Fisioterapia a Domicilio',
+    name: 'Servicios de Ejercicio y Readaptación para Mayores',
     itemListElement: [
       {
         '@type': 'Offer',
         itemOffered: {
           '@type': 'Service',
-          name: 'Ejercicio Funcional',
-          description: 'Entrenamiento adaptado para mejorar movilidad y autonomía',
+          name: 'Entrenamiento Funcional a Domicilio',
+          description: 'Ejercicio adaptado para mejorar fuerza, equilibrio y movilidad en personas mayores. Sesiones supervisadas en tu casa por entrenador titulado.',
         },
       },
       {
         '@type': 'Offer',
         itemOffered: {
           '@type': 'Service',
-          name: 'Fisioterapia Geriátrica',
-          description: 'Rehabilitación especializada para personas mayores',
+          name: 'Prevención de Caídas',
+          description: 'Evaluación del riesgo de caídas y ejercicios específicos para mejorar equilibrio y confianza en personas mayores.',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Readaptación Funcional Post-Operación',
+          description: 'Ejercicio adaptado en la fase de vuelta a la actividad tras cirugía de cadera, rodilla u otras intervenciones. Coordinación con tu fisioterapeuta médico.',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Recuperación de Autonomía',
+          description: 'Programa de ejercicio personalizado para recuperar la capacidad funcional y la independencia en personas mayores.',
         },
       },
     ],

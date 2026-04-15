@@ -1,6 +1,6 @@
 # 🏃‍♂️ ANTEASalud · Landing Page
 
-Landing profesional para captación de familias que buscan ejercicio funcional y fisioterapia a domicilio para mayores.
+Landing profesional para captación de familias que buscan ejercicio funcional y readaptación a domicilio para personas mayores en Madrid.
 
 Desarrollado con **Next.js, Tailwind CSS** y **EmailJS** para recepción de contactos instantánea sin backend.
 

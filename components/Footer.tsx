@@ -17,7 +17,7 @@ export default function Footer() {
           <div className="space-y-4">
             <h3 className="text-2xl font-black text-white">ANTEA</h3>
             <p className="text-[rgb(130,131,130)] text-sm leading-relaxed">
-              Ejercicio funcional y fisioterapia profesional para personas mayores. Recupera movilidad, autonomía y confianza en casa.
+              Ejercicio funcional y readaptación a domicilio para personas mayores en Madrid. Recupera movilidad, autonomía y confianza en casa.
             </p>
             {/* TODO: Actualizar con URLs reales de redes sociales de ANTEA */}
             <div className="flex gap-4 pt-4">
@@ -38,7 +38,7 @@ export default function Footer() {
             <h4 className="font-bold text-white text-lg">Servicios</h4>
             <ul className="space-y-2 text-sm">
               <li><Link href="#servicios" className="hover:text-[rgb(0,94,184)] transition">Entrenamiento funcional</Link></li>
-              <li><Link href="#servicios" className="hover:text-[rgb(0,94,184)] transition">Fisioterapia a domicilio</Link></li>
+              <li><Link href="#servicios" className="hover:text-[rgb(0,94,184)] transition">Readaptación a domicilio</Link></li>
               <li><Link href="#servicios" className="hover:text-[rgb(0,94,184)] transition">Prevención de caídas</Link></li>
               <li><Link href="#servicios" className="hover:text-[rgb(0,94,184)] transition">Seguimiento personalizado</Link></li>
             </ul>

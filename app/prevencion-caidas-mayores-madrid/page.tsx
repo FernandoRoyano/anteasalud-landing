@@ -6,7 +6,7 @@ import { Check, ShieldCheck, AlertTriangle, TrendingDown, Activity } from 'lucid
 const TITLE = 'Prevención de Caídas en Personas Mayores a Domicilio en Madrid | ANTEA Salud';
 const DESCRIPTION =
   'Programa de prevención de caídas para personas mayores en Madrid. Ejercicio específico de equilibrio, fuerza y coordinación en tu casa. Entrenador titulado con 14 años de experiencia. Valoración gratuita.';
-const URL = 'https://www.anteasalud.com/prevencion-caidas-mayores-madrid';
+const URL = 'https://anteasalud.com/prevencion-caidas-mayores-madrid';
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -25,7 +25,7 @@ const jsonLd = {
     '@type': 'LocalBusiness',
     name: 'ANTEA Salud',
     telephone: '+34633261963',
-    url: 'https://www.anteasalud.com',
+    url: 'https://anteasalud.com',
   },
   areaServed: { '@type': 'AdministrativeArea', name: 'Comunidad de Madrid' },
   description: DESCRIPTION,

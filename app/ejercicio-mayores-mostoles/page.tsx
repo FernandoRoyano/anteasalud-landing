@@ -6,7 +6,7 @@ import { Check } from 'lucide-react';
 const TITLE = 'Ejercicio para Mayores a Domicilio en Móstoles | ANTEA Salud';
 const DESCRIPTION =
   'Entrenador titulado para personas mayores a domicilio en Móstoles. Ejercicio funcional, prevención de caídas y recuperación de autonomía en tu casa. Graduado en Ciencias del Deporte con 14 años de experiencia. Valoración gratuita.';
-const URL = 'https://www.anteasalud.com/ejercicio-mayores-mostoles';
+const URL = 'https://anteasalud.com/ejercicio-mayores-mostoles';
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -21,7 +21,7 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Service',
   serviceType: 'Ejercicio para personas mayores a domicilio',
-  provider: { '@type': 'LocalBusiness', name: 'ANTEA Salud', telephone: '+34633261963', url: 'https://www.anteasalud.com' },
+  provider: { '@type': 'LocalBusiness', name: 'ANTEA Salud', telephone: '+34633261963', url: 'https://anteasalud.com' },
   areaServed: { '@type': 'City', name: 'Móstoles', containedIn: { '@type': 'AdministrativeArea', name: 'Comunidad de Madrid' } },
   description: DESCRIPTION,
 };

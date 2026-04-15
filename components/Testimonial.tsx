@@ -69,9 +69,9 @@ export default function Testimonials() {
   const reviewSchema = {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
-    '@id': 'https://www.anteasalud.com#reviews',
+    '@id': 'https://anteasalud.com#reviews',
     name: 'ANTEA Salud',
-    url: 'https://www.anteasalud.com',
+    url: 'https://anteasalud.com',
     aggregateRating: {
       '@type': 'AggregateRating',
       ratingValue: '4.9',

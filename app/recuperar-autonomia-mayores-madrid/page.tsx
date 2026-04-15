@@ -6,7 +6,7 @@ import { Check } from 'lucide-react';
 const TITLE = 'Recuperar la Autonomía de Personas Mayores a Domicilio en Madrid | ANTEA Salud';
 const DESCRIPTION =
   'Ayudamos a personas mayores a recuperar su autonomía con un programa de ejercicio funcional a domicilio en Madrid. Entrenador titulado con 14 años de experiencia. Primera valoración gratuita.';
-const URL = 'https://www.anteasalud.com/recuperar-autonomia-mayores-madrid';
+const URL = 'https://anteasalud.com/recuperar-autonomia-mayores-madrid';
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -21,7 +21,7 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Service',
   serviceType: 'Recuperación de autonomía funcional en personas mayores',
-  provider: { '@type': 'LocalBusiness', name: 'ANTEA Salud', telephone: '+34633261963', url: 'https://www.anteasalud.com' },
+  provider: { '@type': 'LocalBusiness', name: 'ANTEA Salud', telephone: '+34633261963', url: 'https://anteasalud.com' },
   areaServed: { '@type': 'AdministrativeArea', name: 'Comunidad de Madrid' },
   description: DESCRIPTION,
 };

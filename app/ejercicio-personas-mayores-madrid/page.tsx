@@ -6,7 +6,7 @@ import { Check, Dumbbell, HeartPulse, ShieldCheck, TrendingUp, Users, Home, Cloc
 const TITLE = 'Ejercicio para Personas Mayores a Domicilio en Madrid | ANTEA Salud';
 const DESCRIPTION =
   'Ejercicio adaptado para personas mayores a domicilio en Madrid. Entrenador titulado en Ciencias del Deporte con 14 años de experiencia. Recupera fuerza, equilibrio y autonomía en casa. Valoración gratuita sin compromiso.';
-const URL = 'https://www.anteasalud.com/ejercicio-personas-mayores-madrid';
+const URL = 'https://anteasalud.com/ejercicio-personas-mayores-madrid';
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -31,7 +31,7 @@ const jsonLd = {
     '@type': 'LocalBusiness',
     name: 'ANTEA Salud',
     telephone: '+34633261963',
-    url: 'https://www.anteasalud.com',
+    url: 'https://anteasalud.com',
   },
   areaServed: {
     '@type': 'AdministrativeArea',
@@ -51,7 +51,7 @@ const breadcrumb = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Inicio', item: 'https://www.anteasalud.com' },
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: 'https://anteasalud.com' },
     { '@type': 'ListItem', position: 2, name: 'Ejercicio para personas mayores en Madrid', item: URL },
   ],
 };

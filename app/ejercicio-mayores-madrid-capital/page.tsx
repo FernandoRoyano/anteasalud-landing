@@ -6,7 +6,7 @@ import { Check, MapPin } from 'lucide-react';
 const TITLE = 'Ejercicio para Mayores a Domicilio en Madrid Capital | ANTEA Salud';
 const DESCRIPTION =
   'Entrenador titulado especializado en personas mayores a domicilio en Madrid capital. Sin recargo por desplazamiento. Centro, Salamanca, Retiro, Chamberí, Latina, Carabanchel, Vallecas y resto de barrios. 14 años de experiencia.';
-const URL = 'https://www.anteasalud.com/ejercicio-mayores-madrid-capital';
+const URL = 'https://anteasalud.com/ejercicio-mayores-madrid-capital';
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -21,7 +21,7 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Service',
   serviceType: 'Ejercicio para personas mayores a domicilio',
-  provider: { '@type': 'LocalBusiness', name: 'ANTEA Salud', telephone: '+34633261963', url: 'https://www.anteasalud.com' },
+  provider: { '@type': 'LocalBusiness', name: 'ANTEA Salud', telephone: '+34633261963', url: 'https://anteasalud.com' },
   areaServed: { '@type': 'City', name: 'Madrid' },
   description: DESCRIPTION,
 };

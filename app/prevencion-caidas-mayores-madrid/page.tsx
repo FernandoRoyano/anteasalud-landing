@@ -121,6 +121,29 @@ export default function Page() {
         </div>
       </section>
 
+      {/* Lead magnet: guía gratuita */}
+      <section className="w-full bg-gradient-to-r from-[rgb(191,231,249)] to-[rgb(232,237,238)] py-16 px-4">
+        <div className="max-w-3xl mx-auto">
+          <div className="bg-white rounded-3xl shadow-xl border-2 border-[rgb(0,94,184)]/30 p-10 text-center">
+            <div className="inline-block px-3 py-1 bg-[rgb(0,94,184)] text-white text-xs font-bold rounded-full mb-4">
+              DESCARGA GRATUITA
+            </div>
+            <h2 className="text-2xl md:text-3xl font-black text-[rgb(31,41,51)] mb-4">
+              Guía práctica: 10 ejercicios para prevenir caídas
+            </h2>
+            <p className="text-lg text-[rgb(130,131,130)] mb-6 max-w-xl mx-auto">
+              Los ejercicios exactos que uso con mis clientes, explicados paso a paso. Incluye test de riesgo y rutina semanal. Sin coste.
+            </p>
+            <a
+              href="/guia-prevencion-caidas"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[rgb(0,94,184)] text-white font-bold rounded-xl shadow-md hover:shadow-lg hover:scale-105 transition"
+            >
+              Acceder a la guía gratis
+            </a>
+          </div>
+        </div>
+      </section>
+
       <LandingCTA
         title="Actuar ahora evita un drama después"
         subtitle="La diferencia entre envejecer con autonomía o no suele estar en actuar a tiempo. Valoración gratuita en tu casa, sin compromiso."

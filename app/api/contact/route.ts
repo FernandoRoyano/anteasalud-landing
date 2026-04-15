@@ -6,10 +6,10 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const { nombre, email, telefono, zona, interes } = body;
 
-    // Validación de campos obligatorios
-    if (!nombre || !telefono) {
+    // Validación: nombre siempre obligatorio, y al menos teléfono o email
+    if (!nombre || (!telefono && !email)) {
       return NextResponse.json(
-        { error: 'Nombre y teléfono son obligatorios' },
+        { error: 'Nombre y (teléfono o email) son obligatorios' },
         { status: 400 }
       );
     }

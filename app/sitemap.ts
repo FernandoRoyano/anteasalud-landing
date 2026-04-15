@@ -50,6 +50,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly',
       priority: 0.8,
     },
+    // Lead magnet (guía gratuita)
+    {
+      url: `${baseUrl}/guia-prevencion-caidas`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
     // Páginas legales
     {
       url: `${baseUrl}/privacidad`,

@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { LayoutDashboard, Users, LogOut, Menu, X, UserCircle, Calendar, Link2 } from 'lucide-react';
+import { LayoutDashboard, Users, LogOut, Menu, X, UserCircle, Calendar, Link2, Video } from 'lucide-react';
 import { useState } from 'react';
 
 const navItems = [
@@ -10,6 +10,7 @@ const navItems = [
   { href: '/admin/leads', label: 'Leads web', icon: Users },
   { href: '/admin/clientes', label: 'Clientes', icon: UserCircle },
   { href: '/admin/sesiones', label: 'Sesiones', icon: Calendar },
+  { href: '/admin/guion-video', label: 'Guion vídeo', icon: Video },
   { href: '/admin/enlaces', label: 'Enlaces', icon: Link2 },
 ];
 

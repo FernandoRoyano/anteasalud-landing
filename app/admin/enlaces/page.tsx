@@ -100,6 +100,7 @@ const GROUPS: LinkGroup[] = [
       { label: 'Leads web', url: '/admin/leads', description: 'Leads del formulario + guía (con badge)' },
       { label: 'Clientes', url: '/admin/clientes', description: 'Gestión de Tino, Isabel...' },
       { label: 'Sesiones', url: '/admin/sesiones', description: 'Calendario y cobros por WhatsApp' },
+      { label: 'Guion vídeo VSL', url: '/admin/guion-video', description: 'Guion del vídeo "Nuestro método" listo para grabar' },
     ],
   },
   {

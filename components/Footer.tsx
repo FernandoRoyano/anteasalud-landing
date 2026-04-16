@@ -37,10 +37,10 @@ export default function Footer() {
           <div className="space-y-4">
             <h4 className="font-bold text-white text-lg">Servicios</h4>
             <ul className="space-y-2 text-sm">
+              <li><Link href="/nuestro-metodo" className="hover:text-[rgb(0,94,184)] transition">Nuestro método (vídeo)</Link></li>
               <li><Link href="/ejercicio-personas-mayores-madrid" className="hover:text-[rgb(0,94,184)] transition">Ejercicio para mayores</Link></li>
               <li><Link href="/prevencion-caidas-mayores-madrid" className="hover:text-[rgb(0,94,184)] transition">Prevención de caídas</Link></li>
               <li><Link href="/recuperar-autonomia-mayores-madrid" className="hover:text-[rgb(0,94,184)] transition">Recuperar autonomía</Link></li>
-              <li><Link href="/#precios" className="hover:text-[rgb(0,94,184)] transition">Precios</Link></li>
             </ul>
           </div>
 

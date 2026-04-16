@@ -77,9 +77,14 @@ const GROUPS: LinkGroup[] = [
     ],
   },
   {
-    title: 'Lead magnet y descargables',
+    title: 'VSL y lead magnet',
     icon: FileText,
     links: [
+      {
+        label: 'Nuestro método (vídeo VSL)',
+        url: 'https://anteasalud.com/nuestro-metodo',
+        description: 'Página con el vídeo de presentación y CTA al wizard',
+      },
       {
         label: 'Guía: 10 ejercicios para prevenir caídas',
         url: 'https://anteasalud.com/guia-prevencion-caidas',

@@ -57,6 +57,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.8,
     },
+    // Vídeo VSL / Nuestro método
+    {
+      url: `${baseUrl}/nuestro-metodo`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
     // Páginas legales
     {
       url: `${baseUrl}/privacidad`,

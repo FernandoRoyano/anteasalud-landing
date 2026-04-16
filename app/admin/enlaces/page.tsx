@@ -86,6 +86,11 @@ const GROUPS: LinkGroup[] = [
         description: 'Página con el vídeo de presentación y CTA al wizard',
       },
       {
+        label: 'Guion del vídeo VSL',
+        url: '/admin/guion-video',
+        description: 'Guion completo para grabar el vídeo (versión navegable + imprimible)',
+      },
+      {
         label: 'Guía: 10 ejercicios para prevenir caídas',
         url: 'https://anteasalud.com/guia-prevencion-caidas',
         description: 'Descarga gratuita que captura email',
@@ -100,7 +105,6 @@ const GROUPS: LinkGroup[] = [
       { label: 'Leads web', url: '/admin/leads', description: 'Leads del formulario + guía (con badge)' },
       { label: 'Clientes', url: '/admin/clientes', description: 'Gestión de Tino, Isabel...' },
       { label: 'Sesiones', url: '/admin/sesiones', description: 'Calendario y cobros por WhatsApp' },
-      { label: 'Guion vídeo VSL', url: '/admin/guion-video', description: 'Guion del vídeo "Nuestro método" listo para grabar' },
     ],
   },
   {

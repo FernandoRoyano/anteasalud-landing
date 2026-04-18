@@ -91,6 +91,11 @@ const GROUPS: LinkGroup[] = [
         description: 'Guion completo para grabar el vídeo (versión navegable + imprimible)',
       },
       {
+        label: 'Guion del anuncio (Meta Ads)',
+        url: '/admin/guion-anuncio',
+        description: '3 versiones cortas (15/20/25s) con mapa emocional línea a línea',
+      },
+      {
         label: 'Guía: 10 ejercicios para prevenir caídas',
         url: 'https://anteasalud.com/guia-prevencion-caidas',
         description: 'Descarga gratuita que captura email',

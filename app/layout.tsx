@@ -59,6 +59,9 @@ export const metadata = {
       'max-snippet': -1,
     },
   },
+  verification: {
+    google: process.env.GOOGLE_SITE_VERIFICATION,
+  },
 };
 
 // JSON-LD Schema para SEO

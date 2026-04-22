@@ -13,6 +13,7 @@ import {
   Lock,
   ArrowRight,
 } from 'lucide-react';
+import { BreadcrumbSchema } from '@/components/BreadcrumbSchema';
 
 export default function GuiaPrevencionCaidasPage() {
   const [name, setName] = useState('');
@@ -63,6 +64,11 @@ export default function GuiaPrevencionCaidasPage() {
 
   return (
     <>
+      <BreadcrumbSchema items={[
+        { name: 'Inicio', url: 'https://anteasalud.com' },
+        { name: 'Guía prevención caídas', url: 'https://anteasalud.com/guia-prevencion-caidas' },
+      ]} />
+
       {/* Hero */}
       <section className="w-full bg-gradient-to-br from-[rgb(191,231,249)] via-white to-[rgb(232,237,238)] pt-32 pb-16 px-4">
         <div className="max-w-4xl mx-auto text-center space-y-6">

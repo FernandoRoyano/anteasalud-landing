@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Phone, Play, Award, Clock, Home, Target, ChevronDown, MessageCircle } from 'lucide-react';
 import { useWizard } from '@/components/WizardWhatsApp';
+import { BreadcrumbSchema } from '@/components/BreadcrumbSchema';
 
 // =============================================================================
 // CONFIG — cuando Fernando suba el vídeo a YouTube, cambiar este ID.
@@ -18,6 +19,11 @@ export default function NuestroMetodoPage() {
 
   return (
     <>
+      <BreadcrumbSchema items={[
+        { name: 'Inicio', url: 'https://anteasalud.com' },
+        { name: 'Nuestro método', url: 'https://anteasalud.com/nuestro-metodo' },
+      ]} />
+
       {/* Hero */}
       <section className="w-full bg-gradient-to-br from-[rgb(0,60,115)] via-[rgb(0,94,184)] to-[rgb(32,113,188)] pt-28 pb-10 px-4">
         <div className="max-w-4xl mx-auto text-center space-y-4">

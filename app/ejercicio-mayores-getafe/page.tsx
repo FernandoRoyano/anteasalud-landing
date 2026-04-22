@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import LandingHero from '@/components/landing/LandingHero';
 import LandingCTA from '@/components/landing/LandingCTA';
 import { Check } from 'lucide-react';
+import { BreadcrumbSchema } from '@/components/BreadcrumbSchema';
 
 const TITLE = 'Ejercicio para Mayores a Domicilio en Getafe | ANTEA Salud';
 const DESCRIPTION =
@@ -30,6 +31,10 @@ export default function Page() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <BreadcrumbSchema items={[
+        { name: 'Inicio', url: 'https://anteasalud.com' },
+        { name: 'Getafe', url: URL },
+      ]} />
 
       <LandingHero
         badge="Getafe · Sur de Madrid"

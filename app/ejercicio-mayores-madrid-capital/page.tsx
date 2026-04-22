@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import LandingHero from '@/components/landing/LandingHero';
 import LandingCTA from '@/components/landing/LandingCTA';
 import { Check, MapPin } from 'lucide-react';
+import { BreadcrumbSchema } from '@/components/BreadcrumbSchema';
 
 const TITLE = 'Ejercicio para Mayores a Domicilio en Madrid Capital | ANTEA Salud';
 const DESCRIPTION =
@@ -37,6 +38,10 @@ export default function Page() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <BreadcrumbSchema items={[
+        { name: 'Inicio', url: 'https://anteasalud.com' },
+        { name: 'Madrid capital', url: URL },
+      ]} />
 
       <LandingHero
         badge="Madrid capital · Sin recargo por desplazamiento"

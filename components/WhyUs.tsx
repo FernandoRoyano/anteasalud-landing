@@ -57,7 +57,7 @@ export default function WhyUs() {
           <div className="inline-block px-4 py-2 bg-[rgb(191,231,249)] rounded-full">
             <span className="text-sm font-semibold text-[rgb(0,94,184)]">¿Por qué elegirnos?</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-black text-slate-900">
+          <h2 className="font-display text-fluid-4xl font-black tracking-tight text-slate-900">
             Lo que nos diferencia
           </h2>
           <p className="text-xl text-slate-600 max-w-2xl mx-auto">

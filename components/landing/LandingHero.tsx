@@ -37,7 +37,7 @@ export default function LandingHero({
           <span className="text-sm font-semibold text-[rgb(0,94,184)]">{badge}</span>
         </div>
 
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 leading-[1.1] tracking-tight">
+        <h1 className="font-display text-fluid-5xl font-black tracking-tight text-slate-900 leading-[1.1] tracking-tight">
           {h1}
           <span className="block text-[rgb(0,94,184)] mt-2">{h1Highlight}</span>
         </h1>

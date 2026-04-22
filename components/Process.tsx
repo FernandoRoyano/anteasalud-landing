@@ -48,7 +48,7 @@ export default function Process() {
           <div className="inline-block px-4 py-2 bg-[rgb(191,231,249)] rounded-full">
             <span className="text-sm font-semibold text-[rgb(0,94,184)]">¿Cómo funciona?</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-black text-[rgb(31,41,51)]">
+          <h2 className="font-display text-fluid-4xl font-black tracking-tight text-[rgb(31,41,51)]">
             4 pasos simples para empezar
           </h2>
           <p className="text-xl text-[rgb(130,131,130)] max-w-2xl mx-auto">

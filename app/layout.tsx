@@ -1,6 +1,21 @@
 import './globals.css';
+import { Inter, Bricolage_Grotesque } from 'next/font/google';
 import PublicChrome from '@/components/PublicChrome';
 import GoogleAnalytics from '@/components/GoogleAnalytics';
+
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800', '900'],
+  variable: '--font-inter-var',
+  display: 'swap',
+});
+
+const bricolage = Bricolage_Grotesque({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-bricolage-var',
+  display: 'swap',
+});
 
 export const metadata = {
   title: 'Ejercicio para Mayores a Domicilio en Madrid | ANTEA Salud',
@@ -155,11 +170,8 @@ const jsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es">
+    <html lang="es" className={`${inter.variable} ${bricolage.variable}`}>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
         {/* Favicon */}
         <link rel="icon" href="/favicon.ico" />
         {/* JSON-LD Structured Data */}

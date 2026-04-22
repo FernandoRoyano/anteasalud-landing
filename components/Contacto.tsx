@@ -14,7 +14,7 @@ export default function Contacto() {
         <section id="contacto" className="w-full py-20 px-4 bg-white">
             <div className="max-w-3xl mx-auto">
                 <div ref={headerRef} className="text-center mb-10">
-                    <h2 className="text-3xl md:text-4xl font-black text-[rgb(0,94,184)] mb-4">
+                    <h2 className="font-display text-fluid-3xl font-black tracking-tight text-[rgb(0,94,184)] mb-4">
                         Solicita tu valoración gratuita
                     </h2>
                     <p className="text-lg text-slate-600">

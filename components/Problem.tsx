@@ -3,7 +3,7 @@ export default function Problem() {
     <section className="w-full bg-[rgb(232,237,238)] py-24 px-4">
       <div className="max-w-4xl mx-auto">
         <div className="bg-white rounded-3xl shadow-xl p-12 md:p-16 space-y-8">
-          <h2 className="text-4xl md:text-5xl font-black text-[rgb(31,41,51)] leading-tight">
+          <h2 className="font-display text-fluid-4xl font-black tracking-tight text-[rgb(31,41,51)] leading-tight">
             Llega un momento en el que notas que pierde movilidad
           </h2>
           

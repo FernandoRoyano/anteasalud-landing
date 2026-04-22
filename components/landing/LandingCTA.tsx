@@ -30,7 +30,7 @@ export default function LandingCTA({ title, subtitle, related }: LandingCTAProps
       <div className="max-w-4xl mx-auto">
         {/* CTA principal */}
         <div className="bg-gradient-to-br from-[rgb(0,94,184)] to-[rgb(0,60,115)] rounded-3xl p-10 md:p-14 text-center text-white shadow-2xl">
-          <h2 className="text-3xl md:text-4xl font-black mb-4">{title}</h2>
+          <h2 className="font-display text-fluid-3xl font-black tracking-tight mb-4">{title}</h2>
           <p className="text-lg md:text-xl text-blue-100 mb-8 max-w-2xl mx-auto">{subtitle}</p>
           <button
             onClick={openWizard}

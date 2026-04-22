@@ -76,7 +76,7 @@ export default function Solution() {
             <span className="text-sm font-semibold text-white">La solución que buscabas</span>
           </div>
 
-          <h2 className="solution-text text-4xl md:text-5xl font-black text-white leading-tight">
+          <h2 className="solution-text font-display text-fluid-4xl font-black tracking-tight text-white leading-tight">
             Profesionales expertos que vienen a casa
           </h2>
 

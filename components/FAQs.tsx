@@ -18,7 +18,7 @@ export default function FAQs() {
     },
     {
       question: "¿Cuánto cuesta una sesión?",
-      answer: "Sesión suelta 45€ (30 minutos). Plan de 2 días por semana 35€/sesión (70€/semana). Para zonas fuera de Madrid capital se añaden 5€ por sesión por desplazamiento. Primera valoración siempre gratuita y sin compromiso."
+      answer: "Sesión suelta 55€ (30 minutos). Plan de 2 días por semana 45€/sesión (90€/semana). Para zonas fuera de Madrid capital se añaden 10€ por sesión por desplazamiento. Primera valoración siempre gratuita y sin compromiso."
     },
     {
       question: "¿Qué documentación necesito?",
@@ -33,8 +33,8 @@ export default function FAQs() {
       answer: "Depende de cada persona. Algunos ven resultados en 4-6 semanas, otros necesitan 2-3 meses. La mayoría nota mejora en equilibrio, fuerza y confianza en 6-8 sesiones. Evaluamos constantemente y ajustamos el plan."
     },
     {
-      question: "¿Puedo dejar de ir si veo que mejoro?",
-      answer: "Claro. El objetivo es que recuperes autonomía y confianza. Una vez alcanzados tus objetivos, puedes seguir con sesiones de mantenimiento menos frecuentes o parar. Tú controlas tu plan."
+      question: "¿Podemos espaciar o parar las sesiones cuando mejore?",
+      answer: "Claro. El objetivo es que recupere autonomía y confianza. Cuando veamos los avances esperados, ajustamos la frecuencia: menos sesiones por semana, mantenimiento puntual o parar del todo. Sin permanencia, sin penalizaciones."
     },
     {
       question: "¿Hacéis coordinación con mi médico?",
@@ -42,11 +42,11 @@ export default function FAQs() {
     },
     {
       question: "¿Dónde operáis?",
-      answer: "Operamos en Madrid capital y municipios de la Comunidad de Madrid en un radio de hasta 22 km del centro: Móstoles, Leganés, Alcorcón, Getafe, Fuenlabrada, Parla, Pinto, Pozuelo, Majadahonda, Las Rozas, Boadilla, Villaviciosa de Odón, Coslada, San Fernando de Henares, Rivas-Vaciamadrid, Torrejón de Ardoz, Alcobendas y Tres Cantos. Vamos a tu domicilio."
+      answer: "Operamos en Madrid capital y municipios de la Comunidad de Madrid en un radio de hasta 22 km del centro: Móstoles, Leganés, Alcorcón, Getafe, Fuenlabrada, Pozuelo, Majadahonda, Las Rozas, Boadilla, Villaviciosa de Odón, Coslada, San Fernando de Henares, Rivas-Vaciamadrid, Torrejón de Ardoz, Alcobendas y Tres Cantos. Vamos a tu domicilio."
     },
     {
       question: "¿Cobráis desplazamiento?",
-      answer: "Madrid capital sin recargo. Para el resto de la Comunidad de Madrid aplicamos un recargo de +5€ por sesión por desplazamiento. Por ejemplo, una sesión suelta en Móstoles cuesta 50€ (45€ + 5€). Es una cantidad fija por sesión, sin sorpresas."
+      answer: "Madrid capital sin recargo. Para el resto de la Comunidad de Madrid aplicamos un recargo de +10€ por sesión por desplazamiento. Por ejemplo, una sesión suelta en Móstoles cuesta 65€ (55€ + 10€). Es una cantidad fija por sesión, sin sorpresas."
     },
     {
       question: "¿Cómo se paga?",

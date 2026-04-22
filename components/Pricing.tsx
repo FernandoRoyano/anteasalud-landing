@@ -38,7 +38,7 @@ export default function Pricing() {
             </p>
 
             <div className="mb-6">
-              <span className="text-5xl font-black text-[rgb(0,94,184)]">45€</span>
+              <span className="text-5xl font-black text-[rgb(0,94,184)]">55€</span>
             </div>
 
             <ul className="space-y-3 mb-8">
@@ -81,11 +81,11 @@ export default function Pricing() {
             </p>
 
             <div className="mb-2">
-              <span className="text-5xl font-black text-white">70€</span>
+              <span className="text-5xl font-black text-white">90€</span>
               <span className="text-white/80"> / semana</span>
             </div>
             <p className="text-sm mb-6">
-              <span className="bg-white/20 px-2 py-1 rounded text-white font-semibold">35€/sesión · Ahorras 20€</span>
+              <span className="bg-white/20 px-2 py-1 rounded text-white font-semibold">45€/sesión · Ahorras 20€</span>
             </p>
 
             <ul className="space-y-3 mb-8">
@@ -165,7 +165,7 @@ export default function Pricing() {
               <h4 className="font-bold text-[rgb(31,41,51)] mb-1">Recargo por desplazamiento</h4>
               <p className="text-sm text-[rgb(31,41,51)]">
                 <strong>Madrid capital:</strong> sin recargo. <br />
-                <strong>Resto de la Comunidad de Madrid</strong> (Móstoles, Leganés, Getafe, Pozuelo, Alcobendas, Torrejón...): <strong className="text-orange-700">+5€ por sesión</strong> para cubrir el desplazamiento.
+                <strong>Resto de la Comunidad de Madrid</strong> (Móstoles, Leganés, Getafe, Pozuelo, Alcobendas, Torrejón...): <strong className="text-orange-700">+10€ por sesión</strong> para cubrir el desplazamiento.
               </p>
             </div>
           </div>

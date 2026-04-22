@@ -44,8 +44,8 @@ const SITUACIONES = [
   { value: 'otro', label: 'Otra situación' },
 ];
 
-const PRECIO_SESION = 45;
-const PRECIO_PLAN_SEMANA = 70;
+const PRECIO_SESION = 55;
+const PRECIO_PLAN_SEMANA = 90;
 
 interface Zona {
   value: string;
@@ -55,10 +55,10 @@ interface Zona {
 
 const ZONAS_MADRID: Zona[] = [
   { value: 'capital', label: 'Madrid capital', recargo: 0 },
-  { value: 'sur', label: 'Sur (Móstoles, Fuenlabrada, Getafe, Leganés, Alcorcón...)', recargo: 5 },
-  { value: 'oeste', label: 'Oeste (Pozuelo, Las Rozas, Majadahonda, Boadilla...)', recargo: 5 },
-  { value: 'este', label: 'Este (Torrejón de Ardoz, Coslada, Rivas-Vaciamadrid...)', recargo: 5 },
-  { value: 'norte', label: 'Norte (Alcobendas, Tres Cantos)', recargo: 5 },
+  { value: 'sur', label: 'Sur (Móstoles, Fuenlabrada, Getafe, Leganés, Alcorcón...)', recargo: 10 },
+  { value: 'oeste', label: 'Oeste (Pozuelo, Las Rozas, Majadahonda, Boadilla...)', recargo: 10 },
+  { value: 'este', label: 'Este (Torrejón de Ardoz, Coslada, Rivas-Vaciamadrid...)', recargo: 10 },
+  { value: 'norte', label: 'Norte (Alcobendas, Tres Cantos)', recargo: 10 },
 ];
 
 // =============================================================================

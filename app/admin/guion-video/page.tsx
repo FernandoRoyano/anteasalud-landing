@@ -210,14 +210,14 @@ export default function GuionVideoPage() {
         >
           <p>Los precios son estos, <strong>sin letra pequeña</strong>:</p>
           <ul className="list-disc pl-6 space-y-1">
-            <li>Una sesión suelta, <strong>45 euros</strong>.</li>
+            <li>Una sesión suelta, <strong>55 euros</strong>.</li>
             <li>
-              El plan de <strong>dos sesiones por semana, 35 euros cada sesión. 70 euros a la semana</strong>. Que
+              El plan de <strong>dos sesiones por semana, 45 euros cada sesión. 90 euros a la semana</strong>. Que
               es lo que suele funcionar mejor, porque la constancia es lo que da resultados.
             </li>
             <li>
               Si vives <strong>fuera de Madrid capital</strong> — en Móstoles, Getafe, Leganés o zonas similares
-              — se suma <strong>5 euros por sesión</strong> por el desplazamiento. Es lo único extra. No hay
+              — se suma <strong>10 euros por sesión</strong> por el desplazamiento. Es lo único extra. No hay
               cuotas de alta, no hay permanencia, no hay sorpresas.
             </li>
           </ul>
@@ -301,7 +301,7 @@ export default function GuionVideoPage() {
         <ol className="list-decimal pl-6 space-y-2 text-[rgb(31,41,51)] text-sm">
           <li>Intro musical suave 2-3s antes del hook (YouTube Audio Library tiene música libre)</li>
           <li>Subtítulos automáticos (80% ven vídeos sin sonido)</li>
-          <li>Texto en pantalla en momentos clave: &ldquo;14 años&rdquo;, &ldquo;CCAFYD&rdquo;, &ldquo;Tino, 96 años&rdquo;, &ldquo;45€/70€ sem&rdquo;</li>
+          <li>Texto en pantalla en momentos clave: &ldquo;14 años&rdquo;, &ldquo;CCAFYD&rdquo;, &ldquo;Tino, 96 años&rdquo;, &ldquo;55€/90€ sem&rdquo;</li>
           <li>Corte seco al final, no fades largos</li>
           <li>Revisa audio antes de exportar (ajustar en CapCut)</li>
           <li>Exporta 1080p, no 4K (pesa innecesario)</li>

@@ -138,9 +138,9 @@
 
 > "Los precios son estos, **sin letra pequeña**:
 >
-> - Una sesión suelta, **45 euros**.
-> - El plan de **dos sesiones por semana, 35 euros cada sesión. 70 euros a la semana**. Que es lo que suele funcionar mejor, porque la constancia es lo que da resultados.
-> - Si vives **fuera de Madrid capital** — en Móstoles, Getafe, Leganés o zonas similares — se suma **5 euros por sesión** por el desplazamiento. Es lo único extra. No hay cuotas de alta, no hay permanencia, no hay sorpresas.
+> - Una sesión suelta, **55 euros**.
+> - El plan de **dos sesiones por semana, 45 euros cada sesión. 90 euros a la semana**. Que es lo que suele funcionar mejor, porque la constancia es lo que da resultados.
+> - Si vives **fuera de Madrid capital** — en Móstoles, Getafe, Leganés o zonas similares — se suma **10 euros por sesión** por el desplazamiento. Es lo único extra. No hay cuotas de alta, no hay permanencia, no hay sorpresas.
 >
 > La **primera valoración es gratuita**. Voy a tu casa, evaluamos la situación, vemos si puedo ayudar, y tú decides. Sin compromiso, sin presión. Si no encajamos, no pagas nada."
 
@@ -199,7 +199,7 @@
    - "14 años de experiencia" (en el hook)
    - "Graduado en Ciencias del Deporte" (cuando te presentas)
    - "Tino, 96 años" (cuando cuentas su historia)
-   - "45€ sesión suelta / 35€/sesión plan semanal" (cuando dices el precio)
+   - "55€ sesión suelta / 45€/sesión plan semanal" (cuando dices el precio)
 4. **Corte seco** al final (no fades largos)
 5. **Revisa el audio** antes de publicar. Si hay picos o ruido ambiente, pásalo por CapCut → ajustar audio
 6. **Exporta en 1080p**. 4K es innecesario y pesa más

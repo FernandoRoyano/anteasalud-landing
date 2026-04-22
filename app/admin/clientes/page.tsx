@@ -381,8 +381,8 @@ function ClientFormModal({
                       : 'border-[rgb(200,207,210)] bg-white text-[rgb(130,131,130)] hover:border-[rgb(0,94,184)]'
                   }`}
                 >
-                  {m === 'pack' && 'Plan 2/sem (35€)'}
-                  {m === 'suelta' && 'Sesión suelta (45€)'}
+                  {m === 'pack' && 'Plan 2/sem (45€)'}
+                  {m === 'suelta' && 'Sesión suelta (55€)'}
                   {m === 'custom' && 'Personalizado'}
                 </button>
               ))}

@@ -64,11 +64,11 @@ export default function Page() {
             <div className="space-y-3">
               <div className="flex items-center justify-between p-3 border-b border-[rgb(232,237,238)]">
                 <span className="text-slate-600">Sesión suelta (30 min)</span>
-                <span className="font-black text-[rgb(0,94,184)]">45€ + 5€</span>
+                <span className="font-black text-[rgb(0,94,184)]">55€ + 10€</span>
               </div>
               <div className="flex items-center justify-between p-3 border-b border-[rgb(232,237,238)]">
                 <span className="text-slate-600">Plan 2 días/semana</span>
-                <span className="font-black text-[rgb(0,94,184)]">70€ + 10€/sem</span>
+                <span className="font-black text-[rgb(0,94,184)]">90€ + 20€/sem</span>
               </div>
               <div className="flex items-center justify-between p-3 bg-green-50 rounded-xl">
                 <span className="text-green-800 font-semibold">Primera valoración</span>
@@ -76,7 +76,7 @@ export default function Page() {
               </div>
             </div>
             <p className="text-xs text-[rgb(130,131,130)] mt-4 text-center">
-              Getafe está fuera de Madrid capital, por lo que se aplica un recargo fijo de +5€ por sesión para cubrir el desplazamiento.
+              Getafe está fuera de Madrid capital, por lo que se aplica un recargo fijo de +10€ por sesión para cubrir el desplazamiento.
             </p>
           </div>
         </div>

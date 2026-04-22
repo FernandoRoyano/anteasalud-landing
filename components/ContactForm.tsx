@@ -17,8 +17,8 @@ const ZONAS = [
 
 const INTERESES = [
   "Evaluación gratuita",
-  "Sesión suelta (45€)",
-  "Plan 2 días/semana (70€)",
+  "Sesión suelta (55€)",
+  "Plan 2 días/semana (90€)",
   "Solo información y precios",
 ];
 

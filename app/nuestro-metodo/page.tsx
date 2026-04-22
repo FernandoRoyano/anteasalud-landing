@@ -141,9 +141,9 @@ export default function NuestroMetodoPage() {
           </div>
 
           <div className="bg-white rounded-3xl shadow-lg border border-[rgb(200,207,210)] p-8 space-y-4">
-            <PriceRow label="Sesión suelta (30 min)" price="45€" />
-            <PriceRow label="Plan 2 días por semana" price="70€/semana" note="35€/sesión" highlight />
-            <PriceRow label="Recargo desplazamiento fuera de Madrid capital" price="+5€/sesión" small />
+            <PriceRow label="Sesión suelta (30 min)" price="55€" />
+            <PriceRow label="Plan 2 días por semana" price="90€/semana" note="45€/sesión" highlight />
+            <PriceRow label="Recargo desplazamiento fuera de Madrid capital" price="+10€/sesión" small />
             <div className="border-t border-[rgb(232,237,238)] pt-4 mt-4">
               <PriceRow label="Primera valoración" price="GRATIS" free />
             </div>
@@ -351,7 +351,7 @@ const FAQS = [
   {
     question: '¿En qué zonas trabajas?',
     answer:
-      'Madrid capital (sin recargo) y municipios de la Comunidad de Madrid hasta 22 km del centro: Móstoles, Fuenlabrada, Getafe, Leganés, Alcorcón, Pozuelo, Las Rozas, Majadahonda, Alcobendas, Torrejón y más. En estas zonas se añade +5€/sesión por desplazamiento.',
+      'Madrid capital (sin recargo) y municipios de la Comunidad de Madrid hasta 22 km del centro: Móstoles, Fuenlabrada, Getafe, Leganés, Alcorcón, Pozuelo, Las Rozas, Majadahonda, Alcobendas, Torrejón y más. En estas zonas se añade +10€/sesión por desplazamiento.',
   },
   {
     question: '¿Cómo se paga?',

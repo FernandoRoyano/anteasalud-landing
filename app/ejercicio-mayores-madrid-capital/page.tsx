@@ -94,8 +94,8 @@ export default function Page() {
           </h2>
           <div className="bg-gradient-to-br from-[rgb(191,231,249)] to-[rgb(232,237,238)] rounded-3xl p-10 border-2 border-[rgb(0,94,184)]/20">
             <div className="space-y-4 mb-6">
-              <PriceRow label="Sesión suelta (30 min)" price="45€" />
-              <PriceRow label="Plan 2 días/semana" price="70€/semana" highlight />
+              <PriceRow label="Sesión suelta (30 min)" price="55€" />
+              <PriceRow label="Plan 2 días/semana" price="90€/semana" highlight />
               <PriceRow label="Primera valoración" price="GRATIS" free />
             </div>
             <div className="bg-green-50 border border-green-200 rounded-xl p-4 mt-6">

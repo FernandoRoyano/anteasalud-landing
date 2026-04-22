@@ -15,23 +15,23 @@ export default function Coverage() {
     },
     {
       name: "Sur",
-      cities: "Leganés, Alcorcón, Getafe, Móstoles, Fuenlabrada, Parla, Pinto",
-      recargo: 5,
+      cities: "Leganés, Alcorcón, Getafe, Móstoles, Fuenlabrada",
+      recargo: 10,
     },
     {
       name: "Oeste",
       cities: "Pozuelo de Alarcón, Majadahonda, Boadilla del Monte, Villaviciosa de Odón, Las Rozas",
-      recargo: 5,
+      recargo: 10,
     },
     {
       name: "Este",
       cities: "Coslada, San Fernando de Henares, Rivas-Vaciamadrid, Torrejón de Ardoz",
-      recargo: 5,
+      recargo: 10,
     },
     {
       name: "Norte",
       cities: "Alcobendas, Tres Cantos",
-      recargo: 5,
+      recargo: 10,
     },
   ];
 
@@ -84,7 +84,7 @@ export default function Coverage() {
         {/* Aviso de recargo */}
         <div className="bg-orange-50 border-2 border-orange-200 rounded-2xl p-6 mb-8 text-center">
           <p className="text-[rgb(31,41,51)] text-sm md:text-base">
-            <strong className="text-orange-700">Recargo por desplazamiento:</strong> Madrid capital sin recargo. Resto de zonas <strong>+5€ por sesión</strong> para cubrir el desplazamiento.
+            <strong className="text-orange-700">Recargo por desplazamiento:</strong> Madrid capital sin recargo. Resto de zonas <strong>+10€ por sesión</strong> para cubrir el desplazamiento.
           </p>
         </div>
 

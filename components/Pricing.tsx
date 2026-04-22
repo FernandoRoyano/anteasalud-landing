@@ -1,7 +1,7 @@
 "use client";
 
 // components/Pricing.tsx
-import { Check, ShieldCheck } from 'lucide-react';
+import { Check } from 'lucide-react';
 import { useScrollAnimation } from '@/lib/useScrollAnimation';
 
 export default function Pricing() {
@@ -171,15 +171,8 @@ export default function Pricing() {
           </div>
         </div>
 
-        {/* Garantía */}
-        <div className="text-center space-y-6">
-          <div className="inline-flex items-center gap-3 bg-[rgb(191,231,249)] px-6 py-3 rounded-full">
-            <ShieldCheck className="w-6 h-6 text-[rgb(0,94,184)]" />
-            <p className="text-[rgb(0,94,184)] font-semibold text-sm md:text-base">
-              Si la primera sesión no te convence, te devolvemos el dinero
-            </p>
-          </div>
-
+        {/* Contacto directo */}
+        <div className="text-center">
           <p className="text-[rgb(130,131,130)]">
             ¿Dudas? Llámanos al <a href="tel:+34633261963" className="text-[rgb(0,94,184)] font-semibold hover:underline">633 261 963</a>
           </p>

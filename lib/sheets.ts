@@ -1,7 +1,7 @@
 import { google, sheets_v4 } from 'googleapis';
-import type { Client, Lead, LeadSource, Session, SessionStatus, Zone } from './types';
+import type { Article, ArticleStatus, Client, Lead, LeadSource, Session, SessionStatus, Zone } from './types';
 
-export type { Client, Lead, LeadSource, Session, SessionStatus, Zone };
+export type { Article, ArticleStatus, Client, Lead, LeadSource, Session, SessionStatus, Zone };
 
 // =============================================================================
 // CONFIG
@@ -12,6 +12,21 @@ const GUIA_CAIDAS_SHEET = 'Guía caídas';
 const LEADS_HEADERS = ['Fecha', 'Nombre', 'Email', 'Teléfono', 'Zona', 'Interés', 'Estado', 'Notas'];
 const CLIENTES_SHEET = 'Clientes';
 const SESIONES_SHEET = 'Sesiones';
+const ARTICULOS_SHEET = 'Articulos';
+
+const ARTICULOS_HEADERS = [
+  'id',
+  'slug',
+  'title',
+  'excerpt',
+  'bodyMarkdown',
+  'ogImage',
+  'tags',
+  'status',
+  'publishedAt',
+  'createdAt',
+  'updatedAt',
+];
 
 const CLIENTES_HEADERS = [
   'id',
@@ -551,5 +566,187 @@ export async function deleteSession(id: string): Promise<void> {
     requestBody: {
       values: [['', '', '', '', '', '', '', '', '', '']],
     },
+  });
+}
+
+// =============================================================================
+// ARTÍCULOS (blog)
+// =============================================================================
+
+function parseArticleRow(row: string[], index: number): Article {
+  return {
+    row: index + 2,
+    id: String(row[0] ?? '').trim(),
+    slug: String(row[1] ?? '').trim(),
+    title: String(row[2] ?? ''),
+    excerpt: String(row[3] ?? ''),
+    bodyMarkdown: String(row[4] ?? ''),
+    ogImage: String(row[5] ?? ''),
+    tags: String(row[6] ?? '')
+      .split(',')
+      .map((t) => t.trim())
+      .filter(Boolean),
+    status: (String(row[7] ?? 'draft').trim() as ArticleStatus) || 'draft',
+    publishedAt: String(row[8] ?? ''),
+    createdAt: String(row[9] ?? ''),
+    updatedAt: String(row[10] ?? ''),
+  };
+}
+
+function serializeArticleRow(a: Article): string[] {
+  return [
+    a.id,
+    a.slug,
+    a.title,
+    a.excerpt,
+    a.bodyMarkdown,
+    a.ogImage || '',
+    (a.tags || []).join(', '),
+    a.status,
+    a.publishedAt || '',
+    a.createdAt,
+    a.updatedAt,
+  ];
+}
+
+export async function getAllArticles(): Promise<Article[]> {
+  const sheets = getSheetsClient();
+  const spreadsheetId = process.env.GOOGLE_SHEET_ID!;
+  await ensureSheet(sheets, spreadsheetId, ARTICULOS_SHEET, ARTICULOS_HEADERS);
+
+  const response = await sheets.spreadsheets.values.get({
+    spreadsheetId,
+    range: `${ARTICULOS_SHEET}!A2:K`,
+  });
+
+  const rows = response.data.values || [];
+  return rows
+    .map((row, index) => parseArticleRow(row, index))
+    .filter((a) => a.id); // filas vacías (soft-deleted) se ignoran
+}
+
+export async function getPublishedArticles(): Promise<Article[]> {
+  const all = await getAllArticles();
+  return all
+    .filter((a) => a.status === 'published')
+    .sort((a, b) => (b.publishedAt || '').localeCompare(a.publishedAt || ''));
+}
+
+export async function getArticleBySlug(slug: string): Promise<Article | null> {
+  const all = await getAllArticles();
+  return all.find((a) => a.slug === slug) || null;
+}
+
+export async function getArticleById(id: string): Promise<Article | null> {
+  const all = await getAllArticles();
+  return all.find((a) => a.id === id) || null;
+}
+
+export async function createArticle(
+  data: Omit<Article, 'id' | 'row' | 'createdAt' | 'updatedAt'>
+): Promise<Article> {
+  const sheets = getSheetsClient();
+  const spreadsheetId = process.env.GOOGLE_SHEET_ID!;
+  await ensureSheet(sheets, spreadsheetId, ARTICULOS_SHEET, ARTICULOS_HEADERS);
+
+  // Garantizar slug único
+  const existing = await getAllArticles();
+  let baseSlug = data.slug ? slugify(data.slug) : slugify(data.title);
+  if (!baseSlug) baseSlug = 'articulo';
+  let slug = baseSlug;
+  let counter = 2;
+  while (existing.some((a) => a.slug === slug)) {
+    slug = `${baseSlug}-${counter++}`;
+  }
+
+  const id = `art_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
+  const now = new Date().toISOString();
+
+  const article: Article = {
+    id,
+    slug,
+    title: data.title,
+    excerpt: data.excerpt || '',
+    bodyMarkdown: data.bodyMarkdown || '',
+    ogImage: data.ogImage || '',
+    tags: data.tags || [],
+    status: data.status || 'draft',
+    publishedAt: data.status === 'published' ? now : '',
+    createdAt: now,
+    updatedAt: now,
+  };
+
+  await sheets.spreadsheets.values.append({
+    spreadsheetId,
+    range: `${ARTICULOS_SHEET}!A:K`,
+    valueInputOption: 'RAW',
+    insertDataOption: 'INSERT_ROWS',
+    requestBody: { values: [serializeArticleRow(article)] },
+  });
+
+  return article;
+}
+
+export async function updateArticle(id: string, updates: Partial<Article>): Promise<Article> {
+  const sheets = getSheetsClient();
+  const spreadsheetId = process.env.GOOGLE_SHEET_ID!;
+
+  const existing = await getAllArticles();
+  const article = existing.find((a) => a.id === id);
+  if (!article || !article.row) throw new Error(`Artículo ${id} no encontrado`);
+
+  // Si cambian el slug, garantizar unicidad
+  let newSlug = article.slug;
+  if (updates.slug && updates.slug !== article.slug) {
+    const desired = slugify(updates.slug);
+    let counter = 2;
+    newSlug = desired;
+    while (existing.some((a) => a.slug === newSlug && a.id !== id)) {
+      newSlug = `${desired}-${counter++}`;
+    }
+  }
+
+  // Si pasa de draft a published por primera vez, setear publishedAt
+  const wasDraft = article.status !== 'published';
+  const nowPublished = updates.status === 'published';
+  const publishedAt =
+    wasDraft && nowPublished
+      ? new Date().toISOString()
+      : updates.publishedAt !== undefined
+        ? updates.publishedAt
+        : article.publishedAt;
+
+  const merged: Article = {
+    ...article,
+    ...updates,
+    slug: newSlug,
+    publishedAt,
+    updatedAt: new Date().toISOString(),
+  };
+
+  await sheets.spreadsheets.values.update({
+    spreadsheetId,
+    range: `${ARTICULOS_SHEET}!A${article.row}:K${article.row}`,
+    valueInputOption: 'RAW',
+    requestBody: { values: [serializeArticleRow(merged)] },
+  });
+
+  return merged;
+}
+
+export async function deleteArticle(id: string): Promise<void> {
+  const sheets = getSheetsClient();
+  const spreadsheetId = process.env.GOOGLE_SHEET_ID!;
+
+  const existing = await getAllArticles();
+  const article = existing.find((a) => a.id === id);
+  if (!article || !article.row) throw new Error(`Artículo ${id} no encontrado`);
+
+  // Limpieza de fila (soft delete — no elimino la fila para no desplazar índices)
+  await sheets.spreadsheets.values.update({
+    spreadsheetId,
+    range: `${ARTICULOS_SHEET}!A${article.row}:K${article.row}`,
+    valueInputOption: 'RAW',
+    requestBody: { values: [['', '', '', '', '', '', '', '', '', '', '']] },
   });
 }

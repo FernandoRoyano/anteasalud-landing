@@ -112,3 +112,32 @@ export interface Session {
   createdAt: string;
   updatedAt: string;
 }
+
+// =============================================================================
+// Artículos (blog)
+// =============================================================================
+
+export type ArticleStatus = 'draft' | 'published';
+
+export interface Article {
+  /** Número de fila en Google Sheets */
+  row?: number;
+  /** ID interno (timestamp + random) */
+  id: string;
+  /** URL-friendly slug, único */
+  slug: string;
+  title: string;
+  /** Resumen de 1-2 frases para listado y OG */
+  excerpt: string;
+  /** Cuerpo en Markdown */
+  bodyMarkdown: string;
+  /** URL absoluta o ruta pública a imagen destacada y OG */
+  ogImage: string;
+  /** Tags separados por coma en Sheets; array en la app */
+  tags: string[];
+  status: ArticleStatus;
+  /** ISO datetime — null si aún en draft sin publicar */
+  publishedAt: string;
+  createdAt: string;
+  updatedAt: string;
+}

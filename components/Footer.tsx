@@ -51,6 +51,7 @@ export default function Footer() {
               <li><Link href="/ejercicio-mayores-madrid-capital" className="hover:text-[rgb(0,94,184)] transition">Madrid capital</Link></li>
               <li><Link href="/ejercicio-mayores-mostoles" className="hover:text-[rgb(0,94,184)] transition">Móstoles</Link></li>
               <li><Link href="/ejercicio-mayores-getafe" className="hover:text-[rgb(0,94,184)] transition">Getafe</Link></li>
+              <li><Link href="/articulos" className="hover:text-[rgb(0,94,184)] transition">Artículos</Link></li>
               <li><Link href="/#faqs" className="hover:text-[rgb(0,94,184)] transition">Preguntas frecuentes</Link></li>
             </ul>
           </div>

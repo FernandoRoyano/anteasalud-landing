@@ -29,10 +29,13 @@ const PARA_QUIEN = [
 ];
 
 const EDADES = [
+  { value: '<50', label: 'Menos de 50 años' },
+  { value: '50-60', label: '50 - 60 años' },
   { value: '60-70', label: '60 - 70 años' },
   { value: '70-80', label: '70 - 80 años' },
   { value: '80-90', label: '80 - 90 años' },
   { value: '+90', label: 'Más de 90 años' },
+  { value: 'otra', label: 'Otra edad (especificar)' },
 ];
 
 const SITUACIONES = [
@@ -97,6 +100,8 @@ export function WizardProvider({ children }: { children: ReactNode }) {
 interface FormData {
   paraQuien: string;
   edad: string;
+  /** Si edad === 'otra', el usuario puede escribir aquí su edad o rango personalizado */
+  edadCustom: string;
   situacion: string;
   zona: string;
   nombre: string;
@@ -110,6 +115,7 @@ function WizardModal({ onClose }: { onClose: () => void }) {
   const [data, setData] = useState<FormData>({
     paraQuien: '',
     edad: '',
+    edadCustom: '',
     situacion: '',
     zona: '',
     nombre: '',
@@ -127,7 +133,11 @@ function WizardModal({ onClose }: { onClose: () => void }) {
 
   const canContinue = () => {
     if (step === 1) return !!data.paraQuien;
-    if (step === 2) return !!data.edad;
+    if (step === 2) {
+      if (!data.edad) return false;
+      if (data.edad === 'otra') return data.edadCustom.trim().length > 0;
+      return true;
+    }
     if (step === 3) return !!data.situacion;
     if (step === 4) return !!data.zona;
     if (step === 5) return data.nombre.trim().length > 1 && data.telefono.replace(/\D/g, '').length >= 9;
@@ -139,7 +149,10 @@ function WizardModal({ onClose }: { onClose: () => void }) {
     setError('');
 
     const paraQuienLabel = PARA_QUIEN.find((p) => p.value === data.paraQuien)?.label || data.paraQuien;
-    const edadLabel = EDADES.find((e) => e.value === data.edad)?.label || data.edad;
+    const edadLabel =
+      data.edad === 'otra'
+        ? data.edadCustom.trim()
+        : EDADES.find((e) => e.value === data.edad)?.label || data.edad;
     const situacionLabel = SITUACIONES.find((s) => s.value === data.situacion)?.label || data.situacion;
     const zonaObj = ZONAS_MADRID.find((z) => z.value === data.zona);
     const zonaLabel = zonaObj?.label || data.zona;
@@ -261,10 +274,45 @@ Mi teléfono: ${data.telefono}`;
                   selected={data.edad === opt.value}
                   onClick={() => {
                     update('edad', opt.value);
-                    setTimeout(next, 200);
+                    // Si elige "Otra edad", se queda en este paso para escribir el valor.
+                    // El resto avanzan automáticamente como antes.
+                    if (opt.value !== 'otra') {
+                      setTimeout(next, 200);
+                    }
                   }}
                 />
               ))}
+
+              {data.edad === 'otra' && (
+                <div className="mt-4 p-4 rounded-xl bg-[rgb(232,237,238)] border border-[rgb(200,207,210)]">
+                  <label
+                    htmlFor="edad-custom"
+                    className="block text-sm font-semibold text-[rgb(31,41,51)] mb-2"
+                  >
+                    Indica la edad o el rango
+                  </label>
+                  <input
+                    id="edad-custom"
+                    type="text"
+                    inputMode="text"
+                    autoFocus
+                    maxLength={40}
+                    placeholder="Ej: 55 años, 45-50, alrededor de 58…"
+                    value={data.edadCustom}
+                    onChange={(e) => update('edadCustom', e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' && data.edadCustom.trim().length > 0) {
+                        e.preventDefault();
+                        next();
+                      }
+                    }}
+                    className="w-full px-4 py-3 rounded-lg border border-[rgb(200,207,210)] bg-white text-[rgb(31,41,51)] placeholder:text-[rgb(130,131,130)] focus:outline-none focus:border-[rgb(0,94,184)] focus:ring-2 focus:ring-[rgb(0,94,184)]/20"
+                  />
+                  <p className="text-xs text-[rgb(130,131,130)] mt-2">
+                    Pulsa Enter o el botón &ldquo;Continuar&rdquo; cuando termines.
+                  </p>
+                </div>
+              )}
             </Step>
           )}
 

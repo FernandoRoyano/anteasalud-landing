@@ -2,6 +2,7 @@ import './globals.css';
 import { Inter, Bricolage_Grotesque } from 'next/font/google';
 import PublicChrome from '@/components/PublicChrome';
 import GoogleAnalytics from '@/components/GoogleAnalytics';
+import GoogleAds from '@/components/GoogleAds';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -185,6 +186,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="font-sans antialiased">
         <GoogleAnalytics />
+        <GoogleAds />
         <PublicChrome>{children}</PublicChrome>
       </body>
     </html>

@@ -104,11 +104,11 @@ export default function CTAFinal() {
         <p className="cta-anim text-fluid-sm text-white/50 mb-12">
           ¿Prefieres escribir?{' '}
           <a
-            href="mailto:info@anteasalud.com"
+            href="mailto:anteasalud@gmail.com"
             className="inline-flex items-center gap-1.5 text-white/80 hover:text-accent-light transition-colors underline underline-offset-4 decoration-white/30 hover:decoration-accent-light"
           >
             <Mail className="w-3.5 h-3.5" />
-            info@anteasalud.com
+            anteasalud@gmail.com
           </a>
         </p>
 

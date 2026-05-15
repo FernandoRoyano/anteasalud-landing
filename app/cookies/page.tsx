@@ -162,8 +162,8 @@ export default function PoliticaCookies() {
             </p>
             <p>
               <strong>Email:</strong>{" "}
-              <a href="mailto:info@anteasalud.com" className="text-[rgb(0,94,184)] hover:underline">
-                info@anteasalud.com
+              <a href="mailto:anteasalud@gmail.com" className="text-[rgb(0,94,184)] hover:underline">
+                anteasalud@gmail.com
               </a>
             </p>
           </section>

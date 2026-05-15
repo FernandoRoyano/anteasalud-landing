@@ -74,7 +74,7 @@ const jsonLd = {
   description: 'Entrenamiento funcional y ejercicio terapéutico a domicilio para personas mayores en Madrid. Graduado en Ciencias de la Actividad Física y el Deporte con 14 años de experiencia especializado en la recuperación de autonomía, prevención de caídas y readaptación funcional.',
   url: 'https://anteasalud.com',
   telephone: '+34633261963',
-  email: 'info@anteasalud.com',
+  email: 'anteasalud@gmail.com',
   priceRange: '€€',
   image: 'https://anteasalud.com/og-image.jpg',
   founder: {

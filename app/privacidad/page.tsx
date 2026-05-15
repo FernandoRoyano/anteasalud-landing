@@ -32,7 +32,7 @@ export default function PoliticaPrivacidad() {
               <p><strong>Identidad:</strong> ANTEA Salud</p>
               <p><strong>NIF/CIF:</strong> [Tu NIF o CIF]</p>
               <p><strong>Dirección:</strong> [Tu dirección fiscal]</p>
-              <p><strong>Email:</strong> info@anteasalud.com</p>
+              <p><strong>Email:</strong> anteasalud@gmail.com</p>
               <p><strong>Teléfono:</strong> 633 261 963</p>
             </div>
           </section>
@@ -152,8 +152,8 @@ export default function PoliticaPrivacidad() {
             </ul>
             <p className="mt-4">
               Para ejercer estos derechos, contacta con nosotros en{" "}
-              <a href="mailto:info@anteasalud.com" className="text-[rgb(0,94,184)] hover:underline">
-                info@anteasalud.com
+              <a href="mailto:anteasalud@gmail.com" className="text-[rgb(0,94,184)] hover:underline">
+                anteasalud@gmail.com
               </a>{" "}
               indicando tu nombre y el derecho que deseas ejercer.
             </p>
@@ -222,8 +222,8 @@ export default function PoliticaPrivacidad() {
             <div className="space-y-2">
               <p>
                 <strong>Email:</strong>{" "}
-                <a href="mailto:info@anteasalud.com" className="text-[rgb(0,94,184)] hover:underline">
-                  info@anteasalud.com
+                <a href="mailto:anteasalud@gmail.com" className="text-[rgb(0,94,184)] hover:underline">
+                  anteasalud@gmail.com
                 </a>
               </p>
               <p>

@@ -66,8 +66,8 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="mailto:info@anteasalud.com" className="hover:text-[rgb(0,94,184)] transition flex items-center gap-2">
-                  <Mail className="w-4 h-4" /> info@anteasalud.com
+                <a href="mailto:anteasalud@gmail.com" className="hover:text-[rgb(0,94,184)] transition flex items-center gap-2">
+                  <Mail className="w-4 h-4" /> anteasalud@gmail.com
                 </a>
               </li>
               <li>

@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState, ReactNode } from 'react';
+import { trackLeadConversion } from '@/components/GoogleAds';
 import {
   X,
   ArrowLeft,
@@ -178,7 +179,7 @@ Mi teléfono: ${data.telefono}`;
 
     // Guardar en Google Sheets vía API
     try {
-      await fetch('/api/contact', {
+      const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -189,6 +190,7 @@ Mi teléfono: ${data.telefono}`;
           interes: `${situacionLabel} (${paraQuienLabel}, ${edadLabel})${recargo > 0 ? ` · +${recargo}€ desplaz.` : ''}`,
         }),
       });
+      if (res.ok) trackLeadConversion();
     } catch {
       // No bloqueamos si falla el guardado, igual abrimos WhatsApp
     }

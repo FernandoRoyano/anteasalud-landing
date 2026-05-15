@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { trackLeadConversion } from "@/components/GoogleAds";
 
 type FormStatus = "idle" | "sending" | "success" | "error";
 
@@ -43,6 +44,7 @@ export default function ContactForm() {
 
       if (!res.ok) throw new Error();
 
+      trackLeadConversion();
       setStatus("success");
       setNombre("");
       setEmail("");

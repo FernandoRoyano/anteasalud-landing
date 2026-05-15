@@ -2,7 +2,7 @@
 
 import Script from 'next/script';
 
-const GOOGLE_ADS_ID = 'AW-8735161449';
+const GOOGLE_ADS_ID = 'AW-954833079';
 
 export default function GoogleAds() {
   return (

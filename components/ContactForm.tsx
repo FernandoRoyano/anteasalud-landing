@@ -6,14 +6,12 @@ import { trackLeadConversion } from "@/components/GoogleAds";
 type FormStatus = "idle" | "sending" | "success" | "error";
 
 const ZONAS = [
-  "Madrid y alrededores",
-  "Barcelona y alrededores",
-  "Valencia y alrededores",
-  "Sevilla y alrededores",
-  "Bilbao/País Vasco",
-  "Zaragoza",
-  "Málaga/Costa del Sol",
-  "Otra ciudad",
+  "Madrid capital",
+  "Sur (Móstoles, Fuenlabrada, Getafe, Leganés, Alcorcón...)",
+  "Oeste (Pozuelo, Las Rozas, Majadahonda, Boadilla...)",
+  "Este (Torrejón de Ardoz, Coslada, Rivas-Vaciamadrid...)",
+  "Norte (Alcobendas, Tres Cantos)",
+  "Otra zona de la Comunidad de Madrid",
 ];
 
 const INTERESES = [

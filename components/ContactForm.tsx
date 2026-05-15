@@ -83,7 +83,7 @@ export default function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="email" className="block text-sm font-semibold text-[rgb(31,41,51)] mb-1">Email</label>
+        <label htmlFor="email" className="block text-sm font-semibold text-[rgb(31,41,51)] mb-1">Email <span className="text-red-500">*</span></label>
         <input
           id="email"
           type="email"
@@ -91,6 +91,7 @@ export default function ContactForm() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           className={inputClass}
+          required
           disabled={status === "sending"}
         />
       </div>

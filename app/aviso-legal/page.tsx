@@ -33,7 +33,6 @@ export default function AvisoLegal() {
               <p><strong>NIF/CIF:</strong> [Tu NIF o CIF]</p>
               <p><strong>Domicilio:</strong> [Tu dirección fiscal]</p>
               <p><strong>Email:</strong> anteasalud@gmail.com</p>
-              <p><strong>Teléfono:</strong> 633 261 963</p>
               <p><strong>Actividad:</strong> Servicios de entrenamiento funcional y ejercicio terapéutico a domicilio para personas mayores</p>
             </div>
           </section>
@@ -183,12 +182,6 @@ export default function AvisoLegal() {
                 <strong>Email:</strong>{" "}
                 <a href="mailto:anteasalud@gmail.com" className="text-[rgb(0,94,184)] hover:underline">
                   anteasalud@gmail.com
-                </a>
-              </p>
-              <p>
-                <strong>Teléfono:</strong>{" "}
-                <a href="tel:+34633261963" className="text-[rgb(0,94,184)] hover:underline">
-                  633 261 963
                 </a>
               </p>
             </div>

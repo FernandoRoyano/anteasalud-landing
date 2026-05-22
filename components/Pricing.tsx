@@ -174,7 +174,7 @@ export default function Pricing() {
         {/* Contacto directo */}
         <div className="text-center">
           <p className="text-[rgb(130,131,130)]">
-            ¿Dudas? Llámanos al <a href="tel:+34633261963" className="text-[rgb(0,94,184)] font-semibold hover:underline">633 261 963</a>
+            ¿Dudas? <a href="#contacto" className="text-[rgb(0,94,184)] font-semibold hover:underline">Rellena el formulario</a> y te respondemos en menos de 24h
           </p>
         </div>
 

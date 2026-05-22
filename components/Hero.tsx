@@ -1,6 +1,7 @@
 "use client";
 
-import { Phone, Star, Sparkles } from 'lucide-react';
+import Image from 'next/image';
+import { Check, Star, Sparkles } from 'lucide-react';
 import { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import { gsap } from '@/lib/gsap';
@@ -62,20 +63,21 @@ export default function Hero() {
             Entrenador titulado especializado en personas mayores, prevención de caídas y readaptación funcional.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 pt-2">
-            <a
-              href="#contacto"
-              className="hero-cta group inline-flex items-center justify-center gap-2 px-8 py-5 bg-primary hover:bg-primary-dark text-white font-semibold text-fluid-lg rounded-2xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300"
-            >
-              Solicita valoración gratuita
-              <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-            </a>
-            <a
-              href="tel:+34633261963"
-              className="hero-cta inline-flex items-center justify-center gap-2 px-8 py-5 bg-surface border border-border hover:border-accent text-ink hover:text-accent font-semibold text-fluid-lg rounded-2xl hover:shadow-md transition-all duration-300"
-            >
-              <Phone className="w-5 h-5" /> 633 261 963
-            </a>
+          {/* Imagen del servicio */}
+          <div className="hero-image relative h-[320px] rounded-3xl overflow-hidden shadow-xl ring-1 ring-black/5">
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/15 z-10 pointer-events-none" />
+            <Image
+              src="/hero-realistic.png"
+              alt="Profesional de ANTEA cuidando a persona mayor"
+              fill
+              className="object-cover"
+              priority
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
+            <div className="absolute top-4 right-4 z-20 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/95 text-white text-fluid-xs font-semibold backdrop-blur-sm shadow-md">
+              <Check className="w-3.5 h-3.5" strokeWidth={3} />
+              Valoración gratuita
+            </div>
           </div>
 
           {/* Social proof real — estrellas + rating verificado */}

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from 'next/link';
-import { Camera, Phone, Mail, MessageCircle } from 'lucide-react';
+import { Camera, Mail, MessageCircle } from 'lucide-react';
 import { useWizard } from './WizardWhatsApp';
 
 export default function Footer() {
@@ -60,11 +60,6 @@ export default function Footer() {
           <div className="space-y-4">
             <h4 className="font-bold text-white text-lg">Contacto</h4>
             <ul className="space-y-3 text-sm">
-              <li>
-                <a href="tel:+34633261963" className="hover:text-[rgb(0,94,184)] transition flex items-center gap-2">
-                  <Phone className="w-4 h-4" /> 633 261 963
-                </a>
-              </li>
               <li>
                 <a href="mailto:anteasalud@gmail.com" className="hover:text-[rgb(0,94,184)] transition flex items-center gap-2">
                   <Mail className="w-4 h-4" /> anteasalud@gmail.com

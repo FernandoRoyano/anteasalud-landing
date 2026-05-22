@@ -1,6 +1,6 @@
 "use client";
 
-import { Phone, MessageCircle, Mail, Clock, Check, HeartPulse } from 'lucide-react';
+import { MessageCircle, Mail, Clock, Check, HeartPulse } from 'lucide-react';
 import { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import { gsap, ScrollTrigger } from '@/lib/gsap';
@@ -75,19 +75,8 @@ export default function CTAFinal() {
           Te respondemos en menos de 24 horas.
         </p>
 
-        {/* CTAs primarios: Llamar + WhatsApp */}
-        <div className="cta-anim flex flex-col sm:flex-row gap-4 justify-center mb-8">
-          <a
-            href="tel:+34633261963"
-            className="group inline-flex items-center justify-center gap-3 px-8 py-5 bg-white text-ink font-semibold text-fluid-lg rounded-2xl shadow-xl hover:shadow-2xl hover:-translate-y-0.5 transition-all duration-300"
-          >
-            <Phone className="w-5 h-5 text-primary" strokeWidth={2.5} />
-            <div className="text-left leading-tight">
-              <div className="text-fluid-xs text-muted font-normal">Llama ahora</div>
-              <div className="font-bold">633 261 963</div>
-            </div>
-          </a>
-
+        {/* CTA primario: WhatsApp */}
+        <div className="cta-anim flex justify-center mb-8">
           <button
             onClick={openWizard}
             className="group inline-flex items-center justify-center gap-3 px-8 py-5 bg-accent hover:bg-accent-dark text-white font-semibold text-fluid-lg rounded-2xl shadow-xl hover:shadow-2xl hover:-translate-y-0.5 transition-all duration-300"

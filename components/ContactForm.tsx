@@ -101,7 +101,7 @@ export default function ContactForm() {
         <input
           id="telefono"
           type="tel"
-          placeholder="Ej: 633 261 963"
+          placeholder="Ej: 6XX XXX XXX"
           value={telefono}
           onChange={(e) => setTelefono(e.target.value)}
           className={inputClass}

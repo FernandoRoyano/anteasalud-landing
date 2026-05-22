@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from 'react';
-import { Phone, MessageCircle } from 'lucide-react';
+import { MessageCircle } from 'lucide-react';
 import { useScrollAnimation } from '@/lib/useScrollAnimation';
 import { useWizard } from './WizardWhatsApp';
 
@@ -143,18 +143,12 @@ export default function FAQs() {
           <p className="text-lg text-[rgb(130,131,130)] mb-8">
             Nuestro equipo te responderá en <span className="font-bold text-[rgb(31,41,51)]">menos de 24 horas</span>
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="tel:+34633261963"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white border-2 border-[rgb(200,207,210)] text-[rgb(31,41,51)] font-bold text-lg rounded-2xl hover:bg-[rgb(232,237,238)] hover:border-[rgb(0,94,184)] shadow-md hover:shadow-lg transition-all"
-            >
-              <Phone className="w-5 h-5" /> Llamar ahora
-            </a>
+          <div className="flex justify-center">
             <button
               onClick={openWizard}
               className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[rgb(0,94,184)] text-white font-bold text-lg rounded-2xl hover:bg-[rgb(32,113,188)] shadow-md hover:shadow-lg transition-all"
             >
-              <MessageCircle className="w-5 h-5" /> WhatsApp
+              <MessageCircle className="w-5 h-5" /> Escríbenos por WhatsApp
             </button>
           </div>
         </div>

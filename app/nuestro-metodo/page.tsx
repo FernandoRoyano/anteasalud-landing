@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from 'react';
-import { Phone, Play, Award, Clock, Home, Target, ChevronDown, MessageCircle } from 'lucide-react';
+import { Play, Award, Clock, Home, Target, ChevronDown, MessageCircle } from 'lucide-react';
 import { useWizard } from '@/components/WizardWhatsApp';
 import { BreadcrumbSchema } from '@/components/BreadcrumbSchema';
 
@@ -192,19 +192,13 @@ export default function NuestroMetodoPage() {
             en tu casa.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <div className="flex justify-center items-center">
             <button
               onClick={openWizard}
               className="inline-flex items-center justify-center gap-3 px-10 py-5 bg-white text-[rgb(0,94,184)] font-black text-lg md:text-xl rounded-2xl shadow-2xl hover:scale-105 transition"
             >
               <MessageCircle className="w-6 h-6" /> Solicitar valoración gratuita
             </button>
-            <a
-              href="tel:+34633261963"
-              className="inline-flex items-center justify-center gap-2 px-8 py-5 bg-transparent text-white border-2 border-white/40 font-bold rounded-2xl hover:bg-white/10 transition"
-            >
-              <Phone className="w-5 h-5" /> 633 261 963
-            </a>
           </div>
 
           <p className="text-sm text-blue-200 mt-6">

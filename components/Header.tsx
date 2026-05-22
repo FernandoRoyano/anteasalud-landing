@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Phone, MessageCircle } from 'lucide-react';
+import { MessageCircle } from 'lucide-react';
 import { useWizard } from './WizardWhatsApp';
 
 export default function Header() {
@@ -158,13 +158,6 @@ export default function Header() {
                 <hr className="my-5 border-[rgb(200,207,210)]" />
                 {/* Info de contacto */}
                 <div className="flex flex-col items-center gap-2">
-                  <a
-                    href="tel:+34633261963"
-                    className="flex items-center gap-3 text-[rgb(31,41,51)] text-base hover:text-[rgb(0,94,184)] transition"
-                  >
-                    <Phone className="w-5 h-5" aria-hidden="true" />
-                    <span>633 261 963</span>
-                  </a>
                   <button
                     onClick={() => {
                       setMenuOpen(false);

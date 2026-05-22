@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, Phone } from 'lucide-react';
+import { Check } from 'lucide-react';
 import { useScrollAnimation } from '@/lib/useScrollAnimation';
 
 export default function Coverage() {
@@ -94,13 +94,13 @@ export default function Coverage() {
             ¿Tu municipio no aparece?
           </h3>
           <p className="text-lg text-[rgb(130,131,130)] mb-8">
-            Trabajamos en un radio de hasta 22 km del centro de Madrid. Llámanos y te confirmamos disponibilidad en tu zona.
+            Trabajamos en un radio de hasta 22 km del centro de Madrid. Rellena el formulario y te confirmamos disponibilidad en tu zona.
           </p>
           <a
-            href="tel:+34633261963"
+            href="#contacto"
             className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[rgb(0,94,184)] text-white font-bold rounded-2xl hover:bg-[rgb(32,113,188)] shadow-lg hover:shadow-xl transition-all"
           >
-            <Phone className="w-5 h-5" /> Consulta disponibilidad
+            Consulta disponibilidad
           </a>
         </div>
       </div>

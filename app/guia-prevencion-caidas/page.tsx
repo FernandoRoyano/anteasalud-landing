@@ -363,7 +363,7 @@ export default function GuiaPrevencionCaidasPage() {
             <p>
               <strong className="text-[rgb(31,41,51)]">ANTEA Salud</strong> · Fernando Royano · Graduado en Ciencias de la Actividad Física y el Deporte
             </p>
-            <p className="mt-1">Madrid · 633 261 963 · anteasalud.com</p>
+            <p className="mt-1">Madrid · anteasalud.com</p>
           </div>
         </div>
       </section>

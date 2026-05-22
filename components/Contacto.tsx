@@ -1,6 +1,6 @@
 "use client";
 
-import { Phone, Clock, MapPin, MessageCircle, ShieldCheck, BadgeCheck, UserCheck, BarChart3 } from 'lucide-react';
+import { Clock, MapPin, MessageCircle, ShieldCheck, BadgeCheck, UserCheck, BarChart3 } from 'lucide-react';
 import { useScrollAnimation } from '@/lib/useScrollAnimation';
 import { useWizard } from './WizardWhatsApp';
 
@@ -28,20 +28,7 @@ export default function Contacto() {
                     className="bg-gradient-to-br from-white to-[rgb(232,237,238)] rounded-3xl shadow-xl border border-[rgb(200,207,210)] p-8 md:p-10"
                 >
                     {/* Info de contacto */}
-                    <div className="grid md:grid-cols-3 gap-4 mb-8">
-                        <a
-                            href="tel:+34633261963"
-                            className="flex items-center gap-3 p-4 bg-white rounded-2xl border border-[rgb(200,207,210)] hover:border-[rgb(0,94,184)] hover:shadow-md transition group"
-                        >
-                            <div className="w-11 h-11 rounded-xl bg-[rgb(191,231,249)] flex items-center justify-center flex-shrink-0 group-hover:bg-[rgb(0,94,184)] transition">
-                                <Phone className="w-5 h-5 text-[rgb(0,94,184)] group-hover:text-white transition" />
-                            </div>
-                            <div className="min-w-0">
-                                <p className="text-xs text-slate-500">Llamar ahora</p>
-                                <p className="font-bold text-[rgb(31,41,51)] text-sm">633 261 963</p>
-                            </div>
-                        </a>
-
+                    <div className="grid sm:grid-cols-2 gap-4 mb-8">
                         <div className="flex items-center gap-3 p-4 bg-white rounded-2xl border border-[rgb(200,207,210)]">
                             <div className="w-11 h-11 rounded-xl bg-[rgb(191,231,249)] flex items-center justify-center flex-shrink-0">
                                 <Clock className="w-5 h-5 text-[rgb(0,94,184)]" />

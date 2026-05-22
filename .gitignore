@@ -20,3 +20,12 @@ out/
 .vscode/
 .idea/
 *.log
+
+# TypeScript build info
+*.tsbuildinfo
+
+# Claude Code (tooling local, no versionar)
+.claude/
+memory/
+CLAUDE.md
+DESIGN.md

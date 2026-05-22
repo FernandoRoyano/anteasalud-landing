@@ -48,6 +48,7 @@ export default function Page() {
         h1="Ejercicio para personas mayores a domicilio"
         h1Highlight="en Madrid capital"
         subtitle="Entrenador titulado con 14 años de experiencia especializado en personas mayores. Voy a tu casa en cualquier distrito de Madrid. Primera valoración gratuita y sin compromiso."
+        origen="Landing · Madrid capital"
       />
 
       {/* Intro específica de Madrid */}

@@ -41,6 +41,7 @@ export default function Page() {
         h1="Ejercicio para personas mayores a domicilio"
         h1Highlight="en Móstoles"
         subtitle="Voy a tu casa en Móstoles a entrenar a tu padre, madre o familiar. Ejercicio adaptado para recuperar fuerza, equilibrio y autonomía. Entrenador titulado especializado en personas mayores."
+        origen="Landing · Móstoles"
       />
 
       <section className="w-full bg-white py-20 px-4">

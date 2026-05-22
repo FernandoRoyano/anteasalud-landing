@@ -6,17 +6,28 @@ import { trackLeadConversion } from "@/components/GoogleAds";
 
 type FormStatus = "idle" | "sending" | "success" | "error";
 
-interface AdsLeadFormProps {
+interface LeadFormProps {
   /** Texto del botón de envío */
   ctaText?: string;
-  /** Etiqueta de interés que se guarda en el lead (identifica la landing de origen) */
+  /** Etiqueta de interés que se guarda en el lead (identifica la página de origen) */
   origen: string;
+  /** Título del formulario */
+  title?: string;
+  /** Mostrar el textarea opcional de "cuéntanos la situación" */
+  showMessage?: boolean;
 }
 
-export default function AdsLeadForm({
+/**
+ * Formulario de captación de 2 campos (nombre + teléfono) reutilizable en
+ * heros de landings, home y páginas de Ads. Guarda el lead vía /api/contact
+ * y dispara la conversión de Google Ads tras envío exitoso.
+ */
+export default function LeadForm({
   ctaText = "Quiero la valoración gratuita →",
   origen,
-}: AdsLeadFormProps) {
+  title = "Solicita tu valoración gratuita",
+  showMessage = true,
+}: LeadFormProps) {
   const [status, setStatus] = useState<FormStatus>("idle");
   const [nombre, setNombre] = useState("");
   const [telefono, setTelefono] = useState("");
@@ -74,16 +85,14 @@ export default function AdsLeadForm({
       onSubmit={handleSubmit}
       className="bg-white shadow-xl rounded-3xl p-8 space-y-4"
     >
-      <h3 className="text-2xl font-bold text-[rgb(0,60,115)]">
-        Solicita tu valoración gratuita
-      </h3>
+      <h3 className="text-2xl font-bold text-[rgb(0,60,115)]">{title}</h3>
 
       <div>
-        <label htmlFor="ads-nombre" className="block text-sm font-semibold text-[rgb(31,41,51)] mb-1">
+        <label htmlFor="lead-nombre" className="block text-sm font-semibold text-[rgb(31,41,51)] mb-1">
           Nombre <span className="text-red-500">*</span>
         </label>
         <input
-          id="ads-nombre"
+          id="lead-nombre"
           type="text"
           placeholder="Tu nombre"
           value={nombre}
@@ -95,11 +104,11 @@ export default function AdsLeadForm({
       </div>
 
       <div>
-        <label htmlFor="ads-telefono" className="block text-sm font-semibold text-[rgb(31,41,51)] mb-1">
+        <label htmlFor="lead-telefono" className="block text-sm font-semibold text-[rgb(31,41,51)] mb-1">
           Teléfono <span className="text-red-500">*</span>
         </label>
         <input
-          id="ads-telefono"
+          id="lead-telefono"
           type="tel"
           placeholder="Ej: 633 261 963"
           value={telefono}
@@ -110,20 +119,22 @@ export default function AdsLeadForm({
         />
       </div>
 
-      <div>
-        <label htmlFor="ads-mensaje" className="block text-sm font-semibold text-[rgb(31,41,51)] mb-1">
-          Cuéntanos brevemente la situación <span className="text-slate-400 font-normal">(opcional)</span>
-        </label>
-        <textarea
-          id="ads-mensaje"
-          rows={3}
-          placeholder="Ej: mi madre tiene 80 años y le cuesta caminar..."
-          value={mensaje}
-          onChange={(e) => setMensaje(e.target.value)}
-          className={inputClass}
-          disabled={status === "sending"}
-        />
-      </div>
+      {showMessage && (
+        <div>
+          <label htmlFor="lead-mensaje" className="block text-sm font-semibold text-[rgb(31,41,51)] mb-1">
+            Cuéntanos brevemente la situación <span className="text-slate-400 font-normal">(opcional)</span>
+          </label>
+          <textarea
+            id="lead-mensaje"
+            rows={3}
+            placeholder="Ej: mi madre tiene 80 años y le cuesta caminar..."
+            value={mensaje}
+            onChange={(e) => setMensaje(e.target.value)}
+            className={inputClass}
+            disabled={status === "sending"}
+          />
+        </div>
+      )}
 
       <button
         type="submit"

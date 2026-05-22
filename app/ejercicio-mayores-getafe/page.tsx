@@ -41,6 +41,7 @@ export default function Page() {
         h1="Ejercicio para personas mayores a domicilio"
         h1Highlight="en Getafe"
         subtitle="Entrenador titulado con 14 años de experiencia especializado en personas mayores. Voy a tu casa en Getafe a entrenar a tu familiar. Ejercicio adaptado, prevención de caídas y recuperación de autonomía."
+        origen="Landing · Getafe"
       />
 
       <section className="w-full bg-white py-20 px-4">

@@ -67,6 +67,7 @@ export default function Page() {
         h1="Ejercicio para personas mayores a domicilio"
         h1Highlight="en Madrid"
         subtitle="Recupera fuerza, equilibrio y autonomía con un entrenador titulado que va a tu casa. Sesiones personalizadas, adaptadas a cada edad y condición física. Primera valoración gratuita y sin compromiso."
+        origen="Landing · Ejercicio personas mayores Madrid"
       />
 
       {/* Introducción */}

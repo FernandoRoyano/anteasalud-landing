@@ -41,6 +41,7 @@ export default function Page() {
         h1="Recupera tu autonomía desde casa"
         h1Highlight="con ejercicio adaptado"
         subtitle="Tras una operación, una caída o una pérdida progresiva de fuerza, recuperar la autonomía es posible con un programa de ejercicio específico. Te acompaño en tu casa, con un plan diseñado para tu situación real."
+        origen="Landing · Recuperar autonomía Madrid"
       />
 
       {/* Qué es autonomía y por qué importa */}

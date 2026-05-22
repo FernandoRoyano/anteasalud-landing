@@ -46,6 +46,7 @@ export default function Page() {
         h1="Prevención de caídas en personas mayores"
         h1Highlight="a domicilio en Madrid"
         subtitle="Una caída a los 70-80 años puede cambiar una vida entera. Con ejercicio específico de fuerza y equilibrio podemos reducir drásticamente el riesgo. Programa personalizado en tu casa, diseñado por un entrenador titulado."
+        origen="Landing · Prevención de caídas Madrid"
       />
 
       {/* El problema real */}

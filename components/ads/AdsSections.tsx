@@ -1,5 +1,5 @@
 import { Check, Star, GraduationCap, Users, Calendar, Target } from "lucide-react";
-import AdsLeadForm from "@/components/ads/AdsLeadForm";
+import LeadForm from "@/components/LeadForm";
 
 /* ---------- Prueba social (reutilizable) ---------- */
 function SocialProof() {
@@ -51,7 +51,7 @@ export function AdsHero({ h1, h1Highlight, subtitle, bullets, formCta, origen }:
         </div>
 
         <div className="space-y-4">
-          <AdsLeadForm ctaText={formCta} origen={origen} />
+          <LeadForm ctaText={formCta} origen={origen} />
           <SocialProof />
         </div>
       </div>
@@ -200,7 +200,7 @@ export function AdsFinalCTA({ title, subtitle, formCta, origen }: AdsFinalCTAPro
             Rellena el formulario y Fernando te escribirá en menos de 24 horas.
           </p>
         </div>
-        <AdsLeadForm ctaText={formCta} origen={origen} />
+        <LeadForm ctaText={formCta} origen={origen} />
       </div>
     </section>
   );

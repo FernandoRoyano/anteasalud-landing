@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/PROYECTOS CODECONNECT/WELLNESSREAL/WELLNESSREAL/src/app/cliente/[token]/**)",
+      "Read(//c/PROYECTOS CODECONNECT/WELLNESSREAL/WELLNESSREAL/**)",
+      "Edit(/.claude/skills/antea-salud/**)",
+      "Edit(/.claude/skills/claude-api/**)"
+    ]
+  }
+}

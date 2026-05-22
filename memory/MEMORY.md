@@ -1,0 +1,2 @@
+- [Perfil profesional de Fernando Royano](user_fernando_profile.md) — CCAFYD, trabaja múltiples perfiles pero enfocado en tercera edad; nunca decir "solo mayores"
+- [Estilo de copy para anuncios (Randulfe)](feedback_copy_style_randulfe.md) — anuncios cortos: dolor directo primero, frases cortas, tuteo, sin credenciales al inicio

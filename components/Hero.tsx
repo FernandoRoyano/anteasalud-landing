@@ -1,10 +1,10 @@
 "use client";
 
-import Image from 'next/image';
-import { Check, Phone, Star, Sparkles } from 'lucide-react';
+import { Phone, Star, Sparkles } from 'lucide-react';
 import { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import { gsap } from '@/lib/gsap';
+import LeadForm from '@/components/LeadForm';
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -100,35 +100,9 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Columna imagen */}
-        <div className="hero-image relative h-[500px] rounded-3xl overflow-hidden shadow-xl ring-1 ring-black/5">
-          {/* Gradient overlay cálido sutil */}
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/15 z-10 pointer-events-none" />
-          <Image
-            src="/hero-realistic.png"
-            alt="Profesional de ANTEA cuidando a persona mayor"
-            fill
-            className="object-cover"
-            priority
-            sizes="(max-width: 768px) 100vw, 50vw"
-          />
-
-          {/* Pill flotante con micro-insight */}
-          <div className="absolute bottom-5 left-5 z-20 inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-surface/95 backdrop-blur-sm shadow-lg">
-            <span className="flex h-2 w-2 relative">
-              <span className="absolute inline-flex h-full w-full rounded-full bg-accent opacity-75 animate-ping" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
-            </span>
-            <span className="text-fluid-sm font-semibold text-ink">
-              Sesiones disponibles esta semana
-            </span>
-          </div>
-
-          {/* Check flotante superior */}
-          <div className="absolute top-5 right-5 z-20 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/95 text-white text-fluid-xs font-semibold backdrop-blur-sm shadow-md">
-            <Check className="w-3.5 h-3.5" strokeWidth={3} />
-            Valoración gratuita
-          </div>
+        {/* Columna formulario de captación */}
+        <div className="hero-image">
+          <LeadForm origen="Home" />
         </div>
       </div>
     </section>

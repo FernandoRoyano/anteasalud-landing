@@ -83,7 +83,7 @@ export default function Page() {
             La buena noticia es que el ejercicio adaptado <strong className="text-[rgb(0,94,184)]">revierte muchos de esos efectos</strong> a cualquier edad. No hace falta ir a un gimnasio, ni tener equipamiento, ni recorrer medio Madrid. Con un profesional titulado que vaya a tu casa y diseñe un programa específico, se pueden conseguir mejoras medibles en pocas semanas.
           </p>
           <p className="text-lg text-slate-600 leading-relaxed">
-            En ANTEA Salud llevamos <strong>14 años trabajando exclusivamente con personas mayores</strong> en Madrid. Sabemos cómo abordar las limitaciones reales de cada persona, cómo motivar sin forzar, y cómo adaptar cada ejercicio a lo que el cuerpo pide ese día.
+            En ANTEA Salud llevamos <strong>14 años especializados en el trabajo con personas mayores</strong> en Madrid. Sabemos cómo abordar las limitaciones reales de cada persona, cómo motivar sin forzar, y cómo adaptar cada ejercicio a lo que el cuerpo pide ese día.
           </p>
         </div>
       </section>
@@ -177,6 +177,38 @@ export default function Page() {
                 </div>
               </li>
             </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* Historia de caso real */}
+      <section className="w-full bg-white py-20 px-4">
+        <div className="max-w-3xl mx-auto">
+          <div className="text-center mb-10 space-y-3">
+            <span className="inline-block px-4 py-1.5 bg-[rgb(191,231,249)] rounded-full text-sm font-semibold text-[rgb(0,94,184)]">
+              Una historia real
+            </span>
+            <h2 className="text-3xl md:text-4xl font-black text-[rgb(31,41,51)]">
+              Concha, 82 años: recuperar la fuerza cuando parecía tarde
+            </h2>
+          </div>
+
+          <div className="bg-[rgb(247,249,250)] rounded-3xl p-8 md:p-12 border border-[rgb(232,237,238)] space-y-5 text-lg text-slate-600 leading-relaxed">
+            <p>
+              Cuando conocí a Concha, en su casa del barrio de Pacífico, llevaba meses arrastrando una parestesia en la pierna izquierda: hormigueo y pérdida de sensibilidad que convertían gestos tan simples como levantarse de la silla o cruzar el pasillo en un pequeño reto cada vez. Es una mujer menuda, de poca masa muscular, y cada movimiento le costaba. Pero lo que más la frenaba no era el cuerpo: era el miedo. El miedo a fallar, a caerse, a no poder.
+            </p>
+            <p>
+              En la primera valoración lo vimos claro: faltaba <strong className="text-[rgb(0,94,184)]">fuerza</strong>. Y sin fuerza no hay estabilidad, ni equilibrio, ni confianza. No había que «cuidarla» ni dejarla quieta —eso solo acelera la pérdida—. Había que entrenarla. Diseñé un programa centrado en ejercicios de fuerza adaptados a su condición: levantarse de la silla con apoyo, elevaciones de talones, trabajo de tren inferior muy progresivo, respetando siempre sus sensaciones y sin prisa.
+            </p>
+            <p>
+              Las primeras semanas fueron de adaptación. Concha desconfiaba de su propia pierna. Pero sesión a sesión, el cuerpo respondía. Empezó a levantarse con menos esfuerzo. A moverse por casa con más seguridad. A no pensar en cada paso.
+            </p>
+            <p>
+              El trabajo sigue —la fuerza no se gana en un día, se construye— pero la dirección es inequívoca: Concha gana movilidad y autonomía cada semana. Su caso es el mejor recordatorio de lo que repito en cada casa a la que entro: <strong className="text-[rgb(31,41,51)]">la fuerza se entrena a cualquier edad, y nunca es demasiado tarde para empezar.</strong>
+            </p>
+            <p className="text-base text-[rgb(130,131,130)] pt-2 border-t border-[rgb(232,237,238)]">
+              — Fernando Royano, Graduado en Ciencias de la Actividad Física y el Deporte (CCAFYD)
+            </p>
           </div>
         </div>
       </section>

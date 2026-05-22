@@ -28,14 +28,18 @@ export async function POST(req: NextRequest) {
       minute: '2-digit',
     });
 
-    // Notificación por email vía EmailJS
-    await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+    // Notificación por email vía EmailJS.
+    // EmailJS bloquea por defecto las llamadas que no vienen del navegador, así
+    // que al hacerlo desde el servidor hay que enviar la Private Key como
+    // accessToken (variable de entorno EMAILJS_PRIVATE_KEY en Vercel).
+    const emailRes = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         service_id: 'service_antea_contacto',
         template_id: 'Antea Salud',
         user_id: 'GkuifuSj9iMoXN9fw',
+        accessToken: process.env.EMAILJS_PRIVATE_KEY,
         template_params: {
           user_name: nombre,
           user_email: email || 'No proporcionado',
@@ -46,6 +50,13 @@ export async function POST(req: NextRequest) {
         },
       }),
     });
+
+    // No bloqueamos al usuario si el email falla (el lead ya está en Sheets),
+    // pero dejamos rastro en logs para no volver a tener fallos silenciosos.
+    if (!emailRes.ok) {
+      const detail = await emailRes.text().catch(() => '');
+      console.error(`[contact:email] EmailJS respondió ${emailRes.status}: ${detail}`);
+    }
 
     return NextResponse.json({ ok: true });
   } catch (error) {

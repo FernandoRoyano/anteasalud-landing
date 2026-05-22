@@ -1,8 +1,6 @@
 import { Check, Star, GraduationCap, Users, Calendar, Target } from "lucide-react";
 import AdsLeadForm from "@/components/ads/AdsLeadForm";
 
-const PHONE = "+34633261963";
-
 /* ---------- Prueba social (reutilizable) ---------- */
 function SocialProof() {
   return (
@@ -198,9 +196,9 @@ export function AdsFinalCTA({ title, subtitle, formCta, origen }: AdsFinalCTAPro
         <div className="text-white space-y-4">
           <h2 className="font-display text-fluid-3xl font-black tracking-tight">{title}</h2>
           <p className="text-lg md:text-xl text-blue-100">{subtitle}</p>
-          <a href={`tel:${PHONE}`} className="inline-block text-lg font-bold underline decoration-2 underline-offset-4 hover:text-white">
-            O llama ahora: 633 261 963
-          </a>
+          <p className="text-base text-blue-100">
+            Rellena el formulario y Fernando te escribirá en menos de 24 horas.
+          </p>
         </div>
         <AdsLeadForm ctaText={formCta} origen={origen} />
       </div>

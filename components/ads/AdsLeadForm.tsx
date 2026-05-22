@@ -62,8 +62,8 @@ export default function AdsLeadForm({
         </div>
         <h3 className="text-2xl font-bold text-[rgb(0,60,115)]">¡Solicitud recibida!</h3>
         <p className="text-slate-600">
-          Fernando te llamará en menos de 24 horas. Si prefieres, también puedes
-          escribirle por WhatsApp al <strong>633 261 963</strong>.
+          Fernando se pondrá en contacto contigo en menos de 24 horas para
+          concertar tu valoración gratuita.
         </p>
       </div>
     );
@@ -139,7 +139,7 @@ export default function AdsLeadForm({
 
       {status === "error" && (
         <p className="text-center text-red-600 font-medium">
-          Error al enviar. Inténtalo de nuevo o llama al 633 261 963.
+          Error al enviar. Inténtalo de nuevo en unos segundos.
         </p>
       )}
     </form>

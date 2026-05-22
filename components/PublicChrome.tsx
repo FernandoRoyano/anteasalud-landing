@@ -14,9 +14,9 @@ import { WizardProvider } from './WizardWhatsApp';
 export default function PublicChrome({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isAdmin = pathname?.startsWith('/admin');
-  // Landings de captación de Google Ads: sin header ni footer para maximizar
-  // conversión (sin distracciones de navegación), pero conservamos WhatsApp y
-  // el banner de cookies (necesario por el tracking de Ads).
+  // Landings de captación de Google Ads: sin header, footer ni WhatsApp para
+  // canalizar TODO el tráfico al formulario. Solo conservamos el banner de
+  // cookies (necesario por el tracking de Ads).
   const isAds = pathname?.startsWith('/ads');
 
   if (isAdmin) {
@@ -25,11 +25,10 @@ export default function PublicChrome({ children }: { children: React.ReactNode }
 
   if (isAds) {
     return (
-      <WizardProvider>
+      <>
         {children}
         <CookieBanner />
-        <WhatsAppButton />
-      </WizardProvider>
+      </>
     );
   }
 

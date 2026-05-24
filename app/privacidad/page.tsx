@@ -30,8 +30,8 @@ export default function PoliticaPrivacidad() {
             </h2>
             <div className="bg-[rgb(232,237,238)] rounded-xl p-6 space-y-2">
               <p><strong>Identidad:</strong> ANTEA Salud</p>
-              <p><strong>NIF/CIF:</strong> [Tu NIF o CIF]</p>
-              <p><strong>Dirección:</strong> [Tu dirección fiscal]</p>
+              <p><strong>NIF:</strong> 72171129G</p>
+              <p><strong>Dirección:</strong> Calle Juan de Urbieta, Madrid</p>
               <p><strong>Email:</strong> anteasalud@gmail.com</p>
             </div>
           </section>

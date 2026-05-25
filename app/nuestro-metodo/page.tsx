@@ -82,7 +82,7 @@ export default function NuestroMetodoPage() {
             <SummaryCard
               icon={Award}
               title="Quién soy"
-              text="Graduado en Ciencias del Deporte. 14 años trabajando exclusivamente con personas mayores en Madrid. No soy fisioterapeuta — soy entrenador especializado."
+              text="Graduado en Ciencias del Deporte. 14 años especializado en personas mayores en Madrid. No soy fisioterapeuta — soy entrenador especializado."
             />
             <SummaryCard
               icon={Home}

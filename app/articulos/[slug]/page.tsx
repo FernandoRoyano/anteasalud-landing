@@ -35,7 +35,7 @@ export async function generateMetadata({
       url,
       title: article.title,
       description: article.excerpt,
-      images: [article.ogImage || '/og-image.jpg'],
+      images: [article.ogImage || '/hero-realistic.png'],
       publishedTime: article.publishedAt,
       modifiedTime: article.updatedAt,
     },
@@ -71,7 +71,7 @@ export default async function ArticleDetailPage({
     '@type': 'Article',
     headline: article.title,
     description: article.excerpt,
-    image: article.ogImage ? [article.ogImage] : ['https://anteasalud.com/og-image.jpg'],
+    image: article.ogImage ? [article.ogImage] : ['https://anteasalud.com/hero-realistic.png'],
     datePublished: article.publishedAt,
     dateModified: article.updatedAt,
     author: {
@@ -86,7 +86,7 @@ export default async function ArticleDetailPage({
       url: 'https://anteasalud.com',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://anteasalud.com/og-image.jpg',
+        url: 'https://anteasalud.com/hero-realistic.png',
       },
     },
     mainEntityOfPage: {

@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     url: URL,
     title: TITLE,
     description: DESCRIPTION,
-    images: ['/og-image.jpg'],
+    images: ['/hero-realistic.png'],
   },
 };
 

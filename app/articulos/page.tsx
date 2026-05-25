@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     url: URL_PAGE,
     title: TITLE,
     description: DESCRIPTION,
-    images: ['/og-image.jpg'],
+    images: ['/hero-realistic.png'],
   },
 };
 

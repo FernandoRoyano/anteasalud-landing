@@ -31,7 +31,7 @@ export default function PoliticaPrivacidad() {
             <div className="bg-[rgb(232,237,238)] rounded-xl p-6 space-y-2">
               <p><strong>Identidad:</strong> ANTEA Salud</p>
               <p><strong>NIF:</strong> 72171129G</p>
-              <p><strong>Dirección:</strong> Calle Juan de Urbieta, Madrid</p>
+              <p><strong>Dirección:</strong> Calle Juan de Urbieta 30, 28007 Madrid</p>
               <p><strong>Email:</strong> anteasalud@gmail.com</p>
             </div>
           </section>

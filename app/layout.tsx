@@ -36,7 +36,7 @@ export const metadata = {
     description: 'Entrenamiento funcional para personas mayores en tu casa. Recupera autonomía y confianza. +200 familias en Madrid confían en nosotros.',
     images: [
       {
-        url: '/og-image.jpg',
+        url: '/hero-realistic.png',
         width: 1200,
         height: 630,
         alt: 'ANTEA Salud - Ejercicio para Mayores a Domicilio en Madrid',
@@ -47,7 +47,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'Ejercicio para Mayores a Domicilio en Madrid | ANTEA Salud',
     description: 'Entrenamiento funcional para personas mayores en tu casa. +200 familias en Madrid confían en nosotros.',
-    images: ['/og-image.jpg'],
+    images: ['/hero-realistic.png'],
   },
   robots: {
     index: true,
@@ -76,7 +76,7 @@ const jsonLd = {
   telephone: '+34633261963',
   email: 'anteasalud@gmail.com',
   priceRange: '€€',
-  image: 'https://anteasalud.com/og-image.jpg',
+  image: 'https://anteasalud.com/hero-realistic.png',
   founder: {
     '@type': 'Person',
     name: 'Fernando Royano',

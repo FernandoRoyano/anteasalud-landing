@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   keywords:
     'prevención caídas mayores Madrid, ejercicios prevenir caídas, miedo a caer mayores, equilibrio personas mayores, reducir riesgo caídas en casa, ejercicios equilibrio mayores',
   alternates: { canonical: URL },
-  openGraph: { type: 'article', url: URL, title: TITLE, description: DESCRIPTION, images: ['/og-image.jpg'] },
+  openGraph: { type: 'article', url: URL, title: TITLE, description: DESCRIPTION, images: ['/hero-realistic.png'] },
 };
 
 const jsonLd = {
@@ -64,7 +64,7 @@ export default function Page() {
             Y lo más frustrante: la mayoría son <strong className="text-[rgb(0,94,184)]">prevenibles con ejercicio específico</strong>. El problema es que nadie trabaja esos aspectos concretos en una clase genérica de gimnasio. Hace falta un plan diseñado para tu situación real.
           </p>
           <p className="text-lg text-slate-600 leading-relaxed">
-            Tras 14 años entrenando exclusivamente a personas mayores, sabemos qué ejercicios mueven la aguja y cuáles son marketing. La prevención de caídas requiere trabajar simultáneamente <strong>fuerza en piernas</strong>, <strong>equilibrio dinámico</strong>, <strong>tiempo de reacción</strong> y <strong>confianza psicológica</strong> al caminar.
+            Tras 14 años especializado en entrenar a personas mayores, sabemos qué ejercicios mueven la aguja y cuáles son marketing. La prevención de caídas requiere trabajar simultáneamente <strong>fuerza en piernas</strong>, <strong>equilibrio dinámico</strong>, <strong>tiempo de reacción</strong> y <strong>confianza psicológica</strong> al caminar.
           </p>
         </div>
       </section>

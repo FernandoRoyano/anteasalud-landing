@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   keywords:
     'ejercicio mayores Móstoles, entrenador personal Móstoles, ejercicio a domicilio Móstoles, fisio mayores Móstoles, readaptación Móstoles, ejercicio para mayores sur Madrid',
   alternates: { canonical: URL },
-  openGraph: { type: 'article', url: URL, title: TITLE, description: DESCRIPTION, images: ['/og-image.jpg'] },
+  openGraph: { type: 'article', url: URL, title: TITLE, description: DESCRIPTION, images: ['/hero-realistic.png'] },
 };
 
 const jsonLd = {
@@ -56,7 +56,7 @@ export default function Page() {
             Móstoles está a unos 18 km del centro de Madrid, a 25-35 minutos en coche. Me desplazo en coche propio, llego siempre puntual, y trabajo barrios como <strong>Móstoles centro, Parque Coimbra, Pradillo, El Soto, Parque Guadarrama, Iviasa y el resto de la ciudad</strong>.
           </p>
           <p className="text-lg text-slate-600 leading-relaxed">
-            Mi formación es <strong className="text-[rgb(0,94,184)]">Graduado en Ciencias de la Actividad Física y el Deporte</strong>, con 14 años trabajando exclusivamente con personas mayores. Sé adaptar el ejercicio a cada caso: tras una operación, para prevenir caídas, para recuperar fuerza tras meses encamado, o simplemente para mantenerse activo y evitar el deterioro.
+            Mi formación es <strong className="text-[rgb(0,94,184)]">Graduado en Ciencias de la Actividad Física y el Deporte</strong>, con 14 años especializado en personas mayores. Sé adaptar el ejercicio a cada caso: tras una operación, para prevenir caídas, para recuperar fuerza tras meses encamado, o simplemente para mantenerse activo y evitar el deterioro.
           </p>
         </div>
       </section>

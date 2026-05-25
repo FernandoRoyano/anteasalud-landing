@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   keywords:
     'ejercicio mayores Madrid capital, entrenador personal mayores Madrid, ejercicio a domicilio Madrid centro, ejercicio mayores Salamanca, ejercicio mayores Retiro, ejercicio mayores Chamberí',
   alternates: { canonical: URL },
-  openGraph: { type: 'article', url: URL, title: TITLE, description: DESCRIPTION, images: ['/og-image.jpg'] },
+  openGraph: { type: 'article', url: URL, title: TITLE, description: DESCRIPTION, images: ['/hero-realistic.png'] },
 };
 
 const jsonLd = {

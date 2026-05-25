@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   keywords:
     'ejercicio mayores Getafe, entrenador personal Getafe, ejercicio a domicilio Getafe, readaptación Getafe, ejercicio para mayores sur Madrid, prevención caídas Getafe',
   alternates: { canonical: URL },
-  openGraph: { type: 'article', url: URL, title: TITLE, description: DESCRIPTION, images: ['/og-image.jpg'] },
+  openGraph: { type: 'article', url: URL, title: TITLE, description: DESCRIPTION, images: ['/hero-realistic.png'] },
 };
 
 const jsonLd = {
@@ -56,7 +56,7 @@ export default function Page() {
             Cada sesión dura 30 minutos y la adapto al estado concreto de cada persona ese día. Nada de clases genéricas: primero hacemos valoración, luego diseño un plan específico, y vamos ajustando sesión a sesión según la evolución.
           </p>
           <p className="text-lg text-slate-600 leading-relaxed">
-            Mi titulación es <strong className="text-[rgb(0,94,184)]">Graduado en Ciencias de la Actividad Física y el Deporte</strong> y llevo 14 años trabajando exclusivamente con personas mayores. Si tienes dudas sobre si mi servicio encaja con el caso de tu familiar, la primera valoración es gratuita y te lo confirmo sin compromiso.
+            Mi titulación es <strong className="text-[rgb(0,94,184)]">Graduado en Ciencias de la Actividad Física y el Deporte</strong> y llevo 14 años especializado en personas mayores. Si tienes dudas sobre si mi servicio encaja con el caso de tu familiar, la primera valoración es gratuita y te lo confirmo sin compromiso.
           </p>
         </div>
       </section>

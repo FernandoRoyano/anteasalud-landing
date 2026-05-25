@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   keywords:
     'recuperar autonomía mayores, autonomía personas mayores Madrid, ejercicio después de operación cadera, recuperación funcional mayores, readaptación a domicilio, ejercicio post hospitalización',
   alternates: { canonical: URL },
-  openGraph: { type: 'article', url: URL, title: TITLE, description: DESCRIPTION, images: ['/og-image.jpg'] },
+  openGraph: { type: 'article', url: URL, title: TITLE, description: DESCRIPTION, images: ['/hero-realistic.png'] },
 };
 
 const jsonLd = {

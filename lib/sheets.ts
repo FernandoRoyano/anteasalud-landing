@@ -1,5 +1,6 @@
 import { google, sheets_v4 } from 'googleapis';
 import type { Article, ArticleStatus, Client, Lead, LeadSource, Session, SessionStatus, Zone } from './types';
+import { getArticleEditorial } from '@/lib/article-editorial';
 
 export type { Article, ArticleStatus, Client, Lead, LeadSource, Session, SessionStatus, Zone };
 
@@ -574,7 +575,7 @@ export async function deleteSession(id: string): Promise<void> {
 // =============================================================================
 
 function parseArticleRow(row: string[], index: number): Article {
-  return {
+  return getArticleEditorial({
     row: index + 2,
     id: String(row[0] ?? '').trim(),
     slug: String(row[1] ?? '').trim(),
@@ -590,7 +591,7 @@ function parseArticleRow(row: string[], index: number): Article {
     publishedAt: String(row[8] ?? ''),
     createdAt: String(row[9] ?? ''),
     updatedAt: String(row[10] ?? ''),
-  };
+  });
 }
 
 function serializeArticleRow(a: Article): string[] {

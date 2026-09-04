@@ -180,7 +180,7 @@ body {
    Estilos tipográficos para artículos de blog (Markdown renderizado)
    ══════════════════════════════════════════════════════ */
 .prose-antea {
-  color: rgb(var(--color-ink) / 1);
+  color: var(--color-ink);
   font-size: var(--text-fluid-lg);
   line-height: 1.75;
 }
@@ -197,7 +197,7 @@ body {
   line-height: 1.15;
   margin-top: 2.5em;
   margin-bottom: 0.6em;
-  color: rgb(var(--color-ink) / 1);
+  color: var(--color-ink);
 }
 
 .prose-antea h3 {
@@ -208,7 +208,7 @@ body {
   line-height: 1.25;
   margin-top: 2em;
   margin-bottom: 0.5em;
-  color: rgb(var(--color-ink) / 1);
+  color: var(--color-ink);
 }
 
 .prose-antea h4 {
@@ -216,7 +216,7 @@ body {
   font-size: var(--text-fluid-xl);
   margin-top: 1.6em;
   margin-bottom: 0.4em;
-  color: rgb(var(--color-ink) / 1);
+  color: var(--color-ink);
 }
 
 .prose-antea p {
@@ -224,18 +224,18 @@ body {
 }
 
 .prose-antea a {
-  color: rgb(0 94 184 / 1);
+  color: var(--color-primary);
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
   transition: color 0.2s;
 }
 .prose-antea a:hover {
-  color: rgb(224 123 60 / 1);
+  color: var(--color-accent-dark);
 }
 
 .prose-antea strong {
-  color: rgb(var(--color-ink) / 1);
+  color: var(--color-ink);
   font-weight: 700;
 }
 
@@ -263,17 +263,17 @@ body {
 }
 
 .prose-antea li::marker {
-  color: rgb(224 123 60 / 1);
+  color: var(--color-accent-dark);
   font-weight: bold;
 }
 
 .prose-antea blockquote {
-  border-left: 4px solid rgb(224 123 60 / 0.7);
+  border-left: 4px solid color-mix(in srgb, var(--color-accent) 70%, transparent);
   padding: 0.5em 0 0.5em 1.5em;
   margin: 1.75em 0;
   font-style: italic;
-  color: rgb(var(--color-ink) / 0.8);
-  background: rgb(224 123 60 / 0.05);
+  color: color-mix(in srgb, var(--color-ink) 80%, transparent);
+  background: var(--color-accent-50);
   border-radius: 0 var(--radius-md) var(--radius-md) 0;
 }
 
@@ -282,16 +282,16 @@ body {
 }
 
 .prose-antea code {
-  background: rgb(var(--color-surface-alt) / 1);
+  background: var(--color-surface-alt);
   padding: 0.15em 0.4em;
   border-radius: 0.35em;
   font-size: 0.9em;
-  border: 1px solid rgb(var(--color-border) / 1);
+  border: 1px solid var(--color-border);
 }
 
 .prose-antea pre {
-  background: rgb(var(--color-ink) / 1);
-  color: rgb(var(--color-surface) / 1);
+  background: var(--color-ink);
+  color: var(--color-surface);
   padding: 1.25em;
   border-radius: var(--radius-lg);
   overflow-x: auto;
@@ -309,7 +309,7 @@ body {
 .prose-antea hr {
   border: 0;
   height: 1px;
-  background: rgb(var(--color-border) / 1);
+  background: var(--color-border);
   margin: 3em 0;
 }
 
@@ -324,13 +324,13 @@ body {
 .prose-antea td {
   padding: 0.75em 1em;
   text-align: left;
-  border-bottom: 1px solid rgb(var(--color-border) / 1);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .prose-antea th {
   font-weight: 700;
-  color: rgb(var(--color-ink) / 1);
-  background: rgb(var(--color-surface-alt) / 1);
+  color: var(--color-ink);
+  background: var(--color-surface-alt);
 }
 
 .prose-antea img {
@@ -347,7 +347,7 @@ body {
   font-size: var(--text-fluid-xl);
   margin-top: 4em;
   padding-top: 1.5em;
-  border-top: 1px solid rgb(var(--color-border) / 1);
+  border-top: 1px solid var(--color-border);
 }
 
 .badge-glow {

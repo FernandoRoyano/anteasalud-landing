@@ -1,11 +1,13 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { getArticleBySlug, getPublishedArticles } from '@/lib/sheets';
 import { BreadcrumbSchema } from '@/components/BreadcrumbSchema';
-import { Calendar, ArrowLeft } from 'lucide-react';
+import { getArticleImageAlt, getReadingMinutes } from '@/lib/article-editorial';
+import { Calendar, ArrowLeft, Clock3, ShieldCheck } from 'lucide-react';
 
 // ISR 1h — los artículos publicados se refrescan al hueco siguiente.
 export const revalidate = 3600;
@@ -65,13 +67,15 @@ export default async function ArticleDetailPage({
   }
 
   const url = `https://anteasalud.com/articulos/${article.slug}`;
+  const readingMinutes = getReadingMinutes(article.bodyMarkdown);
+  const articleImage = new URL(article.ogImage || '/hero-realistic.png', 'https://anteasalud.com').toString();
 
   const articleSchema = {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: article.title,
     description: article.excerpt,
-    image: article.ogImage ? [article.ogImage] : ['https://anteasalud.com/hero-realistic.png'],
+    image: [articleImage],
     datePublished: article.publishedAt,
     dateModified: article.updatedAt,
     author: {
@@ -112,11 +116,12 @@ export default async function ArticleDetailPage({
 
       <article className="w-full bg-surface">
         {/* Header */}
-        <header className="relative w-full bg-surface-alt" style={{ paddingTop: 'clamp(6rem, 12vw, 9rem)', paddingBottom: 'clamp(3rem, 6vw, 4rem)' }}>
-          <div className="max-w-3xl mx-auto px-4">
+        <header className="relative isolate w-full overflow-hidden bg-primary-dark text-white" style={{ paddingTop: 'clamp(7rem, 12vw, 10rem)', paddingBottom: 'clamp(5rem, 9vw, 8rem)' }}>
+          <div className="absolute inset-0 antea-grid opacity-25" aria-hidden="true" />
+          <div className="relative max-w-4xl mx-auto px-5 sm:px-8">
             <Link
               href="/articulos"
-              className="inline-flex items-center gap-1.5 text-fluid-sm text-muted hover:text-primary transition-colors mb-8"
+              className="inline-flex items-center gap-1.5 text-fluid-sm text-white/65 hover:text-white transition-colors mb-8"
             >
               <ArrowLeft className="w-4 h-4" />
               Volver a artículos
@@ -127,7 +132,7 @@ export default async function ArticleDetailPage({
                 {article.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="text-[0.7rem] font-semibold uppercase tracking-wider text-accent-dark bg-accent/10 px-2.5 py-1 rounded-full"
+                    className="text-[0.7rem] font-semibold uppercase tracking-wider text-accent-light bg-white/10 px-2.5 py-1 rounded-full ring-1 ring-white/10"
                   >
                     {tag}
                   </span>
@@ -136,41 +141,47 @@ export default async function ArticleDetailPage({
             )}
 
             <h1
-              className="font-display font-black tracking-tight text-ink leading-[1.05] mb-6"
+              className="font-display font-black tracking-tight leading-[1.02] mb-6 text-balance"
               style={{ fontSize: 'clamp(2.25rem, 5vw, 4rem)' }}
             >
               {article.title}
             </h1>
-            <p className="text-fluid-xl text-muted leading-relaxed mb-8">
+            <p className="text-fluid-xl text-white/72 leading-relaxed mb-8 max-w-3xl text-pretty">
               {article.excerpt}
             </p>
-            <div className="flex items-center gap-4 text-fluid-sm text-muted">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-fluid-sm text-white/65">
               <span className="inline-flex items-center gap-1.5">
                 <Calendar className="w-4 h-4" />
                 {formatDate(article.publishedAt)}
               </span>
-              <span>·</span>
-              <span>Fernando Royano · CCAFYD · 14 años</span>
+              <span className="inline-flex items-center gap-1.5"><Clock3 className="w-4 h-4" />{readingMinutes} min de lectura</span>
+              <span className="basis-full sm:basis-auto">Fernando Royano · CCAFYD</span>
             </div>
           </div>
         </header>
 
         {/* Hero image */}
         {article.ogImage && (
-          <div className="max-w-4xl mx-auto px-4" style={{ marginTop: '-2rem' }}>
-            <div className="relative aspect-[16/9] rounded-3xl overflow-hidden shadow-xl ring-1 ring-black/5">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+          <div className="relative z-10 max-w-5xl mx-auto px-5 sm:px-8" style={{ marginTop: '-3rem' }}>
+            <div className="relative aspect-[16/9] rounded-[2rem] overflow-hidden shadow-xl ring-1 ring-black/5">
+              <Image
                 src={article.ogImage}
-                alt={article.title}
-                className="w-full h-full object-cover"
+                alt={getArticleImageAlt(article)}
+                fill
+                priority
+                sizes="(min-width: 1024px) 960px, 100vw"
+                className="object-cover"
               />
             </div>
           </div>
         )}
 
         {/* Body */}
-        <div className="max-w-3xl mx-auto px-4" style={{ paddingTop: 'clamp(3rem, 6vw, 5rem)', paddingBottom: 'clamp(5rem, 10vw, 8rem)' }}>
+        <div className="max-w-3xl mx-auto px-5 sm:px-8" style={{ paddingTop: 'clamp(3rem, 6vw, 5rem)', paddingBottom: 'clamp(5rem, 10vw, 8rem)' }}>
+          <aside className="mb-10 flex gap-4 rounded-2xl border border-primary/15 bg-primary-50 p-5 text-fluid-sm leading-relaxed text-muted">
+            <ShieldCheck className="mt-0.5 size-5 shrink-0 text-primary" aria-hidden="true" />
+            <p><strong className="text-ink">Una guía para orientarte.</strong> No sustituye una valoración médica ni una recomendación individual. Si hay dolor, una caída reciente o un cambio brusco, consulta con un profesional sanitario.</p>
+          </aside>
           <div className="prose-antea">
             <ReactMarkdown remarkPlugins={[remarkGfm]}>{article.bodyMarkdown}</ReactMarkdown>
           </div>

@@ -63,7 +63,7 @@ export default function LeadForm({
   };
 
   const inputClass =
-    "w-full px-4 py-3 rounded-xl border border-[rgb(200,207,210)] focus:outline-none focus:ring-2 focus:ring-[rgb(0,94,184)] focus:border-transparent";
+    "w-full px-4 py-3.5 rounded-xl border border-[#2d6a4f]/20 bg-[#fbfcf8] text-[#17372b] placeholder:text-[#82958c] focus:outline-none focus:ring-2 focus:ring-[#4f9f73] focus:border-transparent";
 
   if (status === "success") {
     return (
@@ -83,9 +83,9 @@ export default function LeadForm({
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white shadow-xl rounded-3xl p-8 space-y-4"
+      className="bg-white shadow-[0_28px_70px_-35px_rgba(23,55,43,.45)] rounded-3xl border border-[#2d6a4f]/10 p-7 sm:p-8 space-y-4"
     >
-      <h3 className="text-2xl font-bold text-[rgb(0,60,115)]">{title}</h3>
+      <h3 className="font-display text-2xl font-bold text-[#17372b]">{title}</h3>
 
       <div>
         <label htmlFor="lead-nombre" className="block text-sm font-semibold text-[rgb(31,41,51)] mb-1">
@@ -139,7 +139,7 @@ export default function LeadForm({
       <button
         type="submit"
         disabled={status === "sending"}
-        className="w-full py-4 bg-[rgb(0,94,184)] hover:bg-[rgb(32,113,188)] text-white font-bold text-lg rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all disabled:opacity-60 disabled:hover:scale-100"
+        className="w-full py-4 bg-[#2d6a4f] hover:bg-[#22543f] text-white font-bold text-lg rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all disabled:opacity-60 disabled:hover:translate-y-0"
       >
         {status === "sending" ? "Enviando..." : ctaText}
       </button>

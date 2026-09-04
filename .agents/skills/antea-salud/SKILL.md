@@ -137,3 +137,15 @@ Fernando está construyendo un pipeline programático con **Remotion + FFmpeg** 
 - SPPB (Short Physical Performance Battery) — test estándar
 - Recomendaciones OMS actividad física > 65 años
 - Programa VIVIFRAIL (guía de prescripción)
+
+### Uso de VIVIFRAIL en ANTEA
+
+VIVIFRAIL debe estar presente como **marco de referencia para la valoración funcional y la orientación inicial del ejercicio**, sin aplicarlo de forma automática a todo caso, artículo o servicio.
+
+- Tomar como base su lógica: capacidad funcional + riesgo de caídas → perfil de partida → programa multicomponente adaptado.
+- Considerar el SPPB como medida principal de función de miembros inferiores; la velocidad de marcha puede servir como alternativa cuando el SPPB no sea viable.
+- Diferenciar el nivel funcional (perfiles A-E) del riesgo de caídas; los perfiles con `+` incorporan ese riesgo.
+- Usar sus dominios —fuerza/potencia, equilibrio, marcha, flexibilidad y resistencia— para comprobar que la propuesta no deja capacidades importantes fuera.
+- Complementar cuando proceda con historia de caídas, medicación, dolor, entorno, cognición, objetivos personales y criterio profesional.
+- No presentar VIVIFRAIL como diagnóstico, protocolo universal, sustituto de una evaluación sanitaria o programa cerrado que deba copiarse sin adaptación.
+- Si se publican umbrales, perfiles, dosis o ejercicios atribuidos a VIVIFRAIL, contrastarlos antes con su documentación oficial vigente.

@@ -61,6 +61,15 @@ const EDITORIAL_OVERRIDES: Record<string, EditorialOverride> = {
   },
 };
 
+const ADDITIONAL_IMAGE_ALTS: Record<string, string> = {
+  'valoracion-funcional-personas-mayores-que-incluye': 'Mujer mayor realizando una prueba de marcha durante una valoración funcional en casa',
+  'fragilidad-prefragilidad-persona-robusta-significado': 'Mujer mayor cuidando las plantas de su terraza de manera autónoma',
+  'sppb-que-es-valoracion-personas-mayores': 'Hombre mayor realizando una prueba de equilibrio del SPPB con supervisión',
+  'levantarse-silla-autonomia-personas-mayores': 'Mujer mayor practicando cómo levantarse de una silla con supervisión profesional',
+  'perdida-fuerza-personas-mayores-senales': 'Hombre mayor colocando una bolsa de compra sobre la encimera de su cocina',
+  'recuperar-capacidad-despues-hospitalizacion-mayores': 'Mujer mayor retomando la marcha en casa acompañada por un profesional del ejercicio',
+};
+
 const CONTENT_CORRECTIONS: Array<[string, string]> = [
   [
     'Los factores de riesgo más estudiados son la debilidad muscular del tren inferior, el deterioro del equilibrio, la velocidad de marcha reducida, el miedo a caerse y el uso de ciertos medicamentos [2]. Todos son observables. Y todos responden al ejercicio bien pautado.',
@@ -119,7 +128,7 @@ export function getArticleEditorial(article: Article): Article {
 }
 
 export function getArticleImageAlt(article: Article): string {
-  return EDITORIAL_OVERRIDES[article.slug]?.imageAlt ?? article.title;
+  return EDITORIAL_OVERRIDES[article.slug]?.imageAlt ?? ADDITIONAL_IMAGE_ALTS[article.slug] ?? article.title;
 }
 
 export function getReadingMinutes(markdown: string): number {

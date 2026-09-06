@@ -14,8 +14,13 @@ export const revalidate = 3600;
 
 // Pre-renderizado de rutas conocidas en build (las demás se generan al vuelo).
 export async function generateStaticParams() {
-  const articles = await getPublishedArticles();
-  return articles.map((a) => ({ slug: a.slug }));
+  try {
+    const articles = await getPublishedArticles();
+    return articles.map((article) => ({ slug: article.slug }));
+  } catch (error) {
+    console.error('[Articulos:generateStaticParams] No se pudieron precargar los artículos:', error);
+    return [];
+  }
 }
 
 export async function generateMetadata({

@@ -38,7 +38,12 @@ function formatDate(iso: string): string {
 }
 
 export default async function ArticulosIndexPage() {
-  const articles = await getPublishedArticles();
+  let articles: Awaited<ReturnType<typeof getPublishedArticles>> = [];
+  try {
+    articles = await getPublishedArticles();
+  } catch (error) {
+    console.error('[Articulos:index] No se pudieron cargar los artículos:', error);
+  }
 
   return (
     <>

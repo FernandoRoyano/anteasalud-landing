@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import { ArrowDown, ArrowRight, Check, ClipboardCheck, Footprints, GraduationCap, HeartHandshake, Home, ShieldCheck } from 'lucide-react';
 import LeadForm from '@/components/LeadForm';
 
@@ -75,7 +74,6 @@ export default function HomePage() {
         <div className="relative order-2 aspect-[5/4] overflow-hidden rounded-[5rem_1.5rem_1.5rem_1.5rem] lg:order-1"><Image src="/solution-realistic.png" alt="Valoración del equilibrio de una persona mayor en su domicilio" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" /></div>
         <div className="order-1 lg:order-2"><Eyebrow light>Profesional y cercano</Eyebrow><h2 className="mt-5 font-display text-[clamp(2.6rem,5vw,4.8rem)] font-bold leading-[.98] tracking-[-.04em]">Una persona de confianza entra en su casa.</h2><p className="mt-7 text-lg leading-relaxed text-white/70">Fernando Royano es graduado en Ciencias de la Actividad Física y del Deporte y lleva 14 años acompañando a personas para que se muevan mejor.</p>
           <div className="mt-9 grid gap-5 sm:grid-cols-2"><Credential icon={GraduationCap} title="Formación universitaria">Ejercicio adaptado con criterio profesional.</Credential><Credential icon={HeartHandshake} title="Trato continuado">La misma persona, sesión tras sesión.</Credential></div>
-          <Link href="/nuestro-metodo" className="mt-10 inline-flex items-center gap-2 font-bold text-[#b9e5ca] underline decoration-[#74c69d]/50 underline-offset-8 hover:text-white">Conocer nuestro método <ArrowRight className="h-4 w-4" /></Link>
         </div>
       </div></section>
 

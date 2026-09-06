@@ -13,7 +13,6 @@ const staticRoutes = [
   '/ejercicio-mayores-mostoles',
   '/ejercicio-mayores-getafe',
   '/guia-prevencion-caidas',
-  '/nuestro-metodo',
   '/valoracion-gratuita',
   '/articulos',
   '/privacidad',

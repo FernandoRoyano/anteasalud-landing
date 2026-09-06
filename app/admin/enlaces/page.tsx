@@ -81,11 +81,6 @@ const GROUPS: LinkGroup[] = [
     icon: FileText,
     links: [
       {
-        label: 'Nuestro método (vídeo VSL)',
-        url: 'https://anteasalud.com/nuestro-metodo',
-        description: 'Página con el vídeo de presentación y CTA al wizard',
-      },
-      {
         label: 'Guion del vídeo VSL',
         url: '/admin/guion-video',
         description: 'Guion completo para grabar el vídeo (versión navegable + imprimible)',
@@ -273,4 +268,3 @@ export default function EnlacesPage() {
     </div>
   );
 }
-

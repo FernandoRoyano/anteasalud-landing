@@ -26,7 +26,6 @@ export default function PublicChrome({ children }: { children: React.ReactNode }
     '/ejercicio-mayores-mostoles',
     '/ejercicio-mayores-getafe',
     '/valoracion-gratuita',
-    '/nuestro-metodo',
     '/guia-prevencion-caidas',
   ]);
   const isRefreshedLanding = isAds || refreshedLandings.has(pathname ?? '');

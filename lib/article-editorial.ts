@@ -253,10 +253,12 @@ export function getArticleEditorial(article: Article): Article {
     article.bodyMarkdown
   );
   const expansion = ARTICLE_EXPANSIONS[article.slug];
+  const expansionHeading = expansion?.match(/^##\s+.+$/m)?.[0];
+  const shouldAddExpansion = expansion && expansionHeading && !correctedBody.includes(expansionHeading);
   const referencesHeading = '\n## Referencias';
-  const bodyMarkdown = expansion && correctedBody.includes(referencesHeading)
+  const bodyMarkdown = shouldAddExpansion && correctedBody.includes(referencesHeading)
     ? correctedBody.replace(referencesHeading, `${expansion}${referencesHeading}`)
-    : `${correctedBody}${expansion ?? ''}`;
+    : `${correctedBody}${shouldAddExpansion ? expansion : ''}`;
 
   return override ? { ...article, ...override, bodyMarkdown } : { ...article, bodyMarkdown };
 }

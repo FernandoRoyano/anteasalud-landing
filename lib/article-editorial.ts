@@ -70,6 +70,135 @@ const ADDITIONAL_IMAGE_ALTS: Record<string, string> = {
   'recuperar-capacidad-despues-hospitalizacion-mayores': 'Mujer mayor retomando la marcha en casa acompañada por un profesional del ejercicio',
 };
 
+const ARTICLE_EXPANSIONS: Record<string, string> = {
+  'valoracion-funcional-personas-mayores-que-incluye': `
+## Qué conviene preparar antes de la valoración
+
+No hace falta convertir la visita en un examen. Ayuda tener a mano el informe de alta si existe, una lista actualizada de medicación y los apoyos que utiliza habitualmente. También conviene pensar en dos o tres situaciones concretas que hayan cambiado: levantarse del sofá, llegar al portal o ducharse sin ayuda.
+
+La ropa debe permitir moverse con comodidad y el calzado ha de ser el que la persona usa de verdad. Evaluar con unas condiciones artificiales aporta menos información que observar cómo resuelve su rutina habitual.
+
+## Qué ocurre después
+
+La valoración termina con una explicación comprensible para la persona y su familia: qué capacidades conserva, dónde aparecen las principales limitaciones y qué objetivos tienen sentido. Si podemos ayudar, proponemos un punto de partida y una forma de medir la evolución. Si detectamos algo que necesita revisión sanitaria, lo decimos antes de iniciar el programa.
+
+Una buena valoración no busca acumular pruebas. Busca responder una pregunta práctica: **qué necesita esta persona para moverse con más seguridad y autonomía en su vida real**.
+
+También puedes leer [qué mide el SPPB](/articulos/sppb-que-es-valoracion-personas-mayores) y [qué señales indican pérdida de fuerza](/articulos/perdida-fuerza-personas-mayores-senales).
+`,
+  'fragilidad-prefragilidad-persona-robusta-significado': `
+## Fragilidad no significa dependencia
+
+Una persona puede ser frágil y seguir haciendo muchas cosas sola. El término describe una menor reserva para responder ante esfuerzos, enfermedades o periodos de inactividad. Por eso interesa detectarla pronto: en fases iniciales suele existir más margen para recuperar capacidad.
+
+Tampoco es una etiqueta permanente. El perfil puede cambiar cuando mejoran la fuerza, la actividad diaria, la alimentación o el problema de salud que estaba limitando a la persona. La evolución debe medirse, no suponerse.
+
+## Cómo puede ayudar la familia
+
+- Observar cambios funcionales, no solo diagnósticos.
+- Evitar hacer automáticamente todo por la persona.
+- Facilitar movimiento frecuente dentro de sus posibilidades.
+- Consultar ante pérdidas rápidas de peso, fuerza o autonomía.
+- Elegir objetivos significativos: salir, cocinar o visitar a alguien.
+
+La intervención depende de la causa y puede necesitar coordinación médica, nutricional, fisioterapéutica y de ejercicio. En ANTEA utilizamos la valoración funcional para decidir qué parte podemos trabajar y cuándo es necesario derivar.
+
+Para continuar, consulta [cómo es una valoración funcional](/articulos/valoracion-funcional-personas-mayores-que-incluye) y [cómo recuperar capacidad tras una hospitalización](/articulos/recuperar-capacidad-despues-hospitalizacion-mayores).
+`,
+  'sppb-que-es-valoracion-personas-mayores': `
+## Qué no puede decirnos el SPPB
+
+El resultado no explica por sí solo por qué existe una limitación. Dolor, miedo, fatiga, visión, medicación o una enfermedad reciente pueden afectar al rendimiento. Tampoco sustituye una exploración médica ni permite predecir de forma individual si una persona va a caerse.
+
+Su valor aparece cuando se interpreta junto con la historia personal y se repite en condiciones parecidas. Así podemos distinguir una impresión subjetiva de un cambio funcional medible.
+
+## Preguntas frecuentes
+
+### ¿Se puede practicar antes para sacar mejor puntuación?
+
+No hace falta. Queremos observar la capacidad habitual, no aprobar un examen. Familiarizarse con las instrucciones es razonable; entrenar específicamente para ocultar una dificultad reduce la utilidad de la prueba.
+
+### ¿Una puntuación baja significa que ya no puede mejorar?
+
+No. Indica un punto de partida y la necesidad de adaptar el trabajo. La capacidad de responder al ejercicio se conserva a edades avanzadas, aunque la progresión y los tiempos sean individuales.
+
+### ¿Cada cuánto se repite?
+
+Depende del programa y de la situación clínica. Se repite cuando ha pasado tiempo suficiente para esperar un cambio útil o cuando aparece una modificación relevante del estado funcional.
+
+Lee también [qué incluye la valoración completa](/articulos/valoracion-funcional-personas-mayores-que-incluye).
+`,
+  'levantarse-silla-autonomia-personas-mayores': `
+## Una progresión práctica y segura
+
+El primer objetivo no es eliminar los apoyos, sino conseguir un movimiento estable y repetible. Podemos empezar con una silla firme algo elevada y las manos apoyadas. Cuando la persona controla la subida y la bajada sin dolor ni mareo, reducimos gradualmente la ayuda o ajustamos la altura.
+
+La fatiga cambia la técnica. Por eso dejamos de contar repeticiones cuando aparecen balanceos cada vez mayores, la persona se deja caer o necesita una ayuda que antes no utilizaba. La calidad del gesto orienta mejor que perseguir un número fijo.
+
+## Preguntas frecuentes
+
+### ¿Es mejor hacerlo rápido o despacio?
+
+Depende del objetivo y del nivel de partida. Al comenzar suele interesar controlar el movimiento. Más adelante puede trabajarse la capacidad de levantarse con mayor rapidez, siempre con una progresión supervisada.
+
+### ¿Qué silla sirve?
+
+Una silla estable, sin ruedas y colocada donde no pueda deslizarse. Los sofás bajos y blandos aumentan mucho la dificultad y no suelen ser el mejor punto de partida.
+
+### ¿Qué hago si aparece dolor?
+
+No hay que forzar. Un dolor nuevo, intenso o creciente necesita revisión antes de continuar. La dificultad sin dolor puede abordarse ajustando altura, apoyo y volumen.
+
+Relacionado: [señales de pérdida de fuerza](/articulos/perdida-fuerza-personas-mayores-senales).
+`,
+  'perdida-fuerza-personas-mayores-senales': `
+## Caminar ayuda, pero no siempre entrena la fuerza necesaria
+
+Caminar aporta actividad aeróbica y mantiene una parte importante de la movilidad. Sin embargo, un paseo cómodo puede no exigir suficiente fuerza a piernas, cadera, espalda y brazos. Las recomendaciones actuales para personas mayores combinan actividad aeróbica, fortalecimiento muscular y trabajo de equilibrio.
+
+Por eso alguien puede caminar todos los días y seguir teniendo dificultades para levantarse, subir un escalón o cargar la compra. No significa que caminar no sirva; significa que el programa está incompleto.
+
+## Qué cambios podemos medir
+
+Además de repetir pruebas funcionales, buscamos mejoras que la familia reconozca:
+
+- Necesitar menos impulso para levantarse.
+- Controlar mejor la bajada al sentarse.
+- Subir escalones con menos ayuda.
+- Transportar objetos cotidianos con seguridad.
+- Terminar una tarea con menor fatiga.
+
+No todas las semanas producen el mismo avance. Comparar con el punto de partida cada cierto tiempo evita juzgar el proceso por un día especialmente bueno o malo.
+
+Si quieres entender cómo establecemos esa referencia, lee [qué hacemos en una valoración funcional](/articulos/valoracion-funcional-personas-mayores-que-incluye).
+`,
+  'recuperar-capacidad-despues-hospitalizacion-mayores': `
+## Cómo organizar las primeras semanas
+
+Una rutina sencilla suele funcionar mejor que una sesión aislada demasiado exigente. Podemos repartir pequeños momentos de movimiento durante el día y reservar el trabajo más estructurado para cuando la persona tiene más energía.
+
+El plan debe indicar qué puede hacer sola, qué necesita supervisión y qué no debe realizar todavía. Esa distinción reduce tanto el miedo como la ayuda excesiva de la familia.
+
+## Un ejemplo de objetivo bien planteado
+
+“Recuperar fuerza” es demasiado amplio. “Levantarse del sillón con un solo apoyo y caminar hasta el baño sin detenerse” permite seleccionar ejercicios, observar la evolución y saber cuándo progresar.
+
+Después podemos ampliar el objetivo: llegar al ascensor, caminar hasta el portal o retomar una compra pequeña. La recuperación se construye conectando cada ejercicio con una tarea que importa.
+
+## Preguntas frecuentes
+
+### ¿Cuánto tarda en recuperar el nivel anterior?
+
+No existe un plazo universal. Influyen la causa y duración del ingreso, el nivel previo, la alimentación, las restricciones médicas y la continuidad del trabajo.
+
+### ¿Qué pasa si un día está más cansada?
+
+Se ajusta la sesión. Reducir volumen o elegir tareas más sencillas puede mantener la continuidad sin convertir el cansancio en inactividad total.
+
+Consulta también [qué aporta el ejercicio después de una fractura](/articulos/ejercicio-despues-fractura-mayores) y [cuándo interviene fisioterapia o ejercicio](/articulos/fisioterapeuta-o-entrenador-personal-mayores-diferencia).
+`,
+};
+
 const CONTENT_CORRECTIONS: Array<[string, string]> = [
   [
     'Los factores de riesgo más estudiados son la debilidad muscular del tren inferior, el deterioro del equilibrio, la velocidad de marcha reducida, el miedo a caerse y el uso de ciertos medicamentos [2]. Todos son observables. Y todos responden al ejercicio bien pautado.',
@@ -119,10 +248,15 @@ const CONTENT_CORRECTIONS: Array<[string, string]> = [
 
 export function getArticleEditorial(article: Article): Article {
   const override = EDITORIAL_OVERRIDES[article.slug];
-  const bodyMarkdown = CONTENT_CORRECTIONS.reduce(
+  const correctedBody = CONTENT_CORRECTIONS.reduce(
     (body, [original, replacement]) => body.replace(original, replacement),
     article.bodyMarkdown
   );
+  const expansion = ARTICLE_EXPANSIONS[article.slug];
+  const referencesHeading = '\n## Referencias';
+  const bodyMarkdown = expansion && correctedBody.includes(referencesHeading)
+    ? correctedBody.replace(referencesHeading, `${expansion}${referencesHeading}`)
+    : `${correctedBody}${expansion ?? ''}`;
 
   return override ? { ...article, ...override, bodyMarkdown } : { ...article, bodyMarkdown };
 }

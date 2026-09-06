@@ -26,20 +26,21 @@ export default function LandingHero({
   origen = 'Landing SEO',
 }: LandingHeroProps) {
   return (
-    <section className="relative w-full bg-gradient-to-br from-[rgb(191,231,249)] via-white to-[rgb(232,237,238)] px-4 pt-32 pb-20">
-      <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-10 lg:gap-12 items-center">
+    <section className="relative w-full overflow-hidden bg-[#fbfcf8] px-5 pb-20 pt-32 sm:px-8 lg:pb-28 lg:pt-40">
+      <div className="antea-grid absolute inset-0 opacity-45" aria-hidden="true" />
+      <div className="relative mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-[1.04fr_.96fr]">
         <div className="space-y-6">
-          <div className="inline-flex items-center gap-1.5 px-4 py-2 bg-[rgb(191,231,249)] rounded-full">
-            <Check className="w-4 h-4 text-[rgb(0,94,184)]" />
-            <span className="text-sm font-semibold text-[rgb(0,94,184)]">{badge}</span>
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#2d6a4f]/20 bg-white/75 px-4 py-2 backdrop-blur">
+            <Check className="h-4 w-4 text-[#2d6a4f]" />
+            <span className="text-sm font-semibold text-[#2d6a4f]">{badge}</span>
           </div>
 
-          <h1 className="font-display text-fluid-5xl font-black tracking-tight text-slate-900 leading-[1.1]">
+          <h1 className="font-display text-[clamp(3rem,6vw,5.6rem)] font-bold leading-[.96] tracking-[-.05em] text-[#153e31]">
             {h1}
-            <span className="block text-[rgb(0,94,184)] mt-2">{h1Highlight}</span>
+            <span className="mt-2 block text-[#2d6a4f]">{h1Highlight}</span>
           </h1>
 
-          <p className="text-lg md:text-xl text-slate-600 leading-relaxed">
+          <p className="max-w-2xl text-lg leading-relaxed text-[#45665a] md:text-xl">
             {subtitle}
           </p>
 
@@ -49,7 +50,7 @@ export default function LandingHero({
                 <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
               ))}
             </div>
-            <span className="text-sm text-slate-600 font-medium">
+            <span className="text-sm font-medium text-[#45665a]">
               4.9 · +200 familias en Madrid confían en nosotros
             </span>
           </div>

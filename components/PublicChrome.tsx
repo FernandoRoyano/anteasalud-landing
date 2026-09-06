@@ -18,6 +18,18 @@ export default function PublicChrome({ children }: { children: React.ReactNode }
   // canalizar TODO el tráfico al formulario. Solo conservamos el banner de
   // cookies (necesario por el tracking de Ads).
   const isAds = pathname?.startsWith('/ads');
+  const refreshedLandings = new Set([
+    '/ejercicio-personas-mayores-madrid',
+    '/prevencion-caidas-mayores-madrid',
+    '/recuperar-autonomia-mayores-madrid',
+    '/ejercicio-mayores-madrid-capital',
+    '/ejercicio-mayores-mostoles',
+    '/ejercicio-mayores-getafe',
+    '/valoracion-gratuita',
+    '/nuestro-metodo',
+    '/guia-prevencion-caidas',
+  ]);
+  const isRefreshedLanding = isAds || refreshedLandings.has(pathname ?? '');
 
   if (isAdmin) {
     return <>{children}</>;
@@ -26,7 +38,7 @@ export default function PublicChrome({ children }: { children: React.ReactNode }
   if (isAds) {
     return (
       <>
-        {children}
+        <div className="landing-refresh">{children}</div>
         <CookieBanner />
       </>
     );
@@ -35,7 +47,7 @@ export default function PublicChrome({ children }: { children: React.ReactNode }
   return (
     <WizardProvider>
       <Header />
-      {children}
+      {isRefreshedLanding ? <div className="landing-refresh">{children}</div> : children}
       <CookieBanner />
       <WhatsAppButton />
       <Footer />

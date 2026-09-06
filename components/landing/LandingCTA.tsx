@@ -26,19 +26,20 @@ export default function LandingCTA({ title, subtitle, related }: LandingCTAProps
   const { open: openWizard } = useWizard();
 
   return (
-    <section className="w-full bg-gradient-to-b from-white to-[rgb(232,237,238)] py-20 px-4">
+    <section className="w-full bg-[#fbfcf8] px-5 py-24 sm:px-8 lg:py-32">
       <div className="max-w-4xl mx-auto">
         {/* CTA principal */}
-        <div className="bg-gradient-to-br from-[rgb(0,94,184)] to-[rgb(0,60,115)] rounded-3xl p-10 md:p-14 text-center text-white shadow-2xl">
-          <h2 className="font-display text-fluid-3xl font-black tracking-tight mb-4">{title}</h2>
-          <p className="text-lg md:text-xl text-blue-100 mb-8 max-w-2xl mx-auto">{subtitle}</p>
+        <div className="relative overflow-hidden rounded-[2rem] bg-[#17372b] p-10 text-center text-white shadow-[0_30px_80px_-35px_rgba(21,62,49,.55)] md:p-14">
+          <div className="antea-grid absolute inset-0 opacity-10" aria-hidden="true" />
+          <h2 className="relative mb-4 font-display text-[clamp(2.4rem,5vw,4.2rem)] font-bold leading-[1] tracking-[-.04em]">{title}</h2>
+          <p className="relative mx-auto mb-8 max-w-2xl text-lg text-white/70 md:text-xl">{subtitle}</p>
           <button
             onClick={openWizard}
-            className="inline-flex items-center justify-center gap-3 px-10 py-5 bg-white text-[rgb(0,94,184)] font-black text-lg md:text-xl rounded-2xl shadow-xl hover:scale-105 transition-all duration-200"
+            className="relative inline-flex items-center justify-center gap-3 rounded-full bg-[#b9e5ca] px-10 py-5 text-lg font-bold text-[#17372b] shadow-xl transition hover:-translate-y-0.5 hover:bg-white md:text-xl"
           >
             <MessageCircle className="w-6 h-6" /> Iniciar valoración gratuita
           </button>
-          <p className="text-sm text-blue-200 mt-4">
+          <p className="relative mt-4 text-sm text-white/60">
             Sin compromiso · Respuesta en menos de 24 horas
           </p>
         </div>

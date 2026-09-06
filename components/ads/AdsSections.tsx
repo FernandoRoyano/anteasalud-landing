@@ -30,12 +30,16 @@ interface AdsHeroProps {
 
 export function AdsHero({ h1, h1Highlight, subtitle, bullets, formCta, origen }: AdsHeroProps) {
   return (
-    <section className="relative w-full bg-gradient-to-br from-[rgb(191,231,249)] via-white to-[rgb(232,237,238)] px-4 pt-12 pb-16">
-      <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-10 lg:gap-12 items-center">
+    <section className="relative w-full overflow-hidden bg-[#fbfcf8] px-5 pb-20 pt-16 sm:px-8 lg:py-28">
+      <div className="antea-grid absolute inset-0 opacity-45" aria-hidden="true" />
+      <div className="relative mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-[1.04fr_.96fr]">
         <div className="space-y-6">
-          <h1 className="font-display text-fluid-4xl font-black tracking-tight text-slate-900 leading-[1.12]">
+          <p className="inline-flex items-center gap-2 rounded-full border border-[#2d6a4f]/20 bg-white/75 px-4 py-2 text-sm font-semibold text-[#2d6a4f] backdrop-blur">
+            <span className="h-2 w-2 rounded-full bg-[#74c69d]" /> Atención personalizada en Madrid
+          </p>
+          <h1 className="font-display text-[clamp(3rem,6vw,5.6rem)] font-bold leading-[.96] tracking-[-.05em] text-[#153e31]">
             {h1}
-            <span className="block text-[rgb(0,94,184)] mt-2">{h1Highlight}</span>
+            <span className="mt-2 block text-[#2d6a4f]">{h1Highlight}</span>
           </h1>
 
           <p className="text-lg md:text-xl text-slate-600 leading-relaxed">{subtitle}</p>
@@ -62,7 +66,7 @@ export function AdsHero({ h1, h1Highlight, subtitle, bullets, formCta, origen }:
 /* ---------- Escasez (una línea) ---------- */
 export function AdsScarcity({ text }: { text: string }) {
   return (
-    <div className="w-full bg-[rgb(0,60,115)] py-3 px-4 text-center">
+    <div className="w-full border-y border-white/10 bg-[#17372b] px-4 py-3 text-center">
       <p className="text-sm md:text-base font-semibold text-white">{text}</p>
     </div>
   );
@@ -191,10 +195,11 @@ interface AdsFinalCTAProps {
 
 export function AdsFinalCTA({ title, subtitle, formCta, origen }: AdsFinalCTAProps) {
   return (
-    <section className="w-full bg-gradient-to-br from-[rgb(0,94,184)] to-[rgb(0,60,115)] py-20 px-4">
-      <div className="max-w-5xl mx-auto grid lg:grid-cols-2 gap-10 items-center">
+    <section className="relative w-full overflow-hidden bg-[#17372b] px-5 py-24 sm:px-8 lg:py-32">
+      <div className="antea-grid absolute inset-0 opacity-10" aria-hidden="true" />
+      <div className="relative mx-auto grid max-w-6xl items-center gap-14 lg:grid-cols-[1fr_.85fr]">
         <div className="text-white space-y-4">
-          <h2 className="font-display text-fluid-3xl font-black tracking-tight">{title}</h2>
+          <h2 className="font-display text-[clamp(2.8rem,5vw,4.8rem)] font-bold leading-[.98] tracking-[-.04em] text-white">{title}</h2>
           <p className="text-lg md:text-xl text-blue-100">{subtitle}</p>
           <p className="text-base text-blue-100">
             Rellena el formulario y Fernando te escribirá en menos de 24 horas.

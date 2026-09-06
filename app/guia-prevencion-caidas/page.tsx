@@ -14,6 +14,7 @@ import {
   ArrowRight,
 } from 'lucide-react';
 import { BreadcrumbSchema } from '@/components/BreadcrumbSchema';
+import { openWhatsAppPlaceholder, sendLeadToWhatsApp } from '@/lib/lead-whatsapp';
 
 export default function GuiaPrevencionCaidasPage() {
   const [name, setName] = useState('');
@@ -25,6 +26,7 @@ export default function GuiaPrevencionCaidasPage() {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!name.trim() || !email.trim()) return;
+    const whatsappWindow = openWhatsAppPlaceholder();
     setSubmitting(true);
     setError('');
 
@@ -43,15 +45,22 @@ export default function GuiaPrevencionCaidasPage() {
 
       if (res.ok) {
         setUnlocked(true);
+        sendLeadToWhatsApp(whatsappWindow, {
+          nombre: name.trim(),
+          email: email.trim(),
+          interes: 'Descarga guía prevención caídas',
+        });
         // Scroll suave al contenido desbloqueado
         setTimeout(() => {
           document.getElementById('contenido-guia')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }, 200);
       } else {
+        whatsappWindow?.close();
         const data = await res.json().catch(() => ({}));
         setError(data.error || 'Error al procesar la solicitud');
       }
     } catch {
+      whatsappWindow?.close();
       setError('Error de conexión');
     } finally {
       setSubmitting(false);

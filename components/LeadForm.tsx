@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Check } from "lucide-react";
 import { trackLeadConversion } from "@/components/GoogleAds";
+import { openWhatsAppPlaceholder, sendLeadToWhatsApp } from "@/lib/lead-whatsapp";
 
 type FormStatus = "idle" | "sending" | "success" | "error";
 
@@ -35,6 +36,7 @@ export default function LeadForm({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const whatsappWindow = openWhatsAppPlaceholder();
     setStatus("sending");
 
     try {
@@ -53,11 +55,18 @@ export default function LeadForm({
       if (!res.ok) throw new Error();
 
       trackLeadConversion();
+      sendLeadToWhatsApp(whatsappWindow, {
+        nombre,
+        telefono,
+        zona: "Madrid",
+        interes: `${origen}${mensaje ? ` · ${mensaje}` : ""}`,
+      });
       setStatus("success");
       setNombre("");
       setTelefono("");
       setMensaje("");
     } catch {
+      whatsappWindow?.close();
       setStatus("error");
     }
   };

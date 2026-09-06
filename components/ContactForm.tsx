@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { trackLeadConversion } from "@/components/GoogleAds";
+import { openWhatsAppPlaceholder, sendLeadToWhatsApp } from "@/lib/lead-whatsapp";
 
 type FormStatus = "idle" | "sending" | "success" | "error";
 
@@ -31,6 +32,7 @@ export default function ContactForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const whatsappWindow = openWhatsAppPlaceholder();
     setStatus("sending");
 
     try {
@@ -43,6 +45,7 @@ export default function ContactForm() {
       if (!res.ok) throw new Error();
 
       trackLeadConversion();
+      sendLeadToWhatsApp(whatsappWindow, { nombre, email, telefono, zona, interes });
       setStatus("success");
       setNombre("");
       setEmail("");
@@ -50,6 +53,7 @@ export default function ContactForm() {
       setZona("");
       setInteres("");
     } catch {
+      whatsappWindow?.close();
       setStatus("error");
     }
   };

@@ -1,10 +1,8 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
-import Link from 'next/link';
 import { getPublishedArticles } from '@/lib/sheets';
 import { BreadcrumbSchema } from '@/components/BreadcrumbSchema';
+import { ArticlesFilter } from '@/components/ArticlesFilter';
 import { getArticleImageAlt, getReadingMinutes } from '@/lib/article-editorial';
-import { Calendar, ArrowRight, Clock3 } from 'lucide-react';
 
 const TITLE = 'Artículos — Guías de ejercicio y salud para personas mayores | ANTEA Salud';
 const DESCRIPTION =
@@ -26,16 +24,6 @@ export const metadata: Metadata = {
 
 // Revalida cada hora — cuando se publica un artículo nuevo aparece en <1h
 export const revalidate = 3600;
-
-function formatDate(iso: string): string {
-  if (!iso) return '';
-  const date = new Date(iso);
-  return date.toLocaleDateString('es-ES', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
-}
 
 export default async function ArticulosIndexPage() {
   let articles: Awaited<ReturnType<typeof getPublishedArticles>> = [];
@@ -82,57 +70,19 @@ export default async function ArticulosIndexPage() {
               </p>
             </div>
           ) : (
-            <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
-              {articles.map((article, index) => (
-                <Link
-                  key={article.id}
-                  href={`/articulos/${article.slug}`}
-                  className={`group flex flex-col bg-white rounded-[1.75rem] border border-border/80 overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-500 ${index === 0 ? 'md:col-span-2 md:grid md:grid-cols-[1.2fr_1fr]' : ''}`}
-                >
-                  <div className={`relative bg-surface-alt overflow-hidden ${index === 0 ? 'aspect-[16/10] md:aspect-auto md:min-h-[27rem]' : 'aspect-[16/10]'}`}>
-                      <Image
-                        src={article.ogImage}
-                        alt={getArticleImageAlt(article)}
-                        fill
-                        sizes={index === 0 ? '(min-width: 768px) 55vw, 100vw' : '(min-width: 768px) 50vw, 100vw'}
-                        priority={index === 0}
-                        className="object-cover group-hover:scale-[1.025] transition-transform duration-700 ease-out"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-primary-dark/20 via-transparent to-transparent" aria-hidden="true" />
-                  </div>
-                  <div className={`flex flex-col flex-1 ${index === 0 ? 'p-7 sm:p-10 md:justify-center' : 'p-6 sm:p-7'}`}>
-                    {article.tags.length > 0 && (
-                      <div className="flex flex-wrap gap-2 mb-3">
-                        {article.tags.slice(0, 2).map((tag) => (
-                          <span
-                            key={tag}
-                            className="text-[0.7rem] font-semibold uppercase tracking-wider text-accent-dark bg-accent/10 px-2.5 py-1 rounded-full"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    )}
-                    <h2 className={`font-display font-bold text-ink leading-[1.12] mb-3 text-balance group-hover:text-primary transition-colors ${index === 0 ? 'text-fluid-3xl' : 'text-fluid-xl'}`}>
-                      {article.title}
-                    </h2>
-                    <p className="text-muted leading-relaxed text-fluid-base mb-4 flex-1">
-                      {article.excerpt}
-                    </p>
-                    <div className="flex items-center justify-between gap-3 pt-4 border-t border-border/60 text-fluid-sm">
-                      <span className="flex flex-wrap items-center gap-x-3 gap-y-1 text-muted">
-                        <span className="inline-flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5" />{formatDate(article.publishedAt)}</span>
-                        <span className="inline-flex items-center gap-1.5"><Clock3 className="w-3.5 h-3.5" />{getReadingMinutes(article.bodyMarkdown)} min</span>
-                      </span>
-                      <span className="inline-flex items-center gap-1.5 font-semibold text-primary group-hover:gap-2.5 transition-all">
-                        Leer
-                        <ArrowRight className="w-4 h-4" />
-                      </span>
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
+            <ArticlesFilter
+              articles={articles.map((article) => ({
+                id: article.id,
+                slug: article.slug,
+                title: article.title,
+                excerpt: article.excerpt,
+                ogImage: article.ogImage,
+                imageAlt: getArticleImageAlt(article),
+                tags: article.tags,
+                publishedAt: article.publishedAt,
+                readingMinutes: getReadingMinutes(article.bodyMarkdown),
+              }))}
+            />
           )}
         </div>
       </section>

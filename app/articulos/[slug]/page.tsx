@@ -123,7 +123,7 @@ export default async function ArticleDetailPage({
         {/* Header */}
         <header className="relative isolate w-full overflow-hidden bg-primary-dark text-white" style={{ paddingTop: 'clamp(7rem, 12vw, 10rem)', paddingBottom: 'clamp(5rem, 9vw, 8rem)' }}>
           <div className="absolute inset-0 antea-grid opacity-25" aria-hidden="true" />
-          <div className="relative max-w-4xl mx-auto px-5 sm:px-8">
+          <div className="relative w-full max-w-3xl mx-auto px-5 sm:px-8">
             <Link
               href="/articulos"
               className="inline-flex items-center gap-1.5 text-fluid-sm text-white/65 hover:text-white transition-colors mb-8"
@@ -182,7 +182,7 @@ export default async function ArticleDetailPage({
         )}
 
         {/* Body */}
-        <div className="max-w-3xl mx-auto px-5 sm:px-8" style={{ paddingTop: 'clamp(3rem, 6vw, 5rem)', paddingBottom: 'clamp(5rem, 10vw, 8rem)' }}>
+        <div className="w-full max-w-3xl mx-auto px-5 sm:px-8" style={{ paddingTop: 'clamp(3rem, 6vw, 5rem)', paddingBottom: 'clamp(5rem, 10vw, 8rem)' }}>
           <aside className="mb-10 flex gap-4 rounded-2xl border border-primary/15 bg-primary-50 p-5 text-fluid-sm leading-relaxed text-muted">
             <ShieldCheck className="mt-0.5 size-5 shrink-0 text-primary" aria-hidden="true" />
             <p><strong className="text-ink">Una guía para orientarte.</strong> No sustituye una valoración médica ni una recomendación individual. Si hay dolor, una caída reciente o un cambio brusco, consulta con un profesional sanitario.</p>

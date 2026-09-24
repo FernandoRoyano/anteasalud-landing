@@ -273,11 +273,11 @@ export default async function ArticleDetailPage({ params }: { params: Promise<{ 
 
           <section aria-labelledby="author-title" className="mt-16 flex flex-col gap-5 rounded-3xl border border-border bg-white p-7 sm:flex-row">
             <Image
-              src="/hero-fernando.png"
+              src="/fernando-avatar.webp"
               alt="Fernando Royano"
               width={96}
               height={96}
-              className="size-24 shrink-0 rounded-full object-cover object-[52%_20%]"
+              className="size-24 shrink-0 rounded-full object-cover"
             />
             <div>
               <h2 id="author-title" className="font-display text-fluid-xl font-bold text-ink">

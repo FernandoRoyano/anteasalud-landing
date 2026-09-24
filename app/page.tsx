@@ -77,7 +77,7 @@ export default function HomePage() {
           </div>
           <div className="relative lg:pl-8">
             <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem_2rem_8rem_2rem] bg-[#dce9df] shadow-[0_30px_80px_-35px_rgba(21,62,49,.45)]">
-              <Image src="/hero-fernando.png" alt="Fernando Royano acompaña a una persona mayor durante una sesión de ejercicio adaptado" fill priority sizes="(max-width: 1024px) 100vw, 46vw" className="object-cover object-[52%_center]" />
+              <Image src="/hero-fernando.webp" alt="Fernando Royano acompaña a una persona mayor durante una sesión de ejercicio adaptado" fill priority sizes="(max-width: 1024px) 100vw, 46vw" className="object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#143b2e]/45 via-transparent to-transparent" />
               <div className="absolute bottom-6 left-6 right-6 rounded-2xl border border-white/40 bg-white/90 p-5 backdrop-blur-md sm:left-8 sm:right-auto sm:max-w-xs"><p className="text-sm font-semibold uppercase tracking-[.16em] text-[#2d6a4f]">El objetivo</p><p className="mt-2 font-display text-2xl font-bold leading-tight">Más autonomía en los movimientos cotidianos.</p></div>
             </div>
@@ -109,7 +109,7 @@ export default function HomePage() {
       </section>
 
       <section className="overflow-hidden bg-[#17372b] px-5 py-24 text-white sm:px-8 lg:py-32"><div className="mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-2 lg:gap-24">
-        <div className="relative order-2 aspect-[5/4] overflow-hidden rounded-[5rem_1.5rem_1.5rem_1.5rem] lg:order-1"><Image src="/solution-realistic.png" alt="Valoración del equilibrio de una persona mayor en su domicilio" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" /></div>
+        <div className="relative order-2 aspect-[5/4] overflow-hidden rounded-[5rem_1.5rem_1.5rem_1.5rem] lg:order-1"><Image src="/solution.webp" alt="Valoración del equilibrio de una persona mayor en su domicilio" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" /></div>
         <div className="order-1 lg:order-2"><Eyebrow light>Profesional y cercano</Eyebrow><h2 className="mt-5 font-display text-[clamp(2.6rem,5vw,4.8rem)] font-bold leading-[.98] tracking-[-.04em]">Una persona de confianza entra en su casa.</h2><p className="mt-7 text-lg leading-relaxed text-white/85">Fernando Royano es graduado en Ciencias de la Actividad Física y del Deporte y lleva 14 años como entrenador personal a domicilio, especializado en personas mayores. <Link href="/sobre-fernando" className="font-semibold text-white underline underline-offset-4">Conoce su trayectoria</Link>.</p>
           <div className="mt-9 grid gap-5 sm:grid-cols-2"><Credential icon={GraduationCap} title="Formación universitaria">Ejercicio adaptado con criterio profesional.</Credential><Credential icon={HeartHandshake} title="Trato continuado">La misma persona, sesión tras sesión.</Credential></div>
         </div>

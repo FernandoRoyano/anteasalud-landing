@@ -47,7 +47,7 @@ export default function Page() {
       {/* El problema real */}
       <section className="w-full bg-white py-20 px-4">
         <div className="max-w-4xl mx-auto space-y-6">
-          <h2 className="text-3xl md:text-4xl font-black text-[rgb(31,41,51)]">
+          <h2 className="text-3xl md:text-4xl font-black text-[#17372b]">
             Las caídas son la primera causa de pérdida de autonomía
           </h2>
           <div className="grid md:grid-cols-3 gap-6 my-10">
@@ -55,23 +55,23 @@ export default function Page() {
             <StatCard number="30%" label="de las caídas provocan lesión grave" />
             <StatCard number="50%" label="de las personas con fractura de cadera pierde autonomía" />
           </div>
-          <p className="text-lg text-slate-600 leading-relaxed">
-            Y lo más frustrante: la mayoría son <strong className="text-[rgb(0,94,184)]">prevenibles con ejercicio específico</strong>. El problema es que nadie trabaja esos aspectos concretos en una clase genérica de gimnasio. Hace falta un plan diseñado para tu situación real.
+          <p className="text-lg text-[#4a6358] leading-relaxed">
+            Y lo más frustrante: la mayoría son <strong className="text-[#2d6a4f]">prevenibles con ejercicio específico</strong>. El problema es que nadie trabaja esos aspectos concretos en una clase genérica de gimnasio. Hace falta un plan diseñado para tu situación real.
           </p>
-          <p className="text-lg text-slate-600 leading-relaxed">
+          <p className="text-lg text-[#4a6358] leading-relaxed">
             Tras 14 años como entrenador a domicilio, especializado en personas mayores, sabemos qué ejercicios mueven la aguja y cuáles son marketing. La prevención de caídas requiere trabajar simultáneamente <strong>fuerza en piernas</strong>, <strong>equilibrio dinámico</strong>, <strong>tiempo de reacción</strong> y <strong>confianza psicológica</strong> al caminar.
           </p>
         </div>
       </section>
 
       {/* Cómo lo trabajamos */}
-      <section className="w-full bg-[rgb(232,237,238)] py-20 px-4">
+      <section className="w-full bg-[#eef5f0] py-20 px-4">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-14 space-y-3">
-            <h2 className="text-3xl md:text-4xl font-black text-[rgb(31,41,51)]">
+            <h2 className="text-3xl md:text-4xl font-black text-[#17372b]">
               Cómo abordamos la prevención de caídas
             </h2>
-            <p className="text-lg text-[rgb(130,131,130)]">
+            <p className="text-lg text-[#4a6358]">
               4 pilares que trabajamos en cada sesión
             </p>
           </div>
@@ -104,10 +104,10 @@ export default function Page() {
       {/* Señales de alerta */}
       <section className="w-full bg-white py-20 px-4">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-black text-[rgb(31,41,51)] mb-6">
+          <h2 className="text-3xl md:text-4xl font-black text-[#17372b] mb-6">
             Señales de que tu familiar necesita prevención de caídas
           </h2>
-          <p className="text-lg text-slate-600 mb-8">
+          <p className="text-lg text-[#4a6358] mb-8">
             Si reconoces 2 o más de estas situaciones, es momento de actuar antes de que ocurra algo serio:
           </p>
           <div className="bg-orange-50 border-2 border-orange-200 rounded-3xl p-8 space-y-3">
@@ -123,21 +123,21 @@ export default function Page() {
       </section>
 
       {/* Lead magnet: guía gratuita */}
-      <section className="w-full bg-gradient-to-r from-[rgb(191,231,249)] to-[rgb(232,237,238)] py-16 px-4">
+      <section className="w-full bg-gradient-to-r from-[#dcebe2] to-[#eef5f0] py-16 px-4">
         <div className="max-w-3xl mx-auto">
-          <div className="bg-white rounded-3xl shadow-xl border-2 border-[rgb(0,94,184)]/30 p-10 text-center">
-            <div className="inline-block px-3 py-1 bg-[rgb(0,94,184)] text-white text-xs font-bold rounded-full mb-4">
+          <div className="bg-white rounded-3xl shadow-xl border-2 border-[#2d6a4f]/30 p-10 text-center">
+            <div className="inline-block px-3 py-1 bg-[#2d6a4f] text-white text-sm font-bold rounded-full mb-4">
               DESCARGA GRATUITA
             </div>
-            <h2 className="text-2xl md:text-3xl font-black text-[rgb(31,41,51)] mb-4">
+            <h2 className="text-2xl md:text-3xl font-black text-[#17372b] mb-4">
               Guía práctica: 10 ejercicios para prevenir caídas
             </h2>
-            <p className="text-lg text-[rgb(130,131,130)] mb-6 max-w-xl mx-auto">
+            <p className="text-lg text-[#4a6358] mb-6 max-w-xl mx-auto">
               Los ejercicios exactos que uso con mis clientes, explicados paso a paso. Incluye test de riesgo y rutina semanal. Sin coste.
             </p>
             <a
               href="/guia-prevencion-caidas"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[rgb(0,94,184)] text-white font-bold rounded-xl shadow-md hover:shadow-lg hover:scale-105 transition"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#2d6a4f] text-white font-bold rounded-xl shadow-md hover:shadow-lg transition"
             >
               Acceder a la guía gratis
             </a>
@@ -162,9 +162,9 @@ export default function Page() {
 
 function StatCard({ number, label }: { number: string; label: string }) {
   return (
-    <div className="bg-gradient-to-br from-[rgb(191,231,249)] to-[rgb(232,237,238)] rounded-2xl p-6 text-center border border-[rgb(0,94,184)]/20">
-      <div className="text-4xl font-black text-[rgb(0,94,184)] mb-2">{number}</div>
-      <p className="text-sm text-[rgb(31,41,51)]">{label}</p>
+    <div className="bg-gradient-to-br from-[#dcebe2] to-[#eef5f0] rounded-2xl p-6 text-center border border-[#2d6a4f]/20">
+      <div className="text-4xl font-black text-[#2d6a4f] mb-2">{number}</div>
+      <p className="text-sm text-[#17372b]">{label}</p>
     </div>
   );
 }
@@ -179,12 +179,12 @@ function PillarCard({
   description: string;
 }) {
   return (
-    <div className="bg-white rounded-2xl p-6 shadow-md border border-[rgb(200,207,210)]">
-      <div className="w-12 h-12 rounded-xl bg-[rgb(0,94,184)] flex items-center justify-center text-white mb-4">
+    <div className="bg-white rounded-2xl p-6 shadow-md border border-[#cfe0d6]">
+      <div className="w-12 h-12 rounded-xl bg-[#2d6a4f] flex items-center justify-center text-white mb-4">
         {icon}
       </div>
-      <h3 className="text-lg font-bold text-[rgb(31,41,51)] mb-2">{title}</h3>
-      <p className="text-slate-600 leading-relaxed">{description}</p>
+      <h3 className="text-lg font-bold text-[#17372b] mb-2">{title}</h3>
+      <p className="text-[#4a6358] leading-relaxed">{description}</p>
     </div>
   );
 }
@@ -193,7 +193,7 @@ function AlertItem({ text }: { text: string }) {
   return (
     <div className="flex items-start gap-3">
       <Check className="w-5 h-5 text-orange-600 flex-shrink-0 mt-1" />
-      <p className="text-[rgb(31,41,51)]">{text}</p>
+      <p className="text-[#17372b]">{text}</p>
     </div>
   );
 }

@@ -33,8 +33,7 @@ export default function ClientesPage() {
   const [editing, setEditing] = useState<Client | null>(null);
   const [showInactive, setShowInactive] = useState(false);
 
-  const loadClients = () => {
-    setLoading(true);
+  const fetchClients = () =>
     fetch('/api/admin/clients')
       .then((r) => r.json())
       .then((data) => {
@@ -43,10 +42,15 @@ export default function ClientesPage() {
       })
       .catch(() => setError('Error al cargar clientes'))
       .finally(() => setLoading(false));
+
+  const loadClients = () => {
+    setLoading(true);
+    fetchClients();
   };
 
+  // loading ya arranca en true: la carga inicial solo actualiza estado en callbacks
   useEffect(() => {
-    loadClients();
+    fetchClients();
   }, []);
 
   const visible = clients.filter((c) => showInactive || c.active);

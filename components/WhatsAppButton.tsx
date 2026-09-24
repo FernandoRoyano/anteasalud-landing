@@ -7,9 +7,10 @@ export default function WhatsAppButton() {
 
   return (
     <button
+      type="button"
       onClick={open}
-      className="fixed bottom-8 right-8 z-40 flex items-center justify-center w-16 h-16 rounded-full bg-green-500 text-white shadow-2xl hover:bg-green-600 hover:scale-110 transition-all duration-300 motion-safe:animate-bounce"
-      aria-label="Contactar por WhatsApp"
+      className="fixed bottom-4 right-4 z-40 flex h-16 w-16 items-center justify-center rounded-full bg-[#15803d] text-white shadow-2xl transition-colors hover:bg-[#166534] sm:bottom-8 sm:right-8"
+      aria-label="Contacto rápido por WhatsApp"
     >
       <svg
         className="w-8 h-8"

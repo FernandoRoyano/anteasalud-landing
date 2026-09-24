@@ -6,6 +6,8 @@ export const DEFAULT_OG_IMAGE = '/og-default.jpg';
 export const ORGANIZATION_ID = `${SITE_URL}/#organization`;
 export const PERSON_ID = `${SITE_URL}/#fernando`;
 export const WEBSITE_ID = `${SITE_URL}/#website`;
+/** Perfiles verificados de la marca (schema sameAs). Vacío hasta confirmar URLs reales. */
+export const SOCIAL_PROFILES: string[] = [];
 
 interface BuildMetadataInput {
   /** Sin sufijo de marca: la plantilla del layout añade « | ANTEA Salud» */

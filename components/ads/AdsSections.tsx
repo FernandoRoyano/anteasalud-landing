@@ -36,13 +36,13 @@ export function AdsHero({ h1, h1Highlight, subtitle, bullets, formCta, origen }:
             <span className="mt-2 block text-[#2d6a4f]">{h1Highlight}</span>
           </h1>
 
-          <p className="text-lg md:text-xl text-slate-600 leading-relaxed">{subtitle}</p>
+          <p className="text-lg md:text-xl text-[#4a6358] leading-relaxed">{subtitle}</p>
 
           <ul className="space-y-3">
             {bullets.map((b) => (
               <li key={b} className="flex items-start gap-3">
-                <Check className="w-5 h-5 text-[rgb(0,94,184)] mt-0.5 flex-shrink-0" />
-                <span className="text-slate-700">{b}</span>
+                <Check className="w-5 h-5 text-[#2d6a4f] mt-0.5 flex-shrink-0" />
+                <span className="text-[#3b5a4e]">{b}</span>
               </li>
             ))}
           </ul>
@@ -72,8 +72,8 @@ export function AdsStats({ stats }: { stats: string[] }) {
     <section className="w-full bg-white py-16 px-4">
       <div className="max-w-5xl mx-auto grid sm:grid-cols-3 gap-6">
         {stats.map((s) => (
-          <div key={s} className="bg-[rgb(247,249,250)] rounded-2xl p-6 text-center border border-[rgb(232,237,238)]">
-            <p className="text-slate-700 font-medium leading-relaxed">{s}</p>
+          <div key={s} className="bg-[#fbfcf8] rounded-2xl p-6 text-center border border-[#eef5f0]">
+            <p className="text-[#3b5a4e] font-medium leading-relaxed">{s}</p>
           </div>
         ))}
       </div>
@@ -84,13 +84,13 @@ export function AdsStats({ stats }: { stats: string[] }) {
 /* ---------- Historia de caso ---------- */
 export function AdsCaseStory({ title, paragraphs }: { title: string; paragraphs: string[] }) {
   return (
-    <section className="w-full bg-[rgb(247,249,250)] py-20 px-4">
+    <section className="w-full bg-[#fbfcf8] py-20 px-4">
       <div className="max-w-3xl mx-auto">
-        <div className="bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-[rgb(232,237,238)]">
-          <h2 className="font-display text-fluid-2xl font-black text-[rgb(31,41,51)] mb-6">{title}</h2>
+        <div className="bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-[#eef5f0]">
+          <h2 className="font-display text-fluid-2xl font-black text-[#17372b] mb-6">{title}</h2>
           <div className="space-y-4">
             {paragraphs.map((p, i) => (
-              <p key={i} className="text-lg text-slate-600 leading-relaxed">{p}</p>
+              <p key={i} className="text-lg text-[#4a6358] leading-relaxed">{p}</p>
             ))}
           </div>
         </div>
@@ -111,16 +111,16 @@ export function AdsAbout({ methodology }: { methodology: string }) {
   return (
     <section className="w-full bg-white py-20 px-4">
       <div className="max-w-4xl mx-auto">
-        <h2 className="font-display text-fluid-2xl font-black text-[rgb(31,41,51)] text-center mb-10">
+        <h2 className="font-display text-fluid-2xl font-black text-[#17372b] text-center mb-10">
           Quién va a estar con tu familiar
         </h2>
         <div className="grid sm:grid-cols-2 gap-5">
           {creds.map(({ icon: Icon, text }) => (
-            <div key={text} className="flex items-start gap-4 bg-[rgb(247,249,250)] rounded-2xl p-5 border border-[rgb(232,237,238)]">
-              <div className="w-11 h-11 rounded-xl bg-[rgb(191,231,249)] flex items-center justify-center flex-shrink-0">
-                <Icon className="w-5 h-5 text-[rgb(0,94,184)]" />
+            <div key={text} className="flex items-start gap-4 bg-[#fbfcf8] rounded-2xl p-5 border border-[#eef5f0]">
+              <div className="w-11 h-11 rounded-xl bg-[#dcebe2] flex items-center justify-center flex-shrink-0">
+                <Icon className="w-5 h-5 text-[#2d6a4f]" />
               </div>
-              <p className="text-slate-700 font-medium leading-snug pt-1.5">{text}</p>
+              <p className="text-[#3b5a4e] font-medium leading-snug pt-1.5">{text}</p>
             </div>
           ))}
         </div>
@@ -132,19 +132,19 @@ export function AdsAbout({ methodology }: { methodology: string }) {
 /* ---------- Cómo funciona (pasos) ---------- */
 export function AdsSteps({ steps }: { steps: { title: string; text: string }[] }) {
   return (
-    <section className="w-full bg-[rgb(247,249,250)] py-20 px-4">
+    <section className="w-full bg-[#fbfcf8] py-20 px-4">
       <div className="max-w-4xl mx-auto">
-        <h2 className="font-display text-fluid-2xl font-black text-[rgb(31,41,51)] text-center mb-12">
+        <h2 className="font-display text-fluid-2xl font-black text-[#17372b] text-center mb-12">
           Cómo funciona
         </h2>
         <div className="grid md:grid-cols-3 gap-6">
           {steps.map((step, i) => (
-            <div key={step.title} className="bg-white rounded-2xl p-6 border border-[rgb(232,237,238)]">
-              <div className="w-10 h-10 rounded-full bg-[rgb(0,94,184)] text-white font-black flex items-center justify-center mb-4">
+            <div key={step.title} className="bg-white rounded-2xl p-6 border border-[#eef5f0]">
+              <div className="w-10 h-10 rounded-full bg-[#2d6a4f] text-white font-black flex items-center justify-center mb-4">
                 {i + 1}
               </div>
-              <h3 className="text-lg font-bold text-[rgb(31,41,51)] mb-2">{step.title}</h3>
-              <p className="text-slate-600 leading-relaxed">{step.text}</p>
+              <h3 className="text-lg font-bold text-[#17372b] mb-2">{step.title}</h3>
+              <p className="text-[#4a6358] leading-relaxed">{step.text}</p>
             </div>
           ))}
         </div>
@@ -158,19 +158,19 @@ export function AdsTestimonials({ testimonials }: { testimonials: { text: string
   return (
     <section className="w-full bg-white py-20 px-4">
       <div className="max-w-5xl mx-auto">
-        <h2 className="font-display text-fluid-2xl font-black text-[rgb(31,41,51)] text-center mb-12">
+        <h2 className="font-display text-fluid-2xl font-black text-[#17372b] text-center mb-12">
           Lo que dicen las familias
         </h2>
         <div className="grid md:grid-cols-3 gap-6">
           {testimonials.map((t) => (
-            <div key={t.author} className="bg-[rgb(247,249,250)] rounded-2xl p-6 border border-[rgb(232,237,238)] flex flex-col">
+            <div key={t.author} className="bg-[#fbfcf8] rounded-2xl p-6 border border-[#eef5f0] flex flex-col">
               <div className="flex gap-0.5 mb-3">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" aria-hidden="true" />
                 ))}
               </div>
-              <p className="text-slate-600 leading-relaxed flex-1">&ldquo;{t.text}&rdquo;</p>
-              <p className="mt-4 font-bold text-[rgb(31,41,51)] text-sm">{t.author}</p>
+              <p className="text-[#4a6358] leading-relaxed flex-1">&ldquo;{t.text}&rdquo;</p>
+              <p className="mt-4 font-bold text-[#17372b] text-sm">{t.author}</p>
             </div>
           ))}
         </div>
@@ -194,8 +194,8 @@ export function AdsFinalCTA({ title, subtitle, formCta, origen }: AdsFinalCTAPro
       <div className="relative mx-auto grid max-w-6xl items-center gap-14 lg:grid-cols-[1fr_.85fr]">
         <div className="text-white space-y-4">
           <h2 className="font-display text-[clamp(2.8rem,5vw,4.8rem)] font-bold leading-[.98] tracking-[-.04em] text-white">{title}</h2>
-          <p className="text-lg md:text-xl text-blue-100">{subtitle}</p>
-          <p className="text-base text-blue-100">
+          <p className="text-lg md:text-xl text-white/85">{subtitle}</p>
+          <p className="text-base text-white/85">
             Rellena el formulario y Fernando te escribirá en menos de 24 horas.
           </p>
         </div>

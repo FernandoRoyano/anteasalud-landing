@@ -1,45 +1,46 @@
 "use client";
 
+import type { ReactNode } from 'react';
 import { usePathname } from 'next/navigation';
 import Header from './Header';
-import Footer from './Footer';
 import WhatsAppButton from './WhatsAppButton';
 import CookieBanner from './CookieBanner';
 import GoogleTag from './GoogleTag';
 import { WizardProvider } from './WizardWhatsApp';
 
+function SkipLink() {
+  return (
+    <a
+      href="#contenido"
+      className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-xl focus:bg-[#17372b] focus:px-5 focus:py-3 focus:text-lg focus:font-bold focus:text-white"
+    >
+      Saltar al contenido
+    </a>
+  );
+}
+
 /**
  * Renderiza el header, footer, banner de cookies y botón de WhatsApp
  * sólo en las páginas públicas. En /admin/* no se muestra nada de esto.
+ * El footer llega como prop para seguir siendo Server Component.
  */
-export default function PublicChrome({ children }: { children: React.ReactNode }) {
+export default function PublicChrome({ children, footer }: { children: ReactNode; footer: ReactNode }) {
   const pathname = usePathname();
-  const isAdmin = pathname?.startsWith('/admin');
-  // Landings de captación de Google Ads: sin header, footer ni WhatsApp para
-  // canalizar TODO el tráfico al formulario. Solo conservamos el banner de
-  // cookies (necesario por el tracking de Ads).
-  const isAds = pathname?.startsWith('/ads');
-  const refreshedLandings = new Set([
-    '/ejercicio-personas-mayores-madrid',
-    '/prevencion-caidas-mayores-madrid',
-    '/recuperar-autonomia-mayores-madrid',
-    '/ejercicio-mayores-madrid-capital',
-    '/ejercicio-mayores-mostoles',
-    '/ejercicio-mayores-getafe',
-    '/valoracion-gratuita',
-    '/guia-prevencion-caidas',
-  ]);
-  const isRefreshedLanding = isAds || refreshedLandings.has(pathname ?? '');
 
-  if (isAdmin) {
+  if (pathname?.startsWith('/admin')) {
     return <>{children}</>;
   }
 
-  if (isAds) {
+  // Landings de captación de Google Ads: sin header, footer ni WhatsApp para
+  // canalizar todo el tráfico al formulario.
+  if (pathname?.startsWith('/ads')) {
     return (
       <>
         <GoogleTag />
-        <div className="landing-refresh">{children}</div>
+        <SkipLink />
+        <main id="contenido" tabIndex={-1} className="outline-none">
+          {children}
+        </main>
         <CookieBanner />
       </>
     );
@@ -48,11 +49,14 @@ export default function PublicChrome({ children }: { children: React.ReactNode }
   return (
     <WizardProvider>
       <GoogleTag />
+      <SkipLink />
       <Header />
-      {isRefreshedLanding ? <div className="landing-refresh">{children}</div> : children}
+      <main id="contenido" tabIndex={-1} className="outline-none">
+        {children}
+      </main>
       <CookieBanner />
       <WhatsAppButton />
-      <Footer />
+      {footer}
     </WizardProvider>
   );
 }

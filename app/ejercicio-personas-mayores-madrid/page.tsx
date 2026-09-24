@@ -48,29 +48,29 @@ export default function Page() {
       {/* Introducción */}
       <section className="w-full bg-white py-20 px-4">
         <div className="max-w-4xl mx-auto space-y-6">
-          <h2 className="text-3xl md:text-4xl font-black text-[rgb(31,41,51)]">
+          <h2 className="text-3xl md:text-4xl font-black text-[#17372b]">
             El ejercicio es la herramienta más potente contra el envejecimiento
           </h2>
-          <p className="text-lg text-slate-600 leading-relaxed">
+          <p className="text-lg text-[#4a6358] leading-relaxed">
             A partir de los 60 años, el cuerpo pierde de forma natural fuerza muscular, equilibrio y densidad ósea. Si no se trabaja, esta pérdida se acelera y aparecen los problemas que todos tememos: caídas, pérdida de autonomía, miedo a salir de casa, dependencia.
           </p>
-          <p className="text-lg text-slate-600 leading-relaxed">
-            La buena noticia es que el ejercicio adaptado <strong className="text-[rgb(0,94,184)]">revierte muchos de esos efectos</strong> a cualquier edad. No hace falta ir a un gimnasio, ni tener equipamiento, ni recorrer medio Madrid. Con un profesional titulado que vaya a tu casa y diseñe un programa específico, se pueden conseguir mejoras medibles en pocas semanas.
+          <p className="text-lg text-[#4a6358] leading-relaxed">
+            La buena noticia es que el ejercicio adaptado <strong className="text-[#2d6a4f]">revierte muchos de esos efectos</strong> a cualquier edad. No hace falta ir a un gimnasio, ni tener equipamiento, ni recorrer medio Madrid. Con un profesional titulado que vaya a tu casa y diseñe un programa específico, se pueden conseguir mejoras medibles en pocas semanas.
           </p>
-          <p className="text-lg text-slate-600 leading-relaxed">
+          <p className="text-lg text-[#4a6358] leading-relaxed">
             En ANTEA Salud llevamos <strong>14 años de experiencia como entrenadores a domicilio, especializados en personas mayores</strong> en Madrid. Sabemos cómo abordar las limitaciones reales de cada persona, cómo motivar sin forzar, y cómo adaptar cada ejercicio a lo que el cuerpo pide ese día.
           </p>
         </div>
       </section>
 
       {/* Beneficios */}
-      <section className="w-full bg-[rgb(232,237,238)] py-20 px-4">
+      <section className="w-full bg-[#eef5f0] py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-14 space-y-4">
-            <h2 className="text-3xl md:text-4xl font-black text-[rgb(31,41,51)]">
+            <h2 className="text-3xl md:text-4xl font-black text-[#17372b]">
               Beneficios reales del ejercicio a domicilio
             </h2>
-            <p className="text-lg text-[rgb(130,131,130)] max-w-2xl mx-auto">
+            <p className="text-lg text-[#4a6358] max-w-2xl mx-auto">
               Lo que verás en tu familiar (o en ti mismo) tras las primeras semanas
             </p>
           </div>
@@ -113,42 +113,42 @@ export default function Page() {
       {/* Qué trabajamos exactamente */}
       <section className="w-full bg-white py-20 px-4">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-black text-[rgb(31,41,51)] mb-8">
+          <h2 className="text-3xl md:text-4xl font-black text-[#17372b] mb-8">
             ¿Qué tipo de ejercicios hacemos con personas mayores?
           </h2>
-          <div className="space-y-6 text-lg text-slate-600 leading-relaxed">
+          <div className="space-y-6 text-lg text-[#4a6358] leading-relaxed">
             <p>
               Cada sesión de 30 minutos combina varios bloques pensados para abordar las debilidades más importantes que aparecen con la edad:
             </p>
             <ul className="space-y-4 pl-4">
               <li className="flex gap-3">
-                <Check className="w-6 h-6 text-[rgb(0,94,184)] flex-shrink-0 mt-1" />
+                <Check className="w-6 h-6 text-[#2d6a4f] flex-shrink-0 mt-1" />
                 <div>
-                  <strong className="text-[rgb(31,41,51)]">Fuerza funcional.</strong> Sentadillas adaptadas, levantarse de la silla, elevaciones de talones. Ejercicios que replican los movimientos del día a día.
+                  <strong className="text-[#17372b]">Fuerza funcional.</strong> Sentadillas adaptadas, levantarse de la silla, elevaciones de talones. Ejercicios que replican los movimientos del día a día.
                 </div>
               </li>
               <li className="flex gap-3">
-                <Check className="w-6 h-6 text-[rgb(0,94,184)] flex-shrink-0 mt-1" />
+                <Check className="w-6 h-6 text-[#2d6a4f] flex-shrink-0 mt-1" />
                 <div>
-                  <strong className="text-[rgb(31,41,51)]">Equilibrio.</strong> Apoyos sobre una pierna, caminar en línea, giros controlados. La base para prevenir caídas.
+                  <strong className="text-[#17372b]">Equilibrio.</strong> Apoyos sobre una pierna, caminar en línea, giros controlados. La base para prevenir caídas.
                 </div>
               </li>
               <li className="flex gap-3">
-                <Check className="w-6 h-6 text-[rgb(0,94,184)] flex-shrink-0 mt-1" />
+                <Check className="w-6 h-6 text-[#2d6a4f] flex-shrink-0 mt-1" />
                 <div>
-                  <strong className="text-[rgb(31,41,51)]">Movilidad articular.</strong> Estiramientos guiados para cadera, hombros y columna. Recupera rango de movimiento perdido.
+                  <strong className="text-[#17372b]">Movilidad articular.</strong> Estiramientos guiados para cadera, hombros y columna. Recupera rango de movimiento perdido.
                 </div>
               </li>
               <li className="flex gap-3">
-                <Check className="w-6 h-6 text-[rgb(0,94,184)] flex-shrink-0 mt-1" />
+                <Check className="w-6 h-6 text-[#2d6a4f] flex-shrink-0 mt-1" />
                 <div>
-                  <strong className="text-[rgb(31,41,51)]">Coordinación.</strong> Ejercicios que combinan movimiento y atención. Mejoran los reflejos y previenen tropiezos.
+                  <strong className="text-[#17372b]">Coordinación.</strong> Ejercicios que combinan movimiento y atención. Mejoran los reflejos y previenen tropiezos.
                 </div>
               </li>
               <li className="flex gap-3">
-                <Check className="w-6 h-6 text-[rgb(0,94,184)] flex-shrink-0 mt-1" />
+                <Check className="w-6 h-6 text-[#2d6a4f] flex-shrink-0 mt-1" />
                 <div>
-                  <strong className="text-[rgb(31,41,51)]">Trabajo cardiovascular suave.</strong> Adaptado a cada persona. Mejora el corazón sin pasarse.
+                  <strong className="text-[#17372b]">Trabajo cardiovascular suave.</strong> Adaptado a cada persona. Mejora el corazón sin pasarse.
                 </div>
               </li>
             </ul>
@@ -160,28 +160,28 @@ export default function Page() {
       <section className="w-full bg-white py-20 px-4">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-10 space-y-3">
-            <span className="inline-block px-4 py-1.5 bg-[rgb(191,231,249)] rounded-full text-sm font-semibold text-[rgb(0,94,184)]">
+            <span className="inline-block px-4 py-1.5 bg-[#dcebe2] rounded-full text-sm font-semibold text-[#2d6a4f]">
               Una historia real
             </span>
-            <h2 className="text-3xl md:text-4xl font-black text-[rgb(31,41,51)]">
+            <h2 className="text-3xl md:text-4xl font-black text-[#17372b]">
               Concha, 82 años: recuperar la fuerza cuando parecía tarde
             </h2>
           </div>
 
-          <div className="bg-[rgb(247,249,250)] rounded-3xl p-8 md:p-12 border border-[rgb(232,237,238)] space-y-5 text-lg text-slate-600 leading-relaxed">
+          <div className="bg-[#fbfcf8] rounded-3xl p-8 md:p-12 border border-[#eef5f0] space-y-5 text-lg text-[#4a6358] leading-relaxed">
             <p>
               Cuando conocí a Concha, en su casa del barrio de Pacífico, llevaba meses arrastrando una parestesia en la pierna izquierda: hormigueo y pérdida de sensibilidad que convertían gestos tan simples como levantarse de la silla o cruzar el pasillo en un pequeño reto cada vez. Es una mujer menuda, de poca masa muscular, y cada movimiento le costaba. Pero lo que más la frenaba no era el cuerpo: era el miedo. El miedo a fallar, a caerse, a no poder.
             </p>
             <p>
-              En la primera valoración lo vimos claro: faltaba <strong className="text-[rgb(0,94,184)]">fuerza</strong>. Y sin fuerza no hay estabilidad, ni equilibrio, ni confianza. No había que «cuidarla» ni dejarla quieta —eso solo acelera la pérdida—. Había que entrenarla. Diseñé un programa centrado en ejercicios de fuerza adaptados a su condición: levantarse de la silla con apoyo, elevaciones de talones, trabajo de tren inferior muy progresivo, respetando siempre sus sensaciones y sin prisa.
+              En la primera valoración lo vimos claro: faltaba <strong className="text-[#2d6a4f]">fuerza</strong>. Y sin fuerza no hay estabilidad, ni equilibrio, ni confianza. No había que «cuidarla» ni dejarla quieta —eso solo acelera la pérdida—. Había que entrenarla. Diseñé un programa centrado en ejercicios de fuerza adaptados a su condición: levantarse de la silla con apoyo, elevaciones de talones, trabajo de tren inferior muy progresivo, respetando siempre sus sensaciones y sin prisa.
             </p>
             <p>
               Las primeras semanas fueron de adaptación. Concha desconfiaba de su propia pierna. Pero sesión a sesión, el cuerpo respondía. Empezó a levantarse con menos esfuerzo. A moverse por casa con más seguridad. A no pensar en cada paso.
             </p>
             <p>
-              El trabajo sigue —la fuerza no se gana en un día, se construye— pero la dirección es inequívoca: Concha gana movilidad y autonomía cada semana. Su caso es el mejor recordatorio de lo que repito en cada casa a la que entro: <strong className="text-[rgb(31,41,51)]">la fuerza se entrena a cualquier edad, y nunca es demasiado tarde para empezar.</strong>
+              El trabajo sigue —la fuerza no se gana en un día, se construye— pero la dirección es inequívoca: Concha gana movilidad y autonomía cada semana. Su caso es el mejor recordatorio de lo que repito en cada casa a la que entro: <strong className="text-[#17372b]">la fuerza se entrena a cualquier edad, y nunca es demasiado tarde para empezar.</strong>
             </p>
-            <p className="text-base text-[rgb(130,131,130)] pt-2 border-t border-[rgb(232,237,238)]">
+            <p className="text-base text-[#4a6358] pt-2 border-t border-[#eef5f0]">
               — Fernando Royano, Graduado en Ciencias de la Actividad Física y del Deporte (CCAFYD)
             </p>
           </div>
@@ -189,12 +189,12 @@ export default function Page() {
       </section>
 
       {/* A quién va dirigido */}
-      <section className="w-full bg-[rgb(232,237,238)] py-20 px-4">
+      <section className="w-full bg-[#eef5f0] py-20 px-4">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-black text-[rgb(31,41,51)] mb-6">
+          <h2 className="text-3xl md:text-4xl font-black text-[#17372b] mb-6">
             ¿A quién va dirigido este servicio?
           </h2>
-          <div className="bg-white rounded-3xl shadow-md border border-[rgb(200,207,210)] p-8 md:p-10 space-y-5">
+          <div className="bg-white rounded-3xl shadow-md border border-[#cfe0d6] p-8 md:p-10 space-y-5">
             <ItemRow text="Personas mayores de 60 años que quieren mantenerse activas y prevenir el deterioro" />
             <ItemRow text="Tras una operación de cadera, rodilla u otra cirugía, una vez dada el alta médica" />
             <ItemRow text="Después de una caída, para recuperar la confianza y evitar la siguiente" />
@@ -203,7 +203,7 @@ export default function Page() {
             <ItemRow text="Mayores que han dejado de salir de casa y han perdido fuerza" />
             <ItemRow text="Cualquier persona mayor que quiera ganar calidad de vida desde su salón" />
           </div>
-          <p className="text-center text-sm text-[rgb(130,131,130)] mt-6">
+          <p className="text-center text-sm text-[#4a6358] mt-6">
             Si tienes dudas sobre si tu caso encaja, la primera valoración es gratuita y te lo confirmamos sin compromiso.
           </p>
         </div>
@@ -234,12 +234,12 @@ function BenefitCard({
   description: string;
 }) {
   return (
-    <div className="bg-white rounded-2xl p-6 shadow-md border border-[rgb(200,207,210)] hover:shadow-lg hover:border-[rgb(0,94,184)] transition">
-      <div className="w-12 h-12 rounded-xl bg-[rgb(191,231,249)] flex items-center justify-center text-[rgb(0,94,184)] mb-4">
+    <div className="bg-white rounded-2xl p-6 shadow-md border border-[#cfe0d6] hover:shadow-lg hover:border-[#2d6a4f] transition">
+      <div className="w-12 h-12 rounded-xl bg-[#dcebe2] flex items-center justify-center text-[#2d6a4f] mb-4">
         {icon}
       </div>
-      <h3 className="text-lg font-bold text-[rgb(31,41,51)] mb-2">{title}</h3>
-      <p className="text-sm text-slate-600 leading-relaxed">{description}</p>
+      <h3 className="text-lg font-bold text-[#17372b] mb-2">{title}</h3>
+      <p className="text-sm text-[#4a6358] leading-relaxed">{description}</p>
     </div>
   );
 }
@@ -247,10 +247,10 @@ function BenefitCard({
 function ItemRow({ text }: { text: string }) {
   return (
     <div className="flex items-start gap-3">
-      <div className="w-8 h-8 rounded-full bg-[rgb(191,231,249)] flex items-center justify-center flex-shrink-0">
-        <Users className="w-4 h-4 text-[rgb(0,94,184)]" />
+      <div className="w-8 h-8 rounded-full bg-[#dcebe2] flex items-center justify-center flex-shrink-0">
+        <Users className="w-4 h-4 text-[#2d6a4f]" />
       </div>
-      <p className="text-[rgb(31,41,51)] pt-1">{text}</p>
+      <p className="text-[#17372b] pt-1">{text}</p>
     </div>
   );
 }

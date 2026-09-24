@@ -2,6 +2,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Inter, Bricolage_Grotesque } from 'next/font/google';
 import PublicChrome from '@/components/PublicChrome';
+import Footer from '@/components/Footer';
 import { JsonLd } from '@/components/JsonLd';
 import {
   DEFAULT_OG_IMAGE,
@@ -9,6 +10,7 @@ import {
   PERSON_ID,
   SITE_NAME,
   SITE_URL,
+  SOCIAL_PROFILES,
   WEBSITE_ID,
 } from '@/lib/seo';
 
@@ -101,11 +103,8 @@ const jsonLd = {
         'Readaptación funcional',
         'Valoración funcional (SPPB)',
       ],
-      sameAs: [
-        'https://www.facebook.com/anteasalud',
-        'https://www.instagram.com/anteasalud',
-        'https://www.linkedin.com/company/anteasalud',
-      ],
+      // Añadir aquí las URLs reales de perfiles sociales / Google Business Profile cuando estén verificadas
+      sameAs: SOCIAL_PROFILES,
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
         name: 'Servicios de ejercicio para personas mayores',
@@ -152,7 +151,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <JsonLd data={jsonLd} />
       </head>
       <body className="font-sans antialiased">
-        <PublicChrome>{children}</PublicChrome>
+        <PublicChrome footer={<Footer />}>{children}</PublicChrome>
       </body>
     </html>
   );

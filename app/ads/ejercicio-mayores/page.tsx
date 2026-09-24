@@ -41,10 +41,10 @@ export default function Page() {
       {/* Problema + solución */}
       <section className="w-full bg-white py-20 px-4">
         <div className="max-w-3xl mx-auto text-center space-y-6">
-          <p className="text-xl md:text-2xl text-slate-700 leading-relaxed font-medium">
+          <p className="text-xl md:text-2xl text-[#3b5a4e] leading-relaxed font-medium">
             Lo ves perder fuerza cada mes. Sabes que necesita moverse. Pero entre el trabajo, los niños y la distancia, no puedes llevarlo. Y los centros de día no son la solución que buscas.
           </p>
-          <p className="font-display text-fluid-2xl font-black text-[rgb(0,94,184)]">
+          <p className="font-display text-fluid-2xl font-black text-[#2d6a4f]">
             Nosotros vamos a él.
           </p>
         </div>
@@ -78,15 +78,15 @@ export default function Page() {
       />
 
       {/* Precio con ancla de valor + sin permanencia */}
-      <section className="w-full bg-[rgb(247,249,250)] py-20 px-4">
+      <section className="w-full bg-[#fbfcf8] py-20 px-4">
         <div className="max-w-3xl mx-auto text-center space-y-5">
-          <h2 className="font-display text-fluid-2xl font-black text-[rgb(31,41,51)]">
+          <h2 className="font-display text-fluid-2xl font-black text-[#17372b]">
             ¿Cuánto vale que tu padre pueda ducharse solo?
           </h2>
-          <p className="text-lg text-slate-600 leading-relaxed">
+          <p className="text-lg text-[#4a6358] leading-relaxed">
             ¿Que no tengas que preocuparte cada vez que te llaman? Sesiones desde <strong>45€</strong>, adaptadas a su caso.
           </p>
-          <p className="text-lg font-bold text-[rgb(0,94,184)]">
+          <p className="text-lg font-bold text-[#2d6a4f]">
             Sin permanencia. Pagas el mes y, si no quieres seguir, no sigues.
           </p>
         </div>

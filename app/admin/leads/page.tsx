@@ -35,8 +35,7 @@ export default function LeadsPage() {
   const [filterZona, setFilterZona] = useState('');
   const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
 
-  const loadLeads = () => {
-    setLoading(true);
+  const fetchLeads = () =>
     fetch('/api/admin/leads')
       .then((res) => res.json())
       .then((data) => {
@@ -45,10 +44,10 @@ export default function LeadsPage() {
       })
       .catch(() => setError('Error al cargar los leads'))
       .finally(() => setLoading(false));
-  };
 
+  // loading ya arranca en true: la carga inicial solo actualiza estado en callbacks
   useEffect(() => {
-    loadLeads();
+    fetchLeads();
   }, []);
 
   const zonas = useMemo(() => {

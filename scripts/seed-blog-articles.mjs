@@ -11,10 +11,6 @@ loadEnvConfig(process.cwd());
 import { google } from 'googleapis';
 
 const ARTICULOS_SHEET = 'Articulos';
-const ARTICULOS_HEADERS = [
-  'id', 'slug', 'title', 'excerpt', 'bodyMarkdown', 'ogImage',
-  'tags', 'status', 'publishedAt', 'createdAt', 'updatedAt',
-];
 
 const articles = [
   {

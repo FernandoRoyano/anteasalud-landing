@@ -11,8 +11,6 @@ export const metadata: Metadata = buildMetadata({
   description:
     'Graduado en CCAFYD con 14 años como entrenador personal a domicilio en Madrid, especializado en fuerza, equilibrio y autonomía de personas mayores.',
   path: '/sobre-fernando',
-  image: '/hero-fernando.png',
-  imageAlt: 'Fernando Royano durante una sesión de ejercicio con una persona mayor',
 });
 
 const principles = [
@@ -64,7 +62,7 @@ export default function SobreFernandoPage() {
           </div>
           <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem_2rem_6rem_2rem] bg-[#dce9df]">
             <Image
-              src="/hero-fernando.png"
+              src="/hero-fernando.webp"
               alt="Fernando Royano acompaña a una persona mayor durante una sesión de ejercicio adaptado"
               fill
               priority

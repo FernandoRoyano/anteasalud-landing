@@ -47,25 +47,25 @@ export default function Page() {
       {/* Qué es autonomía y por qué importa */}
       <section className="w-full bg-white py-20 px-4">
         <div className="max-w-4xl mx-auto space-y-6">
-          <h2 className="text-3xl md:text-4xl font-black text-[rgb(31,41,51)]">
+          <h2 className="text-3xl md:text-4xl font-black text-[#17372b]">
             ¿Qué significa realmente &quot;recuperar la autonomía&quot;?
           </h2>
-          <p className="text-lg text-slate-600 leading-relaxed">
-            No hablamos de correr maratones ni de levantar pesas. Hablamos de las cosas del día a día que dan dignidad y calidad de vida: <strong className="text-[rgb(0,94,184)]">levantarse del sillón sin ayuda, ducharse sin miedo, vestirse, salir al supermercado, cocinar, jugar con los nietos</strong>.
+          <p className="text-lg text-[#4a6358] leading-relaxed">
+            No hablamos de correr maratones ni de levantar pesas. Hablamos de las cosas del día a día que dan dignidad y calidad de vida: <strong className="text-[#2d6a4f]">levantarse del sillón sin ayuda, ducharse sin miedo, vestirse, salir al supermercado, cocinar, jugar con los nietos</strong>.
           </p>
-          <p className="text-lg text-slate-600 leading-relaxed">
+          <p className="text-lg text-[#4a6358] leading-relaxed">
             Cuando se pierden estas capacidades, la vida cambia de golpe: hay que depender de otros, aparece la tristeza, el aislamiento, la frustración. Y muchas veces, <strong>el deterioro se acelera</strong> porque la falta de movimiento empeora aún más la condición física.
           </p>
-          <p className="text-lg text-slate-600 leading-relaxed">
+          <p className="text-lg text-[#4a6358] leading-relaxed">
             La buena noticia es que <strong>la mayoría de estas funciones se pueden recuperar</strong> con trabajo específico. He visto a personas de 85 años volver a salir a la calle solas tras 3 meses de trabajo. No es magia: es un plan bien hecho, constante, adaptado y con un profesional que sabe lo que hace.
           </p>
         </div>
       </section>
 
       {/* Casos típicos */}
-      <section className="w-full bg-[rgb(232,237,238)] py-20 px-4">
+      <section className="w-full bg-[#eef5f0] py-20 px-4">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-black text-[rgb(31,41,51)] text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-black text-[#17372b] text-center mb-12">
             Casos habituales con los que trabajamos
           </h2>
 
@@ -115,14 +115,14 @@ export default function Page() {
 
 function CaseCard({ title, description }: { title: string; description: string }) {
   return (
-    <div className="bg-white rounded-2xl p-6 shadow-md border border-[rgb(200,207,210)] hover:shadow-lg transition">
+    <div className="bg-white rounded-2xl p-6 shadow-md border border-[#cfe0d6] hover:shadow-lg transition">
       <div className="flex items-start gap-3 mb-3">
-        <div className="w-6 h-6 rounded-full bg-[rgb(0,94,184)] flex items-center justify-center flex-shrink-0 mt-0.5">
+        <div className="w-6 h-6 rounded-full bg-[#2d6a4f] flex items-center justify-center flex-shrink-0 mt-0.5">
           <Check className="w-4 h-4 text-white" />
         </div>
-        <h3 className="text-lg font-bold text-[rgb(31,41,51)]">{title}</h3>
+        <h3 className="text-lg font-bold text-[#17372b]">{title}</h3>
       </div>
-      <p className="text-slate-600 leading-relaxed pl-9">{description}</p>
+      <p className="text-[#4a6358] leading-relaxed pl-9">{description}</p>
     </div>
   );
 }

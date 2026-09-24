@@ -17,7 +17,6 @@ import {
 import {
   type Client,
   type Session,
-  type SessionStatus,
   SESSION_STATUS_COLORS,
 } from '@/lib/types';
 import SessionReminders from '@/components/admin/SessionReminders';

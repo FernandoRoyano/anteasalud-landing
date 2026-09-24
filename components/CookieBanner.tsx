@@ -45,18 +45,16 @@ export default function CookieBanner() {
       aria-label="Preferencias de cookies"
       className="fixed inset-x-0 bottom-0 z-[60] p-3 sm:p-5"
     >
-      <div className="mx-auto max-w-4xl rounded-2xl border border-[#2d6a4f]/20 bg-white p-5 shadow-2xl sm:p-6">
-        <h2 className="mb-2 text-xl font-bold text-[#17372b]">¿Aceptas las cookies de medición?</h2>
-        <p className="text-base leading-relaxed text-[#374151]">
-          Usamos cookies técnicas necesarias y, solo si aceptas, cookies de Google Analytics y Google Ads para
-          medir visitas y saber qué anuncios funcionan. No vendemos tus datos. Puedes cambiar tu elección en
-          cualquier momento desde el pie de página.
-        </p>
-        <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <Link href="/cookies" className="text-base font-semibold text-[#2d6a4f] underline underline-offset-2">
-            Ver política de cookies
+      <div className="mx-auto max-w-4xl rounded-2xl border border-[#2d6a4f]/20 bg-white p-4 shadow-2xl sm:p-6">
+        <h2 className="mb-1 text-lg font-bold text-[#17372b] sm:text-xl">¿Aceptas las cookies de medición?</h2>
+        <p className="text-base leading-snug text-[#374151]">
+          Solo si aceptas usamos Google Analytics y Google Ads para medir visitas y anuncios. No vendemos tus datos.{" "}
+          <Link href="/cookies" className="font-semibold text-[#2d6a4f] underline underline-offset-2">
+            Más información
           </Link>
-          <div className="flex flex-col gap-3 sm:flex-row">
+        </p>
+        <div className="mt-3 flex justify-end">
+          <div className="grid w-full grid-cols-2 gap-3 sm:w-auto">
             <button
               type="button"
               onClick={() => choose("rejected")}

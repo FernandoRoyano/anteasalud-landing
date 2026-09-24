@@ -91,22 +91,22 @@ export default function ValoracionGratuitaPage() {
       ]} />
 
       {/* HERO + FORMULARIO */}
-      <section className="relative w-full bg-gradient-to-br from-[rgb(191,231,249)] via-white to-[rgb(232,237,238)] px-4 pt-32 pb-16">
+      <section className="relative w-full bg-gradient-to-br from-[#dcebe2] via-white to-[#eef5f0] px-4 pt-32 pb-16">
         <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
-            <div className="inline-flex items-center gap-1.5 px-4 py-2 bg-[rgb(191,231,249)] rounded-full">
-              <Check className="w-4 h-4 text-[rgb(0,94,184)]" />
-              <span className="text-sm font-semibold text-[rgb(0,94,184)]">
+            <div className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#dcebe2] rounded-full">
+              <Check className="w-4 h-4 text-[#2d6a4f]" />
+              <span className="text-sm font-semibold text-[#2d6a4f]">
                 100% gratis · Sin compromiso · A domicilio
               </span>
             </div>
 
-            <h1 className="font-display text-fluid-5xl font-black tracking-tight text-slate-900 leading-[1.1]">
+            <h1 className="font-display text-fluid-5xl font-black tracking-tight text-[#17372b] leading-[1.1]">
               Valoración gratuita
-              <span className="block text-[rgb(0,94,184)] mt-2">para mayores en Madrid</span>
+              <span className="block text-[#2d6a4f] mt-2">para mayores en Madrid</span>
             </h1>
 
-            <p className="text-lg md:text-xl text-slate-600 leading-relaxed">
+            <p className="text-lg md:text-xl text-[#4a6358] leading-relaxed">
               Un entrenador titulado va a casa, evalúa fuerza, equilibrio y movilidad, y te entrega un plan personalizado. Sin compromiso. Respuesta en menos de 24 horas.
             </p>
 
@@ -118,8 +118,8 @@ export default function ValoracionGratuitaPage() {
                 '14 años como entrenador, especializado en mayores',
               ].map((item) => (
                 <li key={item} className="flex items-start gap-3">
-                  <Check className="w-5 h-5 text-[rgb(0,94,184)] mt-0.5 flex-shrink-0" />
-                  <span className="text-slate-700">{item}</span>
+                  <Check className="w-5 h-5 text-[#2d6a4f] mt-0.5 flex-shrink-0" />
+                  <span className="text-[#3b5a4e]">{item}</span>
                 </li>
               ))}
             </ul>
@@ -135,10 +135,10 @@ export default function ValoracionGratuitaPage() {
       <section className="w-full bg-white py-20 px-4">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12 space-y-4">
-            <h2 className="font-display text-fluid-3xl font-black text-[rgb(31,41,51)]">
+            <h2 className="font-display text-fluid-3xl font-black text-[#17372b]">
               ¿Qué incluye la valoración gratuita?
             </h2>
-            <p className="text-lg text-slate-600 max-w-3xl mx-auto">
+            <p className="text-lg text-[#4a6358] max-w-3xl mx-auto">
               No es una llamada comercial. Es una visita real a domicilio con evaluación funcional, igual que la primera sesión de un servicio de pago.
             </p>
           </div>
@@ -147,13 +147,13 @@ export default function ValoracionGratuitaPage() {
             {incluye.map(({ icon: Icon, title, text }) => (
               <div
                 key={title}
-                className="bg-[rgb(247,249,250)] rounded-2xl p-6 border border-[rgb(232,237,238)]"
+                className="bg-[#fbfcf8] rounded-2xl p-6 border border-[#eef5f0]"
               >
-                <div className="w-12 h-12 rounded-xl bg-[rgb(191,231,249)] flex items-center justify-center mb-4">
-                  <Icon className="w-6 h-6 text-[rgb(0,94,184)]" />
+                <div className="w-12 h-12 rounded-xl bg-[#dcebe2] flex items-center justify-center mb-4">
+                  <Icon className="w-6 h-6 text-[#2d6a4f]" />
                 </div>
-                <h3 className="text-lg font-bold text-[rgb(31,41,51)] mb-2">{title}</h3>
-                <p className="text-slate-600 leading-relaxed">{text}</p>
+                <h3 className="text-lg font-bold text-[#17372b] mb-2">{title}</h3>
+                <p className="text-[#4a6358] leading-relaxed">{text}</p>
               </div>
             ))}
           </div>
@@ -161,24 +161,24 @@ export default function ValoracionGratuitaPage() {
       </section>
 
       {/* FAQ */}
-      <section className="w-full bg-[rgb(247,249,250)] py-20 px-4">
+      <section className="w-full bg-[#fbfcf8] py-20 px-4">
         <div className="max-w-3xl mx-auto">
-          <h2 className="font-display text-fluid-3xl font-black text-[rgb(31,41,51)] text-center mb-12">
+          <h2 className="font-display text-fluid-3xl font-black text-[#17372b] text-center mb-12">
             Preguntas frecuentes
           </h2>
           <div className="space-y-4">
             {faqs.map(({ q, a }) => (
               <details
                 key={q}
-                className="group bg-white rounded-2xl p-6 border border-[rgb(232,237,238)] hover:border-[rgb(0,94,184)] transition"
+                className="group bg-white rounded-2xl p-6 border border-[#eef5f0] hover:border-[#2d6a4f] transition"
               >
                 <summary className="flex justify-between items-center cursor-pointer list-none">
-                  <span className="font-bold text-[rgb(31,41,51)] pr-4">{q}</span>
-                  <span className="text-[rgb(0,94,184)] text-2xl font-light group-open:rotate-45 transition-transform">
+                  <span className="font-bold text-[#17372b] pr-4">{q}</span>
+                  <span className="text-[#2d6a4f] text-2xl font-light group-open:rotate-45 transition-transform">
                     +
                   </span>
                 </summary>
-                <p className="mt-4 text-slate-600 leading-relaxed">{a}</p>
+                <p className="mt-4 text-[#4a6358] leading-relaxed">{a}</p>
               </details>
             ))}
           </div>

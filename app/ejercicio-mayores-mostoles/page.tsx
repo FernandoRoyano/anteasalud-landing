@@ -45,7 +45,7 @@ const config: LocalServiceConfig = {
     { question: '¿Cuánto cuesta el entrenador a domicilio en Móstoles?', answer: 'La sesión suelta de 30 minutos cuesta 65 € y el plan de 2 sesiones semanales 110 € a la semana, con los 10 € de desplazamiento por sesión ya incluidos. La primera valoración es gratuita.' },
     { question: '¿Qué pasa en la primera visita?', answer: 'Hablamos sobre su salud, sus rutinas y lo que quiere recuperar, y hacemos pruebas sencillas de equilibrio, marcha y levantarse de la silla. Con eso te explicamos qué plan tendría sentido, sin compromiso.' },
     { question: '¿Trabajáis con personas que casi no salen de casa?', answer: 'Sí. Es uno de los casos más habituales. Empezamos con ejercicios sentados o con apoyo y progresamos al ritmo de cada persona.' },
-    { question: '¿Qué horarios tenéis?', answer: 'De lunes a viernes, de 9:00 a 19:00. Buscamos una franja fija para que la rutina sea fácil de mantener.' },
+    { question: '¿Qué horarios tenéis?', answer: 'De lunes a viernes, de 8:30 a 14:00, según disponibilidad. Te confirmamos la franja al organizar la valoración y buscamos que sea fija para que la rutina sea fácil de mantener.' },
   ],
   cta: {
     title: 'Primera valoración gratuita en Móstoles',

@@ -58,7 +58,7 @@ export default function Footer() {
                   <MessageCircle className="h-5 w-5" aria-hidden="true" /> Escribir por WhatsApp
                 </WizardButton>
               </li>
-              <li className="pt-2 text-white/75">Lunes a viernes, 9:00 - 19:00</li>
+              <li className="pt-2 text-white/75">Lunes a viernes, 8:30 - 14:00 (según disponibilidad)</li>
             </ul>
           </div>
 

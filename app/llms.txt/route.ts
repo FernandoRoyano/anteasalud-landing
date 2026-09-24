@@ -22,7 +22,7 @@ export async function GET() {
 - Servicio: ejercicio adaptado a domicilio para personas mayores (prevención de caídas, recuperación de autonomía tras operación u hospitalización, fragilidad, mantenimiento).
 - Zona: Madrid capital (sin recargo) y municipios de la Comunidad de Madrid como Getafe o Móstoles (+10 € por sesión de desplazamiento).
 - Precios: primera valoración funcional gratuita; sesión suelta de 30 minutos, 55 €; plan de 2 sesiones semanales, 90 € por semana. Sin permanencia.
-- Horario: lunes a viernes, 9:00-19:00.
+- Horario: lunes a viernes, de 8:30 a 14:00, según disponibilidad (se confirma al reservar).
 - Contacto: anteasalud@gmail.com · WhatsApp +34 633 26 19 63 · ${SITE_URL}/valoracion-gratuita
 - ANTEA Salud no es un servicio sanitario: no sustituye al médico ni al fisioterapeuta y trabaja siguiendo sus indicaciones.
 

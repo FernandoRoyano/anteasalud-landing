@@ -1,5 +1,6 @@
 import { Check, GraduationCap, Home } from 'lucide-react';
 import LeadForm from '@/components/LeadForm';
+import PriceLine from '@/components/PriceLine';
 
 interface LandingHeroProps {
   /** Texto del badge superior */
@@ -12,6 +13,10 @@ interface LandingHeroProps {
   subtitle: string;
   /** Etiqueta de origen para atribuir el lead a esta landing */
   origen?: string;
+  /** Recargo por desplazamiento de la zona (0 = Madrid capital) */
+  surcharge?: number;
+  /** Mostrar aclaración de zonas cuando el precio es el de Madrid capital */
+  zoneNote?: boolean;
 }
 
 /**
@@ -24,6 +29,8 @@ export default function LandingHero({
   h1Highlight,
   subtitle,
   origen = 'Landing SEO',
+  surcharge = 0,
+  zoneNote = true,
 }: LandingHeroProps) {
   return (
     <section className="relative w-full overflow-hidden bg-[#fbfcf8] px-5 pb-20 pt-32 sm:px-8 lg:pb-28 lg:pt-40">
@@ -43,6 +50,8 @@ export default function LandingHero({
           <p className="max-w-2xl text-lg leading-relaxed text-[#3b5a4e] md:text-xl">
             {subtitle}
           </p>
+
+          <PriceLine surcharge={surcharge} zoneNote={zoneNote} className="rounded-2xl border border-[#2d6a4f]/15 bg-white/80 px-4 py-3" />
 
           <ul className="flex flex-wrap gap-x-6 gap-y-2 border-t border-[#2d6a4f]/15 pt-5 text-base text-[#3b5a4e]">
             <li className="flex items-center gap-2"><GraduationCap className="h-5 w-5 text-[#2d6a4f]" aria-hidden="true" /> Graduado en CCAFYD</li>

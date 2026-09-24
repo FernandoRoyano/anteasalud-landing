@@ -55,6 +55,8 @@ export default function LocalServicePage({ config }: { config: LocalServiceConfi
         h1Highlight={`en ${config.place}`}
         subtitle={config.heroSubtitle}
         origen={`Landing · ${config.place}`}
+        surcharge={config.surcharge}
+        zoneNote={false}
       />
 
       <section className="w-full bg-white px-5 py-20 sm:px-8">

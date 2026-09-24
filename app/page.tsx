@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowDown, ArrowRight, Check, ClipboardCheck, Footprints, GraduationCap, HeartHandshake, Home, ShieldCheck } from 'lucide-react';
 import LeadForm from '@/components/LeadForm';
+import PriceLine from '@/components/PriceLine';
 import { JsonLd } from '@/components/JsonLd';
 import { buildMetadata } from '@/lib/seo';
 
@@ -70,6 +71,7 @@ export default function HomePage() {
               <a href="#contacto" className="inline-flex min-h-14 items-center justify-center gap-2 rounded-full bg-[#2d6a4f] px-7 py-4 font-bold text-white shadow-[0_16px_40px_-18px_rgba(45,106,79,.8)] transition hover:-translate-y-0.5 hover:bg-[#22543f]">Solicitar valoración gratuita <ArrowRight className="h-5 w-5" /></a>
               <a href="#como-funciona" className="inline-flex min-h-14 items-center justify-center gap-2 rounded-full border border-[#2d6a4f]/25 bg-white/60 px-7 py-4 font-semibold text-[#2d6a4f] transition hover:bg-white">Ver cómo funciona <ArrowDown className="h-4 w-4" /></a>
             </div>
+            <PriceLine zoneNote className="mt-6 rounded-2xl border border-[#2d6a4f]/15 bg-white/80 px-4 py-3" />
             <div className="mt-10 flex flex-wrap gap-x-7 gap-y-3 border-t border-[#2d6a4f]/15 pt-6 text-base text-[#3b5a4e]">
               <span className="flex items-center gap-2"><GraduationCap className="h-5 w-5 text-[#2d6a4f]" /> Graduado en Ciencias del Deporte</span>
               <span className="flex items-center gap-2"><Check className="h-5 w-5 text-[#2d6a4f]" /> 14 años como entrenador, especializado en mayores</span>

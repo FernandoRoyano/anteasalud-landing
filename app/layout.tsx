@@ -1,52 +1,46 @@
 import './globals.css';
+import type { Metadata } from 'next';
 import { Inter, Bricolage_Grotesque } from 'next/font/google';
 import PublicChrome from '@/components/PublicChrome';
-import { safeJsonLd } from '@/lib/seo';
+import { JsonLd } from '@/components/JsonLd';
+import {
+  DEFAULT_OG_IMAGE,
+  ORGANIZATION_ID,
+  PERSON_ID,
+  SITE_NAME,
+  SITE_URL,
+  WEBSITE_ID,
+} from '@/lib/seo';
 
 const inter = Inter({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800', '900'],
   variable: '--font-inter-var',
   display: 'swap',
 });
 
 const bricolage = Bricolage_Grotesque({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800'],
   variable: '--font-bricolage-var',
   display: 'swap',
 });
 
-export const metadata = {
-  title: 'Ejercicio para Mayores a Domicilio en Madrid | ANTEA Salud',
-  description: 'Entrenamiento funcional y ejercicio terapéutico a domicilio para personas mayores en Madrid. Recupera autonomía, fuerza y confianza en casa. Graduado en Ciencias del Deporte con 14 años de experiencia. Valoración gratuita.',
-  keywords: 'ejercicio para mayores Madrid, entrenamiento personal mayores a domicilio, ejercicio terapéutico personas mayores, prevención caídas mayores Madrid, readaptación funcional domicilio, entrenador personas mayores Madrid, ejercicio post operación cadera, recuperar autonomía mayores, entrenamiento funcional mayores Madrid, ejercicio adaptado tercera edad Madrid',
-  authors: [{ name: 'ANTEA Salud' }],
-  metadataBase: new URL('https://anteasalud.com'),
-  alternates: {
-    canonical: 'https://anteasalud.com',
-  },
+const DEFAULT_TITLE = 'Ejercicio para mayores a domicilio en Madrid | ANTEA Salud';
+const DEFAULT_DESCRIPTION =
+  'Entrenamiento de fuerza y equilibrio a domicilio para personas mayores en Madrid. Graduado en CCAFYD. Valoración gratuita en casa.';
+
+export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
+  title: { default: DEFAULT_TITLE, template: `%s | ${SITE_NAME}` },
+  description: DEFAULT_DESCRIPTION,
+  applicationName: SITE_NAME,
+  authors: [{ name: 'Fernando Royano', url: `${SITE_URL}/sobre-fernando` }],
   openGraph: {
     type: 'website',
     locale: 'es_ES',
-    url: 'https://anteasalud.com',
-    siteName: 'ANTEA Salud',
-    title: 'Ejercicio para Mayores a Domicilio en Madrid | ANTEA Salud',
-    description: 'Entrenamiento funcional para personas mayores en tu casa. Recupera autonomía y confianza. +200 familias en Madrid confían en nosotros.',
-    images: [
-      {
-        url: '/hero-realistic.png',
-        width: 1200,
-        height: 630,
-        alt: 'ANTEA Salud - Ejercicio para Mayores a Domicilio en Madrid',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Ejercicio para Mayores a Domicilio en Madrid | ANTEA Salud',
-    description: 'Entrenamiento funcional para personas mayores en tu casa. +200 familias en Madrid confían en nosotros.',
-    images: ['/hero-realistic.png'],
+    siteName: SITE_NAME,
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+    images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: 'Fernando Royano entrenando con un hombre mayor en su casa' }],
   },
   robots: {
     index: true,
@@ -64,124 +58,98 @@ export const metadata = {
   },
 };
 
-// JSON-LD Schema para SEO
+// Grafo JSON-LD global: negocio de área de servicio + web + autor (E-E-A-T)
 const jsonLd = {
   '@context': 'https://schema.org',
-  '@type': ['LocalBusiness', 'HealthAndBeautyBusiness', 'SportsActivityLocation'],
-  '@id': 'https://anteasalud.com',
-  name: 'ANTEA Salud',
-  description: 'Entrenamiento funcional y ejercicio terapéutico a domicilio para personas mayores en Madrid. Graduado en Ciencias de la Actividad Física y el Deporte con 14 años de experiencia especializado en la recuperación de autonomía, prevención de caídas y readaptación funcional.',
-  url: 'https://anteasalud.com',
-  telephone: '+34633261963',
-  email: 'anteasalud@gmail.com',
-  priceRange: '€€',
-  image: 'https://anteasalud.com/hero-realistic.png',
-  founder: {
-    '@type': 'Person',
-    name: 'Fernando Royano',
-    jobTitle: 'Graduado en Ciencias de la Actividad Física y el Deporte (CCAFYD)',
-    description: 'Entrenador titulado con 14 años de experiencia especializado en ejercicio funcional para personas mayores, readaptación y prevención de caídas.',
-  },
-  knowsAbout: [
-    'Ejercicio para personas mayores',
-    'Entrenamiento funcional',
-    'Prevención de caídas',
-    'Readaptación funcional',
-    'Ejercicio terapéutico',
-    'Recuperación de autonomía',
-    'Ejercicio adaptado post-operación',
-  ],
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: 'Madrid',
-    addressRegion: 'Comunidad de Madrid',
-    addressCountry: 'ES',
-  },
-  geo: {
-    '@type': 'GeoCoordinates',
-    latitude: 40.4168,
-    longitude: -3.7038,
-  },
-  openingHoursSpecification: {
-    '@type': 'OpeningHoursSpecification',
-    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-    opens: '09:00',
-    closes: '19:00',
-  },
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: '4.9',
-    reviewCount: '200',
-    bestRating: '5',
-  },
-  sameAs: [
-    'https://www.facebook.com/anteasalud',
-    'https://www.instagram.com/anteasalud',
-  ],
-  areaServed: {
-    '@type': 'AdministrativeArea',
-    name: 'Comunidad de Madrid',
-  },
-  serviceArea: {
-    '@type': 'GeoCircle',
-    geoMidpoint: {
-      '@type': 'GeoCoordinates',
-      latitude: 40.4168,
-      longitude: -3.7038,
+  '@graph': [
+    {
+      '@type': ['LocalBusiness', 'HealthAndBeautyBusiness'],
+      '@id': ORGANIZATION_ID,
+      name: SITE_NAME,
+      description:
+        'Entrenamiento funcional y ejercicio adaptado a domicilio para personas mayores en Madrid: fuerza, equilibrio, prevención de caídas y recuperación de autonomía.',
+      url: SITE_URL,
+      logo: `${SITE_URL}/logo.png`,
+      image: `${SITE_URL}${DEFAULT_OG_IMAGE}`,
+      telephone: '+34633261963',
+      email: 'anteasalud@gmail.com',
+      priceRange: '€€',
+      founder: { '@id': PERSON_ID },
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Madrid',
+        addressRegion: 'Comunidad de Madrid',
+        addressCountry: 'ES',
+      },
+      areaServed: [
+        { '@type': 'City', name: 'Madrid' },
+        { '@type': 'City', name: 'Getafe' },
+        { '@type': 'City', name: 'Móstoles' },
+        { '@type': 'AdministrativeArea', name: 'Comunidad de Madrid' },
+      ],
+      openingHoursSpecification: {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+        opens: '09:00',
+        closes: '19:00',
+      },
+      knowsAbout: [
+        'Ejercicio para personas mayores',
+        'Entrenamiento de fuerza en personas mayores',
+        'Prevención de caídas',
+        'Fragilidad y sarcopenia',
+        'Readaptación funcional',
+        'Valoración funcional (SPPB)',
+      ],
+      sameAs: [
+        'https://www.facebook.com/anteasalud',
+        'https://www.instagram.com/anteasalud',
+        'https://www.linkedin.com/company/anteasalud',
+      ],
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Servicios de ejercicio para personas mayores',
+        itemListElement: [
+          { name: 'Entrenamiento funcional a domicilio', url: `${SITE_URL}/ejercicio-personas-mayores-madrid` },
+          { name: 'Prevención de caídas', url: `${SITE_URL}/prevencion-caidas-mayores-madrid` },
+          { name: 'Recuperación de autonomía', url: `${SITE_URL}/recuperar-autonomia-mayores-madrid` },
+          { name: 'Valoración funcional gratuita', url: `${SITE_URL}/valoracion-gratuita` },
+        ].map((service) => ({
+          '@type': 'Offer',
+          itemOffered: { '@type': 'Service', name: service.name, url: service.url, provider: { '@id': ORGANIZATION_ID } },
+        })),
+      },
     },
-    geoRadius: '50000',
-  },
-  hasOfferCatalog: {
-    '@type': 'OfferCatalog',
-    name: 'Servicios de Ejercicio y Readaptación para Mayores',
-    itemListElement: [
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'Entrenamiento Funcional a Domicilio',
-          description: 'Ejercicio adaptado para mejorar fuerza, equilibrio y movilidad en personas mayores. Sesiones supervisadas en tu casa por entrenador titulado.',
-        },
+    {
+      '@type': 'WebSite',
+      '@id': WEBSITE_ID,
+      url: SITE_URL,
+      name: SITE_NAME,
+      inLanguage: 'es-ES',
+      publisher: { '@id': ORGANIZATION_ID },
+    },
+    {
+      '@type': 'Person',
+      '@id': PERSON_ID,
+      name: 'Fernando Royano',
+      url: `${SITE_URL}/sobre-fernando`,
+      jobTitle: 'Entrenador especializado en personas mayores',
+      worksFor: { '@id': ORGANIZATION_ID },
+      hasCredential: {
+        '@type': 'EducationalOccupationalCredential',
+        credentialCategory: 'degree',
+        name: 'Grado en Ciencias de la Actividad Física y del Deporte (CCAFYD)',
       },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'Prevención de Caídas',
-          description: 'Evaluación del riesgo de caídas y ejercicios específicos para mejorar equilibrio y confianza en personas mayores.',
-        },
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'Readaptación Funcional Post-Operación',
-          description: 'Ejercicio adaptado en la fase de vuelta a la actividad tras cirugía de cadera, rodilla u otras intervenciones. Coordinación con tu fisioterapeuta médico.',
-        },
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'Recuperación de Autonomía',
-          description: 'Programa de ejercicio personalizado para recuperar la capacidad funcional y la independencia en personas mayores.',
-        },
-      },
-    ],
-  },
+      knowsAbout: ['Ejercicio para personas mayores', 'Prevención de caídas', 'Entrenamiento de fuerza', 'Readaptación funcional'],
+    },
+  ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es" className={`${inter.variable} ${bricolage.variable}`}>
       <head>
-        {/* Favicon */}
-        <link rel="icon" href="/favicon.ico" />
-        {/* JSON-LD Structured Data */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
-        />
+        <JsonLd data={jsonLd} />
       </head>
       <body className="font-sans antialiased">
         <PublicChrome>{children}</PublicChrome>

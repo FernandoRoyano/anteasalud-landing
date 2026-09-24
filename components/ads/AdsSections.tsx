@@ -5,14 +5,8 @@ import LeadForm from "@/components/LeadForm";
 function SocialProof() {
   return (
     <div className="flex flex-col items-center gap-1.5 text-center">
-      <div className="flex items-center gap-1">
-        {[...Array(5)].map((_, i) => (
-          <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-        ))}
-        <span className="ml-1 text-sm font-bold text-slate-700">4.9</span>
-      </div>
-      <p className="text-sm text-slate-600">
-        +200 familias en Madrid · Respuesta en menos de 24h
+      <p className="text-base font-semibold text-[#3b5a4e]">
+        Graduado en CCAFYD · +200 familias en Madrid · Respuesta en menos de 24h
       </p>
     </div>
   );
@@ -172,7 +166,7 @@ export function AdsTestimonials({ testimonials }: { testimonials: { text: string
             <div key={t.author} className="bg-[rgb(247,249,250)] rounded-2xl p-6 border border-[rgb(232,237,238)] flex flex-col">
               <div className="flex gap-0.5 mb-3">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                  <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" aria-hidden="true" />
                 ))}
               </div>
               <p className="text-slate-600 leading-relaxed flex-1">&ldquo;{t.text}&rdquo;</p>

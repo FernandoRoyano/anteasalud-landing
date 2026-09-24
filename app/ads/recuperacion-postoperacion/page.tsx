@@ -13,7 +13,7 @@ import {
 const ORIGEN = "Ads · Recuperación post-operación";
 
 export const metadata: Metadata = {
-  title: "Recuperación tras operación a domicilio en Madrid | ANTEA Salud",
+  title: { absolute: "Recuperación tras operación a domicilio en Madrid | ANTEA Salud" },
   description:
     "El alta médica no es el final de la recuperación. Un entrenador titulado diseña el programa de vuelta a la actividad tras una operación de cadera o rodilla, en tu domicilio. Valoración gratuita.",
   robots: { index: false, follow: false },

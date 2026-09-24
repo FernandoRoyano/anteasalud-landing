@@ -1,3 +1,4 @@
+import { cache } from 'react';
 import { google, sheets_v4 } from 'googleapis';
 import type { Article, ArticleStatus, Client, Lead, LeadSource, Session, SessionStatus, Zone } from './types';
 import { getArticleEditorial } from '@/lib/article-editorial';
@@ -573,7 +574,7 @@ export async function deleteSession(id: string): Promise<void> {
 // =============================================================================
 
 function parseArticleRow(row: string[], index: number): Article {
-  return getArticleEditorial({
+  return {
     row: index + 2,
     id: String(row[0] ?? '').trim(),
     slug: String(row[1] ?? '').trim(),
@@ -589,7 +590,7 @@ function parseArticleRow(row: string[], index: number): Article {
     publishedAt: String(row[8] ?? ''),
     createdAt: String(row[9] ?? ''),
     updatedAt: String(row[10] ?? ''),
-  });
+  };
 }
 
 function serializeArticleRow(a: Article): string[] {
@@ -608,6 +609,7 @@ function serializeArticleRow(a: Article): string[] {
   ];
 }
 
+/** Datos en bruto del Sheet (admin y escrituras). Nunca aplicar la capa editorial aquí: se persistiría. */
 export async function getAllArticles(): Promise<Article[]> {
   const sheets = getSheetsClient();
   const spreadsheetId = process.env.GOOGLE_SHEET_ID!;
@@ -624,17 +626,19 @@ export async function getAllArticles(): Promise<Article[]> {
     .filter((a) => a.id); // filas vacías (soft-deleted) se ignoran
 }
 
-export async function getPublishedArticles(): Promise<Article[]> {
+// Web pública: artículos con la capa editorial aplicada. cache() evita llamadas duplicadas por request.
+export const getPublishedArticles = cache(async (): Promise<Article[]> => {
   const all = await getAllArticles();
   return all
     .filter((a) => a.status === 'published')
+    .map(getArticleEditorial)
     .sort((a, b) => (b.publishedAt || '').localeCompare(a.publishedAt || ''));
-}
+});
 
-export async function getArticleBySlug(slug: string): Promise<Article | null> {
-  const all = await getAllArticles();
+export const getArticleBySlug = cache(async (slug: string): Promise<Article | null> => {
+  const all = await getPublishedArticles();
   return all.find((a) => a.slug === slug) || null;
-}
+});
 
 export async function getArticleById(id: string): Promise<Article | null> {
   const all = await getAllArticles();

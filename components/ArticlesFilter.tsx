@@ -14,7 +14,7 @@ const ARTICLE_CATEGORIES = [
   {
     id: 'fuerza',
     label: 'Fuerza y autonomía',
-    tags: ['fuerza', 'autonomía', 'fragilidad'],
+    tags: ['fuerza', 'autonomía', 'fragilidad', 'sarcopenia', 'movilidad'],
   },
   {
     id: 'valoracion',
@@ -24,7 +24,7 @@ const ARTICLE_CATEGORIES = [
   {
     id: 'recuperacion',
     label: 'Recuperación',
-    tags: ['recuperación', 'hospitalización', 'cadera', 'fractura', 'post-operatorio', 'fisioterapia'],
+    tags: ['recuperación', 'readaptación', 'hospitalización', 'cadera', 'fractura', 'post-operatorio', 'fisioterapia'],
   },
   {
     id: 'ejercicio',
@@ -73,6 +73,7 @@ function articleMatchesCategory(article: ArticleListItem, categoryId: CategoryId
 function formatDate(iso: string): string {
   if (!iso) return '';
   return new Date(iso).toLocaleDateString('es-ES', {
+    timeZone: 'Europe/Madrid',
     year: 'numeric',
     month: 'long',
     day: 'numeric',
@@ -104,14 +105,14 @@ export function ArticlesFilter({ articles }: ArticlesFilterProps) {
       <div className="mb-8 sm:mb-10">
         <div className="flex items-end justify-between gap-4 mb-4">
           <div>
-            <p className="text-fluid-xs font-semibold uppercase tracking-[0.18em] text-accent-dark mb-1.5">
+            <p className="text-fluid-sm font-semibold uppercase tracking-[0.18em] text-accent-dark mb-1.5">
               Explorar por tema
             </p>
             <h2 className="font-display text-fluid-2xl font-bold text-ink">
               ¿Qué necesitas entender?
             </h2>
           </div>
-          <p className="hidden sm:block text-fluid-sm text-muted" aria-live="polite">
+          <p className="hidden sm:block text-fluid-base text-muted">
             {filteredArticles.length} {filteredArticles.length === 1 ? 'artículo' : 'artículos'}
           </p>
         </div>
@@ -125,7 +126,7 @@ export function ArticlesFilter({ articles }: ArticlesFilterProps) {
             type="button"
             onClick={() => setActiveCategory('todos')}
             aria-pressed={activeCategory === 'todos'}
-            className={`shrink-0 rounded-full border px-4 py-2.5 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 ${
+            className={`shrink-0 min-h-11 rounded-full border px-4 py-2 text-base font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 ${
               activeCategory === 'todos'
                 ? 'border-primary bg-primary text-white shadow-sm'
                 : 'border-border bg-white text-primary hover:border-primary/40 hover:bg-primary/5'
@@ -142,7 +143,7 @@ export function ArticlesFilter({ articles }: ArticlesFilterProps) {
                 type="button"
                 onClick={() => setActiveCategory(category.id)}
                 aria-pressed={isActive}
-                className={`shrink-0 rounded-full border px-4 py-2.5 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 ${
+                className={`shrink-0 min-h-11 rounded-full border px-4 py-2 text-base font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 ${
                   isActive
                     ? 'border-primary bg-primary text-white shadow-sm'
                     : 'border-border bg-white text-primary hover:border-primary/40 hover:bg-primary/5'
@@ -183,7 +184,7 @@ export function ArticlesFilter({ articles }: ArticlesFilterProps) {
                   {article.tags.slice(0, 2).map((tag) => (
                     <span
                       key={tag}
-                      className="text-[0.7rem] font-semibold uppercase tracking-wider text-accent-dark bg-accent/10 px-2.5 py-1 rounded-full"
+                      className="text-sm font-semibold uppercase tracking-wide text-accent-dark bg-accent/10 px-2.5 py-1 rounded-full"
                     >
                       {tag}
                     </span>
@@ -196,14 +197,14 @@ export function ArticlesFilter({ articles }: ArticlesFilterProps) {
               <p className="text-muted leading-relaxed text-fluid-base mb-4 flex-1">
                 {article.excerpt}
               </p>
-              <div className="flex items-center justify-between gap-3 pt-4 border-t border-border/60 text-fluid-sm">
+              <div className="flex items-center justify-between gap-3 pt-4 border-t border-border/60 text-fluid-base">
                 <span className="flex flex-wrap items-center gap-x-3 gap-y-1 text-muted">
-                  <span className="inline-flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5" />{formatDate(article.publishedAt)}</span>
-                  <span className="inline-flex items-center gap-1.5"><Clock3 className="w-3.5 h-3.5" />{article.readingMinutes} min</span>
+                  <span className="inline-flex items-center gap-1.5"><Calendar className="w-4 h-4" aria-hidden="true" />{formatDate(article.publishedAt)}</span>
+                  <span className="inline-flex items-center gap-1.5"><Clock3 className="w-4 h-4" aria-hidden="true" />{article.readingMinutes} min</span>
                 </span>
                 <span className="inline-flex items-center gap-1.5 font-semibold text-primary group-hover:gap-2.5 transition-all">
                   Leer
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-4 h-4" aria-hidden="true" />
                 </span>
               </div>
             </div>

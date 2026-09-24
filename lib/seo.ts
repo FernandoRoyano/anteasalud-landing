@@ -68,6 +68,35 @@ export function buildMetadata({
   };
 }
 
+interface ServiceSchemaInput {
+  name: string;
+  description: string;
+  path: string;
+  areaServed: string | string[];
+}
+
+/** Service vinculado al negocio global (@id) en lugar de duplicar un LocalBusiness por página */
+export function buildServiceSchema({ name, description, path, areaServed }: ServiceSchemaInput) {
+  const areas = Array.isArray(areaServed) ? areaServed : [areaServed];
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    '@id': `${absoluteUrl(path)}#service`,
+    name,
+    serviceType: 'Ejercicio para personas mayores a domicilio',
+    description,
+    url: absoluteUrl(path),
+    provider: { '@id': ORGANIZATION_ID },
+    areaServed: areas.map((area) => ({ '@type': 'City', name: area })),
+    offers: {
+      '@type': 'Offer',
+      name: 'Primera valoración funcional a domicilio',
+      price: '0',
+      priceCurrency: 'EUR',
+    },
+  };
+}
+
 /** next/image no tiene remotePatterns: solo aceptamos imágenes servidas desde /public */
 export function isLocalImagePath(src: string | undefined): src is string {
   return !!src && /^\/[\w\-./]+\.(webp|png|jpe?g|avif)$/i.test(src) && !src.includes('..');

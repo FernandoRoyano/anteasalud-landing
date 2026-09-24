@@ -13,7 +13,7 @@ import {
 const ORIGEN = "Ads · Ejercicio mayores";
 
 export const metadata: Metadata = {
-  title: "Entrenador para mayores a domicilio en Madrid | ANTEA Salud",
+  title: { absolute: "Entrenador para mayores a domicilio en Madrid | ANTEA Salud" },
   description:
     "Recupera la fuerza y la autonomía de tu padre o madre desde su casa. Un profesional titulado va a su domicilio en Madrid con sesiones adaptadas a su ritmo. Valoración gratuita.",
   robots: { index: false, follow: false },

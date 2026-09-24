@@ -248,16 +248,19 @@ const CONTENT_CORRECTIONS: Array<[string, string]> = [
 
 export function getArticleEditorial(article: Article): Article {
   const override = EDITORIAL_OVERRIDES[article.slug];
+  // replaceAll con función: no interpreta patrones especiales ($&, $1…) del texto de reemplazo
   const correctedBody = CONTENT_CORRECTIONS.reduce(
-    (body, [original, replacement]) => body.replace(original, replacement),
+    (body, [original, replacement]) => body.replaceAll(original, () => replacement),
     article.bodyMarkdown
   );
   const expansion = ARTICLE_EXPANSIONS[article.slug];
-  const expansionHeading = expansion?.match(/^##\s+.+$/m)?.[0];
-  const shouldAddExpansion = expansion && expansionHeading && !correctedBody.includes(expansionHeading);
+  // Si cualquier sección de la ampliación ya está en el cuerpo (p. ej. persistida desde el admin), no se duplica
+  const expansionHeadings = expansion?.match(/^##\s+.+$/gm) ?? [];
+  const shouldAddExpansion =
+    !!expansion && expansionHeadings.length > 0 && !expansionHeadings.some((h) => correctedBody.includes(h));
   const referencesHeading = '\n## Referencias';
   const bodyMarkdown = shouldAddExpansion && correctedBody.includes(referencesHeading)
-    ? correctedBody.replace(referencesHeading, `${expansion}${referencesHeading}`)
+    ? correctedBody.replace(referencesHeading, () => `${expansion}${referencesHeading}`)
     : `${correctedBody}${shouldAddExpansion ? expansion : ''}`;
 
   return override ? { ...article, ...override, bodyMarkdown } : { ...article, bodyMarkdown };

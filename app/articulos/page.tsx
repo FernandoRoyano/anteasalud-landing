@@ -3,24 +3,16 @@ import { getPublishedArticles } from '@/lib/sheets';
 import { BreadcrumbSchema } from '@/components/BreadcrumbSchema';
 import { ArticlesFilter } from '@/components/ArticlesFilter';
 import { getArticleImageAlt, getReadingMinutes } from '@/lib/article-editorial';
+import { DEFAULT_OG_IMAGE, SITE_URL, buildMetadata, isLocalImagePath } from '@/lib/seo';
 
-const TITLE = 'Artículos — Guías de ejercicio y salud para personas mayores | ANTEA Salud';
-const DESCRIPTION =
-  'Artículos con evidencia científica sobre ejercicio, prevención de caídas, readaptación y autonomía en personas mayores. Escritos por un entrenador titulado con 14 años de experiencia.';
-const URL_PAGE = 'https://anteasalud.com/articulos';
+const URL_PAGE = `${SITE_URL}/articulos`;
 
-export const metadata: Metadata = {
-  title: TITLE,
-  description: DESCRIPTION,
-  alternates: { canonical: URL_PAGE },
-  openGraph: {
-    type: 'website',
-    url: URL_PAGE,
-    title: TITLE,
-    description: DESCRIPTION,
-    images: ['/hero-realistic.png'],
-  },
-};
+export const metadata: Metadata = buildMetadata({
+  title: 'Guías de ejercicio para personas mayores',
+  description:
+    'Artículos con evidencia sobre ejercicio, caídas, fuerza, fragilidad y recuperación en personas mayores, escritos por un graduado en CCAFYD.',
+  path: '/articulos',
+});
 
 // Revalida cada hora — cuando se publica un artículo nuevo aparece en <1h
 export const revalidate = 3600;
@@ -46,7 +38,7 @@ export default async function ArticulosIndexPage() {
         <div className="absolute inset-0 antea-grid opacity-30" aria-hidden="true" />
         <div className="absolute -right-24 -top-20 size-96 rounded-full bg-accent/20 blur-3xl" aria-hidden="true" />
         <div className="relative max-w-6xl mx-auto px-5 sm:px-8">
-          <p className="text-fluid-xs font-semibold uppercase tracking-[0.25em] text-accent-light mb-6">Cuaderno ANTEA</p>
+          <p className="text-fluid-sm font-semibold uppercase tracking-[0.25em] text-accent-light mb-6">Cuaderno ANTEA · Guías para familias</p>
           <h1
             className="max-w-4xl font-display font-black tracking-tight leading-[0.98] mb-7 text-balance"
             style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)' }}
@@ -54,7 +46,7 @@ export default async function ArticulosIndexPage() {
             Entender el movimiento<br />
             <span className="text-accent-light">cambia cómo cuidamos.</span>
           </h1>
-          <p className="text-fluid-xl text-white/75 leading-relaxed max-w-2xl text-pretty">
+          <p className="text-fluid-xl text-white/85 leading-relaxed max-w-2xl text-pretty">
             Ideas prácticas para familias que quieren ayudar con criterio: qué observar, qué puede aportar el ejercicio y cuándo pedir ayuda.
           </p>
         </div>
@@ -76,7 +68,7 @@ export default async function ArticulosIndexPage() {
                 slug: article.slug,
                 title: article.title,
                 excerpt: article.excerpt,
-                ogImage: article.ogImage,
+                ogImage: isLocalImagePath(article.ogImage) ? article.ogImage : DEFAULT_OG_IMAGE,
                 imageAlt: getArticleImageAlt(article),
                 tags: article.tags,
                 publishedAt: article.publishedAt,

@@ -1,127 +1,72 @@
 import type { Metadata } from 'next';
-import LandingHero from '@/components/landing/LandingHero';
-import LandingCTA from '@/components/landing/LandingCTA';
-import { Check } from 'lucide-react';
-import { BreadcrumbSchema } from '@/components/BreadcrumbSchema';
-import { safeJsonLd } from '@/lib/seo';
+import LocalServicePage, { type LocalServiceConfig } from '@/components/landing/LocalServicePage';
+import { buildMetadata } from '@/lib/seo';
 
-const TITLE = 'Ejercicio para Mayores a Domicilio en Getafe | ANTEA Salud';
-const DESCRIPTION =
-  'Entrenador titulado para personas mayores a domicilio en Getafe. Ejercicio funcional, prevención de caídas y readaptación en casa. Graduado en Ciencias del Deporte con 14 años de experiencia. Primera valoración gratuita.';
-const URL = 'https://anteasalud.com/ejercicio-mayores-getafe';
-
-export const metadata: Metadata = {
-  title: TITLE,
-  description: DESCRIPTION,
-  keywords:
-    'ejercicio mayores Getafe, entrenador personal Getafe, ejercicio a domicilio Getafe, readaptación Getafe, ejercicio para mayores sur Madrid, prevención caídas Getafe',
-  alternates: { canonical: URL },
-  openGraph: { type: 'article', url: URL, title: TITLE, description: DESCRIPTION, images: ['/hero-realistic.png'] },
+const config: LocalServiceConfig = {
+  place: 'Getafe',
+  path: '/ejercicio-mayores-getafe',
+  badge: 'Getafe · Sur de Madrid',
+  description:
+    'Entrenador para personas mayores a domicilio en Getafe: fuerza, equilibrio y prevención de caídas en casa. Graduado en CCAFYD. Valoración gratuita.',
+  heroSubtitle:
+    'Voy a casa de tu familiar en Getafe para trabajar fuerza, equilibrio y confianza al caminar. Sesiones de 30 minutos adaptadas a cómo se encuentra cada día.',
+  surcharge: 10,
+  intro: {
+    title: 'Ejercicio adaptado en tu casa de Getafe',
+    paragraphs: [
+      'Getafe está a unos 14 km del centro de Madrid y muchas familias del municipio nos piden algo concreto: que su padre o su madre vuelva a moverse con seguridad sin tener que desplazarse a un gimnasio o a un centro.',
+      'Cada sesión dura 30 minutos y se adapta al estado de la persona ese día. Primero hacemos una valoración funcional gratuita en casa; después diseñamos un plan y lo ajustamos sesión a sesión según la evolución.',
+      'El ejercicio a domicilio es compatible con las actividades de los centros municipales de mayores de Getafe. De hecho, muchas personas empiezan en casa para ganar fuerza y confianza y, cuando están preparadas, se animan a volver a las actividades de grupo.',
+    ],
+  },
+  neighborhoods: {
+    title: 'Barrios de Getafe a los que vamos',
+    note: 'Nos desplazamos en coche a cualquier punto del municipio.',
+    items: ['Centro', 'Sector III', 'Las Margaritas', 'San Isidro', 'El Bercial', 'Los Molinos', 'Perales del Río', 'Getafe Norte', 'Juan de la Cierva', 'La Alhóndiga', 'El Casar', 'Buenavista'],
+  },
+  walking: {
+    title: 'Dónde practicar lo que trabajamos en las sesiones',
+    intro:
+      'El objetivo es que la fuerza y el equilibrio que ganamos en casa se noten fuera. Estas son las referencias que usamos con familias de Getafe para ir sumando paseos, de menos a más exigencia:',
+    routes: [
+      { name: 'Paseos llanos del propio barrio', tip: 'Primera fase: recorridos cortos, con bancos cerca y en horas de poca gente. Lo importante es la regularidad, no la distancia.' },
+      { name: 'Parques urbanos con caminos amplios', tip: 'Cuando la marcha es estable: parques como el de Lorenzo Azofra o las zonas verdes de Getafe Norte permiten alargar el paseo en terreno cómodo.' },
+      { name: 'Cerro de los Ángeles', tip: 'Tiene pendientes y firme irregular. Lo reservamos para cuando la persona ya se levanta de la silla sin manos y mantiene bien el equilibrio en los giros.' },
+    ],
+  },
+  cases: [
+    'Mayores que quieren mantenerse activos sin salir de casa',
+    'Vuelta a la actividad tras una operación de cadera o rodilla, con el alta médica',
+    'Prevención de caídas y recuperación de la confianza al caminar',
+    'Ejercicio adaptado con artrosis u osteoporosis, siguiendo las indicaciones sanitarias',
+    'Pérdida de fuerza tras una hospitalización o una temporada sin moverse',
+  ],
+  faqs: [
+    { question: '¿Cuánto cuesta el ejercicio a domicilio en Getafe?', answer: 'La sesión suelta de 30 minutos cuesta 65 € y el plan de 2 sesiones semanales 110 € a la semana. Incluye 10 € por sesión de desplazamiento fuera de Madrid capital. La primera valoración es gratuita.' },
+    { question: '¿Vais a Perales del Río o El Bercial?', answer: 'Sí. Cubrimos todos los barrios de Getafe, incluidos Perales del Río, El Bercial, Los Molinos y Getafe Norte.' },
+    { question: '¿Hace falta tener material en casa?', answer: 'No. Llevamos el material necesario (bandas, pesos ligeros, conos). Solo necesitamos una silla estable sin ruedas y un pequeño espacio despejado.' },
+    { question: '¿Es compatible con la fisioterapia o con el centro de mayores?', answer: 'Sí. No sustituimos al fisioterapeuta ni al médico: seguimos sus indicaciones y el ejercicio se puede combinar con las actividades de grupo del centro municipal.' },
+  ],
+  cta: {
+    title: 'Primera valoración gratuita en Getafe',
+    subtitle: 'Sin compromiso y sin pago por adelantado. Vemos juntos la situación y decidimos si tiene sentido empezar.',
+  },
+  related: [
+    { href: '/ejercicio-mayores-mostoles', label: 'Móstoles' },
+    { href: '/ejercicio-mayores-madrid-capital', label: 'Madrid capital' },
+    { href: '/prevencion-caidas-mayores-madrid', label: 'Prevención de caídas' },
+  ],
 };
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Service',
-  serviceType: 'Ejercicio para personas mayores a domicilio',
-  provider: { '@type': 'LocalBusiness', name: 'ANTEA Salud', telephone: '+34633261963', url: 'https://anteasalud.com' },
-  areaServed: { '@type': 'City', name: 'Getafe', containedIn: { '@type': 'AdministrativeArea', name: 'Comunidad de Madrid' } },
-  description: DESCRIPTION,
-};
+// Revalida para incluir artículos nuevos en «Guías para familias»
+export const revalidate = 3600;
+
+export const metadata: Metadata = buildMetadata({
+  title: 'Ejercicio para mayores a domicilio en Getafe',
+  description: config.description,
+  path: config.path,
+});
 
 export default function Page() {
-  return (
-    <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }} />
-      <BreadcrumbSchema items={[
-        { name: 'Inicio', url: 'https://anteasalud.com' },
-        { name: 'Getafe', url: URL },
-      ]} />
-
-      <LandingHero
-        badge="Getafe · Sur de Madrid"
-        h1="Ejercicio para personas mayores a domicilio"
-        h1Highlight="en Getafe"
-        subtitle="Entrenador titulado con 14 años de experiencia especializado en personas mayores. Voy a tu casa en Getafe a entrenar a tu familiar. Ejercicio adaptado, prevención de caídas y recuperación de autonomía."
-        origen="Landing · Getafe"
-      />
-
-      <section className="w-full bg-white py-20 px-4">
-        <div className="max-w-4xl mx-auto space-y-6">
-          <h2 className="text-3xl md:text-4xl font-black text-[rgb(31,41,51)]">
-            Ejercicio adaptado en tu casa de Getafe
-          </h2>
-          <p className="text-lg text-slate-600 leading-relaxed">
-            Getafe está a solo 14 km del centro de Madrid y es una de las zonas donde más familias me han pedido servicio en los últimos años. Voy en coche propio a cualquier barrio de Getafe: <strong>Sector 3, Las Margaritas, San Isidro, El Bercial, Los Molinos, Perales del Río, Getafe Norte y centro</strong>.
-          </p>
-          <p className="text-lg text-slate-600 leading-relaxed">
-            Cada sesión dura 30 minutos y la adapto al estado concreto de cada persona ese día. Nada de clases genéricas: primero hacemos valoración, luego diseño un plan específico, y vamos ajustando sesión a sesión según la evolución.
-          </p>
-          <p className="text-lg text-slate-600 leading-relaxed">
-            Mi titulación es <strong className="text-[rgb(0,94,184)]">Graduado en Ciencias de la Actividad Física y el Deporte</strong> y llevo 14 años especializado en personas mayores. Si tienes dudas sobre si mi servicio encaja con el caso de tu familiar, la primera valoración es gratuita y te lo confirmo sin compromiso.
-          </p>
-        </div>
-      </section>
-
-      <section className="w-full bg-[rgb(232,237,238)] py-20 px-4">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-black text-[rgb(31,41,51)] text-center mb-8">
-            Precios para Getafe
-          </h2>
-          <div className="bg-white rounded-3xl shadow-lg border border-[rgb(200,207,210)] p-8">
-            <div className="space-y-3">
-              <div className="flex items-center justify-between p-3 border-b border-[rgb(232,237,238)]">
-                <span className="text-slate-600">Sesión suelta (30 min)</span>
-                <span className="font-black text-[rgb(0,94,184)]">55€ + 10€</span>
-              </div>
-              <div className="flex items-center justify-between p-3 border-b border-[rgb(232,237,238)]">
-                <span className="text-slate-600">Plan 2 días/semana</span>
-                <span className="font-black text-[rgb(0,94,184)]">90€ + 20€/sem</span>
-              </div>
-              <div className="flex items-center justify-between p-3 bg-green-50 rounded-xl">
-                <span className="text-green-800 font-semibold">Primera valoración</span>
-                <span className="font-black text-green-600">GRATIS</span>
-              </div>
-            </div>
-            <p className="text-xs text-[rgb(130,131,130)] mt-4 text-center">
-              Getafe está fuera de Madrid capital, por lo que se aplica un recargo fijo de +10€ por sesión para cubrir el desplazamiento.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section className="w-full bg-white py-20 px-4">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-black text-[rgb(31,41,51)] mb-6">
-            Casos en los que ayudamos en Getafe
-          </h2>
-          <div className="space-y-3">
-            <WhoItem text="Mayores de 60 que quieren mantenerse activos sin salir de casa" />
-            <WhoItem text="Recuperación tras operación de cadera, rodilla u otras intervenciones" />
-            <WhoItem text="Prevención de caídas y recuperación de confianza al caminar" />
-            <WhoItem text="Ejercicio adaptado para artrosis, osteoporosis y dolores crónicos" />
-            <WhoItem text="Personas que han perdido fuerza tras hospitalización larga" />
-          </div>
-        </div>
-      </section>
-
-      <LandingCTA
-        title="Primera sesión gratuita en Getafe"
-        subtitle="Sin compromiso, sin pago por adelantado. Simplemente valoramos juntos la situación y decidimos si tiene sentido empezar."
-        related={[
-          { href: '/ejercicio-mayores-mostoles', label: 'Móstoles' },
-          { href: '/ejercicio-mayores-madrid-capital', label: 'Madrid capital' },
-          { href: '/ejercicio-personas-mayores-madrid', label: 'Ejercicio para mayores' },
-        ]}
-      />
-    </>
-  );
-}
-
-function WhoItem({ text }: { text: string }) {
-  return (
-    <div className="flex items-start gap-3 p-4 bg-[rgb(232,237,238)] rounded-xl">
-      <Check className="w-5 h-5 text-[rgb(0,94,184)] flex-shrink-0 mt-1" />
-      <p className="text-[rgb(31,41,51)]">{text}</p>
-    </div>
-  );
+  return <LocalServicePage config={config} />;
 }

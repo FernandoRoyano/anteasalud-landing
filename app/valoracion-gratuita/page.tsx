@@ -1,57 +1,32 @@
 import type { Metadata } from 'next';
-import { Check, Clock, HeartPulse, Home, ShieldCheck, Star } from 'lucide-react';
+import { Check, Clock, HeartPulse, Home, ShieldCheck } from 'lucide-react';
 import ContactForm from '@/components/ContactForm';
 import LandingCTA from '@/components/landing/LandingCTA';
-import { safeJsonLd } from '@/lib/seo';
+import { SITE_URL, buildMetadata, buildServiceSchema } from '@/lib/seo';
+import { JsonLd } from '@/components/JsonLd';
+import { BreadcrumbSchema } from '@/components/BreadcrumbSchema';
+import { LandingArticles } from '@/components/landing/LandingSections';
 
-const TITLE = 'Valoración Gratuita a Domicilio en Madrid | ANTEA Salud';
+const URL = `${SITE_URL}/valoracion-gratuita`;
 const DESCRIPTION =
-  'Solicita tu valoración gratuita y sin compromiso para mayores en Madrid. Entrenador titulado en Ciencias del Deporte con 14 años de experiencia. Visita en casa, plan personalizado y respuesta en menos de 24 horas.';
-const URL = 'https://anteasalud.com/valoracion-gratuita';
+  'Primera valoración gratuita en casa: equilibrio, marcha y fuerza de tu familiar, con un plan claro y sin compromiso. Respuesta en menos de 24 h.';
 
-export const metadata: Metadata = {
-  title: TITLE,
+// Revalida para incluir artículos nuevos en «Guías para familias»
+export const revalidate = 3600;
+
+export const metadata: Metadata = buildMetadata({
+  title: 'Valoración funcional gratuita a domicilio en Madrid',
   description: DESCRIPTION,
-  keywords:
-    'valoración gratuita mayores Madrid, evaluación funcional mayores, entrenador personal mayores Madrid valoración, ejercicio personas mayores valoración gratuita, primera sesión gratis mayores',
-  alternates: { canonical: URL },
-  openGraph: {
-    type: 'website',
-    url: URL,
-    title: TITLE,
-    description: DESCRIPTION,
-    images: ['/hero-realistic.png'],
-  },
-};
+  path: '/valoracion-gratuita',
+});
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Service',
-  serviceType: 'Valoración funcional gratuita a domicilio para personas mayores',
-  provider: {
-    '@type': 'LocalBusiness',
-    name: 'ANTEA Salud',
-    telephone: '+34633261963',
-    url: 'https://anteasalud.com',
-  },
-  areaServed: { '@type': 'AdministrativeArea', name: 'Comunidad de Madrid' },
+const jsonLd = buildServiceSchema({
+  name: 'Valoración funcional gratuita a domicilio',
   description: DESCRIPTION,
-  offers: {
-    '@type': 'Offer',
-    price: '0',
-    priceCurrency: 'EUR',
-    description: 'Primera valoración funcional a domicilio sin coste ni compromiso.',
-  },
-};
+  path: '/valoracion-gratuita',
+  areaServed: ['Madrid', 'Comunidad de Madrid'],
+});
 
-const breadcrumb = {
-  '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Inicio', item: 'https://anteasalud.com' },
-    { '@type': 'ListItem', position: 2, name: 'Valoración gratuita', item: URL },
-  ],
-};
 
 const incluye = [
   {
@@ -91,15 +66,29 @@ const faqs = [
   },
   {
     q: '¿Quién hace la valoración?',
-    a: 'Fernando Royano, Graduado en Ciencias de la Actividad Física y el Deporte (CCAFYD) con 14 años de experiencia trabajando con personas mayores.',
+    a: 'Fernando Royano, Graduado en Ciencias de la Actividad Física y del Deporte (CCAFYD) con 14 años como entrenador personal a domicilio, especializado en personas mayores.',
   },
 ];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(({ q, a }) => ({
+    '@type': 'Question',
+    name: q,
+    acceptedAnswer: { '@type': 'Answer', text: a },
+  })),
+};
 
 export default function ValoracionGratuitaPage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumb) }} />
+      <JsonLd data={jsonLd} />
+      <JsonLd data={faqSchema} />
+      <BreadcrumbSchema items={[
+        { name: 'Inicio', url: SITE_URL },
+        { name: 'Valoración gratuita', url: URL },
+      ]} />
 
       {/* HERO + FORMULARIO */}
       <section className="relative w-full bg-gradient-to-br from-[rgb(191,231,249)] via-white to-[rgb(232,237,238)] px-4 pt-32 pb-16">
@@ -126,7 +115,7 @@ export default function ValoracionGratuitaPage() {
                 'Visita gratis a domicilio en Madrid',
                 'Evaluación funcional completa y test de caídas',
                 'Plan de trabajo personalizado por escrito',
-                '14 años de experiencia con personas mayores',
+                '14 años como entrenador, especializado en mayores',
               ].map((item) => (
                 <li key={item} className="flex items-start gap-3">
                   <Check className="w-5 h-5 text-[rgb(0,94,184)] mt-0.5 flex-shrink-0" />
@@ -134,17 +123,6 @@ export default function ValoracionGratuitaPage() {
                 </li>
               ))}
             </ul>
-
-            <div className="flex items-center gap-2 pt-4">
-              <div className="flex">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                ))}
-              </div>
-              <span className="text-sm text-slate-600 font-medium">
-                +200 familias en Madrid confían en nosotros
-              </span>
-            </div>
           </div>
 
           <div>
@@ -206,6 +184,8 @@ export default function ValoracionGratuitaPage() {
           </div>
         </div>
       </section>
+
+      <LandingArticles title="Qué valoramos y por qué" topics={/valoraci|sppb|tests|fragilidad/i} />
 
       <LandingCTA
         title="¿Listo para empezar?"

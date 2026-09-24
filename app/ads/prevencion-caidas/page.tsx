@@ -13,7 +13,7 @@ import {
 const ORIGEN = "Ads · Prevención de caídas";
 
 export const metadata: Metadata = {
-  title: "Prevención de caídas en mayores a domicilio | ANTEA Salud Madrid",
+  title: { absolute: "Prevención de caídas en mayores a domicilio | ANTEA Salud Madrid" },
   description:
     "¿Tu padre o madre tiene miedo a caerse en casa? Un profesional titulado va a su domicilio en Madrid y diseña un programa para recuperar equilibrio y confianza. Valoración gratuita.",
   robots: { index: false, follow: false },

@@ -2,69 +2,43 @@ import type { Metadata } from 'next';
 import LandingHero from '@/components/landing/LandingHero';
 import LandingCTA from '@/components/landing/LandingCTA';
 import { Check, Dumbbell, HeartPulse, ShieldCheck, TrendingUp, Users, Home, Clock } from 'lucide-react';
-import { safeJsonLd } from '@/lib/seo';
+import { SITE_URL, buildMetadata, buildServiceSchema } from '@/lib/seo';
+import { JsonLd } from '@/components/JsonLd';
+import { BreadcrumbSchema } from '@/components/BreadcrumbSchema';
+import { LandingArticles } from '@/components/landing/LandingSections';
 
-const TITLE = 'Ejercicio para Personas Mayores a Domicilio en Madrid | ANTEA Salud';
+const URL = `${SITE_URL}/ejercicio-personas-mayores-madrid`;
 const DESCRIPTION =
-  'Ejercicio adaptado para personas mayores a domicilio en Madrid. Entrenador titulado en Ciencias del Deporte con 14 años de experiencia. Recupera fuerza, equilibrio y autonomía en casa. Valoración gratuita sin compromiso.';
-const URL = 'https://anteasalud.com/ejercicio-personas-mayores-madrid';
+  'Programa de fuerza, equilibrio y movilidad a domicilio para mayores en toda la Comunidad de Madrid. Graduado en CCAFYD. Valoración gratuita.';
 
-export const metadata: Metadata = {
-  title: TITLE,
+// Revalida para incluir artículos nuevos en «Guías para familias»
+export const revalidate = 3600;
+
+export const metadata: Metadata = buildMetadata({
+  title: 'Ejercicio para personas mayores en la Comunidad de Madrid',
   description: DESCRIPTION,
-  keywords:
-    'ejercicio personas mayores Madrid, ejercicio para mayores a domicilio, entrenamiento personal mayores Madrid, ejercicio adaptado tercera edad, entrenador personas mayores, actividad física mayores Madrid',
-  alternates: { canonical: URL },
-  openGraph: {
-    type: 'article',
-    url: URL,
-    title: TITLE,
-    description: DESCRIPTION,
-    images: ['/hero-realistic.png'],
-  },
-};
+  path: '/ejercicio-personas-mayores-madrid',
+});
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Service',
-  serviceType: 'Ejercicio a domicilio para personas mayores',
-  provider: {
-    '@type': 'LocalBusiness',
-    name: 'ANTEA Salud',
-    telephone: '+34633261963',
-    url: 'https://anteasalud.com',
-  },
-  areaServed: {
-    '@type': 'AdministrativeArea',
-    name: 'Comunidad de Madrid',
-  },
+const jsonLd = buildServiceSchema({
+  name: 'Ejercicio adaptado para personas mayores a domicilio',
   description: DESCRIPTION,
-  offers: {
-    '@type': 'AggregateOffer',
-    priceCurrency: 'EUR',
-    lowPrice: '35',
-    highPrice: '45',
-    offerCount: '2',
-  },
-};
+  path: '/ejercicio-personas-mayores-madrid',
+  areaServed: ['Madrid', 'Comunidad de Madrid'],
+});
 
-const breadcrumb = {
-  '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Inicio', item: 'https://anteasalud.com' },
-    { '@type': 'ListItem', position: 2, name: 'Ejercicio para personas mayores en Madrid', item: URL },
-  ],
-};
 
 export default function Page() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumb) }} />
+      <JsonLd data={jsonLd} />
+      <BreadcrumbSchema items={[
+        { name: 'Inicio', url: SITE_URL },
+        { name: 'Ejercicio para personas mayores en Madrid', url: URL },
+      ]} />
 
       <LandingHero
-        badge="Graduado en Ciencias del Deporte · 14 años con personas mayores"
+        badge="Graduado en CCAFYD · Especializado en personas mayores"
         h1="Ejercicio para personas mayores a domicilio"
         h1Highlight="en Madrid"
         subtitle="Recupera fuerza, equilibrio y autonomía con un entrenador titulado que va a tu casa. Sesiones personalizadas, adaptadas a cada edad y condición física. Primera valoración gratuita y sin compromiso."
@@ -84,7 +58,7 @@ export default function Page() {
             La buena noticia es que el ejercicio adaptado <strong className="text-[rgb(0,94,184)]">revierte muchos de esos efectos</strong> a cualquier edad. No hace falta ir a un gimnasio, ni tener equipamiento, ni recorrer medio Madrid. Con un profesional titulado que vaya a tu casa y diseñe un programa específico, se pueden conseguir mejoras medibles en pocas semanas.
           </p>
           <p className="text-lg text-slate-600 leading-relaxed">
-            En ANTEA Salud llevamos <strong>14 años especializados en el trabajo con personas mayores</strong> en Madrid. Sabemos cómo abordar las limitaciones reales de cada persona, cómo motivar sin forzar, y cómo adaptar cada ejercicio a lo que el cuerpo pide ese día.
+            En ANTEA Salud llevamos <strong>14 años de experiencia como entrenadores a domicilio, especializados en personas mayores</strong> en Madrid. Sabemos cómo abordar las limitaciones reales de cada persona, cómo motivar sin forzar, y cómo adaptar cada ejercicio a lo que el cuerpo pide ese día.
           </p>
         </div>
       </section>
@@ -208,7 +182,7 @@ export default function Page() {
               El trabajo sigue —la fuerza no se gana en un día, se construye— pero la dirección es inequívoca: Concha gana movilidad y autonomía cada semana. Su caso es el mejor recordatorio de lo que repito en cada casa a la que entro: <strong className="text-[rgb(31,41,51)]">la fuerza se entrena a cualquier edad, y nunca es demasiado tarde para empezar.</strong>
             </p>
             <p className="text-base text-[rgb(130,131,130)] pt-2 border-t border-[rgb(232,237,238)]">
-              — Fernando Royano, Graduado en Ciencias de la Actividad Física y el Deporte (CCAFYD)
+              — Fernando Royano, Graduado en Ciencias de la Actividad Física y del Deporte (CCAFYD)
             </p>
           </div>
         </div>
@@ -234,6 +208,8 @@ export default function Page() {
           </p>
         </div>
       </section>
+
+      <LandingArticles title="Guías sobre ejercicio en personas mayores" topics={/fuerza|domicilio|fragilidad|valoraci|levantarse/i} />
 
       <LandingCTA
         title="Recupera la fuerza y la autonomía desde casa"

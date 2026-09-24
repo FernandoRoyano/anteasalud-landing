@@ -3,42 +3,41 @@ import LandingHero from '@/components/landing/LandingHero';
 import LandingCTA from '@/components/landing/LandingCTA';
 import { Check } from 'lucide-react';
 import { BreadcrumbSchema } from '@/components/BreadcrumbSchema';
-import { safeJsonLd } from '@/lib/seo';
+import { SITE_URL, buildMetadata, buildServiceSchema } from '@/lib/seo';
+import { JsonLd } from '@/components/JsonLd';
+import { LandingArticles } from '@/components/landing/LandingSections';
 
-const TITLE = 'Recuperar la Autonomía de Personas Mayores a Domicilio en Madrid | ANTEA Salud';
+const URL = `${SITE_URL}/recuperar-autonomia-mayores-madrid`;
 const DESCRIPTION =
-  'Ayudamos a personas mayores a recuperar su autonomía con un programa de ejercicio funcional a domicilio en Madrid. Entrenador titulado con 14 años de experiencia. Primera valoración gratuita.';
-const URL = 'https://anteasalud.com/recuperar-autonomia-mayores-madrid';
+  'Ejercicio a domicilio en Madrid para recuperar fuerza y autonomía tras una operación, una fractura o una hospitalización. Valoración gratuita.';
 
-export const metadata: Metadata = {
-  title: TITLE,
-  description: DESCRIPTION,
-  keywords:
-    'recuperar autonomía mayores, autonomía personas mayores Madrid, ejercicio después de operación cadera, recuperación funcional mayores, readaptación a domicilio, ejercicio post hospitalización',
-  alternates: { canonical: URL },
-  openGraph: { type: 'article', url: URL, title: TITLE, description: DESCRIPTION, images: ['/hero-realistic.png'] },
-};
+// Revalida para incluir artículos nuevos en «Guías para familias»
+export const revalidate = 3600;
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Service',
-  serviceType: 'Recuperación de autonomía funcional en personas mayores',
-  provider: { '@type': 'LocalBusiness', name: 'ANTEA Salud', telephone: '+34633261963', url: 'https://anteasalud.com' },
-  areaServed: { '@type': 'AdministrativeArea', name: 'Comunidad de Madrid' },
+export const metadata: Metadata = buildMetadata({
+  title: 'Recuperar la autonomía tras una operación o ingreso',
   description: DESCRIPTION,
-};
+  path: '/recuperar-autonomia-mayores-madrid',
+});
+
+const jsonLd = buildServiceSchema({
+  name: 'Recuperación de autonomía funcional a domicilio',
+  description: DESCRIPTION,
+  path: '/recuperar-autonomia-mayores-madrid',
+  areaServed: ['Madrid', 'Comunidad de Madrid'],
+});
 
 export default function Page() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }} />
+      <JsonLd data={jsonLd} />
       <BreadcrumbSchema items={[
-        { name: 'Inicio', url: 'https://anteasalud.com' },
+        { name: 'Inicio', url: SITE_URL },
         { name: 'Recuperar autonomía', url: URL },
       ]} />
 
       <LandingHero
-        badge="Readaptación funcional · 14 años de experiencia"
+        badge="Readaptación funcional a domicilio"
         h1="Recupera tu autonomía desde casa"
         h1Highlight="con ejercicio adaptado"
         subtitle="Tras una operación, una caída o una pérdida progresiva de fuerza, recuperar la autonomía es posible con un programa de ejercicio específico. Te acompaño en tu casa, con un plan diseñado para tu situación real."
@@ -98,6 +97,8 @@ export default function Page() {
           </div>
         </div>
       </section>
+
+      <LandingArticles title="Guías sobre recuperación" topics={/recuperaci|cadera|fractura|hospital|fisioterap/i} />
 
       <LandingCTA
         title="Recupera lo que parecía perdido"

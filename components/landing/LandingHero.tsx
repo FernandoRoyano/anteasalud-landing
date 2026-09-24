@@ -1,4 +1,4 @@
-import { Check, Star } from 'lucide-react';
+import { Check, GraduationCap, Home } from 'lucide-react';
 import LeadForm from '@/components/LeadForm';
 
 interface LandingHeroProps {
@@ -6,7 +6,7 @@ interface LandingHeroProps {
   badge: string;
   /** H1 principal (incluye la keyword objetivo) */
   h1: string;
-  /** Parte destacada del H1 (se pinta en azul, en una nueva línea) */
+  /** Parte destacada del H1 (se pinta en verde, en una nueva línea) */
   h1Highlight: string;
   /** Párrafo de introducción bajo el H1 */
   subtitle: string;
@@ -31,8 +31,8 @@ export default function LandingHero({
       <div className="relative mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-[1.04fr_.96fr]">
         <div className="space-y-6">
           <div className="inline-flex items-center gap-2 rounded-full border border-[#2d6a4f]/20 bg-white/75 px-4 py-2 backdrop-blur">
-            <Check className="h-4 w-4 text-[#2d6a4f]" />
-            <span className="text-sm font-semibold text-[#2d6a4f]">{badge}</span>
+            <Check className="h-4 w-4 text-[#2d6a4f]" aria-hidden="true" />
+            <span className="text-base font-semibold text-[#2d6a4f]">{badge}</span>
           </div>
 
           <h1 className="font-display text-[clamp(3rem,6vw,5.6rem)] font-bold leading-[.96] tracking-[-.05em] text-[#153e31]">
@@ -40,20 +40,15 @@ export default function LandingHero({
             <span className="mt-2 block text-[#2d6a4f]">{h1Highlight}</span>
           </h1>
 
-          <p className="max-w-2xl text-lg leading-relaxed text-[#45665a] md:text-xl">
+          <p className="max-w-2xl text-lg leading-relaxed text-[#3b5a4e] md:text-xl">
             {subtitle}
           </p>
 
-          <div className="flex items-center gap-3 pt-2">
-            <div className="flex">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-              ))}
-            </div>
-            <span className="text-sm font-medium text-[#45665a]">
-              4.9 · +200 familias en Madrid confían en nosotros
-            </span>
-          </div>
+          <ul className="flex flex-wrap gap-x-6 gap-y-2 border-t border-[#2d6a4f]/15 pt-5 text-base text-[#3b5a4e]">
+            <li className="flex items-center gap-2"><GraduationCap className="h-5 w-5 text-[#2d6a4f]" aria-hidden="true" /> Graduado en CCAFYD</li>
+            <li className="flex items-center gap-2"><Home className="h-5 w-5 text-[#2d6a4f]" aria-hidden="true" /> 14 años entrenando a domicilio</li>
+            <li className="flex items-center gap-2"><Check className="h-5 w-5 text-[#2d6a4f]" aria-hidden="true" /> Valoración gratuita</li>
+          </ul>
         </div>
 
         <div>

@@ -3,42 +3,36 @@ import LandingHero from '@/components/landing/LandingHero';
 import LandingCTA from '@/components/landing/LandingCTA';
 import { Check, ShieldCheck, AlertTriangle, TrendingDown, Activity } from 'lucide-react';
 import { BreadcrumbSchema } from '@/components/BreadcrumbSchema';
-import { safeJsonLd } from '@/lib/seo';
+import { SITE_URL, buildMetadata, buildServiceSchema } from '@/lib/seo';
+import { JsonLd } from '@/components/JsonLd';
+import { LandingArticles } from '@/components/landing/LandingSections';
 
-const TITLE = 'Prevención de Caídas en Personas Mayores a Domicilio en Madrid | ANTEA Salud';
+const URL = `${SITE_URL}/prevencion-caidas-mayores-madrid`;
 const DESCRIPTION =
-  'Programa de prevención de caídas para personas mayores en Madrid. Ejercicio específico de equilibrio, fuerza y coordinación en tu casa. Entrenador titulado con 14 años de experiencia. Valoración gratuita.';
-const URL = 'https://anteasalud.com/prevencion-caidas-mayores-madrid';
+  'Ejercicio de equilibrio y fuerza en casa para reducir el riesgo de caídas en personas mayores. Graduado en CCAFYD. Valoración gratuita en Madrid.';
 
-export const metadata: Metadata = {
-  title: TITLE,
-  description: DESCRIPTION,
-  keywords:
-    'prevención caídas mayores Madrid, ejercicios prevenir caídas, miedo a caer mayores, equilibrio personas mayores, reducir riesgo caídas en casa, ejercicios equilibrio mayores',
-  alternates: { canonical: URL },
-  openGraph: { type: 'article', url: URL, title: TITLE, description: DESCRIPTION, images: ['/hero-realistic.png'] },
-};
+// Revalida para incluir artículos nuevos en «Guías para familias»
+export const revalidate = 3600;
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Service',
-  serviceType: 'Prevención de caídas en personas mayores',
-  provider: {
-    '@type': 'LocalBusiness',
-    name: 'ANTEA Salud',
-    telephone: '+34633261963',
-    url: 'https://anteasalud.com',
-  },
-  areaServed: { '@type': 'AdministrativeArea', name: 'Comunidad de Madrid' },
+export const metadata: Metadata = buildMetadata({
+  title: 'Prevención de caídas en mayores a domicilio en Madrid',
   description: DESCRIPTION,
-};
+  path: '/prevencion-caidas-mayores-madrid',
+});
+
+const jsonLd = buildServiceSchema({
+  name: 'Programa de prevención de caídas a domicilio',
+  description: DESCRIPTION,
+  path: '/prevencion-caidas-mayores-madrid',
+  areaServed: ['Madrid', 'Comunidad de Madrid'],
+});
 
 export default function Page() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }} />
+      <JsonLd data={jsonLd} />
       <BreadcrumbSchema items={[
-        { name: 'Inicio', url: 'https://anteasalud.com' },
+        { name: 'Inicio', url: SITE_URL },
         { name: 'Prevención de caídas', url: URL },
       ]} />
 
@@ -65,7 +59,7 @@ export default function Page() {
             Y lo más frustrante: la mayoría son <strong className="text-[rgb(0,94,184)]">prevenibles con ejercicio específico</strong>. El problema es que nadie trabaja esos aspectos concretos en una clase genérica de gimnasio. Hace falta un plan diseñado para tu situación real.
           </p>
           <p className="text-lg text-slate-600 leading-relaxed">
-            Tras 14 años especializado en entrenar a personas mayores, sabemos qué ejercicios mueven la aguja y cuáles son marketing. La prevención de caídas requiere trabajar simultáneamente <strong>fuerza en piernas</strong>, <strong>equilibrio dinámico</strong>, <strong>tiempo de reacción</strong> y <strong>confianza psicológica</strong> al caminar.
+            Tras 14 años como entrenador a domicilio, especializado en personas mayores, sabemos qué ejercicios mueven la aguja y cuáles son marketing. La prevención de caídas requiere trabajar simultáneamente <strong>fuerza en piernas</strong>, <strong>equilibrio dinámico</strong>, <strong>tiempo de reacción</strong> y <strong>confianza psicológica</strong> al caminar.
           </p>
         </div>
       </section>
@@ -150,6 +144,8 @@ export default function Page() {
           </div>
         </div>
       </section>
+
+      <LandingArticles title="Guías sobre caídas y equilibrio" topics={/ca[ií]da|equilibrio/i} />
 
       <LandingCTA
         title="Actuar ahora evita un drama después"

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Check, Clock, HeartPulse, Home, ShieldCheck, Star } from 'lucide-react';
 import ContactForm from '@/components/ContactForm';
 import LandingCTA from '@/components/landing/LandingCTA';
+import { safeJsonLd } from '@/lib/seo';
 
 const TITLE = 'Valoración Gratuita a Domicilio en Madrid | ANTEA Salud';
 const DESCRIPTION =
@@ -97,8 +98,8 @@ const faqs = [
 export default function ValoracionGratuitaPage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumb) }} />
 
       {/* HERO + FORMULARIO */}
       <section className="relative w-full bg-gradient-to-br from-[rgb(191,231,249)] via-white to-[rgb(232,237,238)] px-4 pt-32 pb-16">

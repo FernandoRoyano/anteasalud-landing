@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import LandingHero from '@/components/landing/LandingHero';
 import LandingCTA from '@/components/landing/LandingCTA';
 import { Check, Dumbbell, HeartPulse, ShieldCheck, TrendingUp, Users, Home, Clock } from 'lucide-react';
+import { safeJsonLd } from '@/lib/seo';
 
 const TITLE = 'Ejercicio para Personas Mayores a Domicilio en Madrid | ANTEA Salud';
 const DESCRIPTION =
@@ -59,8 +60,8 @@ const breadcrumb = {
 export default function Page() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumb) }} />
 
       <LandingHero
         badge="Graduado en Ciencias del Deporte · 14 años con personas mayores"

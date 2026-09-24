@@ -3,6 +3,7 @@ import LandingHero from '@/components/landing/LandingHero';
 import LandingCTA from '@/components/landing/LandingCTA';
 import { Check } from 'lucide-react';
 import { BreadcrumbSchema } from '@/components/BreadcrumbSchema';
+import { safeJsonLd } from '@/lib/seo';
 
 const TITLE = 'Ejercicio para Mayores a Domicilio en Móstoles | ANTEA Salud';
 const DESCRIPTION =
@@ -30,7 +31,7 @@ const jsonLd = {
 export default function Page() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }} />
       <BreadcrumbSchema items={[
         { name: 'Inicio', url: 'https://anteasalud.com' },
         { name: 'Móstoles', url: URL },

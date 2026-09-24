@@ -1,15 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { SESSION_COOKIE, verifySessionToken } from '@/lib/session-token';
 
-const COOKIE_NAME = 'antea_admin_session';
-const COOKIE_VALUE = 'authenticated';
-
-export function proxy(req: NextRequest) {
+export async function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   // Solo proteger /admin/* (no la página de login en /admin)
   if (pathname.startsWith('/admin/')) {
-    const session = req.cookies.get(COOKIE_NAME)?.value;
-    if (session !== COOKIE_VALUE) {
+    const valid = await verifySessionToken(req.cookies.get(SESSION_COOKIE)?.value);
+    if (!valid) {
       const url = req.nextUrl.clone();
       url.pathname = '/admin';
       return NextResponse.redirect(url);

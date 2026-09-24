@@ -10,7 +10,7 @@ export type { Article, ArticleStatus, Client, Lead, LeadSource, Session, Session
 
 const LEADS_SHEET = 'Hoja 1'; // Se detecta automáticamente si no coincide
 const GUIA_CAIDAS_SHEET = 'Guía caídas';
-const LEADS_HEADERS = ['Fecha', 'Nombre', 'Email', 'Teléfono', 'Zona', 'Interés', 'Estado', 'Notas'];
+const LEADS_HEADERS = ['Fecha', 'Nombre', 'Email', 'Teléfono', 'Zona', 'Interés', 'Estado', 'Notas', 'Consentimiento'];
 const CLIENTES_SHEET = 'Clientes';
 const SESIONES_SHEET = 'Sesiones';
 const ARTICULOS_SHEET = 'Articulos';
@@ -142,6 +142,11 @@ async function ensureSheet(
 // LEADS (sección de la web pública)
 // =============================================================================
 
+// Con USER_ENTERED, un apóstrofo inicial fuerza texto y evita inyección de fórmulas (=IMPORTXML…)
+function sanitizeCell(value: string): string {
+  return /^[=+\-@\t\r]/.test(value) ? `'${value}` : value;
+}
+
 async function getLeadsSheetName(sheets: sheets_v4.Sheets, spreadsheetId: string): Promise<string> {
   if (cachedLeadsSheetName) return cachedLeadsSheetName;
   const spreadsheet = await sheets.spreadsheets.get({ spreadsheetId });
@@ -208,6 +213,7 @@ export async function saveLead(data: {
   telefono?: string;
   zona?: string;
   interes?: string;
+  consentAt?: string;
 }): Promise<{ source: LeadSource }> {
   const sheets = getSheetsClient();
   const spreadsheetId = process.env.GOOGLE_SHEET_ID!;
@@ -225,13 +231,12 @@ export async function saveLead(data: {
 
   const row = [
     fecha,
-    data.nombre,
-    data.email || '',
-    data.telefono || '',
-    data.zona || '',
-    data.interes || '',
+    ...[data.nombre, data.email, data.telefono, data.zona, data.interes].map((v) =>
+      sanitizeCell(v || '')
+    ),
     'Nuevo',
     '',
+    data.consentAt || '',
   ];
 
   let sheetName: string;
@@ -244,12 +249,12 @@ export async function saveLead(data: {
     // Asegurar cabeceras en Hoja 1 (código antiguo que dependía del inline)
     const existing = await sheets.spreadsheets.values.get({
       spreadsheetId,
-      range: `${sheetName}!A1:H1`,
+      range: `${sheetName}!A1:I1`,
     });
     if (!existing.data.values || existing.data.values.length === 0) {
       await sheets.spreadsheets.values.update({
         spreadsheetId,
-        range: `${sheetName}!A1:H1`,
+        range: `${sheetName}!A1:I1`,
         valueInputOption: 'USER_ENTERED',
         requestBody: { values: [LEADS_HEADERS] },
       });
@@ -258,7 +263,7 @@ export async function saveLead(data: {
 
   await sheets.spreadsheets.values.append({
     spreadsheetId,
-    range: `${sheetName}!A:H`,
+    range: `${sheetName}!A:I`,
     valueInputOption: 'USER_ENTERED',
     requestBody: { values: [row] },
   });
@@ -295,7 +300,7 @@ export async function updateLead(
     range: `${sheetName}!G${rowNumber}:H${rowNumber}`,
     valueInputOption: 'USER_ENTERED',
     requestBody: {
-      values: [[newEstado, newNotas]],
+      values: [[sanitizeCell(newEstado), sanitizeCell(newNotas)]],
     },
   });
 }
@@ -511,14 +516,7 @@ export async function updateSession(id: string, updates: Partial<Session>): Prom
   const existing = await getAllSessions();
   const session = existing.find((s) => s.id === id);
   if (!session || !session.row) {
-    const availableIds = existing.map((s) => s.id).filter(Boolean);
-    console.error(
-      `[updateSession] Sesión "${id}" no encontrada. ` +
-        `${availableIds.length} sesiones en el sheet: ${JSON.stringify(availableIds)}`
-    );
-    throw new Error(
-      `Sesión ${id} no encontrada en el sheet (hay ${availableIds.length} sesiones guardadas)`
-    );
+    throw new Error(`[sheets:updateSession] Sesión ${id} no encontrada`);
   }
 
   const merged = { ...session, ...updates, updatedAt: new Date().toISOString() };

@@ -1,34 +1,41 @@
 import { cookies } from 'next/headers';
+import {
+  SESSION_COOKIE,
+  SESSION_MAX_AGE,
+  constantTimeEqual,
+  createSessionToken,
+  sha256,
+  verifySessionToken,
+} from '@/lib/session-token';
 
-const COOKIE_NAME = 'antea_admin_session';
-const COOKIE_VALUE = 'authenticated';
-const MAX_AGE = 60 * 60 * 24; // 24 horas
+export async function createSession(): Promise<boolean> {
+  const token = await createSessionToken();
+  if (!token) return false;
 
-export async function createSession() {
   const cookieStore = await cookies();
-  cookieStore.set(COOKIE_NAME, COOKIE_VALUE, {
+  cookieStore.set(SESSION_COOKIE, token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
-    sameSite: 'lax',
-    maxAge: MAX_AGE,
+    sameSite: 'strict',
+    maxAge: SESSION_MAX_AGE,
     path: '/',
   });
+  return true;
 }
 
 export async function destroySession() {
   const cookieStore = await cookies();
-  cookieStore.delete(COOKIE_NAME);
+  cookieStore.delete(SESSION_COOKIE);
 }
 
 export async function isAuthenticated(): Promise<boolean> {
   const cookieStore = await cookies();
-  return cookieStore.get(COOKIE_NAME)?.value === COOKIE_VALUE;
+  return verifySessionToken(cookieStore.get(SESSION_COOKIE)?.value);
 }
 
-export function verifyPassword(password: string): boolean {
+export async function verifyPassword(password: string): Promise<boolean> {
   const adminPassword = process.env.ADMIN_PASSWORD;
   if (!adminPassword) return false;
-  return password === adminPassword;
+  // Comparar hashes de longitud fija evita filtrar la longitud por timing
+  return constantTimeEqual(await sha256(password), await sha256(adminPassword));
 }
-
-export { COOKIE_NAME, COOKIE_VALUE };

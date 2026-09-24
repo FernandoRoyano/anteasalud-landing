@@ -5,6 +5,7 @@ import Header from './Header';
 import Footer from './Footer';
 import WhatsAppButton from './WhatsAppButton';
 import CookieBanner from './CookieBanner';
+import GoogleTag from './GoogleTag';
 import { WizardProvider } from './WizardWhatsApp';
 
 /**
@@ -37,6 +38,7 @@ export default function PublicChrome({ children }: { children: React.ReactNode }
   if (isAds) {
     return (
       <>
+        <GoogleTag />
         <div className="landing-refresh">{children}</div>
         <CookieBanner />
       </>
@@ -45,6 +47,7 @@ export default function PublicChrome({ children }: { children: React.ReactNode }
 
   return (
     <WizardProvider>
+      <GoogleTag />
       <Header />
       {isRefreshedLanding ? <div className="landing-refresh">{children}</div> : children}
       <CookieBanner />

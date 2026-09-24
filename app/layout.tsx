@@ -1,8 +1,7 @@
 import './globals.css';
 import { Inter, Bricolage_Grotesque } from 'next/font/google';
 import PublicChrome from '@/components/PublicChrome';
-import GoogleAnalytics from '@/components/GoogleAnalytics';
-import GoogleAds from '@/components/GoogleAds';
+import { safeJsonLd } from '@/lib/seo';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -181,12 +180,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* JSON-LD Structured Data */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
         />
       </head>
       <body className="font-sans antialiased">
-        <GoogleAnalytics />
-        <GoogleAds />
         <PublicChrome>{children}</PublicChrome>
       </body>
     </html>

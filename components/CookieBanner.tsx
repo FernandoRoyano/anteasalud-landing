@@ -1,92 +1,79 @@
-// components/CookieBanner.tsx
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
-import { Cookie } from 'lucide-react';
+import {
+  CONSENT_CHANGE_EVENT,
+  OPEN_COOKIE_SETTINGS_EVENT,
+  readConsent,
+  saveConsent,
+  type ConsentValue,
+} from "@/lib/consent";
+
+function subscribe(callback: () => void) {
+  window.addEventListener(CONSENT_CHANGE_EVENT, callback);
+  window.addEventListener("storage", callback);
+  return () => {
+    window.removeEventListener(CONSENT_CHANGE_EVENT, callback);
+    window.removeEventListener("storage", callback);
+  };
+}
+
+// En servidor no mostramos el banner (evita parpadeo y desajustes de hidratación)
+const getServerSnapshot = (): ConsentValue | "server" => "server";
 
 export default function CookieBanner() {
-  const [showBanner, setShowBanner] = useState(false);
+  const consent = useSyncExternalStore(subscribe, readConsent, getServerSnapshot);
+  const [reopened, setReopened] = useState(false);
 
   useEffect(() => {
-    // Comprobar si ya aceptó/rechazó cookies
-    const cookieConsent = localStorage.getItem("cookie-consent");
-    if (!cookieConsent) {
-      setShowBanner(true);
-    }
+    const open = () => setReopened(true);
+    window.addEventListener(OPEN_COOKIE_SETTINGS_EVENT, open);
+    return () => window.removeEventListener(OPEN_COOKIE_SETTINGS_EVENT, open);
   }, []);
 
-  const acceptCookies = () => {
-    localStorage.setItem("cookie-consent", "accepted");
-    setShowBanner(false);
-  };
+  if (consent === "server" || (consent !== null && !reopened)) return null;
 
-  const rejectCookies = () => {
-    localStorage.setItem("cookie-consent", "rejected");
-    setShowBanner(false);
+  const choose = (value: ConsentValue) => {
+    saveConsent(value);
+    setReopened(false);
   };
-
-  if (!showBanner) return null;
 
   return (
-    <>
-      {/* Overlay oscuro */}
-      <div className="fixed inset-0 bg-black/40 z-[998]" />
-
-      {/* Banner */}
-      <div className="fixed bottom-0 left-0 right-0 z-[999] p-4 md:p-6">
-        <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-2xl border border-[rgb(200,207,210)] p-6 md:p-8">
-
-          {/* Header */}
-          <div className="flex items-start gap-4 mb-4">
-            <Cookie className="w-8 h-8 text-[rgb(0,94,184)] flex-shrink-0 mt-1" />
-            <div>
-              <h2 className="text-xl font-bold text-[rgb(31,41,51)] mb-2">
-                Utilizamos cookies
-              </h2>
-              <p className="text-[rgb(130,131,130)] text-sm md:text-base leading-relaxed">
-                Esta web utiliza únicamente <strong className="text-[rgb(31,41,51)]">cookies técnicas necesarias</strong> para
-                su correcto funcionamiento. No utilizamos cookies de seguimiento, publicidad ni analítica.
-              </p>
-            </div>
-          </div>
-
-          {/* Info adicional */}
-          <div className="bg-[rgb(232,237,238)] rounded-xl p-4 mb-6">
-            <p className="text-sm text-[rgb(31,41,51)]">
-              <strong>¿Qué significa esto?</strong> No rastreamos tu navegación ni compartimos
-              datos con terceros. Las cookies técnicas son imprescindibles para que la web funcione
-              correctamente y no requieren consentimiento según la normativa, pero queremos ser transparentes contigo.
-            </p>
-          </div>
-
-          {/* Botones */}
-          <div className="flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
-            <Link
-              href="/cookies"
-              className="text-sm text-[rgb(0,94,184)] hover:underline order-3 sm:order-1"
+    <section
+      role="region"
+      aria-label="Preferencias de cookies"
+      className="fixed inset-x-0 bottom-0 z-[60] p-3 sm:p-5"
+    >
+      <div className="mx-auto max-w-4xl rounded-2xl border border-[#2d6a4f]/20 bg-white p-5 shadow-2xl sm:p-6">
+        <h2 className="mb-2 text-xl font-bold text-[#17372b]">¿Aceptas las cookies de medición?</h2>
+        <p className="text-base leading-relaxed text-[#374151]">
+          Usamos cookies técnicas necesarias y, solo si aceptas, cookies de Google Analytics y Google Ads para
+          medir visitas y saber qué anuncios funcionan. No vendemos tus datos. Puedes cambiar tu elección en
+          cualquier momento desde el pie de página.
+        </p>
+        <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <Link href="/cookies" className="text-base font-semibold text-[#2d6a4f] underline underline-offset-2">
+            Ver política de cookies
+          </Link>
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <button
+              type="button"
+              onClick={() => choose("rejected")}
+              className="min-h-12 rounded-xl border-2 border-[#2d6a4f] px-6 font-semibold text-[#17372b] transition hover:bg-[#eef5f0]"
             >
-              Ver política de cookies
-            </Link>
-
-            <div className="flex flex-col sm:flex-row gap-3 order-1 sm:order-2">
-              <button
-                onClick={rejectCookies}
-                className="px-6 py-3 text-[rgb(31,41,51)] font-semibold rounded-xl border-2 border-[rgb(200,207,210)] hover:border-[rgb(0,94,184)] hover:bg-[rgb(232,237,238)] transition-all"
-              >
-                Solo necesarias
-              </button>
-              <button
-                onClick={acceptCookies}
-                className="px-6 py-3 bg-[rgb(0,94,184)] text-white font-semibold rounded-xl hover:bg-[rgb(32,113,188)] transition-all"
-              >
-                Aceptar y continuar
-              </button>
-            </div>
+              Rechazar
+            </button>
+            <button
+              type="button"
+              onClick={() => choose("accepted")}
+              className="min-h-12 rounded-xl bg-[#2d6a4f] px-6 font-semibold text-white transition hover:bg-[#22543f]"
+            >
+              Aceptar
+            </button>
           </div>
-
         </div>
       </div>
-    </>
+    </section>
   );
 }

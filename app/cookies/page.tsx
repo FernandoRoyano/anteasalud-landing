@@ -1,185 +1,130 @@
-// app/cookies/page.tsx
 import type { Metadata } from "next";
-import { Check } from 'lucide-react';
+import Link from "next/link";
+import CookieSettingsButton from "@/components/CookieSettingsButton";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Política de Cookies | ANTEA Salud",
-  description: "Política de cookies de ANTEA Salud",
-};
+export const metadata: Metadata = buildMetadata({
+  title: "Política de cookies",
+  description: "Qué cookies usa anteasalud.com, para qué sirven, cuánto duran y cómo cambiar tu consentimiento.",
+  path: "/cookies",
+});
+
+const COOKIES = [
+  { name: "cookie-consent", owner: "ANTEA Salud (localStorage)", purpose: "Recordar si aceptas o rechazas las cookies de medición", type: "Técnica", duration: "Hasta que la borres" },
+  { name: "_ga, _ga_*", owner: "Google Analytics", purpose: "Distinguir visitas y medir el uso de la web de forma agregada", type: "Analítica (requiere consentimiento)", duration: "Hasta 2 años" },
+  { name: "_gcl_au", owner: "Google Ads", purpose: "Saber si una solicitud de contacto proviene de un anuncio", type: "Publicitaria (requiere consentimiento)", duration: "3 meses" },
+];
 
 export default function PoliticaCookies() {
   return (
-    <main className="min-h-screen bg-white py-16 px-4">
+    <div className="min-h-screen bg-white pt-32 pb-16 px-4">
       <article className="max-w-3xl mx-auto">
-        {/* Header */}
         <header className="mb-12">
-          <h1 className="text-3xl md:text-4xl font-black text-[rgb(0,94,184)] mb-4">
-            Política de Cookies
-          </h1>
-          <p className="text-[rgb(130,131,130)]">
-            Última actualización: 27 de noviembre de 2025
-          </p>
+          <h1 className="text-3xl md:text-4xl font-black text-primary-dark mb-4">Política de cookies</h1>
+          <p className="text-muted">Última actualización: 24 de septiembre de 2026</p>
         </header>
 
-        {/* Contenido */}
-        <div className="prose prose-lg max-w-none text-[rgb(31,41,51)] space-y-10">
-          
-          {/* 1. Qué son */}
+        <div className="max-w-none text-ink text-lg leading-relaxed space-y-10">
           <section>
-            <h2 className="text-xl font-bold text-[rgb(0,94,184)] mb-4">
-              ¿Qué son las cookies?
-            </h2>
+            <h2 className="text-2xl font-bold text-primary-dark mb-4">¿Qué son las cookies?</h2>
             <p>
-              Las cookies son pequeños archivos de texto que se almacenan en tu dispositivo 
-              cuando visitas una página web. Se utilizan para recordar tus preferencias, 
-              mejorar tu experiencia de navegación y, en algunos casos, para fines analíticos o publicitarios.
+              Las cookies son pequeños archivos que se guardan en tu dispositivo cuando visitas una web. Sirven para
+              recordar preferencias y, si lo aceptas, para medir cómo se usa la web.
             </p>
           </section>
 
-          {/* 2. Qué cookies usamos */}
           <section>
-            <h2 className="text-xl font-bold text-[rgb(0,94,184)] mb-4">
-              ¿Qué cookies utilizamos?
-            </h2>
+            <h2 className="text-2xl font-bold text-primary-dark mb-4">¿Qué cookies utilizamos?</h2>
             <p className="mb-4">
-              En <strong>anteasalud.com</strong> utilizamos únicamente:
+              Las cookies de Google Analytics y Google Ads <strong>solo se activan si pulsas «Aceptar»</strong> en el
+              aviso de cookies. Si las rechazas, Google solo recibe señales sin cookies y sin identificarte (modo de
+              consentimiento de Google).
             </p>
-            <div className="bg-[rgb(232,237,238)] rounded-xl p-6">
-              <h3 className="font-bold text-[rgb(31,41,51)] mb-2">Cookies técnicas (necesarias)</h3>
-              <p className="text-[rgb(130,131,130)] mb-4">
-                Son imprescindibles para el funcionamiento básico de la web. No requieren consentimiento.
-              </p>
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm">
-                  <thead>
-                    <tr className="border-b border-[rgb(200,207,210)]">
-                      <th className="text-left py-2 pr-4">Nombre</th>
-                      <th className="text-left py-2 pr-4">Finalidad</th>
-                      <th className="text-left py-2">Duración</th>
+            <div className="overflow-x-auto rounded-xl border border-primary-light">
+              <table className="w-full text-base">
+                <caption className="sr-only">Cookies utilizadas en anteasalud.com</caption>
+                <thead className="bg-primary-50">
+                  <tr>
+                    <th scope="col" className="text-left p-3">Nombre</th>
+                    <th scope="col" className="text-left p-3">Titular</th>
+                    <th scope="col" className="text-left p-3">Finalidad</th>
+                    <th scope="col" className="text-left p-3">Tipo</th>
+                    <th scope="col" className="text-left p-3">Duración</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {COOKIES.map((c) => (
+                    <tr key={c.name} className="border-t border-primary-light align-top">
+                      <td className="p-3 font-mono">{c.name}</td>
+                      <td className="p-3">{c.owner}</td>
+                      <td className="p-3">{c.purpose}</td>
+                      <td className="p-3">{c.type}</td>
+                      <td className="p-3">{c.duration}</td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td className="py-2 pr-4 font-mono text-xs">__vercel_live_token</td>
-                      <td className="py-2 pr-4">Funcionamiento del hosting</td>
-                      <td className="py-2">Sesión</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+                  ))}
+                </tbody>
+              </table>
             </div>
+            <p className="mt-4">
+              Google puede tratar estos datos fuera del Espacio Económico Europeo al amparo del Marco de Privacidad de
+              Datos UE-EE. UU. Más información en{" "}
+              <a href="https://policies.google.com/technologies/cookies?hl=es" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline">
+                policies.google.com
+              </a>.
+            </p>
           </section>
 
-          {/* 3. Cookies de terceros */}
           <section>
-            <h2 className="text-xl font-bold text-[rgb(0,94,184)] mb-4">
-              Cookies de terceros
-            </h2>
-            <div className="bg-[rgb(191,231,249)] rounded-xl p-6">
-              <p className="font-semibold text-[rgb(0,94,184)] flex items-center gap-2">
-                <Check className="w-5 h-5 flex-shrink-0" /> No utilizamos cookies de seguimiento ni publicidad
-              </p>
-              <p className="mt-2 text-[rgb(31,41,51)]">
-                Esta web no utiliza Google Analytics, Facebook Pixel, ni ninguna otra 
-                herramienta de seguimiento que recopile datos de navegación.
-              </p>
-            </div>
-          </section>
-
-          {/* 4. Cómo gestionar cookies */}
-          <section>
-            <h2 className="text-xl font-bold text-[rgb(0,94,184)] mb-4">
-              ¿Cómo gestionar las cookies?
-            </h2>
+            <h2 className="text-2xl font-bold text-primary-dark mb-4">¿Cómo cambiar o retirar tu consentimiento?</h2>
             <p className="mb-4">
-              Puedes configurar tu navegador para bloquear o eliminar cookies. 
-              Ten en cuenta que si bloqueas las cookies técnicas, algunas funciones 
-              de la web podrían no funcionar correctamente.
+              Puedes cambiar tu elección en cualquier momento. También puedes borrar o bloquear cookies desde tu
+              navegador.
             </p>
-            <ul className="space-y-2">
-              <li>
-                <a 
-                  href="https://support.google.com/chrome/answer/95647" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-[rgb(0,94,184)] hover:underline"
-                >
-                  → Google Chrome
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="https://support.mozilla.org/es/kb/habilitar-y-deshabilitar-cookies-sitios-web-rastrear-preferencias" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-[rgb(0,94,184)] hover:underline"
-                >
-                  → Mozilla Firefox
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="https://support.apple.com/es-es/guide/safari/sfri11471/mac" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-[rgb(0,94,184)] hover:underline"
-                >
-                  → Safari
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="https://support.microsoft.com/es-es/microsoft-edge/eliminar-las-cookies-en-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-[rgb(0,94,184)] hover:underline"
-                >
-                  → Microsoft Edge
-                </a>
-              </li>
+            <CookieSettingsButton className="min-h-12 rounded-xl bg-primary px-6 font-bold text-white transition hover:bg-primary-dark" />
+            <ul className="mt-6 space-y-2">
+              {[
+                ["Google Chrome", "https://support.google.com/chrome/answer/95647"],
+                ["Mozilla Firefox", "https://support.mozilla.org/es/kb/habilitar-y-deshabilitar-cookies-sitios-web-rastrear-preferencias"],
+                ["Safari", "https://support.apple.com/es-es/guide/safari/sfri11471/mac"],
+                ["Microsoft Edge", "https://support.microsoft.com/es-es/microsoft-edge/eliminar-las-cookies-en-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09"],
+              ].map(([label, href]) => (
+                <li key={label}>
+                  <a href={href} target="_blank" rel="noopener noreferrer" className="text-primary underline">
+                    {label}
+                  </a>
+                </li>
+              ))}
             </ul>
           </section>
 
-          {/* 5. Cambios */}
           <section>
-            <h2 className="text-xl font-bold text-[rgb(0,94,184)] mb-4">
-              Cambios en esta política
-            </h2>
+            <h2 className="text-2xl font-bold text-primary-dark mb-4">Cambios en esta política</h2>
             <p>
-              Podemos actualizar esta política de cookies si añadimos nuevas funcionalidades 
-              a la web. Te recomendamos revisarla periódicamente. La fecha de última 
-              actualización se indica al inicio de este documento.
+              Actualizaremos esta política si cambian las cookies que usamos. La fecha de la última actualización
+              aparece al inicio.
             </p>
           </section>
 
-          {/* 6. Contacto */}
-          <section className="bg-[rgb(232,237,238)] rounded-2xl p-8">
-            <h2 className="text-xl font-bold text-[rgb(0,94,184)] mb-4">
-              ¿Tienes dudas?
-            </h2>
-            <p className="mb-4">
-              Si tienes cualquier pregunta sobre las cookies, contacta con nosotros:
-            </p>
+          <section className="bg-primary-50 rounded-2xl p-8">
+            <h2 className="text-2xl font-bold text-primary-dark mb-4">¿Tienes dudas?</h2>
             <p>
               <strong>Email:</strong>{" "}
-              <a href="mailto:anteasalud@gmail.com" className="text-[rgb(0,94,184)] hover:underline">
+              <a href="mailto:anteasalud@gmail.com" className="text-primary underline">
                 anteasalud@gmail.com
               </a>
             </p>
           </section>
-
         </div>
 
-        {/* Botón volver */}
         <div className="mt-12 text-center">
-          <a
+          <Link
             href="/"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-[rgb(0,94,184)] text-white font-bold rounded-xl hover:bg-[rgb(32,113,188)] transition-colors"
+            className="inline-flex items-center gap-2 min-h-12 px-6 bg-primary text-white font-bold rounded-xl hover:bg-primary-dark transition-colors"
           >
             ← Volver al inicio
-          </a>
+          </Link>
         </div>
       </article>
-    </main>
+    </div>
   );
 }

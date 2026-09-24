@@ -1,4 +1,4 @@
-const ANTEA_WHATSAPP_NUMBER = '34633261963';
+export const ANTEA_WHATSAPP_NUMBER = '34633261963';
 
 interface LeadWhatsAppData {
   nombre: string;
@@ -21,15 +21,23 @@ export function buildLeadWhatsAppUrl(data: LeadWhatsAppData): string {
     'Me gustaría recibir información sobre la valoración gratuita.',
   ];
 
-  return `https://wa.me/${ANTEA_WHATSAPP_NUMBER}?text=${encodeURIComponent(details.join('\n'))}`;
+  return buildWhatsAppUrl(details.join('\n'));
 }
 
 export function openWhatsAppPlaceholder(): Window | null {
   return window.open('about:blank', '_blank');
 }
 
+export function buildWhatsAppUrl(message: string): string {
+  return `https://wa.me/${ANTEA_WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+}
+
 export function sendLeadToWhatsApp(target: Window | null, data: LeadWhatsAppData): void {
-  const url = buildLeadWhatsAppUrl(data);
+  openWhatsAppUrl(target, buildLeadWhatsAppUrl(data));
+}
+
+/** Redirige la ventana abierta en el gesto del usuario (evita bloqueo de popups en iOS) */
+export function openWhatsAppUrl(target: Window | null, url: string): void {
   if (target && !target.closed) {
     target.opener = null;
     target.location.href = url;

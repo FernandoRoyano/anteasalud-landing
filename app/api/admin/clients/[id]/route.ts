@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { updateClient, deleteClient } from '@/lib/sheets';
 import { isAuthenticated } from '@/lib/auth';
+import { clientUpdateSchema, invalidBody } from '@/lib/admin-schemas';
 
 export async function PATCH(
   req: NextRequest,
@@ -12,20 +13,10 @@ export async function PATCH(
 
   try {
     const { id } = await params;
-    const body = await req.json();
+    const parsed = clientUpdateSchema.safeParse(await req.json());
+    if (!parsed.success) return invalidBody(parsed.error);
 
-    const updates: Record<string, unknown> = {};
-    if (typeof body.name === 'string') updates.name = body.name;
-    if (typeof body.phone === 'string') updates.phone = body.phone;
-    if (typeof body.address === 'string') updates.address = body.address;
-    if (typeof body.zone === 'string') updates.zone = body.zone;
-    if (body.pricePerSession !== undefined) updates.pricePerSession = Number(body.pricePerSession);
-    if (typeof body.color === 'string') updates.color = body.color;
-    if (typeof body.notes === 'string') updates.notes = body.notes;
-    if (typeof body.active === 'boolean') updates.active = body.active;
-    if (typeof body.contactName === 'string') updates.contactName = body.contactName;
-
-    await updateClient(id, updates);
+    await updateClient(id, parsed.data);
     return NextResponse.json({ ok: true });
   } catch (error) {
     console.error('Error actualizando cliente:', error);

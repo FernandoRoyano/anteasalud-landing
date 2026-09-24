@@ -8,6 +8,7 @@ import { getArticleBySlug, getPublishedArticles } from '@/lib/sheets';
 import { BreadcrumbSchema } from '@/components/BreadcrumbSchema';
 import { getArticleImageAlt, getReadingMinutes } from '@/lib/article-editorial';
 import { Calendar, ArrowLeft, Clock3, ShieldCheck } from 'lucide-react';
+import { safeJsonLd } from '@/lib/seo';
 
 // ISR 1h — los artículos publicados se refrescan al hueco siguiente.
 export const revalidate = 3600;
@@ -109,7 +110,7 @@ export default async function ArticleDetailPage({
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(articleSchema) }}
       />
       <BreadcrumbSchema
         items={[

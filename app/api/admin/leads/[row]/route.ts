@@ -26,8 +26,8 @@ export async function PATCH(
     const body = await req.json();
     const updates: { estado?: string; notas?: string } = {};
 
-    if (typeof body.estado === 'string') updates.estado = body.estado;
-    if (typeof body.notas === 'string') updates.notas = body.notas;
+    if (typeof body.estado === 'string') updates.estado = body.estado.slice(0, 50);
+    if (typeof body.notas === 'string') updates.notas = body.notas.slice(0, 5000);
 
     if (Object.keys(updates).length === 0) {
       return NextResponse.json({ error: 'Nada que actualizar' }, { status: 400 });

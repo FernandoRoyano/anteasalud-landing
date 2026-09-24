@@ -1,76 +1,9 @@
-"use client";
-
-import { useState, FormEvent } from 'react';
 import Link from 'next/link';
-import {
-  Download,
-  Check,
-  AlertTriangle,
-  Clock,
-  Dumbbell,
-  Loader2,
-  Printer,
-  Lock,
-  ArrowRight,
-} from 'lucide-react';
+import { AlertTriangle, ArrowRight, Check, Clock, Download, Dumbbell } from 'lucide-react';
 import { BreadcrumbSchema } from '@/components/BreadcrumbSchema';
-import { openWhatsAppPlaceholder, sendLeadToWhatsApp } from '@/lib/lead-whatsapp';
+import GuiaGate from './GuiaGate';
 
 export default function GuiaPrevencionCaidasPage() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [submitting, setSubmitting] = useState(false);
-  const [unlocked, setUnlocked] = useState(false);
-  const [error, setError] = useState('');
-
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    if (!name.trim() || !email.trim()) return;
-    const whatsappWindow = openWhatsAppPlaceholder();
-    setSubmitting(true);
-    setError('');
-
-    try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          nombre: name.trim(),
-          email: email.trim(),
-          telefono: '',
-          zona: '',
-          interes: 'Descarga guía prevención caídas',
-        }),
-      });
-
-      if (res.ok) {
-        setUnlocked(true);
-        sendLeadToWhatsApp(whatsappWindow, {
-          nombre: name.trim(),
-          email: email.trim(),
-          interes: 'Descarga guía prevención caídas',
-        });
-        // Scroll suave al contenido desbloqueado
-        setTimeout(() => {
-          document.getElementById('contenido-guia')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 200);
-      } else {
-        whatsappWindow?.close();
-        const data = await res.json().catch(() => ({}));
-        setError(data.error || 'Error al procesar la solicitud');
-      }
-    } catch {
-      whatsappWindow?.close();
-      setError('Error de conexión');
-    } finally {
-      setSubmitting(false);
-    }
-  };
-
-  const handlePrint = () => {
-    window.print();
-  };
-
   return (
     <>
       <BreadcrumbSchema items={[
@@ -79,23 +12,23 @@ export default function GuiaPrevencionCaidasPage() {
       ]} />
 
       {/* Hero */}
-      <section className="w-full bg-gradient-to-br from-[rgb(191,231,249)] via-white to-[rgb(232,237,238)] pt-32 pb-16 px-4">
+      <section className="w-full bg-gradient-to-br from-primary-50 via-white to-primary-50 pt-32 pb-16 px-4">
         <div className="max-w-4xl mx-auto text-center space-y-6">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-[rgb(0,94,184)] text-white rounded-full text-sm font-bold">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-full text-base font-bold">
             <Download className="w-4 h-4" />
             Descarga gratuita
           </div>
 
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 leading-tight">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-ink leading-tight">
             10 ejercicios para prevenir caídas en personas mayores
           </h1>
 
-          <p className="text-xl md:text-2xl text-slate-600 max-w-3xl mx-auto">
+          <p className="text-xl md:text-2xl text-ink/80 max-w-3xl mx-auto">
             Guía práctica para familias. Los ejercicios que usamos en ANTEA Salud con nuestros clientes. Explicados paso a paso, con fotos y progresiones.
           </p>
 
-          <p className="text-sm text-[rgb(130,131,130)]">
-            Por Fernando Royano · Graduado en Ciencias del Deporte · 14 años especializado en mayores
+          <p className="text-base text-muted">
+            Por Fernando Royano · Graduado en Ciencias de la Actividad Física y del Deporte · 14 años como entrenador, especializado en personas mayores
           </p>
         </div>
       </section>
@@ -103,7 +36,7 @@ export default function GuiaPrevencionCaidasPage() {
       {/* Beneficios */}
       <section className="w-full bg-white py-16 px-4">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-black text-center text-[rgb(31,41,51)] mb-10">
+          <h2 className="text-2xl md:text-3xl font-black text-center text-ink mb-10">
             Qué vas a aprender en esta guía
           </h2>
           <div className="grid md:grid-cols-2 gap-4 max-w-3xl mx-auto">
@@ -117,119 +50,41 @@ export default function GuiaPrevencionCaidasPage() {
         </div>
       </section>
 
-      {/* Form (si no está desbloqueado) */}
-      {!unlocked && (
-        <section className="w-full bg-[rgb(232,237,238)] py-16 px-4 print:hidden">
-          <div className="max-w-lg mx-auto">
-            <div className="bg-white rounded-3xl shadow-2xl border border-[rgb(200,207,210)] p-8 md:p-10">
-              <div className="text-center mb-6">
-                <div className="w-16 h-16 rounded-2xl bg-[rgb(0,94,184)] flex items-center justify-center mx-auto mb-4">
-                  <Lock className="w-8 h-8 text-white" />
-                </div>
-                <h2 className="text-2xl md:text-3xl font-black text-[rgb(31,41,51)] mb-2">
-                  Accede gratis a la guía
-                </h2>
-                <p className="text-[rgb(130,131,130)]">
-                  Déjanos tu nombre y email. Acceso inmediato, sin suscripciones ni spam.
-                </p>
-              </div>
-
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <label className="block text-sm font-semibold text-[rgb(31,41,51)] mb-1.5">
-                    Tu nombre
-                  </label>
-                  <input
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                    placeholder="Ej: María García"
-                    className="w-full px-4 py-3 rounded-xl border border-[rgb(200,207,210)] focus:border-[rgb(0,94,184)] focus:ring-2 focus:ring-[rgb(191,231,249)] outline-none text-[rgb(31,41,51)]"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold text-[rgb(31,41,51)] mb-1.5">
-                    Tu email
-                  </label>
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    placeholder="tu@email.com"
-                    className="w-full px-4 py-3 rounded-xl border border-[rgb(200,207,210)] focus:border-[rgb(0,94,184)] focus:ring-2 focus:ring-[rgb(191,231,249)] outline-none text-[rgb(31,41,51)]"
-                  />
-                </div>
-
-                {error && (
-                  <div className="bg-red-50 border border-red-200 text-red-700 text-sm rounded-xl px-4 py-3">
-                    {error}
-                  </div>
-                )}
-
-                <button
-                  type="submit"
-                  disabled={submitting || !name.trim() || !email.trim()}
-                  className="w-full py-4 bg-gradient-to-r from-[rgb(32,113,188)] to-[rgb(0,94,184)] text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition inline-flex items-center justify-center gap-2 disabled:opacity-60 text-lg"
-                >
-                  {submitting ? (
-                    <>
-                      <Loader2 className="w-5 h-5 animate-spin" /> Procesando...
-                    </>
-                  ) : (
-                    <>
-                      <Download className="w-5 h-5" /> Acceder a la guía gratis
-                    </>
-                  )}
-                </button>
-
-                <p className="text-xs text-center text-[rgb(130,131,130)]">
-                  Al enviar aceptas que te contactemos ocasionalmente con contenido relacionado. Sin spam. Darse de baja en cualquier momento.
-                </p>
-              </form>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Contenido (visible cuando se desbloquea o al imprimir) */}
-      <section
-        id="contenido-guia"
-        className={`w-full bg-white py-16 px-4 ${unlocked ? '' : 'hidden print:block'}`}
-      >
+      {/* Resumen abierto de los 10 ejercicios (indexable y útil sin registro) */}
+      <section className="w-full bg-white pb-16 px-4">
         <div className="max-w-3xl mx-auto">
-          {/* Barra de acciones */}
-          {unlocked && (
-            <div className="bg-green-50 border border-green-200 rounded-2xl p-5 mb-10 flex items-center justify-between flex-wrap gap-3 print:hidden">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0">
-                  <Check className="w-5 h-5 text-white" />
-                </div>
-                <div>
-                  <p className="font-bold text-green-800">¡Listo! Ya tienes acceso.</p>
-                  <p className="text-sm text-green-700">Puedes leerlo aquí o imprimirlo en PDF.</p>
-                </div>
-              </div>
-              <button
-                onClick={handlePrint}
-                className="inline-flex items-center gap-2 px-5 py-2.5 bg-[rgb(0,94,184)] text-white font-bold rounded-xl hover:bg-[rgb(32,113,188)] transition"
-              >
-                <Printer className="w-4 h-4" /> Imprimir / Guardar PDF
-              </button>
-            </div>
-          )}
+          <h2 className="text-2xl md:text-3xl font-black text-center text-ink mb-3">
+            Los 10 ejercicios de la guía, de un vistazo
+          </h2>
+          <p className="text-lg text-center text-muted mb-8">
+            Ordenados de más fácil a más avanzado. En la guía completa tienes cada uno paso a paso.
+          </p>
+          <ol className="grid gap-3 sm:grid-cols-2">
+            {EJERCICIOS.map((ejercicio, i) => (
+              <li key={ejercicio.title} className="flex gap-3 rounded-xl border border-primary-light bg-primary-50 p-4">
+                <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-primary font-bold text-white" aria-hidden="true">
+                  {i + 1}
+                </span>
+                <span>
+                  <strong className="block text-lg text-ink">{ejercicio.title}</strong>
+                  <span className="text-base text-muted">{ejercicio.reps}</span>
+                </span>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
 
+      <GuiaGate>
           {/* Portada */}
-          <div className="text-center mb-14 pb-10 border-b border-[rgb(232,237,238)]">
-            <p className="text-sm font-bold text-[rgb(0,94,184)] uppercase tracking-wide mb-3">
+          <div className="text-center mb-14 pb-10 border-b border-primary-light">
+            <p className="text-sm font-bold text-primary uppercase tracking-wide mb-3">
               Guía práctica · ANTEA Salud
             </p>
-            <h2 className="text-3xl md:text-4xl font-black text-[rgb(31,41,51)] mb-4">
+            <h2 className="text-3xl md:text-4xl font-black text-ink mb-4">
               10 ejercicios para prevenir caídas en personas mayores
             </h2>
-            <p className="text-[rgb(130,131,130)]">
+            <p className="text-muted">
               Por Fernando Royano · Graduado en Ciencias del Deporte · 14 años de experiencia
             </p>
           </div>
@@ -256,7 +111,7 @@ export default function GuiaPrevencionCaidasPage() {
               <AlertTriangle className="w-6 h-6 text-orange-600 flex-shrink-0 mt-0.5" />
               <h3 className="text-lg font-bold text-orange-900">Antes de empezar (importante)</h3>
             </div>
-            <ul className="space-y-2 text-slate-700 pl-9">
+            <ul className="space-y-2 text-ink pl-9">
               <li>• Si tu familiar ha tenido una <strong>caída reciente</strong>, una <strong>operación</strong> o tiene patologías graves, consulta antes con su médico.</li>
               <li>• Siempre con <strong>apoyo cercano</strong>: silla firme, mesa, pared.</li>
               <li>• Si aparece <strong>dolor</strong> en cualquier ejercicio, parar inmediatamente.</li>
@@ -271,16 +126,16 @@ export default function GuiaPrevencionCaidasPage() {
             <ul className="space-y-3 my-5 pl-0 list-none">
               {TEST_PREGUNTAS.map((q, i) => (
                 <li key={i} className="flex items-start gap-3">
-                  <div className="w-5 h-5 border-2 border-[rgb(200,207,210)] rounded flex-shrink-0 mt-1"></div>
+                  <div className="w-5 h-5 border-2 border-primary-light rounded flex-shrink-0 mt-1"></div>
                   <span>{q}</span>
                 </li>
               ))}
             </ul>
-            <div className="bg-[rgb(191,231,249)] rounded-xl p-5 mt-6">
-              <p className="text-sm">
-                <strong className="text-[rgb(0,94,184)]">Si marcas 2 o más:</strong> tu familiar está en zona de riesgo. Empieza con estos ejercicios ya.
+            <div className="bg-primary-light rounded-xl p-5 mt-6">
+              <p className="text-base">
+                <strong className="text-primary">Si marcas 2 o más:</strong> tu familiar está en zona de riesgo. Empieza con estos ejercicios ya.
               </p>
-              <p className="text-sm mt-2">
+              <p className="text-base mt-2">
                 <strong className="text-red-700">Si marcas 4 o más:</strong> el riesgo es alto. Considera una valoración profesional.
               </p>
             </div>
@@ -288,10 +143,10 @@ export default function GuiaPrevencionCaidasPage() {
 
           {/* Los 10 ejercicios */}
           <div className="mt-14 mb-8">
-            <h3 className="text-2xl md:text-3xl font-black text-[rgb(31,41,51)] mb-2">
+            <h3 className="text-2xl md:text-3xl font-black text-ink mb-2">
               Los 10 ejercicios
             </h3>
-            <p className="text-[rgb(130,131,130)]">
+            <p className="text-muted">
               Ordenados de más fáciles a más avanzados. Empieza por los primeros.
             </p>
           </div>
@@ -302,21 +157,21 @@ export default function GuiaPrevencionCaidasPage() {
 
           {/* Cómo organizar la rutina */}
           <Section title="Cómo organizar la rutina semanal">
-            <div className="bg-[rgb(232,237,238)] rounded-2xl p-6 my-5 space-y-3">
+            <div className="bg-primary-50 rounded-2xl p-6 my-5 space-y-3">
               <p className="flex items-start gap-3">
-                <Clock className="w-5 h-5 text-[rgb(0,94,184)] flex-shrink-0 mt-1" />
+                <Clock className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
                 <span><strong>Frecuencia:</strong> 3 días por semana. Por ejemplo lunes, miércoles y viernes. Nunca dos días seguidos al principio.</span>
               </p>
               <p className="flex items-start gap-3">
-                <Clock className="w-5 h-5 text-[rgb(0,94,184)] flex-shrink-0 mt-1" />
+                <Clock className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
                 <span><strong>Duración:</strong> 15-20 minutos por sesión. Más tiempo no es mejor: puede causar fatiga y lesiones.</span>
               </p>
               <p className="flex items-start gap-3">
-                <Dumbbell className="w-5 h-5 text-[rgb(0,94,184)] flex-shrink-0 mt-1" />
+                <Dumbbell className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
                 <span><strong>Progresión:</strong> las primeras 2 semanas, 2 series de cada ejercicio. A partir de la 3ª semana, 3 series. Aumenta repeticiones cada 2-3 semanas.</span>
               </p>
               <p className="flex items-start gap-3">
-                <Check className="w-5 h-5 text-[rgb(0,94,184)] flex-shrink-0 mt-1" />
+                <Check className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
                 <span><strong>Constancia &gt; intensidad:</strong> 15 minutos 3 veces por semana, 6 meses seguidos, dan más resultado que 1 hora al día durante 1 semana.</span>
               </p>
             </div>
@@ -334,7 +189,7 @@ export default function GuiaPrevencionCaidasPage() {
               <li>Debilidad en brazos o piernas que no desaparece</li>
             </ul>
             <div className="bg-red-50 border border-red-200 rounded-xl p-5 mt-6">
-              <p className="text-sm text-red-800">
+              <p className="text-base text-red-800">
                 <strong>Importante:</strong> si estas señales son intensas o repetitivas, consulta con su médico antes de seguir. El ejercicio tiene que ser seguro, si no, no compensa.
               </p>
             </div>
@@ -354,28 +209,27 @@ export default function GuiaPrevencionCaidasPage() {
           </Section>
 
           {/* CTA final */}
-          <div className="bg-gradient-to-br from-[rgb(0,94,184)] to-[rgb(0,60,115)] rounded-3xl p-10 text-white text-center mt-14 print:hidden">
+          <div className="bg-primary-dark rounded-3xl p-10 text-white text-center mt-14 print:hidden">
             <h3 className="text-2xl md:text-3xl font-black mb-4">¿Quieres que te ayudemos en persona?</h3>
-            <p className="text-blue-100 mb-6 max-w-xl mx-auto">
+            <p className="text-white/90 mb-6 max-w-xl mx-auto">
               En ANTEA Salud vamos a tu casa en Madrid, hacemos una <strong>valoración gratuita</strong> de tu familiar y, si encaja, empezamos con un plan específico supervisado. Primera sesión sin compromiso.
             </p>
             <Link
               href="/prevencion-caidas-mayores-madrid"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-white text-[rgb(0,94,184)] font-black rounded-xl hover:scale-105 transition"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary font-black rounded-xl transition"
             >
               Más información <ArrowRight className="w-5 h-5" />
             </Link>
           </div>
 
           {/* Firma */}
-          <div className="mt-10 pt-8 border-t border-[rgb(232,237,238)] text-center text-sm text-[rgb(130,131,130)]">
+          <div className="mt-10 pt-8 border-t border-primary-light text-center text-base text-muted">
             <p>
-              <strong className="text-[rgb(31,41,51)]">ANTEA Salud</strong> · Fernando Royano · Graduado en Ciencias de la Actividad Física y el Deporte
+              <strong className="text-ink">ANTEA Salud</strong> · Fernando Royano · Graduado en Ciencias de la Actividad Física y el Deporte
             </p>
             <p className="mt-1">Madrid · anteasalud.com</p>
           </div>
-        </div>
-      </section>
+      </GuiaGate>
     </>
   );
 }
@@ -386,11 +240,11 @@ export default function GuiaPrevencionCaidasPage() {
 
 function BenefitItem({ text }: { text: string }) {
   return (
-    <div className="flex items-start gap-3 p-4 bg-[rgb(232,237,238)] rounded-xl">
-      <div className="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0 mt-0.5">
+    <div className="flex items-start gap-3 p-4 bg-primary-50 rounded-xl">
+      <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center flex-shrink-0 mt-0.5">
         <Check className="w-4 h-4 text-white" />
       </div>
-      <p className="text-[rgb(31,41,51)]">{text}</p>
+      <p className="text-ink">{text}</p>
     </div>
   );
 }
@@ -398,8 +252,8 @@ function BenefitItem({ text }: { text: string }) {
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="my-10">
-      <h3 className="text-2xl font-black text-[rgb(31,41,51)] mb-4">{title}</h3>
-      <div className="text-lg text-slate-700 leading-relaxed space-y-4">{children}</div>
+      <h3 className="text-2xl font-black text-ink mb-4">{title}</h3>
+      <div className="text-lg text-ink leading-relaxed space-y-4">{children}</div>
     </div>
   );
 }
@@ -418,15 +272,15 @@ function EjercicioBlock({
   porque: string;
 }) {
   return (
-    <div className="my-8 p-6 md:p-8 bg-[rgb(232,237,238)] rounded-2xl border border-[rgb(200,207,210)]">
+    <div className="my-8 p-6 md:p-8 bg-primary-50 rounded-2xl border border-primary-light">
       <div className="flex items-start gap-4 mb-5">
-        <div className="w-12 h-12 rounded-2xl bg-[rgb(0,94,184)] text-white flex items-center justify-center flex-shrink-0 font-black text-xl">
+        <div className="w-12 h-12 rounded-2xl bg-primary text-white flex items-center justify-center flex-shrink-0 font-black text-xl">
           {index}
         </div>
-        <h4 className="text-xl md:text-2xl font-black text-[rgb(31,41,51)] pt-2">{title}</h4>
+        <h4 className="text-xl md:text-2xl font-black text-ink pt-2">{title}</h4>
       </div>
 
-      <ol className="list-decimal pl-6 space-y-2 mb-4 text-slate-700">
+      <ol className="list-decimal pl-6 space-y-2 mb-4 text-ink">
         {pasos.map((paso, i) => (
           <li key={i}>{paso}</li>
         ))}
@@ -434,12 +288,12 @@ function EjercicioBlock({
 
       <div className="grid md:grid-cols-2 gap-3 mt-5">
         <div className="bg-white rounded-xl p-4">
-          <p className="text-xs font-bold text-[rgb(0,94,184)] uppercase tracking-wide mb-1">Repeticiones</p>
-          <p className="text-sm text-slate-700">{reps}</p>
+          <p className="text-sm font-bold text-primary uppercase tracking-wide mb-1">Repeticiones</p>
+          <p className="text-base text-ink">{reps}</p>
         </div>
         <div className="bg-white rounded-xl p-4">
-          <p className="text-xs font-bold text-[rgb(0,94,184)] uppercase tracking-wide mb-1">Por qué funciona</p>
-          <p className="text-sm text-slate-700">{porque}</p>
+          <p className="text-sm font-bold text-primary uppercase tracking-wide mb-1">Por qué funciona</p>
+          <p className="text-base text-ink">{porque}</p>
         </div>
       </div>
     </div>

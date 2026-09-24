@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getAllArticles, createArticle } from '@/lib/sheets';
 import { isAuthenticated } from '@/lib/auth';
+import { articleCreateSchema, invalidBody } from '@/lib/admin-schemas';
 
 export async function GET() {
   if (!(await isAuthenticated())) {
@@ -20,20 +21,10 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'No autorizado' }, { status: 401 });
   }
   try {
-    const body = await req.json();
-    if (!body.title || typeof body.title !== 'string') {
-      return NextResponse.json({ error: 'El título es obligatorio' }, { status: 400 });
-    }
-    const article = await createArticle({
-      slug: body.slug || '',
-      title: body.title,
-      excerpt: body.excerpt || '',
-      bodyMarkdown: body.bodyMarkdown || '',
-      ogImage: body.ogImage || '',
-      tags: Array.isArray(body.tags) ? body.tags : [],
-      status: body.status === 'published' ? 'published' : 'draft',
-      publishedAt: '',
-    });
+    const parsed = articleCreateSchema.safeParse(await req.json());
+    if (!parsed.success) return invalidBody(parsed.error);
+
+    const article = await createArticle({ ...parsed.data, publishedAt: '' });
     return NextResponse.json({ article });
   } catch (error) {
     console.error('[articulos:POST]', error);

@@ -1,7 +1,10 @@
 "use client";
 
-import { useState } from "react";
-import { trackLeadConversion } from "@/components/GoogleAds";
+import { useId, useState } from "react";
+import { trackLeadConversion } from "@/components/GoogleTag";
+import { ConsentCheckbox, HoneypotField } from "@/components/ConsentCheckbox";
+import { leadInputClass } from "@/components/LeadForm";
+import { postLead, useFormTimer } from "@/lib/lead-client";
 import { openWhatsAppPlaceholder, sendLeadToWhatsApp } from "@/lib/lead-whatsapp";
 
 type FormStatus = "idle" | "sending" | "success" | "error";
@@ -23,105 +26,110 @@ const INTERESES = [
 ];
 
 export default function ContactForm() {
+  const uid = useId();
   const [status, setStatus] = useState<FormStatus>("idle");
   const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
   const [telefono, setTelefono] = useState("");
   const [zona, setZona] = useState("");
   const [interes, setInteres] = useState("");
+  const [consent, setConsent] = useState(false);
+  const [website, setWebsite] = useState("");
+  const elapsed = useFormTimer();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const whatsappWindow = openWhatsAppPlaceholder();
     setStatus("sending");
+    const lead = { nombre, email, telefono, zona, interes };
 
     try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nombre, email, telefono, zona, interes }),
-      });
-
+      const res = await postLead(lead, { consent, website, fillMs: elapsed() });
       if (!res.ok) throw new Error();
 
       trackLeadConversion();
-      sendLeadToWhatsApp(whatsappWindow, { nombre, email, telefono, zona, interes });
+      sendLeadToWhatsApp(whatsappWindow, lead);
       setStatus("success");
       setNombre("");
       setEmail("");
       setTelefono("");
       setZona("");
       setInteres("");
+      setConsent(false);
     } catch {
       whatsappWindow?.close();
       setStatus("error");
     }
   };
 
-  const inputClass =
-    "w-full px-4 py-3 rounded-xl border border-[rgb(200,207,210)] focus:outline-none focus:ring-2 focus:ring-[rgb(0,94,184)] focus:border-transparent";
-  const selectClass =
-    "w-full px-4 py-3 rounded-xl border border-[rgb(200,207,210)] bg-white focus:outline-none focus:ring-2 focus:ring-[rgb(0,94,184)] focus:border-transparent";
+  const sending = status === "sending";
+  const labelClass = "block text-base font-semibold text-[#1f2933] mb-1.5";
+  const required = <span className="text-[#b91c1c]" aria-hidden="true">*</span>;
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="max-w-md mx-auto bg-white shadow-xl rounded-3xl p-8 space-y-5"
+      className="relative max-w-md mx-auto bg-white shadow-xl rounded-3xl p-8 space-y-5"
     >
-      <h3 className="text-2xl font-bold text-[rgb(0,60,115)] mb-2">
-        Solicita información
-      </h3>
+      <h3 className="text-2xl font-bold text-[#17372b] mb-2">Solicita información</h3>
 
       <div>
-        <label htmlFor="nombre" className="block text-sm font-semibold text-[rgb(31,41,51)] mb-1">Nombre <span className="text-red-500">*</span></label>
+        <label htmlFor={`${uid}-nombre`} className={labelClass}>Nombre {required}</label>
         <input
-          id="nombre"
+          id={`${uid}-nombre`}
           type="text"
+          autoComplete="name"
           placeholder="Ej: María García"
           value={nombre}
           onChange={(e) => setNombre(e.target.value)}
-          className={inputClass}
+          className={leadInputClass}
           required
-          disabled={status === "sending"}
+          minLength={2}
+          maxLength={100}
+          disabled={sending}
         />
       </div>
 
       <div>
-        <label htmlFor="email" className="block text-sm font-semibold text-[rgb(31,41,51)] mb-1">Email <span className="text-red-500">*</span></label>
+        <label htmlFor={`${uid}-telefono`} className={labelClass}>Teléfono {required}</label>
         <input
-          id="email"
-          type="email"
-          placeholder="Ej: maria@email.com"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className={inputClass}
-          required
-          disabled={status === "sending"}
-        />
-      </div>
-
-      <div>
-        <label htmlFor="telefono" className="block text-sm font-semibold text-[rgb(31,41,51)] mb-1">Teléfono <span className="text-red-500">*</span></label>
-        <input
-          id="telefono"
+          id={`${uid}-telefono`}
           type="tel"
+          inputMode="tel"
+          autoComplete="tel"
           placeholder="Ej: 6XX XXX XXX"
           value={telefono}
           onChange={(e) => setTelefono(e.target.value)}
-          className={inputClass}
+          className={leadInputClass}
           required
-          disabled={status === "sending"}
+          disabled={sending}
         />
       </div>
 
       <div>
-        <label htmlFor="zona" className="block text-sm font-semibold text-[rgb(31,41,51)] mb-1">Zona</label>
+        <label htmlFor={`${uid}-email`} className={labelClass}>
+          Email <span className="text-[#4b5563] font-normal">(opcional)</span>
+        </label>
+        <input
+          id={`${uid}-email`}
+          type="email"
+          autoComplete="email"
+          placeholder="Ej: maria@email.com"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className={leadInputClass}
+          disabled={sending}
+        />
+      </div>
+
+      <div>
+        <label htmlFor={`${uid}-zona`} className={labelClass}>Zona</label>
         <select
-          id="zona"
+          id={`${uid}-zona`}
           value={zona}
           onChange={(e) => setZona(e.target.value)}
-          className={selectClass}
-          disabled={status === "sending"}
+          className={leadInputClass}
+          disabled={sending}
         >
           <option value="">Selecciona tu zona</option>
           {ZONAS.map((z) => (
@@ -131,13 +139,13 @@ export default function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="interes" className="block text-sm font-semibold text-[rgb(31,41,51)] mb-1">¿Qué te interesa?</label>
+        <label htmlFor={`${uid}-interes`} className={labelClass}>¿Qué te interesa?</label>
         <select
-          id="interes"
+          id={`${uid}-interes`}
           value={interes}
           onChange={(e) => setInteres(e.target.value)}
-          className={selectClass}
-          disabled={status === "sending"}
+          className={leadInputClass}
+          disabled={sending}
         >
           <option value="">Selecciona una opción</option>
           {INTERESES.map((i) => (
@@ -146,24 +154,29 @@ export default function ContactForm() {
         </select>
       </div>
 
+      <HoneypotField value={website} onChange={setWebsite} />
+      <ConsentCheckbox id={`${uid}-consent`} checked={consent} onChange={setConsent} disabled={sending} />
+
       <button
         type="submit"
-        disabled={status === "sending"}
-        className="w-full py-3 bg-gradient-to-r from-[rgb(32,113,188)] to-[rgb(0,94,184)] text-white font-bold rounded-xl hover:shadow-xl hover:scale-105 transition-all disabled:opacity-60 disabled:hover:scale-100"
+        disabled={sending}
+        className="w-full min-h-14 py-3 bg-[#2d6a4f] hover:bg-[#22543f] text-white text-lg font-bold rounded-xl hover:shadow-xl transition-all disabled:opacity-60"
       >
-        {status === "sending" ? "Enviando..." : "Solicitar información"}
+        {sending ? "Enviando..." : "Solicitar información"}
       </button>
 
-      {status === "success" && (
-        <p className="text-center text-green-600 font-medium">
-          ¡Recibido! Te contactaremos pronto.
-        </p>
-      )}
-      {status === "error" && (
-        <p className="text-center text-red-600 font-medium">
-          Error al enviar. Inténtalo de nuevo.
-        </p>
-      )}
+      <div aria-live="polite">
+        {status === "success" && (
+          <p className="text-center text-lg text-[#2d6a4f] font-semibold">
+            ¡Recibido! Te contactaremos pronto.
+          </p>
+        )}
+        {status === "error" && (
+          <p role="alert" className="text-center text-lg text-[#b91c1c] font-medium">
+            Error al enviar. Revisa los datos e inténtalo de nuevo.
+          </p>
+        )}
+      </div>
     </form>
   );
 }

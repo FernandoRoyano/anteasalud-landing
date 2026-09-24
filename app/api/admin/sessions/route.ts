@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getAllSessions, createSession } from '@/lib/sheets';
 import { isAuthenticated } from '@/lib/auth';
-import type { SessionStatus } from '@/lib/types';
+import { invalidBody, sessionCreateSchema } from '@/lib/admin-schemas';
 
 export async function GET(req: NextRequest) {
   if (!(await isAuthenticated())) {
@@ -14,7 +14,7 @@ export async function GET(req: NextRequest) {
     const sessions = clientId ? all.filter((s) => s.clientId === clientId) : all;
     return NextResponse.json({ sessions });
   } catch (error) {
-    console.error('Error leyendo sesiones:', error);
+    console.error('[admin/sessions:GET]', error);
     return NextResponse.json({ error: 'Error al leer sesiones' }, { status: 500 });
   }
 }
@@ -25,28 +25,14 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const body = await req.json();
+    const parsed = sessionCreateSchema.safeParse(await req.json());
+    if (!parsed.success) return invalidBody(parsed.error);
 
-    if (!body.clientId || !body.date) {
-      return NextResponse.json(
-        { error: 'clientId y date son obligatorios' },
-        { status: 400 }
-      );
-    }
-
-    const session = await createSession({
-      clientId: body.clientId,
-      date: body.date,
-      status: (body.status as SessionStatus) || 'scheduled',
-      isPending: Boolean(body.isPending),
-      missedReason: body.missedReason || '',
-      linkedToSessionId: body.linkedToSessionId || '',
-      notes: body.notes || '',
-    });
+    const session = await createSession(parsed.data);
 
     return NextResponse.json({ session });
   } catch (error) {
-    console.error('Error creando sesión:', error);
+    console.error('[admin/sessions:POST]', error);
     return NextResponse.json({ error: 'Error al crear sesión' }, { status: 500 });
   }
 }

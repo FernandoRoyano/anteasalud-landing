@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getArticleById, updateArticle, deleteArticle } from '@/lib/sheets';
 import { isAuthenticated } from '@/lib/auth';
+import { articleUpdateSchema, invalidBody } from '@/lib/admin-schemas';
 
 export async function GET(
   _req: NextRequest,
@@ -31,18 +32,10 @@ export async function PATCH(
   }
   try {
     const { id } = await params;
-    const body = await req.json();
+    const parsed = articleUpdateSchema.safeParse(await req.json());
+    if (!parsed.success) return invalidBody(parsed.error);
 
-    const updates: Record<string, unknown> = {};
-    if (typeof body.slug === 'string') updates.slug = body.slug;
-    if (typeof body.title === 'string') updates.title = body.title;
-    if (typeof body.excerpt === 'string') updates.excerpt = body.excerpt;
-    if (typeof body.bodyMarkdown === 'string') updates.bodyMarkdown = body.bodyMarkdown;
-    if (typeof body.ogImage === 'string') updates.ogImage = body.ogImage;
-    if (Array.isArray(body.tags)) updates.tags = body.tags;
-    if (body.status === 'draft' || body.status === 'published') updates.status = body.status;
-
-    const article = await updateArticle(id, updates);
+    const article = await updateArticle(id, parsed.data);
     return NextResponse.json({ article });
   } catch (error) {
     console.error('[articulos/[id]:PATCH]', error);

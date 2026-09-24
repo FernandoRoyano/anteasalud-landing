@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getAllClients, createClient } from '@/lib/sheets';
 import { isAuthenticated } from '@/lib/auth';
+import { clientCreateSchema, invalidBody } from '@/lib/admin-schemas';
 
 export async function GET() {
   if (!(await isAuthenticated())) {
@@ -22,22 +23,10 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const body = await req.json();
-    if (!body.name || typeof body.name !== 'string') {
-      return NextResponse.json({ error: 'El nombre es obligatorio' }, { status: 400 });
-    }
+    const parsed = clientCreateSchema.safeParse(await req.json());
+    if (!parsed.success) return invalidBody(parsed.error);
 
-    const client = await createClient({
-      name: body.name,
-      phone: body.phone || '',
-      address: body.address || '',
-      zone: body.zone || 'capital',
-      pricePerSession: Number(body.pricePerSession) || 35,
-      color: body.color || '#1e4a6d',
-      notes: body.notes || '',
-      active: body.active !== false,
-      contactName: body.contactName || '',
-    });
+    const client = await createClient(parsed.data);
 
     return NextResponse.json({ client });
   } catch (error) {

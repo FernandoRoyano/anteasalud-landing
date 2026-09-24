@@ -1,5 +1,6 @@
 "use client";
 
+import CookieSettingsButton from "@/components/CookieSettingsButton";
 import Link from 'next/link';
 import { Camera, Mail, MessageCircle } from 'lucide-react';
 import { useWizard } from './WizardWhatsApp';
@@ -87,6 +88,7 @@ export default function Footer() {
             <Link href="/privacidad" className="hover:text-[rgb(0,94,184)] transition">Política de privacidad</Link>
             <Link href="/aviso-legal" className="hover:text-[rgb(0,94,184)] transition">Aviso legal</Link>
             <Link href="/cookies" className="hover:text-[rgb(0,94,184)] transition">Cookies</Link>
+            <CookieSettingsButton className="hover:text-[rgb(0,94,184)] transition" />
           </div>
         </div>
       </div>

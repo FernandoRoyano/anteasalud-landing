@@ -1,34 +1,36 @@
-// app/aviso-legal/page.tsx
 import type { Metadata } from "next";
+import Link from "next/link";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Aviso Legal | ANTEA Salud",
-  description: "Aviso legal e información corporativa de ANTEA Salud",
-};
+export const metadata: Metadata = buildMetadata({
+  title: "Aviso legal",
+  description: "Aviso legal e información del titular de anteasalud.com, servicio de ejercicio para personas mayores a domicilio en Madrid.",
+  path: "/aviso-legal",
+});
 
 export default function AvisoLegal() {
   return (
-    <main className="min-h-screen bg-white py-16 px-4">
+    <div className="min-h-screen bg-white pt-32 pb-16 px-4">
       <article className="max-w-3xl mx-auto">
         {/* Header */}
         <header className="mb-12">
-          <h1 className="text-3xl md:text-4xl font-black text-[rgb(0,94,184)] mb-4">
+          <h1 className="text-3xl md:text-4xl font-black text-primary-dark mb-4">
             Aviso Legal
           </h1>
-          <p className="text-[rgb(130,131,130)]">
+          <p className="text-muted">
             Última actualización: 27 de noviembre de 2025
           </p>
         </header>
 
         {/* Contenido */}
-        <div className="text-[rgb(31,41,51)] space-y-10">
+        <div className="text-ink space-y-10">
           
           {/* 1. Titular */}
           <section>
-            <h2 className="text-xl font-bold text-[rgb(0,94,184)] mb-4">
+            <h2 className="text-2xl font-bold text-primary-dark mb-4">
               1. Datos identificativos
             </h2>
-            <div className="bg-[rgb(232,237,238)] rounded-xl p-6 space-y-2">
+            <div className="bg-primary-50 rounded-xl p-6 space-y-2">
               <p><strong>Titular:</strong> ANTEA Salud</p>
               <p><strong>NIF:</strong> 72171129G</p>
               <p><strong>Domicilio:</strong> Calle Juan de Urbieta 30, 28007 Madrid</p>
@@ -39,7 +41,7 @@ export default function AvisoLegal() {
 
           {/* 2. Objeto */}
           <section>
-            <h2 className="text-xl font-bold text-[rgb(0,94,184)] mb-4">
+            <h2 className="text-2xl font-bold text-primary-dark mb-4">
               2. Objeto
             </h2>
             <p className="leading-relaxed">
@@ -52,7 +54,7 @@ export default function AvisoLegal() {
 
           {/* 3. Propiedad intelectual */}
           <section>
-            <h2 className="text-xl font-bold text-[rgb(0,94,184)] mb-4">
+            <h2 className="text-2xl font-bold text-primary-dark mb-4">
               3. Propiedad intelectual e industrial
             </h2>
             <p className="leading-relaxed mb-4">
@@ -71,7 +73,7 @@ export default function AvisoLegal() {
 
           {/* 4. Condiciones de uso */}
           <section>
-            <h2 className="text-xl font-bold text-[rgb(0,94,184)] mb-4">
+            <h2 className="text-2xl font-bold text-primary-dark mb-4">
               4. Condiciones de uso
             </h2>
             <p className="leading-relaxed mb-4">
@@ -95,7 +97,7 @@ export default function AvisoLegal() {
 
           {/* 5. Exención de responsabilidades */}
           <section>
-            <h2 className="text-xl font-bold text-[rgb(0,94,184)] mb-4">
+            <h2 className="text-2xl font-bold text-primary-dark mb-4">
               5. Exención de responsabilidades
             </h2>
             <p className="leading-relaxed mb-4">
@@ -118,7 +120,7 @@ export default function AvisoLegal() {
 
           {/* 6. Enlaces a terceros */}
           <section>
-            <h2 className="text-xl font-bold text-[rgb(0,94,184)] mb-4">
+            <h2 className="text-2xl font-bold text-primary-dark mb-4">
               6. Enlaces a terceros
             </h2>
             <p className="leading-relaxed">
@@ -132,7 +134,7 @@ export default function AvisoLegal() {
 
           {/* 7. Derecho de exclusión */}
           <section>
-            <h2 className="text-xl font-bold text-[rgb(0,94,184)] mb-4">
+            <h2 className="text-2xl font-bold text-primary-dark mb-4">
               7. Derecho de exclusión
             </h2>
             <p className="leading-relaxed">
@@ -144,7 +146,7 @@ export default function AvisoLegal() {
 
           {/* 8. Modificaciones */}
           <section>
-            <h2 className="text-xl font-bold text-[rgb(0,94,184)] mb-4">
+            <h2 className="text-2xl font-bold text-primary-dark mb-4">
               8. Modificaciones
             </h2>
             <p className="leading-relaxed">
@@ -157,7 +159,7 @@ export default function AvisoLegal() {
 
           {/* 9. Ley aplicable */}
           <section>
-            <h2 className="text-xl font-bold text-[rgb(0,94,184)] mb-4">
+            <h2 className="text-2xl font-bold text-primary-dark mb-4">
               9. Ley aplicable y jurisdicción
             </h2>
             <p className="leading-relaxed">
@@ -170,8 +172,8 @@ export default function AvisoLegal() {
           </section>
 
           {/* Contacto */}
-          <section className="bg-[rgb(191,231,249)] rounded-2xl p-8">
-            <h2 className="text-xl font-bold text-[rgb(0,94,184)] mb-4">
+          <section className="bg-primary-50 rounded-2xl p-8">
+            <h2 className="text-2xl font-bold text-primary-dark mb-4">
               ¿Tienes dudas?
             </h2>
             <p className="mb-4">
@@ -180,7 +182,7 @@ export default function AvisoLegal() {
             <div className="space-y-2">
               <p>
                 <strong>Email:</strong>{" "}
-                <a href="mailto:anteasalud@gmail.com" className="text-[rgb(0,94,184)] hover:underline">
+                <a href="mailto:anteasalud@gmail.com" className="text-primary underline">
                   anteasalud@gmail.com
                 </a>
               </p>
@@ -191,14 +193,14 @@ export default function AvisoLegal() {
 
         {/* Botón volver */}
         <div className="mt-12 text-center">
-          <a
+          <Link
             href="/"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-[rgb(0,94,184)] text-white font-bold rounded-xl hover:bg-[rgb(32,113,188)] transition-colors"
+            className="inline-flex items-center gap-2 min-h-12 px-6 bg-primary text-white font-bold rounded-xl hover:bg-primary-dark transition-colors"
           >
             ← Volver al inicio
-          </a>
+          </Link>
         </div>
       </article>
-    </main>
+    </div>
   );
 }

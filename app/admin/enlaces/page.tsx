@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from 'react';
+import { familyGuides } from '@/lib/family-guides';
 import {
   Globe,
   LayoutDashboard,
@@ -67,6 +68,11 @@ const GROUPS: LinkGroup[] = [
         description: 'Sin recargo de desplazamiento',
       },
       {
+        label: 'Pacífico (Madrid)',
+        url: 'https://anteasalud.com/ejercicio-mayores-pacifico',
+        description: 'Ejercicio para mayores a domicilio en Pacífico',
+      },
+      {
         label: 'Móstoles',
         url: 'https://anteasalud.com/ejercicio-mayores-mostoles',
       },
@@ -74,6 +80,54 @@ const GROUPS: LinkGroup[] = [
         label: 'Getafe',
         url: 'https://anteasalud.com/ejercicio-mayores-getafe',
       },
+    ],
+  },
+  {
+    title: 'Landing pages para anuncios',
+    icon: FileText,
+    links: [
+      {
+        label: 'Ejercicio para mayores — campaña',
+        url: 'https://anteasalud.com/ads/ejercicio-mayores',
+        description: 'Landing de captación para anuncios de ejercicio a domicilio',
+      },
+      {
+        label: 'Prevención de caídas — campaña',
+        url: 'https://anteasalud.com/ads/prevencion-caidas',
+        description: 'Landing de campaña centrada en prevenir caídas',
+      },
+      {
+        label: 'Recuperación postoperatoria — campaña',
+        url: 'https://anteasalud.com/ads/recuperacion-postoperacion',
+        description: 'Landing de campaña para la vuelta a la actividad tras una operación',
+      },
+    ],
+  },
+  {
+    title: 'Valoración gratuita',
+    icon: FileText,
+    links: [
+      {
+        label: 'Solicitar valoración gratuita',
+        url: 'https://anteasalud.com/valoracion-gratuita',
+        description: 'Página de solicitud de valoración inicial',
+      },
+    ],
+  },
+  {
+    title: 'Guías para familias',
+    icon: FileText,
+    links: [
+      {
+        label: 'Todas las guías',
+        url: 'https://anteasalud.com/guias',
+        description: 'Orientación para familiares de personas mayores',
+      },
+      ...familyGuides.map((guide) => ({
+        label: guide.title,
+        url: `https://anteasalud.com/guias/${guide.slug}`,
+        description: guide.question,
+      })),
     ],
   },
   {
@@ -134,8 +188,8 @@ const GROUPS: LinkGroup[] = [
       },
       {
         label: 'Google Analytics 4',
-        url: 'https://analytics.google.com',
-        description: 'Pendiente de configurar ID',
+        url: 'https://analytics.google.com/analytics/web/#/a71906085p534057565/realtime/overview',
+        description: 'Visitas y contactos de ANTEA Salud en tiempo real',
       },
     ],
   },

@@ -1,0 +1,29 @@
+[
+  {
+    "slug": "sesion-ejercicio-domicilio-mayores-30-minutos",
+    "title": "Cómo es una sesión de ejercicio en casa de 30–45 minutos",
+    "excerpt": "Qué hacemos en una sesión, cómo adaptamos el trabajo y qué puedes preguntar antes de contratar ejercicio a domicilio para tu familiar.",
+    "ogImage": "/articulos/ejercicio-en-casa.webp",
+    "tags": ["Ejercicio a domicilio", "Valoración funcional", "Familias"],
+    "status": "draft",
+    "file": "sesion-ejercicio-domicilio-mayores-30-minutos.md"
+  },
+  {
+    "slug": "familiar-mayor-no-quiere-hacer-ejercicio",
+    "title": "Mi familiar no quiere hacer ejercicio: cómo hablarlo",
+    "excerpt": "Cómo escuchar sus motivos, explicar la propuesta y acompañar su decisión cuando tu padre o tu madre rechaza hacer ejercicio.",
+    "ogImage": "/articulos/miedo-despues-caida.webp",
+    "tags": ["Familias", "Autonomía", "Ejercicio a domicilio"],
+    "status": "draft",
+    "file": "familiar-mayor-no-quiere-hacer-ejercicio.md"
+  },
+  {
+    "slug": "ejercicio-domicilio-mayor-apenas-camina",
+    "title": "Mi familiar apenas camina: ¿encaja el ejercicio en casa?",
+    "excerpt": "Qué conviene valorar antes de contratar ejercicio si tu familiar camina poco o necesita apoyo, y cuándo hace falta atención sanitaria.",
+    "ogImage": "/articulos/despues-hospitalizacion.webp",
+    "tags": ["Movilidad", "Valoración funcional", "Familias"],
+    "status": "draft",
+    "file": "ejercicio-domicilio-mayor-apenas-camina.md"
+  }
+]

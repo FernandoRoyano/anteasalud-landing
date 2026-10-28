@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import PriceLine from '@/components/PriceLine';
 import {
   AdsHero,
   AdsScarcity,
@@ -10,7 +11,7 @@ import {
   AdsFinalCTA,
 } from "@/components/ads/AdsSections";
 
-const ORIGEN = "Ads · Ejercicio mayores";
+const ORIGEN = "Página de campaña: ejercicio para mayores (/ads/ejercicio-mayores)";
 
 export const metadata: Metadata = {
   title: { absolute: "Entrenador para mayores a domicilio en Madrid | ANTEA Salud" },
@@ -83,9 +84,7 @@ export default function Page() {
           <h2 className="font-display text-fluid-2xl font-black text-[#17372b]">
             ¿Cuánto vale que tu padre pueda ducharse solo?
           </h2>
-          <p className="text-lg text-[#4a6358] leading-relaxed">
-            ¿Que no tengas que preocuparte cada vez que te llaman? Sesiones desde <strong>45€</strong>, adaptadas a su caso.
-          </p>
+          <PriceLine zoneNote className="mx-auto max-w-xl" />
           <p className="text-lg font-bold text-[#2d6a4f]">
             Sin permanencia. Pagas el mes y, si no quieres seguir, no sigues.
           </p>

@@ -168,7 +168,7 @@ export default function GuionVideoPage() {
           </p>
           <p>
             Conmigo hicimos un trabajo distinto. No tratamiento, no masajes. <strong>Ejercicio</strong>. Le hago
-            moverse <strong>de verdad</strong>, adaptado a su edad y a sus posibilidades. Sesiones de 30 minutos,
+            moverse <strong>de verdad</strong>, adaptado a su edad y a sus posibilidades. Sesiones de 30–45 minutos,
             dos días por semana.
           </p>
           <p>
@@ -184,7 +184,7 @@ export default function GuionVideoPage() {
         <Block num={6} time="4:30 - 5:30" title="Cómo es una sesión">
           <p>Una sesión conmigo es así de concreta:</p>
           <p>
-            <strong>30 minutos. En tu casa. Dos días por semana</strong> es lo habitual. Llego con todo lo que
+            <strong>30–45 minutos. En tu casa. Dos días por semana</strong> es lo habitual. Llego con todo lo que
             haga falta. Normalmente solo necesito una silla firme y un poco de espacio en el salón.
           </p>
           <p>

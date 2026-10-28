@@ -1,5 +1,6 @@
 import { getPublishedArticles } from '@/lib/sheets';
 import { SITE_URL } from '@/lib/seo';
+import { familyGuides } from '@/lib/family-guides';
 
 export const revalidate = 3600;
 
@@ -21,7 +22,7 @@ export async function GET() {
 
 - Servicio: ejercicio adaptado a domicilio para personas mayores (prevención de caídas, recuperación de autonomía tras operación u hospitalización, fragilidad, mantenimiento).
 - Zona: Madrid capital (sin recargo) y municipios de la Comunidad de Madrid como Getafe o Móstoles (+10 € por sesión de desplazamiento).
-- Precios: primera valoración funcional gratuita; sesión suelta de 30 minutos, 55 €; plan de 2 sesiones semanales, 90 € por semana. Sin permanencia.
+- Precios: primera valoración funcional gratuita; sesión suelta de 30–45 minutos, 55 €; plan de 2 sesiones semanales, 90 € por semana. Sin permanencia.
 - Horario: lunes a viernes, de 8:30 a 14:00, según disponibilidad (se confirma al reservar).
 - Contacto: anteasalud@gmail.com · WhatsApp +34 633 26 19 63 · ${SITE_URL}/valoracion-gratuita
 - ANTEA Salud no es un servicio sanitario: no sustituye al médico ni al fisioterapeuta y trabaja siguiendo sus indicaciones.
@@ -35,9 +36,15 @@ export async function GET() {
 - [Guía gratuita: 10 ejercicios para prevenir caídas](${SITE_URL}/guia-prevencion-caidas)
 - [Sobre Fernando Royano](${SITE_URL}/sobre-fernando)
 
+## Guías para familias
+
+- [Todas las guías](${SITE_URL}/guias)
+${familyGuides.map((guide) => `- [${guide.title}](${SITE_URL}/guias/${guide.slug}): ${guide.description}`).join('\n')}
+
 ## Zonas
 
 - [Madrid capital](${SITE_URL}/ejercicio-mayores-madrid-capital)
+- [Pacífico, Retiro](${SITE_URL}/ejercicio-mayores-pacifico): ejercicio a domicilio sin recargo, con primera valoración gratuita.
 - [Getafe](${SITE_URL}/ejercicio-mayores-getafe)
 - [Móstoles](${SITE_URL}/ejercicio-mayores-mostoles)
 

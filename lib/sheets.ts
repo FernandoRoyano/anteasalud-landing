@@ -1,7 +1,10 @@
 import { cache } from 'react';
+import { createHash, randomUUID } from 'node:crypto';
+import type { LeadUpdates } from '@/lib/types';
 import { google, sheets_v4 } from 'googleapis';
 import type { Article, ArticleStatus, Client, Lead, LeadSource, Session, SessionStatus, Zone } from './types';
 import { getArticleEditorial } from '@/lib/article-editorial';
+import { assessmentReportSchema, createAssessmentReport, decryptAssessmentReport, encryptAssessmentReport, type AssessmentReportInput } from '@/lib/assessment-reports';
 
 export type { Article, ArticleStatus, Client, Lead, LeadSource, Session, SessionStatus, Zone };
 
@@ -12,6 +15,24 @@ export type { Article, ArticleStatus, Client, Lead, LeadSource, Session, Session
 const LEADS_SHEET = 'Hoja 1'; // Se detecta automáticamente si no coincide
 const GUIA_CAIDAS_SHEET = 'Guía caídas';
 const LEADS_HEADERS = ['Fecha', 'Nombre', 'Email', 'Teléfono', 'Zona', 'Interés', 'Estado', 'Notas', 'Consentimiento'];
+const LEAD_DETAIL_HEADERS = ['ID', 'Procedencia', 'Ruta', 'Formulario', 'Mensaje', 'Próxima acción', 'Fecha seguimiento', 'Motivo descarte'];
+
+// Identidad estable para registros históricos sin modificar la hoja al leerla.
+function getLeadId(row: unknown[]): string {
+  return String(row[9] || `legacy-${createHash('sha256').update(JSON.stringify(row.slice(0, 6).map(v => String(v ?? '')))).digest('hex')}`);
+}
+
+async function ensureLeadColumns(sheets: sheets_v4.Sheets, spreadsheetId: string, sheetName: string) {
+  const range = `'${sheetName}'!J1:Q1`;
+  const headers = await sheets.spreadsheets.values.get({ spreadsheetId, range });
+  const existing = headers.data.values?.[0] || [];
+  if (existing.some((value, index) => value && value !== LEAD_DETAIL_HEADERS[index])) {
+    throw new Error('[Sheets:ensureLeadColumns] Las columnas J:Q ya contienen otros datos');
+  }
+  if (LEAD_DETAIL_HEADERS.some((value, index) => existing[index] !== value)) {
+    await sheets.spreadsheets.values.update({ spreadsheetId, range, valueInputOption: 'RAW', requestBody: { values: [LEAD_DETAIL_HEADERS] } });
+  }
+}
 const CLIENTES_SHEET = 'Clientes';
 const SESIONES_SHEET = 'Sesiones';
 const ARTICULOS_SHEET = 'Articulos';
@@ -143,11 +164,6 @@ async function ensureSheet(
 // LEADS (sección de la web pública)
 // =============================================================================
 
-// Con USER_ENTERED, un apóstrofo inicial fuerza texto y evita inyección de fórmulas (=IMPORTXML…)
-function sanitizeCell(value: string): string {
-  return /^[=+\-@\t\r]/.test(value) ? `'${value}` : value;
-}
-
 async function getLeadsSheetName(sheets: sheets_v4.Sheets, spreadsheetId: string): Promise<string> {
   if (cachedLeadsSheetName) return cachedLeadsSheetName;
   const spreadsheet = await sheets.spreadsheets.get({ spreadsheetId });
@@ -168,29 +184,87 @@ async function readLeadsFromSheet(
   sheetName: string,
   source: LeadSource
 ): Promise<Lead[]> {
-  try {
-    const response = await sheets.spreadsheets.values.get({
-      spreadsheetId,
-      range: `${sheetName}!A2:H`,
-    });
-    const rows = response.data.values || [];
-
-    return rows.map((row, index) => ({
-      row: index + 2,
-      source,
-      fecha: String(row[0] ?? ''),
-      nombre: String(row[1] ?? ''),
-      email: String(row[2] ?? ''),
-      telefono: String(row[3] ?? ''),
-      zona: String(row[4] ?? ''),
-      interes: String(row[5] ?? ''),
-      estado: String(row[6] ?? 'Nuevo'),
-      notas: String(row[7] ?? ''),
-    }));
-  } catch {
-    // Si la pestaña no existe todavía, devolvemos lista vacía
-    return [];
+  // Una pestaña opcional ausente no es un error; un fallo de lectura sí lo es.
+  if (source === 'guia') {
+    const book = await sheets.spreadsheets.get({ spreadsheetId, fields: 'sheets.properties.title' });
+    if (!book.data.sheets?.some(sheet => sheet.properties?.title === sheetName)) return [];
   }
+  const response = await sheets.spreadsheets.values.get({
+    spreadsheetId,
+    range: `'${sheetName}'!A2:Q`,
+  });
+  const rows = response.data.values || [];
+
+  return rows.map((row, index) => ({
+    id: getLeadId(row),
+    procedencia: String(row[10] ?? ''),
+    ruta: String(row[11] ?? ''),
+    formulario: String(row[12] ?? ''),
+    mensaje: String(row[13] ?? ''),
+    proximaAccion: String(row[14] ?? ''),
+    fechaSeguimiento: String(row[15] ?? ''),
+    motivoDescarte: String(row[16] ?? ''),
+    row: index + 2,
+    source,
+    fecha: String(row[0] ?? ''),
+    nombre: String(row[1] ?? ''),
+    email: String(row[2] ?? ''),
+    telefono: String(row[3] ?? ''),
+    zona: String(row[4] ?? ''),
+    interes: String(row[5] ?? ''),
+    estado: String(row[6] ?? 'Nuevo'),
+    notas: String(row[7] ?? ''),
+  })).filter(lead => lead.fecha || lead.nombre || lead.email || lead.telefono);
+}
+
+export async function deleteLead(leadId: string, source: LeadSource): Promise<void> {
+  const sheets = getSheetsClient();
+  const spreadsheetId = process.env.GOOGLE_SHEET_ID!;
+  const sheetName = source === 'guia' ? GUIA_CAIDAS_SHEET : await getLeadsSheetName(sheets, spreadsheetId);
+  const current = await sheets.spreadsheets.values.get({ spreadsheetId, range: `'${sheetName}'!A2:Q` });
+  const matches = (current.data.values || []).map((row, index) => ({ row, index }))
+    .filter(({ row }) => row.some(value => String(value ?? '') !== '') && getLeadId(row) === leadId);
+  if (matches.length !== 1) throw new Error('[Sheets:deleteLead] Contacto no encontrado o ambiguo; recarga el panel');
+  const rowNumber = matches[0].index + 2;
+  // Vaciar solo los datos del lead, sin desplazar filas ni tocar columnas adicionales.
+  await sheets.spreadsheets.values.clear({ spreadsheetId, range: `'${sheetName}'!A${rowNumber}:Q${rowNumber}` });
+}
+
+const REPORTS_SHEET = 'Informes valoracion';
+const REPORTS_HEADERS = ['ID', 'Fecha creación', 'Informe cifrado'];
+
+async function readAssessmentReportRows() {
+  const sheets = getSheetsClient();
+  const spreadsheetId = process.env.GOOGLE_SHEET_ID!;
+  await ensureSheet(sheets, spreadsheetId, REPORTS_SHEET, REPORTS_HEADERS);
+  const headers = await sheets.spreadsheets.values.get({ spreadsheetId, range: `'${REPORTS_SHEET}'!A1:C1` });
+  if (REPORTS_HEADERS.some((header, index) => headers.data.values?.[0]?.[index] !== header)) throw new Error('[Sheets:reports] Cabeceras de informes inesperadas');
+  const response = await sheets.spreadsheets.values.get({ spreadsheetId, range: `'${REPORTS_SHEET}'!A2:C` });
+  return response.data.values || [];
+}
+
+export async function getAssessmentReports() {
+  const rows = await readAssessmentReportRows();
+  return rows.filter(row => row[0]).map(row => decryptAssessmentReport(String(row[0]), String(row[2]))).sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+}
+
+export async function getAssessmentReport(id: string) {
+  const rows = await readAssessmentReportRows();
+  const matches = rows.filter(row => row[0] === id);
+  if (matches.length > 1) throw new Error('[Sheets:reports] Identidad de informe ambigua');
+  return matches.length ? decryptAssessmentReport(id, String(matches[0][2])) : null;
+}
+
+export async function saveAssessmentReport(input: AssessmentReportInput) {
+  const data = assessmentReportSchema.parse(input);
+  const existing = await getAssessmentReport(data.id);
+  if (existing) {
+    if (JSON.stringify(assessmentReportSchema.strip().parse(existing)) !== JSON.stringify(data)) throw new Error('[Sheets:reports] Identificador reutilizado');
+    return existing;
+  }
+  const report = createAssessmentReport(data);
+  await getSheetsClient().spreadsheets.values.append({ spreadsheetId: process.env.GOOGLE_SHEET_ID!, range: `'${REPORTS_SHEET}'!A:C`, valueInputOption: 'RAW', insertDataOption: 'INSERT_ROWS', requestBody: { values: [[report.id, report.createdAt, encryptAssessmentReport(report)]] } });
+  return report;
 }
 
 export async function getAllLeads(): Promise<Lead[]> {
@@ -208,18 +282,23 @@ export async function getAllLeads(): Promise<Lead[]> {
 }
 
 /** Guarda un lead en la pestaña correcta según el tipo de interés */
-export async function saveLead(data: {
+async function writeLead(data: {
+  requestId?: string;
   nombre: string;
   email?: string;
   telefono?: string;
   zona?: string;
   interes?: string;
+  procedencia?: string;
+  ruta?: string;
+  formulario?: string;
+  mensaje?: string;
   consentAt?: string;
-}): Promise<{ source: LeadSource }> {
+}): Promise<{ source: LeadSource; id: string; duplicate: boolean }> {
   const sheets = getSheetsClient();
   const spreadsheetId = process.env.GOOGLE_SHEET_ID!;
 
-  const source = getSheetForInterest(data.interes || '');
+  const source = data.formulario === 'Descarga de guía' ? 'guia' : data.formulario ? 'formulario' : getSheetForInterest(data.interes || '');
 
   const fecha = new Date().toLocaleString('es-ES', {
     timeZone: 'Europe/Madrid',
@@ -232,12 +311,12 @@ export async function saveLead(data: {
 
   const row = [
     fecha,
-    ...[data.nombre, data.email, data.telefono, data.zona, data.interes].map((v) =>
-      sanitizeCell(v || '')
-    ),
+    ...[data.nombre, data.email, data.telefono, data.zona, data.interes].map(v => v || ''),
     'Nuevo',
     '',
     data.consentAt || '',
+    data.requestId || randomUUID(),
+    ...[data.procedencia, data.ruta, data.formulario, data.mensaje, '', '', ''].map(value => value || ''),
   ];
 
   let sheetName: string;
@@ -262,20 +341,46 @@ export async function saveLead(data: {
     }
   }
 
+  await ensureLeadColumns(sheets, spreadsheetId, sheetName);
+  if (data.requestId) {
+    const existing = await sheets.spreadsheets.values.get({ spreadsheetId, range: `'${sheetName}'!A2:Q` });
+    const previous = existing.data.values?.find(value => value[9] === data.requestId);
+    if (previous) {
+      const fields = (value: unknown[]) => JSON.stringify([1, 2, 3, 4, 5, 10, 11, 12, 13].map(index => String(value[index] || '')));
+      if (fields(previous) !== fields(row)) throw new Error('[Sheets:saveLead] Identificador reutilizado con otros datos');
+      return { source, id: data.requestId, duplicate: true };
+    }
+  }
   await sheets.spreadsheets.values.append({
     spreadsheetId,
-    range: `${sheetName}!A:I`,
-    valueInputOption: 'USER_ENTERED',
+    range: `'${sheetName}'!A:Q`,
+    valueInputOption: 'RAW',
     requestBody: { values: [row] },
   });
 
-  return { source };
+  return { source, id: String(row[9]), duplicate: false };
+}
+
+const pendingLeadWrites = new Map<string, { content: string; promise: ReturnType<typeof writeLead> }>();
+
+export async function saveLead(data: Parameters<typeof writeLead>[0]) {
+  if (!data.requestId) return writeLead(data);
+  const content = JSON.stringify({ ...data, consentAt: undefined });
+  const pending = pendingLeadWrites.get(data.requestId);
+  if (pending) {
+    if (pending.content !== content) throw new Error('[Sheets:saveLead] Identificador reutilizado con otros datos');
+    return { ...await pending.promise, duplicate: true };
+  }
+  const promise = writeLead(data);
+  pendingLeadWrites.set(data.requestId, { content, promise });
+  try { return await promise; }
+  finally { pendingLeadWrites.delete(data.requestId); }
 }
 
 export async function updateLead(
-  rowNumber: number,
+  leadId: string,
   source: LeadSource,
-  updates: { estado?: string; notas?: string }
+  updates: LeadUpdates
 ): Promise<void> {
   const sheets = getSheetsClient();
   const spreadsheetId = process.env.GOOGLE_SHEET_ID!;
@@ -287,21 +392,32 @@ export async function updateLead(
     sheetName = await getLeadsSheetName(sheets, spreadsheetId);
   }
 
+  await ensureLeadColumns(sheets, spreadsheetId, sheetName);
   const current = await sheets.spreadsheets.values.get({
     spreadsheetId,
-    range: `${sheetName}!G${rowNumber}:H${rowNumber}`,
+    range: `'${sheetName}'!A2:Q`,
   });
 
-  const currentRow = current.data.values?.[0] || ['', ''];
-  const newEstado = updates.estado !== undefined ? updates.estado : (currentRow[0] || '');
-  const newNotas = updates.notas !== undefined ? updates.notas : (currentRow[1] || '');
+  const matches = (current.data.values || []).map((row, index) => ({ row, index })).filter(({ row }) => getLeadId(row) === leadId);
+  if (matches.length !== 1) throw new Error('[Sheets:updateLead] Contacto no encontrado o ambiguo; recarga el panel');
+  const { row: currentRow, index } = matches[0];
+  const rowNumber = index + 2;
+  const newEstado = updates.estado ?? String(currentRow[6] || 'Nuevo');
+  const newNotas = updates.notas ?? String(currentRow[7] || '');
 
-  await sheets.spreadsheets.values.update({
+  await sheets.spreadsheets.values.batchUpdate({
     spreadsheetId,
-    range: `${sheetName}!G${rowNumber}:H${rowNumber}`,
-    valueInputOption: 'USER_ENTERED',
     requestBody: {
-      values: [[sanitizeCell(newEstado), sanitizeCell(newNotas)]],
+      valueInputOption: 'RAW',
+      data: [
+        { range: `'${sheetName}'!G${rowNumber}:H${rowNumber}`, values: [[newEstado, newNotas]] },
+        { range: `'${sheetName}'!J${rowNumber}`, values: [[leadId]] },
+        { range: `'${sheetName}'!O${rowNumber}:Q${rowNumber}`, values: [[
+          updates.proximaAccion ?? String(currentRow[14] || ''),
+          updates.fechaSeguimiento ?? String(currentRow[15] || ''),
+          updates.motivoDescarte ?? String(currentRow[16] || ''),
+        ]] },
+      ],
     },
   });
 }
@@ -713,10 +829,10 @@ export async function updateArticle(id: string, updates: Partial<Article>): Prom
   const wasDraft = article.status !== 'published';
   const nowPublished = updates.status === 'published';
   const publishedAt =
-    wasDraft && nowPublished
-      ? new Date().toISOString()
-      : updates.publishedAt !== undefined
-        ? updates.publishedAt
+    updates.publishedAt !== undefined
+      ? updates.publishedAt
+      : wasDraft && nowPublished
+        ? new Date().toISOString()
         : article.publishedAt;
 
   const merged: Article = {

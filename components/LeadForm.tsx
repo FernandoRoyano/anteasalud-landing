@@ -12,8 +12,9 @@ type FormStatus = "idle" | "sending" | "success" | "error";
 interface LeadFormProps {
   /** Texto del botón de envío */
   ctaText?: string;
-  /** Etiqueta de interés que se guarda en el lead (identifica la página de origen) */
+  /** Procedencia que se guarda separada del interés y del mensaje */
   origen: string;
+  zone?: string;
   /** Título del formulario */
   title?: string;
   /** Mostrar el textarea opcional de "cuéntanos la situación" */
@@ -31,6 +32,7 @@ export const leadInputClass =
 export default function LeadForm({
   ctaText = "Quiero la valoración gratuita →",
   origen,
+  zone = 'Madrid',
   title = "Solicita tu valoración gratuita",
   showMessage = true,
 }: LeadFormProps) {
@@ -56,8 +58,11 @@ export default function LeadForm({
     const lead = {
       nombre,
       telefono,
-      zona: "Madrid",
-      interes: `${origen}${mensaje ? ` · ${mensaje}` : ""}`,
+      zona: zone,
+      procedencia: origen.replace(/\s*\([^)]*\)$/, ""),
+      formulario: "Contacto",
+      interes: "Valoración gratuita",
+      mensaje: mensaje.trim(),
     };
 
     try {
@@ -67,7 +72,7 @@ export default function LeadForm({
         throw new Error(data.error);
       }
 
-      trackLeadConversion();
+      if (!(await res.clone().json()).duplicate) trackLeadConversion();
       sendLeadToWhatsApp(whatsappWindow, lead);
       setStatus("success");
       setNombre("");

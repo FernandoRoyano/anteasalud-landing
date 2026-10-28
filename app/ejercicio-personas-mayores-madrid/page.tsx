@@ -42,7 +42,7 @@ export default function Page() {
         h1="Ejercicio para personas mayores a domicilio"
         h1Highlight="en Madrid"
         subtitle="Recupera fuerza, equilibrio y autonomía con un entrenador titulado que va a tu casa. Sesiones personalizadas, adaptadas a cada edad y condición física. Primera valoración gratuita y sin compromiso."
-        origen="Landing · Ejercicio personas mayores Madrid"
+        origen="Ejercicio para mayores en Madrid (/ejercicio-personas-mayores-madrid)"
       />
 
       {/* Introducción */}
@@ -118,7 +118,7 @@ export default function Page() {
           </h2>
           <div className="space-y-6 text-lg text-[#4a6358] leading-relaxed">
             <p>
-              Cada sesión de 30 minutos combina varios bloques pensados para abordar las debilidades más importantes que aparecen con la edad:
+              Cada sesión de 30–45 minutos combina varios bloques pensados para abordar las debilidades más importantes que aparecen con la edad:
             </p>
             <ul className="space-y-4 pl-4">
               <li className="flex gap-3">

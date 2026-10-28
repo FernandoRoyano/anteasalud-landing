@@ -1,6 +1,14 @@
 export type LeadSource = 'formulario' | 'guia';
 
 export interface Lead {
+  id: string;
+  procedencia: string;
+  ruta: string;
+  formulario: string;
+  mensaje: string;
+  proximaAccion: string;
+  fechaSeguimiento: string;
+  motivoDescarte: string;
   /** Número de fila en Google Sheets (2 = primera fila de datos, ya que 1 son cabeceras) */
   row: number;
   /** Origen del lead: de qué pestaña de Google Sheets viene */
@@ -14,6 +22,8 @@ export interface Lead {
   estado: string;
   notas: string;
 }
+
+export type LeadUpdates = Partial<Pick<Lead, 'estado' | 'notas' | 'proximaAccion' | 'fechaSeguimiento' | 'motivoDescarte'>>;
 
 // =============================================================================
 // CRM: Clientes y Sesiones

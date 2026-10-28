@@ -76,7 +76,7 @@ export const articleCreateSchema = articleBase.extend({
   status: articleBase.shape.status.default('draft'),
 });
 
-export const articleUpdateSchema = articleBase.extend({ title: text(200) }).partial();
+export const articleUpdateSchema = articleBase.extend({ title: text(200), publishedAt: z.iso.datetime() }).partial();
 
 export function invalidBody(error: z.ZodError) {
   const field = error.issues[0]?.path.join('.') || 'datos';

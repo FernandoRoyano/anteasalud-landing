@@ -10,7 +10,7 @@ const PRICE_PLAN = 90;
 
 export function LandingPricing({ place, surcharge }: { place: string; surcharge: number }) {
   const rows = [
-    ['Sesión suelta (30 min)', surcharge ? `${PRICE_SESSION + surcharge} €` : `${PRICE_SESSION} €`],
+    ['Sesión suelta (30–45 min)', surcharge ? `${PRICE_SESSION + surcharge} €` : `${PRICE_SESSION} €`],
     ['Plan 2 días/semana', surcharge ? `${PRICE_PLAN + surcharge * 2} € / semana` : `${PRICE_PLAN} € / semana`],
   ];
 
@@ -23,12 +23,12 @@ export function LandingPricing({ place, surcharge }: { place: string; surcharge:
         <div className="rounded-3xl border border-[#2d6a4f]/15 bg-white p-8 shadow-sm">
           <dl className="space-y-3 text-lg">
             {rows.map(([label, price]) => (
-              <div key={label} className="flex items-center justify-between gap-4 border-b border-[#2d6a4f]/10 p-3">
+                <div key={label} className="flex flex-col items-start justify-between gap-2 border-b border-[#2d6a4f]/10 p-3 sm:flex-row sm:items-center sm:gap-4">
                 <dt className="text-[#3b5a4e]">{label}</dt>
-                <dd className="font-display text-2xl font-bold text-[#2d6a4f]">{price}</dd>
+                  <dd className="whitespace-nowrap font-display text-2xl font-bold text-[#2d6a4f]">{price}</dd>
               </div>
             ))}
-            <div className="flex items-center justify-between gap-4 rounded-xl bg-[#e3f1e8] p-3">
+            <div className="flex flex-col items-start justify-between gap-2 rounded-xl bg-[#e3f1e8] p-3 sm:flex-row sm:items-center sm:gap-4">
               <dt className="font-semibold text-[#17372b]">Primera valoración en casa</dt>
               <dd className="font-display text-2xl font-bold text-[#2d6a4f]">Gratis</dd>
             </div>

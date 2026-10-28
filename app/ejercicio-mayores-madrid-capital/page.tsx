@@ -15,7 +15,7 @@ const config: LocalServiceConfig = {
     title: 'Ejercicio adaptado sin salir de Madrid',
     paragraphs: [
       'Madrid no es fácil para una persona mayor: escaleras de metro, aceras irregulares, tráfico y distancias largas. Llevar a un padre o una madre dos veces por semana a un centro puede convertirse en una odisea que acaba en no hacerlo.',
-      'Por eso vamos nosotros a su casa. Sesiones de 30 minutos en el salón, con el material mínimo necesario y adaptadas a lo que cada persona puede hacer ese día. En Madrid capital no hay recargo por desplazamiento.',
+      'Por eso vamos nosotros a su casa. Sesiones de 30–45 minutos en el salón, con el material mínimo necesario y adaptadas a lo que cada persona puede hacer ese día. En Madrid capital no hay recargo por desplazamiento.',
       'Muchas personas mayores ya participan en actividades de los centros municipales de mayores de su distrito. El trabajo individual en casa es un buen complemento: permite empezar desde un nivel más bajo, ganar confianza y volver al grupo con más seguridad.',
     ],
   },
@@ -47,7 +47,7 @@ const config: LocalServiceConfig = {
     'Personas que quieren volver a las actividades de su centro de mayores con más seguridad',
   ],
   faqs: [
-    { question: '¿Cuánto cuesta el ejercicio a domicilio en Madrid capital?', answer: 'La sesión suelta de 30 minutos cuesta 55 € y el plan de 2 sesiones semanales 90 € a la semana. En Madrid capital no hay recargo por desplazamiento y la primera valoración es gratuita.' },
+    { question: '¿Cuánto cuesta el ejercicio a domicilio en Madrid capital?', answer: 'La sesión suelta de 30–45 minutos cuesta 55 € y el plan de 2 sesiones semanales 90 € a la semana. En Madrid capital no hay recargo por desplazamiento y la primera valoración es gratuita.' },
     { question: '¿Vais a todos los distritos?', answer: 'Sí, a los 21 distritos de Madrid capital, desde Centro hasta Barajas, Villaverde o Fuencarral-El Pardo.' },
     { question: '¿Cuánto espacio hace falta en casa?', answer: 'Muy poco: una silla estable sin ruedas y un par de metros despejados. Adaptamos los ejercicios a pisos pequeños.' },
     { question: '¿Hay permanencia?', answer: 'No. Puedes pausar o reorganizar las sesiones cuando lo necesites. Te recomendaremos una frecuencia, pero la decisión es siempre de la familia.' },
@@ -57,6 +57,7 @@ const config: LocalServiceConfig = {
     subtitle: 'Valoración gratuita en el domicilio. Sin compromiso y sin pago por adelantado.',
   },
   related: [
+    { href: '/ejercicio-mayores-pacifico', label: 'Pacífico · Retiro' },
     { href: '/ejercicio-personas-mayores-madrid', label: 'Ejercicio para mayores' },
     { href: '/ejercicio-mayores-mostoles', label: 'Móstoles' },
     { href: '/ejercicio-mayores-getafe', label: 'Getafe' },

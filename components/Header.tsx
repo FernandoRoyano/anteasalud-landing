@@ -37,7 +37,7 @@ export default function Header() {
   const closeMenu = () => setMenuOpen(false);
 
   return (
-    <header className={`fixed inset-x-0 top-0 z-50 border-b transition-all ${scrolled ? 'border-[#2d6a4f]/10 bg-[#fbfcf8]/95 shadow-sm backdrop-blur-xl' : 'border-transparent bg-[#fbfcf8]/80 backdrop-blur-md'}`}>
+    <header className={`fixed inset-x-0 top-0 z-50 border-b bg-[#fbfcf8] transition-all ${scrolled ? 'border-[#2d6a4f]/10 shadow-sm' : 'border-transparent'}`}>
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 sm:px-8">
         <Link href="/" className="font-display text-2xl font-black tracking-[-.045em] text-[#2d6a4f]" aria-label="ANTEA Salud, inicio">
           ANTEA <span className="font-medium text-[#4a6358]">SALUD</span>

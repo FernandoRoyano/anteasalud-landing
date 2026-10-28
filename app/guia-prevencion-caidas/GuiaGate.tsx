@@ -29,7 +29,8 @@ export default function GuiaGate({ children }: { children: ReactNode }) {
     setError("");
 
     try {
-      const lead = { nombre: name.trim(), email: email.trim(), interes: INTERES_GUIA };
+      const lead = { nombre: name.trim(), email: email.trim(), interes: INTERES_GUIA,
+        procedencia: "Guía de prevención de caídas", formulario: "Descarga de guía" };
       const res = await postLead(lead, { consent, website, fillMs: elapsed() });
 
       if (res.ok) {

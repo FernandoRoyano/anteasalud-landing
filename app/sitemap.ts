@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { getPublishedArticles } from '@/lib/sheets';
+import { familyGuides, FAMILY_GUIDES_UPDATED } from '@/lib/family-guides';
 import { SITE_URL } from '@/lib/seo';
 
 // Se regenera cada hora para incluir artículos publicados desde el admin sin redeploy
@@ -48,5 +49,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     console.error('[sitemap] Error leyendo artículos:', error);
   }
 
-  return [...staticEntries, ...articleEntries];
+  const guideEntries: MetadataRoute.Sitemap = ['/guias', ...familyGuides.map((guide) => `/guias/${guide.slug}`)].map((path) => ({
+    url: `${SITE_URL}${path}`, lastModified: FAMILY_GUIDES_UPDATED, changeFrequency: 'monthly', priority: 0.8,
+  }));
+  return [...staticEntries, {
+    url: `${SITE_URL}/ejercicio-mayores-pacifico`, lastModified: '2026-10-25', changeFrequency: 'monthly', priority: 0.8,
+  }, ...guideEntries, ...articleEntries];
 }

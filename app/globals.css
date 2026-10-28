@@ -21,7 +21,7 @@
 
   /* Neutros */
   --color-ink: #1f2933;
-  --color-muted: #4a6358; /* 6.2:1 sobre blanco */
+  --color-muted: #3b5549;
   --color-surface: #ffffff;
   --color-surface-alt: #f7f8f9;
   --color-border: #e5e7eb;
@@ -45,8 +45,8 @@
   /* Escala fluida con clamp() — responsive automático sin breakpoints */
   --text-fluid-xs:   clamp(0.875rem, 0.85rem + 0.12vw, 0.9375rem);
   --text-fluid-sm:   clamp(1rem, 0.97rem + 0.15vw, 1.0625rem);
-  --text-fluid-base: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
-  --text-fluid-lg:   clamp(1.125rem, 1.05rem + 0.4vw, 1.3125rem);
+  --text-fluid-base: clamp(1.125rem, 1.05rem + 0.25vw, 1.25rem);
+  --text-fluid-lg:   clamp(1.1875rem, 1.1rem + 0.4vw, 1.375rem);
   --text-fluid-xl:   clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
   --text-fluid-2xl:  clamp(1.5rem, 1.3rem + 1vw, 1.875rem);
   --text-fluid-3xl:  clamp(1.875rem, 1.5rem + 1.8vw, 2.5rem);
@@ -106,6 +106,22 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Ritmo de lectura común a la web pública, incluido el contenido de campañas. */
+#contenido :is(h1, h2, h3) {
+  overflow-wrap: break-word;
+  letter-spacing: -0.02em;
+}
+
+#contenido h1 { line-height: 1.12; }
+#contenido h2 { line-height: 1.25; }
+#contenido h3 { line-height: 1.35; }
+#contenido p { line-height: 1.7; text-wrap: pretty; }
+
+#contenido :is(input, textarea)::placeholder {
+  color: #52665c;
+  opacity: 1;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -121,11 +137,17 @@ body {
 .prose-antea {
   color: var(--color-ink);
   font-size: var(--text-fluid-lg);
-  line-height: 1.75;
+  line-height: 1.8;
+  max-width: 65ch;
+  overflow-wrap: break-word;
 }
 
 .prose-antea > * + * {
   margin-top: 1.25em;
+}
+
+#contenido .prose-antea p {
+  line-height: 1.8;
 }
 
 .prose-antea h2 {
@@ -156,10 +178,6 @@ body {
   margin-top: 1.6em;
   margin-bottom: 0.4em;
   color: var(--color-ink);
-}
-
-.prose-antea p {
-  margin: 0;
 }
 
 .prose-antea a {

@@ -31,7 +31,7 @@ export function AdsHero({ h1, h1Highlight, subtitle, bullets, formCta, origen }:
           <p className="inline-flex items-center gap-2 rounded-full border border-[#2d6a4f]/20 bg-white/75 px-4 py-2 text-sm font-semibold text-[#2d6a4f] backdrop-blur">
             <span className="h-2 w-2 rounded-full bg-[#74c69d]" /> Atención personalizada en Madrid
           </p>
-          <h1 className="font-display text-[clamp(3rem,6vw,5.6rem)] font-bold leading-[.96] tracking-[-.05em] text-[#153e31]">
+          <h1 className="font-display text-[clamp(2.25rem,5vw,4.75rem)] font-bold text-[#153e31]">
             {h1}
             <span className="mt-2 block text-[#2d6a4f]">{h1Highlight}</span>
           </h1>

@@ -118,7 +118,7 @@ export function ArticlesFilter({ articles }: ArticlesFilterProps) {
         </div>
 
         <div
-          className="flex gap-2 overflow-x-auto pb-2 sm:flex-wrap sm:overflow-visible sm:pb-0"
+          className="flex flex-wrap gap-2 pb-2 sm:pb-0"
           role="group"
           aria-label="Filtrar artículos por tema"
         >

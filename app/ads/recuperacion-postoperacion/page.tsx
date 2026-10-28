@@ -10,7 +10,7 @@ import {
   AdsFinalCTA,
 } from "@/components/ads/AdsSections";
 
-const ORIGEN = "Ads · Recuperación post-operación";
+const ORIGEN = "Página de campaña: recuperación postoperatoria (/ads/recuperacion-postoperacion)";
 
 export const metadata: Metadata = {
   title: { absolute: "Recuperación tras operación a domicilio en Madrid | ANTEA Salud" },

@@ -9,13 +9,13 @@ const config: LocalServiceConfig = {
   description:
     'Entrenador para personas mayores a domicilio en Getafe: fuerza, equilibrio y prevención de caídas en casa. Graduado en CCAFYD. Valoración gratuita.',
   heroSubtitle:
-    'Voy a casa de tu familiar en Getafe para trabajar fuerza, equilibrio y confianza al caminar. Sesiones de 30 minutos adaptadas a cómo se encuentra cada día.',
+    'Voy a casa de tu familiar en Getafe para trabajar fuerza, equilibrio y confianza al caminar. Sesiones de 30–45 minutos adaptadas a cómo se encuentra cada día.',
   surcharge: 10,
   intro: {
     title: 'Ejercicio adaptado en tu casa de Getafe',
     paragraphs: [
       'Getafe está a unos 14 km del centro de Madrid y muchas familias del municipio nos piden algo concreto: que su padre o su madre vuelva a moverse con seguridad sin tener que desplazarse a un gimnasio o a un centro.',
-      'Cada sesión dura 30 minutos y se adapta al estado de la persona ese día. Primero hacemos una valoración funcional gratuita en casa; después diseñamos un plan y lo ajustamos sesión a sesión según la evolución.',
+      'Cada sesión dura 30–45 minutos y se adapta al estado de la persona ese día. Primero hacemos una valoración funcional gratuita en casa; después diseñamos un plan y lo ajustamos sesión a sesión según la evolución.',
       'El ejercicio a domicilio es compatible con las actividades de los centros municipales de mayores de Getafe. De hecho, muchas personas empiezan en casa para ganar fuerza y confianza y, cuando están preparadas, se animan a volver a las actividades de grupo.',
     ],
   },
@@ -42,7 +42,7 @@ const config: LocalServiceConfig = {
     'Pérdida de fuerza tras una hospitalización o una temporada sin moverse',
   ],
   faqs: [
-    { question: '¿Cuánto cuesta el ejercicio a domicilio en Getafe?', answer: 'La sesión suelta de 30 minutos cuesta 65 € y el plan de 2 sesiones semanales 110 € a la semana. Incluye 10 € por sesión de desplazamiento fuera de Madrid capital. La primera valoración es gratuita.' },
+    { question: '¿Cuánto cuesta el ejercicio a domicilio en Getafe?', answer: 'La sesión suelta de 30–45 minutos cuesta 65 € y el plan de 2 sesiones semanales 110 € a la semana. Incluye 10 € por sesión de desplazamiento fuera de Madrid capital. La primera valoración es gratuita.' },
     { question: '¿Vais a Perales del Río o El Bercial?', answer: 'Sí. Cubrimos todos los barrios de Getafe, incluidos Perales del Río, El Bercial, Los Molinos y Getafe Norte.' },
     { question: '¿Hace falta tener material en casa?', answer: 'No. Llevamos el material necesario (bandas, pesos ligeros, conos). Solo necesitamos una silla estable sin ruedas y un pequeño espacio despejado.' },
     { question: '¿Es compatible con la fisioterapia o con el centro de mayores?', answer: 'Sí. No sustituimos al fisioterapeuta ni al médico: seguimos sus indicaciones y el ejercicio se puede combinar con las actividades de grupo del centro municipal.' },

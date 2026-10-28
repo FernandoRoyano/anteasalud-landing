@@ -76,6 +76,7 @@ export default function SobreFernandoPage() {
       <section className="border-y border-[#2d6a4f]/10 bg-white px-5 py-20 sm:px-8">
         <div className="mx-auto max-w-6xl">
           <h2 className="font-display text-[clamp(2rem,4vw,3.2rem)] font-bold tracking-[-.03em]">Cómo trabajo</h2>
+          <p className="mt-5 max-w-3xl text-lg text-muted">La primera visita es gratuita. Valoro la capacidad funcional, explico los resultados y planteo una propuesta de ejercicio antes de que decidáis si queréis empezar. <Link href="/valoracion-gratuita#como-trabajo" className="font-semibold text-primary underline underline-offset-4">Consulta el proceso, las pruebas y cómo utilizo Vivifrail.</Link></p>
           <div className="mt-10 grid gap-8 md:grid-cols-2">
             {principles.map(([Icon, title, text]) => (
               <article key={title} className="flex gap-5">

@@ -3,9 +3,9 @@ import AdminSidebar from '@/components/admin/AdminSidebar';
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="min-h-screen bg-[rgb(232,237,238)] flex">
+    <div className="min-h-screen bg-[#f7f8f2] flex text-primary-dark">
       <AdminSidebar />
-      <main className="flex-1 lg:ml-64 p-6 md:p-10">
+      <main id="panel-contenido" className="min-w-0 flex-1 p-5 pt-20 sm:p-8 sm:pt-24 lg:ml-64 lg:p-10 xl:p-12">
         {children}
       </main>
     </div>

@@ -1,4 +1,5 @@
 import { MapPin, Route } from 'lucide-react';
+import type { ReactNode } from 'react';
 import { BreadcrumbSchema } from '@/components/BreadcrumbSchema';
 import { JsonLd } from '@/components/JsonLd';
 import LandingHero from '@/components/landing/LandingHero';
@@ -19,6 +20,7 @@ export interface LocalServiceConfig {
   heroSubtitle: string;
   description: string;
   surcharge: number;
+  areaServedType?: 'City' | 'Place';
   intro: { title: string; paragraphs: string[] };
   neighborhoods: { title: string; note: string; items: string[] };
   walking: { title: string; intro: string; routes: Array<{ name: string; tip: string }> };
@@ -29,7 +31,7 @@ export interface LocalServiceConfig {
 }
 
 /** Plantilla de landing local: estructura común, contenido específico de cada zona */
-export default function LocalServicePage({ config }: { config: LocalServiceConfig }) {
+export default function LocalServicePage({ config, hero }: { config: LocalServiceConfig; hero?: ReactNode }) {
   const url = `${SITE_URL}${config.path}`;
 
   return (
@@ -40,6 +42,7 @@ export default function LocalServicePage({ config }: { config: LocalServiceConfi
           description: config.description,
           path: config.path,
           areaServed: config.place === 'Madrid capital' ? 'Madrid' : config.place,
+          areaServedType: config.areaServedType,
         })}
       />
       <BreadcrumbSchema
@@ -49,15 +52,16 @@ export default function LocalServicePage({ config }: { config: LocalServiceConfi
         ]}
       />
 
-      <LandingHero
+      {hero ?? <LandingHero
         badge={config.badge}
         h1="Ejercicio para personas mayores a domicilio"
         h1Highlight={`en ${config.place}`}
         subtitle={config.heroSubtitle}
-        origen={`Landing · ${config.place}`}
+        origen={`Ejercicio para mayores en ${config.place} (${config.path})`}
         surcharge={config.surcharge}
+        zone={config.place}
         zoneNote={false}
-      />
+      />}
 
       <section className="w-full bg-white px-5 py-20 sm:px-8">
         <div className="mx-auto max-w-4xl space-y-6">

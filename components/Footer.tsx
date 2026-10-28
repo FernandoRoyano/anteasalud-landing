@@ -19,6 +19,7 @@ const columns = [
     title: 'Zonas',
     links: [
       ['/ejercicio-mayores-madrid-capital', 'Madrid capital'],
+      ['/ejercicio-mayores-pacifico', 'Pacífico · Retiro'],
       ['/ejercicio-mayores-mostoles', 'Móstoles'],
       ['/ejercicio-mayores-getafe', 'Getafe'],
     ],
@@ -26,7 +27,8 @@ const columns = [
   {
     title: 'Recursos',
     links: [
-      ['/articulos', 'Artículos para familias'],
+        ['/guias', 'Guías para familias'],
+        ['/articulos', 'Todos los artículos'],
       ['/guia-prevencion-caidas', 'Guía gratuita de caídas'],
       ['/#faqs', 'Preguntas frecuentes'],
       ['/sobre-fernando', 'Sobre Fernando Royano'],

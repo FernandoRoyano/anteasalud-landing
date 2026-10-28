@@ -75,10 +75,11 @@ interface ServiceSchemaInput {
   description: string;
   path: string;
   areaServed: string | string[];
+  areaServedType?: 'City' | 'Place';
 }
 
 /** Service vinculado al negocio global (@id) en lugar de duplicar un LocalBusiness por página */
-export function buildServiceSchema({ name, description, path, areaServed }: ServiceSchemaInput) {
+export function buildServiceSchema({ name, description, path, areaServed, areaServedType = 'City' }: ServiceSchemaInput) {
   const areas = Array.isArray(areaServed) ? areaServed : [areaServed];
   return {
     '@context': 'https://schema.org',
@@ -89,7 +90,7 @@ export function buildServiceSchema({ name, description, path, areaServed }: Serv
     description,
     url: absoluteUrl(path),
     provider: { '@id': ORGANIZATION_ID },
-    areaServed: areas.map((area) => ({ '@type': 'City', name: area })),
+    areaServed: areas.map((area) => ({ '@type': areaServedType, name: area })),
     offers: {
       '@type': 'Offer',
       name: 'Primera valoración funcional a domicilio',

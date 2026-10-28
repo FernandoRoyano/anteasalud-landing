@@ -4,7 +4,7 @@ import { createContext, useContext, useEffect, useId, useRef, useState, ReactNod
 import { trackLeadConversion } from '@/components/GoogleTag';
 import { ConsentCheckbox, HoneypotField } from '@/components/ConsentCheckbox';
 import { leadInputClass } from '@/components/LeadForm';
-import { postLead, useFormTimer } from '@/lib/lead-client';
+import { getLeadPageLabel, postLead, useFormTimer } from '@/lib/lead-client';
 import { buildWhatsAppUrl, openWhatsAppPlaceholder, openWhatsAppUrl } from '@/lib/lead-whatsapp';
 import {
   X,
@@ -216,12 +216,16 @@ Mi teléfono: ${data.telefono}`;
           nombre: data.nombre,
           telefono: data.telefono,
           zona: zonaLabel,
-          interes: `${situacionLabel} (${paraQuienLabel}, ${edadLabel})${recargo > 0 ? ` · +${recargo}€ desplaz.` : ''}`,
+          procedencia: getLeadPageLabel(window.location.pathname, document.title),
+          formulario: 'Asistente de WhatsApp',
+          interes: situacionLabel,
+          mensaje: `${paraQuienLabel}, ${edadLabel}${recargo > 0 ? ` · +${recargo}€ desplaz.` : ''}`,
         },
         { consent, website, fillMs: elapsed() }
       );
-      if (res.ok) trackLeadConversion();
-      else console.error(`[WizardWhatsApp:submit] /api/contact respondió ${res.status}`);
+      if (res.ok) {
+        if (!(await res.clone().json()).duplicate) trackLeadConversion();
+      } else console.error(`[WizardWhatsApp:submit] /api/contact respondió ${res.status}`);
     } catch (error) {
       console.error('[WizardWhatsApp:submit] Error guardando lead', error);
     }
@@ -377,7 +381,7 @@ Mi teléfono: ${data.telefono}`;
                   </h4>
                   <ul className="space-y-2 text-base text-[#1f2933]">
                     <li className="flex justify-between">
-                      <span>Sesión suelta (30 min)</span>
+                      <span>Sesión suelta (30–45 min)</span>
                       <strong>{precioSesionFinal}€</strong>
                     </li>
                     <li className="flex justify-between">

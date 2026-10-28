@@ -30,14 +30,14 @@ const outcomes = [
 
 const steps = [
   ['01', 'Conocemos la situación', 'Hablamos contigo sobre su movilidad, antecedentes y objetivos. Sin formularios interminables.'],
-  ['02', 'Valoramos cómo se mueve', 'Fernando realiza una primera valoración funcional gratuita en el domicilio.'],
-  ['03', 'Diseñamos el plan', 'Cada sesión se adapta a sus capacidades y evoluciona según sus progresos.'],
-  ['04', 'Compartimos la evolución', 'La familia sabe qué estamos trabajando y cómo avanza, con un seguimiento cercano.'],
+  ['02', 'Valoramos cómo se mueve', 'Visita gratuita en casa: fuerza, equilibrio y marcha, con pruebas funcionales cuando proceda.'],
+  ['03', 'Explicamos la propuesta', 'Resultados, objetivos, frecuencia y precio, adaptados a su situación y con Vivifrail como referencia.'],
+  ['04', 'Decidís si empezar', 'Con toda la información, tu familiar y vosotros decidís. Sin obligación de contratar ni de decidir durante la visita.'],
 ] as const;
 
 const faqs = [
   ['¿Es adecuado si lleva mucho tiempo sin hacer ejercicio?', 'Sí. Empezamos desde su nivel actual, incluso si tiene poca movilidad o necesita apoyo. La primera valoración nos permite ajustar cada ejercicio con seguridad.'],
-  ['¿Cuánto dura cada sesión?', 'Las sesiones habituales duran 30 minutos. Es un tiempo suficiente para trabajar con calidad sin generar una fatiga innecesaria. También podemos valorar sesiones de 60 minutos.'],
+  ['¿Cuánto dura cada sesión?', 'Las sesiones duran entre 30 y 45 minutos, según lo que tolere cada persona. Para muchas personas, 30 minutos son suficientes. Ajustamos la intensidad, las pausas y la duración para evitar un cansancio excesivo que afecte al resto del día.'],
   ['¿Trabajáis después de una operación?', 'Sí, cuando el equipo médico ha indicado que puede comenzar ejercicio. Nos coordinamos con sus recomendaciones y trabajamos la vuelta progresiva a la actividad.'],
   ['¿En qué zonas os desplazáis?', 'Trabajamos en Madrid capital y en distintos municipios de la Comunidad de Madrid. Fuera de Madrid capital se aplica un suplemento de 10 € por desplazamiento.'],
   ['¿Hay permanencia?', 'No. Puedes pausar o reorganizar las sesiones cuando lo necesites. Te recomendaremos una frecuencia, pero la decisión siempre es de la familia.'],
@@ -61,7 +61,7 @@ export default function HomePage() {
         <div className="antea-grid absolute inset-0 opacity-45" aria-hidden="true" />
         <div className="relative mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-[1.04fr_.96fr]">
           <div className="max-w-3xl">
-            <h1 className="font-display text-[clamp(3.1rem,7vw,6.6rem)] font-bold leading-[.93] tracking-[-.055em] text-[#153e31]">
+            <h1 className="font-display text-[clamp(2.5rem,6vw,5.25rem)] font-bold text-[#153e31]">
               <span className="mb-7 inline-flex items-center gap-2 rounded-full border border-[#2d6a4f]/20 bg-white/75 px-4 py-2 font-sans text-base font-semibold leading-normal tracking-normal text-[#2d6a4f] backdrop-blur"><span className="h-2 w-2 rounded-full bg-[#2d6a4f]" aria-hidden="true" />Ejercicio para personas mayores a domicilio en Madrid</span>
               <span className="block">Que vuelva a hacer</span>
               <span className="relative mt-2 block w-fit text-[#2d6a4f]">su vida.<svg className="absolute -bottom-3 left-0 w-full" viewBox="0 0 360 20" fill="none" aria-hidden="true"><path d="M3 14C87 3 242 3 357 10" stroke="#74c69d" strokeWidth="8" strokeLinecap="round" opacity=".6" /></svg></span>
@@ -107,6 +107,7 @@ export default function HomePage() {
       <section id="como-funciona" className="px-5 py-24 sm:px-8 lg:py-32">
         <div className="mx-auto max-w-7xl"><div className="max-w-3xl"><Eyebrow>Así trabajamos</Eyebrow><Title>Un plan que empieza por escuchar.</Title></div>
           <div className="mt-14 grid border-t border-[#2d6a4f]/20 md:grid-cols-2 lg:grid-cols-4">{steps.map(([number, title, text], index) => <article key={number} className="relative border-b border-[#2d6a4f]/20 py-8 md:px-7 md:[&:nth-child(odd)]:border-r lg:border-b-0 lg:border-r lg:first:pl-0 lg:last:border-r-0"><span className="font-display text-5xl font-bold text-[#3f8a64]" aria-hidden="true">{number}</span><h3 className="mt-8 font-display text-xl font-bold">{title}</h3><p className="mt-3 text-base leading-relaxed text-[#4a6358]">{text}</p>{index < steps.length - 1 && <ArrowRight className="absolute -right-3 top-11 z-10 hidden h-6 w-6 rounded-full bg-[#fbfcf8] p-1 text-[#3f8a64] lg:block" aria-hidden="true" />}</article>)}</div>
+          <p className="mt-8 max-w-3xl text-lg text-muted">Antes de contratar, conoce qué incluye la visita y en qué se basa la propuesta. <Link href="/valoracion-gratuita#como-trabajo" className="font-semibold text-primary underline underline-offset-4">Así es la valoración y cómo utilizo Vivifrail →</Link></p>
         </div>
       </section>
 
@@ -119,8 +120,8 @@ export default function HomePage() {
 
       <section id="precios" className="bg-white px-5 py-24 sm:px-8 lg:py-32"><div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[.8fr_1.2fr] lg:gap-20">
         <div><Eyebrow>Precios claros</Eyebrow><Title>Sin permanencia. Sin letra pequeña.</Title><p className="mt-6 text-lg leading-relaxed text-[#4a6358]">La primera valoración funcional es gratuita. Después eliges el ritmo que mejor encaja con vuestra situación.</p></div>
-        <div className="overflow-hidden rounded-3xl border border-[#2d6a4f]/15"><div className="grid gap-6 border-b border-[#2d6a4f]/15 bg-[#f3f8f4] p-7 sm:grid-cols-[1fr_auto] sm:items-center sm:p-9"><div><p className="font-display text-2xl font-bold">Plan recomendado</p><p className="mt-2 text-[#4a6358]">2 sesiones semanales de 30 minutos</p></div><p className="font-display text-4xl font-bold text-[#2d6a4f]">90 €<span className="text-base font-normal text-[#4a6358]"> / semana</span></p></div>
-          <div className="grid gap-6 p-7 sm:grid-cols-2 sm:p-9"><div><p className="font-bold">También disponible</p><p className="mt-2 text-[#4a6358]">Sesión suelta de 30 minutos</p><p className="mt-3 font-display text-3xl font-bold text-[#2d6a4f]">55 €</p></div><ul className="space-y-3 text-base text-[#3b5a4e]">{['Plan personalizado','Seguimiento de la evolución','Madrid capital sin suplemento','Resto de la Comunidad: +10 €'].map(item => <li key={item} className="flex gap-2"><Check className="mt-1 h-4 w-4 shrink-0 text-[#2d6a4f]" aria-hidden="true" />{item}</li>)}</ul></div>
+        <div className="overflow-hidden rounded-3xl border border-[#2d6a4f]/15"><div className="grid gap-6 border-b border-[#2d6a4f]/15 bg-[#f3f8f4] p-7 sm:grid-cols-[1fr_auto] sm:items-center sm:p-9"><div><p className="font-display text-2xl font-bold">Plan recomendado</p><p className="mt-2 text-[#4a6358]">2 sesiones semanales de 30–45 minutos</p></div><p className="font-display text-4xl font-bold text-[#2d6a4f]">90 €<span className="text-base font-normal text-[#4a6358]"> / semana</span></p></div>
+          <div className="grid gap-6 p-7 sm:grid-cols-2 sm:p-9"><div><p className="font-bold">También disponible</p><p className="mt-2 text-[#4a6358]">Sesión suelta de 30–45 minutos</p><p className="mt-3 font-display text-3xl font-bold text-[#2d6a4f]">55 €</p></div><ul className="space-y-3 text-base text-[#3b5a4e]">{['Plan personalizado','Seguimiento de la evolución','Madrid capital sin suplemento','Resto de la Comunidad: +10 €'].map(item => <li key={item} className="flex gap-2"><Check className="mt-1 h-4 w-4 shrink-0 text-[#2d6a4f]" aria-hidden="true" />{item}</li>)}</ul></div>
         </div>
       </div></section>
 
@@ -131,7 +132,7 @@ export default function HomePage() {
 
       <section id="contacto" className="relative overflow-hidden bg-[#e3f0e6] px-5 py-24 sm:px-8 lg:py-32"><div className="antea-grid absolute inset-0 opacity-30" aria-hidden="true" /><div className="relative mx-auto grid max-w-6xl items-center gap-14 lg:grid-cols-[1fr_.85fr] lg:gap-20">
         <div><div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#2d6a4f] text-white"><ClipboardCheck className="h-7 w-7" /></div><h2 className="mt-8 font-display text-[clamp(2.8rem,6vw,5.3rem)] font-bold leading-[.96] tracking-[-.045em]">Cuéntanos qué movimiento quiere recuperar.</h2><p className="mt-7 max-w-xl text-lg leading-relaxed text-[#3b5a4e]">Te llamaremos en menos de 24 horas para conocer la situación y organizar una primera valoración gratuita, sin compromiso.</p><div className="mt-8 flex flex-wrap gap-5 text-base font-semibold text-[#2d6a4f]">{['Gratuita','En el domicilio','Sin compromiso'].map(item => <span key={item} className="flex items-center gap-2"><Check className="h-4 w-4" aria-hidden="true" />{item}</span>)}</div><p className="mt-8 text-lg text-[#3b5a4e]">¿Prefieres saber antes en qué consiste? <Link href="/valoracion-gratuita" className="font-semibold text-[#2d6a4f] underline underline-offset-4">Así es la valoración gratuita</Link> · <Link href="/articulos" className="font-semibold text-[#2d6a4f] underline underline-offset-4">Guías para familias</Link></p></div>
-        <LeadForm origen="Home rediseño" title="Solicitar mi valoración" ctaText="Quiero que me llaméis" />
+        <LeadForm origen="Página principal (/)" title="Solicitar mi valoración" ctaText="Quiero que me llaméis" />
       </div></section>
     </div>
   );

@@ -8,6 +8,7 @@ import remarkGfm from 'remark-gfm';
 import { getArticleBySlug, getPublishedArticles } from '@/lib/sheets';
 import { BreadcrumbSchema } from '@/components/BreadcrumbSchema';
 import { JsonLd } from '@/components/JsonLd';
+import { getPrimaryGuide } from '@/lib/family-guides';
 import { getArticleImageAlt, getReadingMinutes } from '@/lib/article-editorial';
 import {
   extractFaqs,
@@ -113,6 +114,7 @@ export default async function ArticleDetailPage({ params }: { params: Promise<{ 
   const toc = extractToc(article.bodyMarkdown);
   const faqs = extractFaqs(article.bodyMarkdown);
   const service = getServiceForArticle(article);
+  const primaryGuide = getPrimaryGuide(article.slug);
 
   let related: Awaited<ReturnType<typeof getPublishedArticles>> = [];
   try {
@@ -248,6 +250,12 @@ export default async function ArticleDetailPage({ params }: { params: Promise<{ 
             </p>
           </aside>
 
+          {primaryGuide && (
+            <nav aria-label="Guía relacionada" className="mb-8 rounded-2xl bg-primary-50 p-6">
+              <p className="text-muted">Este artículo forma parte de nuestra guía para familias:</p>
+              <Link href={`/guias/${primaryGuide.slug}`} className="mt-2 inline-block font-semibold text-primary underline underline-offset-4">{primaryGuide.title} →</Link>
+            </nav>
+          )}
           {toc.length >= 3 && (
             <nav aria-labelledby="toc-title" className="mb-12 rounded-2xl border border-border bg-white p-6">
               <h2 id="toc-title" className="font-display text-fluid-xl font-bold text-ink">

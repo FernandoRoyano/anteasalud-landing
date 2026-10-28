@@ -41,13 +41,18 @@ export default function ContactForm() {
     e.preventDefault();
     const whatsappWindow = openWhatsAppPlaceholder();
     setStatus("sending");
-    const lead = { nombre, email, telefono, zona, interes };
+    const lead = {
+      nombre, email, telefono, zona,
+      interes,
+      procedencia: "Valoración gratuita",
+      formulario: "Contacto",
+    };
 
     try {
       const res = await postLead(lead, { consent, website, fillMs: elapsed() });
       if (!res.ok) throw new Error();
 
-      trackLeadConversion();
+      if (!(await res.clone().json()).duplicate) trackLeadConversion();
       sendLeadToWhatsApp(whatsappWindow, lead);
       setStatus("success");
       setNombre("");

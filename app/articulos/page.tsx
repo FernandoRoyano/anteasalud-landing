@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { FamilyGuideLinks } from '@/components/FamilyGuideLinks';
 import { getPublishedArticles } from '@/lib/sheets';
 import { BreadcrumbSchema } from '@/components/BreadcrumbSchema';
 import { ArticlesFilter } from '@/components/ArticlesFilter';
@@ -8,7 +9,7 @@ import { DEFAULT_OG_IMAGE, SITE_URL, buildMetadata, isLocalImagePath } from '@/l
 const URL_PAGE = `${SITE_URL}/articulos`;
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Guías de ejercicio para personas mayores',
+  title: 'Artículos sobre ejercicio y autonomía en personas mayores',
   description:
     'Artículos con evidencia sobre ejercicio, caídas, fuerza, fragilidad y recuperación en personas mayores, escritos por un graduado en CCAFYD.',
   path: '/articulos',
@@ -51,6 +52,8 @@ export default async function ArticulosIndexPage() {
           </p>
         </div>
       </section>
+
+      <section className="bg-surface px-5 pt-12 sm:px-8"><div className="mx-auto max-w-6xl"><FamilyGuideLinks /></div></section>
 
       {/* Listado */}
       <section className="w-full bg-surface" style={{ paddingTop: 'clamp(3rem, 6vw, 5rem)', paddingBottom: 'clamp(5rem, 10vw, 8rem)' }}>

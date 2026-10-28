@@ -6,6 +6,7 @@ interface LeadWhatsAppData {
   telefono?: string;
   zona?: string;
   interes?: string;
+  mensaje?: string;
 }
 
 export function buildLeadWhatsAppUrl(data: LeadWhatsAppData): string {
@@ -17,6 +18,7 @@ export function buildLeadWhatsAppUrl(data: LeadWhatsAppData): string {
     ...(data.email ? [`• Email: ${data.email}`] : []),
     ...(data.zona ? [`• Zona: ${data.zona}`] : []),
     ...(data.interes ? [`• Consulta: ${data.interes}`] : []),
+    ...(data.mensaje ? [`• Situación: ${data.mensaje}`] : []),
     '',
     'Me gustaría recibir información sobre la valoración gratuita.',
   ];

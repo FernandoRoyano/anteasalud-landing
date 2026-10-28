@@ -62,6 +62,15 @@ const EDITORIAL_OVERRIDES: Record<string, EditorialOverride> = {
 };
 
 const ADDITIONAL_IMAGE_ALTS: Record<string, string> = {
+  'sesion-ejercicio-domicilio-mayores-30-minutos': 'Un hombre mayor realiza ejercicio con banda elástica acompañado por un profesional en casa',
+  'familiar-mayor-no-quiere-hacer-ejercicio': 'Un hombre mayor camina por casa acompañado por un familiar',
+  'ejercicio-domicilio-mayor-apenas-camina': 'Una mujer mayor camina por casa acompañada por un profesional',
+  'sarcopenia-mayores-que-es-como-frenarla': 'Hombre mayor colocando la compra en la cocina junto a una familiar',
+  'ejercicios-en-silla-personas-mayores': 'Mujer mayor practicando levantarse de una silla con supervisión profesional',
+  'osteoporosis-ejercicio-seguro-mayores': 'Hombre mayor realizando un ejercicio con banda elástica y supervisión en casa',
+  'ejercicio-artrosis-rodilla-cadera-mayores': 'Mujer mayor incorporándose con apoyo de los reposabrazos mientras un profesional supervisa',
+  'cuanto-ejercicio-necesita-persona-mayor-oms': 'Mujer mayor practicando levantarse de una silla junto a una acompañante',
+  'como-levantarse-del-suelo-despues-de-una-caida': 'Hombre mayor caminando por casa acompañado por un familiar',
   'valoracion-funcional-personas-mayores-que-incluye': 'Mujer mayor realizando una prueba de marcha durante una valoración funcional en casa',
   'fragilidad-prefragilidad-persona-robusta-significado': 'Mujer mayor cuidando las plantas de su terraza de manera autónoma',
   'sppb-que-es-valoracion-personas-mayores': 'Hombre mayor realizando una prueba de equilibrio del SPPB con supervisión',

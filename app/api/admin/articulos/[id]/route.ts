@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getArticleById, updateArticle, deleteArticle } from '@/lib/sheets';
 import { isAuthenticated } from '@/lib/auth';
 import { articleUpdateSchema, invalidBody } from '@/lib/admin-schemas';
+import { revalidatePath } from 'next/cache';
 
 export async function GET(
   _req: NextRequest,
@@ -36,6 +37,10 @@ export async function PATCH(
     if (!parsed.success) return invalidBody(parsed.error);
 
     const article = await updateArticle(id, parsed.data);
+    revalidatePath('/articulos', 'layout');
+    revalidatePath('/guias', 'layout');
+    revalidatePath('/sitemap.xml');
+    revalidatePath('/llms.txt');
     return NextResponse.json({ article });
   } catch (error) {
     console.error('[articulos/[id]:PATCH]', error);
@@ -53,6 +58,10 @@ export async function DELETE(
   try {
     const { id } = await params;
     await deleteArticle(id);
+    revalidatePath('/articulos', 'layout');
+    revalidatePath('/guias', 'layout');
+    revalidatePath('/sitemap.xml');
+    revalidatePath('/llms.txt');
     return NextResponse.json({ ok: true });
   } catch (error) {
     console.error('[articulos/[id]:DELETE]', error);

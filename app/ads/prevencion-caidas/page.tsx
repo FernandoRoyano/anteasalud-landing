@@ -10,7 +10,7 @@ import {
   AdsFinalCTA,
 } from "@/components/ads/AdsSections";
 
-const ORIGEN = "Ads · Prevención de caídas";
+const ORIGEN = "Página de campaña: prevención de caídas (/ads/prevencion-caidas)";
 
 export const metadata: Metadata = {
   title: { absolute: "Prevención de caídas en mayores a domicilio | ANTEA Salud Madrid" },

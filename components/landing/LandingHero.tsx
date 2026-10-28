@@ -17,6 +17,7 @@ interface LandingHeroProps {
   surcharge?: number;
   /** Mostrar aclaración de zonas cuando el precio es el de Madrid capital */
   zoneNote?: boolean;
+  zone?: string;
 }
 
 /**
@@ -31,6 +32,7 @@ export default function LandingHero({
   origen = 'Landing SEO',
   surcharge = 0,
   zoneNote = true,
+  zone,
 }: LandingHeroProps) {
   return (
     <section className="relative w-full overflow-hidden bg-[#fbfcf8] px-5 pb-20 pt-32 sm:px-8 lg:pb-28 lg:pt-40">
@@ -42,7 +44,7 @@ export default function LandingHero({
             <span className="text-base font-semibold text-[#2d6a4f]">{badge}</span>
           </div>
 
-          <h1 className="font-display text-[clamp(3rem,6vw,5.6rem)] font-bold leading-[.96] tracking-[-.05em] text-[#153e31]">
+          <h1 className="font-display text-[clamp(2.25rem,5vw,4.75rem)] font-bold text-[#153e31]">
             {h1}
             <span className="mt-2 block text-[#2d6a4f]">{h1Highlight}</span>
           </h1>
@@ -61,7 +63,7 @@ export default function LandingHero({
         </div>
 
         <div>
-          <LeadForm origen={origen} />
+          <LeadForm origen={origen} zone={zone} />
         </div>
       </div>
     </section>

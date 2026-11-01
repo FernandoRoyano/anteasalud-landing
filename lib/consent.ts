@@ -2,7 +2,7 @@
 
 export type ConsentValue = "accepted" | "rejected";
 
-export const CONSENT_KEY = "cookie-consent";
+export const CONSENT_KEY = "cookie-consent-v2";
 export const CONSENT_CHANGE_EVENT = "antea:consent-change";
 export const OPEN_COOKIE_SETTINGS_EVENT = "antea:open-cookie-settings";
 

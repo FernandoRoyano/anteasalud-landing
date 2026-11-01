@@ -18,7 +18,7 @@ export default function PoliticaPrivacidad() {
             Política de Privacidad
           </h1>
           <p className="text-muted">
-            Última actualización: 24 de septiembre de 2026
+            Última actualización: 1 de noviembre de 2026
           </p>
         </header>
 
@@ -132,7 +132,7 @@ export default function PoliticaPrivacidad() {
                 condiciones de WhatsApp.
               </li>
               <li>
-                <strong>Google Analytics y Google Ads:</strong> solo si aceptas las cookies de medición. Consulta la{" "}
+                <strong>Google Analytics, Google Ads y el píxel de Meta:</strong> solo si aceptas las cookies de medición. Consulta la{" "}
                 <Link href="/cookies" className="text-primary underline">política de cookies</Link>.
               </li>
             </ul>
@@ -198,7 +198,7 @@ export default function PoliticaPrivacidad() {
               9. Cookies
             </h2>
             <p>
-              Usamos cookies técnicas y, solo con tu consentimiento, cookies de Google Analytics y Google Ads.
+              Usamos cookies técnicas y, solo con tu consentimiento, cookies de Google Analytics, Google Ads y el píxel de Meta.
               Más información en nuestra{" "}
               <Link href="/cookies" className="text-primary underline">
                 política de cookies

@@ -48,7 +48,7 @@ export default function CookieBanner() {
       <div className="mx-auto max-w-4xl rounded-2xl border border-[#2d6a4f]/20 bg-white p-4 shadow-2xl sm:p-6">
         <h2 className="mb-1 text-lg font-bold text-[#17372b] sm:text-xl">¿Aceptas las cookies de medición?</h2>
         <p className="text-base leading-snug text-[#374151]">
-          Solo si aceptas usamos Google Analytics y Google Ads para medir visitas y anuncios. No vendemos tus datos.{" "}
+          Solo si aceptas usamos Google Analytics, Google Ads y el píxel de Meta para medir visitas y solicitudes procedentes de anuncios. No vendemos tus datos.{" "}
           <Link href="/cookies" className="font-semibold text-[#2d6a4f] underline underline-offset-2">
             Más información
           </Link>

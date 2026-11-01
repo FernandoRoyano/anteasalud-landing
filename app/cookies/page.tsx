@@ -10,7 +10,8 @@ export const metadata: Metadata = buildMetadata({
 });
 
 const COOKIES = [
-  { name: "cookie-consent", owner: "ANTEA Salud (localStorage)", purpose: "Recordar si aceptas o rechazas las cookies de medición", type: "Técnica", duration: "Hasta que la borres" },
+  { name: "_fbp, _fbc", owner: "Meta", purpose: "Medir visitas y solicitudes de información procedentes de anuncios", type: "Publicitaria (requiere consentimiento)", duration: "Hasta 3 meses" },
+  { name: "cookie-consent-v2", owner: "ANTEA Salud (localStorage)", purpose: "Recordar si aceptas o rechazas las cookies de medición", type: "Técnica", duration: "Hasta que la borres" },
   { name: "_ga, _ga_*", owner: "Google Analytics", purpose: "Distinguir visitas y medir el uso de la web de forma agregada", type: "Analítica (requiere consentimiento)", duration: "Hasta 2 años" },
   { name: "_gcl_au", owner: "Google Ads", purpose: "Saber si una solicitud de contacto proviene de un anuncio", type: "Publicitaria (requiere consentimiento)", duration: "3 meses" },
 ];
@@ -21,7 +22,7 @@ export default function PoliticaCookies() {
       <article className="max-w-3xl mx-auto">
         <header className="mb-12">
           <h1 className="text-3xl md:text-4xl font-black text-primary-dark mb-4">Política de cookies</h1>
-          <p className="text-muted">Última actualización: 24 de septiembre de 2026</p>
+          <p className="text-muted">Última actualización: 1 de noviembre de 2026</p>
         </header>
 
         <div className="max-w-none text-ink text-lg leading-relaxed space-y-10">
@@ -36,10 +37,11 @@ export default function PoliticaCookies() {
           <section>
             <h2 className="text-2xl font-bold text-primary-dark mb-4">¿Qué cookies utilizamos?</h2>
             <p className="mb-4">
-              Las cookies de Google Analytics y Google Ads <strong>solo se activan si pulsas «Aceptar»</strong> en el
+              Las cookies de Google Analytics, Google Ads y Meta <strong>solo se activan si pulsas «Aceptar»</strong> en el
               aviso de cookies. Si las rechazas, Google solo recibe señales sin cookies y sin identificarte (modo de
               consentimiento de Google).
             </p>
+            <p className="mb-4">El píxel de Meta solo se carga tras aceptar. Mide visitas y solicitudes recibidas; no enviamos los campos del formulario, mensajes ni datos de salud. La detección automática de eventos y la coincidencia avanzada están desactivadas. Al rechazar o retirar el consentimiento, se detiene su seguimiento. Más información en <a href="https://www.facebook.com/privacy/policy/" className="text-primary underline">la política de privacidad de Meta</a>.</p>
             <div className="overflow-x-auto rounded-xl border border-primary-light">
               <table className="w-full text-base">
                 <caption className="sr-only">Cookies utilizadas en anteasalud.com</caption>

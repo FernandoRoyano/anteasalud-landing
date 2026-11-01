@@ -2,12 +2,14 @@
 
 import Script from "next/script";
 import { CONSENT_KEY } from "@/lib/consent";
+import MetaPixel, { trackMetaLead } from "@/components/MetaPixel";
 
 const GOOGLE_ADS_ID = "AW-954833079";
 const CONVERSION_LABEL = "Bsr-CO6n2K0cELexpscD";
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
 export function trackLeadConversion() {
+  trackMetaLead();
   window.gtag?.("event", "conversion", {
     send_to: `${GOOGLE_ADS_ID}/${CONVERSION_LABEL}`,
     value: 1.0,
@@ -25,6 +27,7 @@ export default function GoogleTag() {
 
   return (
     <>
+      <MetaPixel />
       <Script id="google-tag-init" strategy="afterInteractive">
         {`
           window.dataLayer = window.dataLayer || [];

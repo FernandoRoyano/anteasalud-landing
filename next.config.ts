@@ -2,7 +2,7 @@ import type { NextConfig } from 'next';
 
 const isDev = process.env.NODE_ENV !== 'production';
 
-// Google tag (Ads + GA4) y Vercel Live (previews). 'unsafe-inline' es necesario sin nonces en App Router estático.
+// Google tag (Ads + GA4), Meta Pixel y Vercel Live (previews). 'unsafe-inline' es necesario sin nonces en App Router estático.
 const GOOGLE = [
   'https://www.googletagmanager.com',
   'https://www.google-analytics.com',
@@ -17,11 +17,11 @@ const GOOGLE = [
 
 const csp = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ''} ${GOOGLE} https://vercel.live`,
+  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ''} ${GOOGLE} https://connect.facebook.net https://vercel.live`,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https:",
   "font-src 'self' data:",
-  `connect-src 'self' ${GOOGLE} https://vercel.live wss://ws-us3.pusher.com`,
+  `connect-src 'self' ${GOOGLE} https://www.facebook.com https://connect.facebook.net https://vercel.live wss://ws-us3.pusher.com`,
   `frame-src ${GOOGLE} https://vercel.live`,
   "object-src 'none'",
   "base-uri 'self'",

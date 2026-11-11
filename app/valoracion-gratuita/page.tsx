@@ -210,6 +210,8 @@ export default function ValoracionGratuitaPage() {
           <h2 className="font-display text-fluid-3xl font-bold">Primero entendéis la propuesta. Después decidís.</h2>
           <p className="mt-5 max-w-[65ch] text-fluid-lg text-white/90">La visita es gratuita aunque decidáis no continuar. Antes de contratar hablamos de objetivos, frecuencia, precio y disponibilidad. No tenéis que decidir durante la visita.</p>
           <p className="mt-4 max-w-[65ch] text-fluid-lg text-white/90">Si empezamos, adapto las sesiones a cómo se encuentra tu familiar, revisamos la evolución y os explico los ajustes. La información se comparte con la familia de acuerdo con la persona.</p>
+          <p className="mt-4 max-w-[65ch] text-fluid-lg text-white/90">Durante el programa de ejercicio pautado, repito la valoración cada mes para comparar con el punto de partida y ajustar el trabajo. Al terminar cada sesión comento cómo ha ido. Podéis escribirme dudas entre visitas, aunque la respuesta no es inmediata.</p>
+          <p className="mt-4 max-w-[65ch] text-fluid-lg text-white/90">Cuando procede, doy pautas para los días sin sesión, adaptadas a lo que la persona puede hacer y a los apoyos que necesita.</p>
         </div>
       </section>
 

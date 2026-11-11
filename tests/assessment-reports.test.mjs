@@ -98,3 +98,28 @@ test('el PDF se genera con varias páginas para propuestas extensas', async () =
   fs.mkdirSync('.vercel', { recursive: true });
   fs.writeFileSync('.vercel/assessment-report-test.pdf', bytes);
 });
+
+
+test('el resumen de sesion se valida y se conserva cifrado sin romper informes anteriores', () => {
+  assert.equal(reports.assessmentReportSchema.safeParse(payload).success, true);
+  for (const sessionReview of ['', 'Breve', 'x'.repeat(4001)]) {
+    assert.equal(reports.assessmentReportSchema.safeParse({ ...payload, sessionReview }).success, false);
+  }
+  const sessionReview = 'Trabajo de fuerza con pausas y buena tolerancia.';
+  const report = reports.createAssessmentReport({ ...payload, sessionReview });
+  const encrypted = reports.encryptAssessmentReport(report);
+  assert.ok(!encrypted.includes(sessionReview));
+  assert.equal(reports.decryptAssessmentReport(report.id, encrypted).sessionReview, sessionReview);
+});
+
+
+test('conserva el nombre y el contexto familiar cifrados, con limites de longitud', () => {
+  const familyDetails = 'Usa andador en casa y quiere volver a salir al portal.';
+  const report = reports.createAssessmentReport({ ...payload, reference: 'Persona de ejemplo', familyDetails });
+  const encrypted = reports.encryptAssessmentReport(report);
+  const restored = reports.decryptAssessmentReport(report.id, encrypted);
+  assert.equal(restored.reference, 'Persona de ejemplo');
+  assert.equal(restored.familyDetails, familyDetails);
+  assert.ok(!encrypted.includes(familyDetails));
+  assert.equal(reports.assessmentReportSchema.safeParse({ ...payload, familyDetails: 'x'.repeat(4001) }).success, false);
+});

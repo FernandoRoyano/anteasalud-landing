@@ -56,14 +56,22 @@ export async function buildAssessmentReportPdf(report: AssessmentReport): Promis
     y -= 5;
   }
   text('Valoración funcional', true);
-  text(`Referencia: ${report.reference} | Fecha: ${report.date} | Edad: ${report.assessment.age ?? 'Sin indicar'}`);
+  text(`Nombre / referencia: ${report.reference} | Fecha: ${report.date} | Edad: ${report.assessment.age ?? 'Sin indicar'}`);
   text('Resultados registrados', true);
+  if (report.familyDetails) {
+    text('Información aportada por la familia', true);
+    text(report.familyDetails);
+  }
   functionalTests.forEach((test, index) => text(`${test.name}: ${report.assessment.scores[index] === null ? 'No valorado' : `${report.assessment.scores[index]} / 4`}`));
   text(`SPPB: ${report.result.total === null ? 'Incompleta' : `${report.result.total} / 12`} | ${report.result.profile ? `Perfil orientativo ${report.result.profile}` : 'Sin perfil automático'}`, true);
   text(report.result.interpretation);
   text('Criterios de caídas', true);
   fallCriteria.forEach((criterion, index) => text(`${criterion}: ${report.assessment.falls[index] === null ? 'Pendiente' : report.assessment.falls[index] ? 'Sí' : 'No'}`));
   text(fallRiskLabel(report.result.risk));
+  if (report.sessionReview) {
+    text('Valoración de la sesión', true);
+    text(report.sessionReview);
+  }
   text('Observaciones', true);
   text(report.observations || 'Sin observaciones registradas.');
   text('Interpretación y propuesta de Fernando', true);

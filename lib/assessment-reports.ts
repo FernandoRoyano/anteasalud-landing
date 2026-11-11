@@ -7,6 +7,8 @@ export const assessmentReportSchema = z.object({
   reference: z.string().trim().min(1).max(100),
   date: z.iso.date(),
   observations: z.string().max(4000),
+  familyDetails: z.string().trim().max(4000).optional(),
+  sessionReview: z.string().trim().min(10).max(4000).optional(),
   proposal: z.string().trim().min(10).max(4000),
   reviewed: z.literal(true),
   assessment: z.object({

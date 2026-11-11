@@ -186,7 +186,7 @@ export default function LeadForm({
       </button>
 
       <p className="text-center text-base text-[#4b5563]">
-        Sin compromiso · Respuesta en menos de 24h · Solo 5 plazas al mes
+        Sin compromiso · Respuesta en menos de 24h
       </p>
 
       {status === "error" && (

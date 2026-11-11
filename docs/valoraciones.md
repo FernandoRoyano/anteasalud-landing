@@ -49,3 +49,14 @@ Pruebas: `node --test tests/functional-assessment.test.mjs`.
 Persistencia, permisos, cifrado y PDF: `node --test tests/assessment-reports.test.mjs`.
 Antes de modificar reglas clínicas, contrastar el protocolo, actualizar su versión y probar los
 límites, los datos ausentes, los criterios de caídas y el bloqueo de exportación sin revisión.
+
+Al completar una nueva valoración, se solicita un resumen de la sesión para la familia
+(mínimo 10 caracteres). Se conserva cifrado con el informe y aparece en la vista previa
+y el PDF. Los informes anteriores sin resumen siguen siendo legibles. La acción principal
+«Guardar y preparar envío» abre la copia guardada con las opciones de compartir;
+el profesional elige destinatario y confirma el envío en su aplicación.
+
+Preparación recoge nombre de la persona (conservado en el campo reference por compatibilidad),
+edad e información opcional del familiar. Este contexto se guarda cifrado y figura en el informe.
+Los test muestran ilustraciones extraídas del pasaporte oficial Vivifrail 2020, páginas
+8–10 y 13 del PDF, con atribución. Los archivos están en public/valoraciones/.

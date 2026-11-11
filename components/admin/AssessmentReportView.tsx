@@ -1,7 +1,8 @@
 import { VIVIFRAIL_SOURCE, getAssessmentPassport, functionalTests, fallCriteria, fallRiskLabel } from '@/lib/functional-assessment';
+import { formatReportIssuedAt } from '@/lib/report-date';
 import type { AssessmentReport } from '@/lib/assessment-reports';
 
-type ReportViewData = Pick<AssessmentReport, 'assessment' | 'reference' | 'date' | 'familyDetails' | 'observations' | 'sessionReview' | 'proposal' | 'version' | 'result'>;
+type ReportViewData = Pick<AssessmentReport, 'assessment' | 'reference' | 'date' | 'familyDetails' | 'observations' | 'sessionReview' | 'proposal' | 'version' | 'result'> & Partial<Pick<AssessmentReport, 'createdAt'>>;
 
 export default function AssessmentReportView({ report, draft = false, className = '' }: { report: ReportViewData; draft?: boolean; className?: string }) {
   const { assessment, reference, date, observations, proposal, version, result } = report;
@@ -11,6 +12,7 @@ export default function AssessmentReportView({ report, draft = false, className 
         <p className="font-semibold text-primary">ANTEA Salud · Fernando Royano · Graduado en CCAFYD</p>
         <h2 className="mt-3 font-display text-3xl font-bold">Valoración funcional</h2>
         <p className="mt-3">Nombre / referencia: {reference || 'Sin indicar'} · Fecha: {date || 'Sin indicar'} · Edad: {assessment.age ?? 'Sin indicar'}</p>
+        {report.createdAt && <p className="mt-2 text-sm text-muted">Informe emitido el {formatReportIssuedAt(report.createdAt)}</p>}
         {draft && <p className="mt-4 font-bold text-red-700">BORRADOR · Pendiente de completar y revisar</p>}
         <h3 className="mt-7 text-xl font-bold">Resultados registrados</h3>
         {report.familyDetails && <><h3 className="mt-7 text-xl font-bold">Información aportada por la familia</h3><p className="mt-3 whitespace-pre-wrap break-words">{report.familyDetails}</p></>}

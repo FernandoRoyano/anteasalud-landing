@@ -10,7 +10,7 @@ const env = { ASSESSMENT_ENCRYPTION_KEY: 'ab'.repeat(32), GOOGLE_SHEET_ID: 'synt
 function load(file, mocks = {}) {
   const code = ts.transpileModule(fs.readFileSync(file, 'utf8'), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 } }).outputText;
   const evaluatedModule = { exports: {} };
-  vm.runInNewContext(code, { module: evaluatedModule, exports: evaluatedModule.exports, Buffer, process: { env }, console: { error() {} }, require: name => Object.hasOwn(mocks, name) ? mocks[name] : name.startsWith('@/lib/') ? load(`${name.replace('@/', '')}.ts`, mocks) : dependency(name) });
+  vm.runInNewContext(code, { module: evaluatedModule, exports: evaluatedModule.exports, Buffer, Date, process: { env }, console: { error() {} }, require: name => Object.hasOwn(mocks, name) ? mocks[name] : name.startsWith('@/lib/') ? load(`${name.replace('@/', '')}.ts`, mocks) : dependency(name) });
   return evaluatedModule.exports;
 }
 const reports = load('lib/assessment-reports.ts');
@@ -149,4 +149,18 @@ test('editar exige sesion y un original existente; guarda otra copia enlazada', 
   assert.equal(original.proposal, payload.proposal);
   const encrypted = reports.encryptAssessmentReport(revisions[0]);
   assert.equal(reports.decryptAssessmentReport(revision.id, encrypted).revisionOf, original.id);
+});
+
+
+test('la hora de emision usa Madrid en invierno y verano y se conserva al recuperar el informe', async () => {
+  const { formatReportIssuedAt } = load('lib/report-date.ts');
+  assert.equal(formatReportIssuedAt('2026-11-11T12:30:45.000Z'), '11/11/2026 a las 13:30:45 (hora de Madrid)');
+  assert.equal(formatReportIssuedAt('2026-07-11T12:30:45.000Z'), '11/07/2026 a las 14:30:45 (hora de Madrid)');
+  const report = reports.createAssessmentReport(payload);
+  const restored = reports.decryptAssessmentReport(report.id, reports.encryptAssessmentReport(report));
+  assert.equal(restored.createdAt, report.createdAt);
+  const { buildAssessmentReportPdf } = load('lib/assessment-report-pdf.ts');
+  const { PDFDocument } = dependency('pdf-lib');
+  const pdf = await PDFDocument.load(await buildAssessmentReportPdf(report));
+  assert.equal(Math.floor(pdf.getCreationDate().getTime()/1000), Math.floor(new Date(report.createdAt).getTime()/1000));
 });

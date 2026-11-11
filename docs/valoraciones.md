@@ -66,3 +66,8 @@ editor. Se exige una nueva revisión profesional. Guardar crea otro informe con 
 UUID y revisionOf apuntando al anterior, conservado cifrado; nunca sobrescribe el original.
 La ficha actualizada enlaza al anterior. El PDF ya enviado no cambia: hay que compartir
 el nuevo informe. El servidor comprueba que el original existe y que los UUID son distintos.
+
+El listado permite editar directamente cada valoración, además de abrirla y compartirla.
+La fecha y hora de emisión proceden de createdAt en el servidor y se muestran con segundos
+en horario Europe/Madrid en el listado, la ficha y el PDF. Cada revisión recibe su propia
+hora de emisión; la fecha de la sesión se conserva por separado.

@@ -1,3 +1,4 @@
+import { formatReportIssuedAt } from '@/lib/report-date';
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 import type { AssessmentReport } from '@/lib/assessment-reports';
 import { fallCriteria, fallRiskLabel, getAssessmentPassport, functionalTests, VIVIFRAIL_SOURCE } from '@/lib/functional-assessment';
@@ -7,6 +8,8 @@ export async function buildAssessmentReportPdf(report: AssessmentReport): Promis
   doc.setTitle('Valoración funcional · ANTEA Salud');
   doc.setAuthor('Fernando Royano · ANTEA Salud');
   doc.setLanguage('es-ES');
+  doc.setCreationDate(new Date(report.createdAt));
+  doc.setModificationDate(new Date(report.createdAt));
   const regular = await doc.embedFont(StandardFonts.Helvetica);
   const bold = await doc.embedFont(StandardFonts.HelveticaBold);
   const green = rgb(0.09, 0.22, 0.17);
@@ -57,6 +60,7 @@ export async function buildAssessmentReportPdf(report: AssessmentReport): Promis
   }
   text('Valoración funcional', true);
   text(`Nombre / referencia: ${report.reference} | Fecha: ${report.date} | Edad: ${report.assessment.age ?? 'Sin indicar'}`);
+  text(`Informe emitido el ${formatReportIssuedAt(report.createdAt)}`);
   text('Resultados registrados', true);
   if (report.familyDetails) {
     text('Información aportada por la familia', true);

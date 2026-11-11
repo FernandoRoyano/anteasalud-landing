@@ -123,3 +123,30 @@ test('conserva el nombre y el contexto familiar cifrados, con limites de longitu
   assert.ok(!encrypted.includes(familyDetails));
   assert.equal(reports.assessmentReportSchema.safeParse({ ...payload, familyDetails: 'x'.repeat(4001) }).success, false);
 });
+
+
+test('editar exige sesion y un original existente; guarda otra copia enlazada', async () => {
+  let authenticated = false;
+  const original = reports.createAssessmentReport(payload);
+  const revisions = [];
+  const api = load('app/api/admin/valoraciones/route.ts', {
+    'next/server': { NextResponse: { json: (body, options) => ({ body, status: options?.status || 200 }) } },
+    '@/lib/auth': { isAuthenticated: async () => authenticated },
+    '@/lib/sheets': {
+      getAssessmentReport: async id => id === original.id ? original : null,
+      saveAssessmentReport: async input => { const report = reports.createAssessmentReport(input); revisions.push(report); return report; },
+    },
+  });
+  const revision = { ...payload, id: '22222222-2222-4222-8222-222222222222', revisionOf: original.id, proposal: 'Propuesta corregida tras revisar los resultados.' };
+  assert.equal((await api.POST({ json: async () => revision })).status, 401);
+  authenticated = true;
+  assert.equal((await api.POST({ json: async () => ({ ...revision, revisionOf: revision.id }) })).status, 400);
+  assert.equal((await api.POST({ json: async () => ({ ...revision, revisionOf: '33333333-3333-4333-8333-333333333333' }) })).status, 400);
+  assert.equal((await api.POST({ json: async () => ({ ...revision, reviewed: false }) })).status, 400);
+  assert.equal(revisions.length, 0);
+  assert.equal((await api.POST({ json: async () => revision })).status, 200);
+  assert.equal(revisions[0].revisionOf, original.id);
+  assert.equal(original.proposal, payload.proposal);
+  const encrypted = reports.encryptAssessmentReport(revisions[0]);
+  assert.equal(reports.decryptAssessmentReport(revision.id, encrypted).revisionOf, original.id);
+});

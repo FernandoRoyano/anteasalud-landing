@@ -60,3 +60,9 @@ Preparación recoge nombre de la persona (conservado en el campo reference por c
 edad e información opcional del familiar. Este contexto se guarda cifrado y figura en el informe.
 Los test muestran ilustraciones extraídas del pasaporte oficial Vivifrail 2020, páginas
 8–10 y 13 del PDF, con atribución. Los archivos están en public/valoraciones/.
+
+Edición: cada ficha tiene «Editar valoración», que carga todos los datos en el mismo
+editor. Se exige una nueva revisión profesional. Guardar crea otro informe con un nuevo
+UUID y revisionOf apuntando al anterior, conservado cifrado; nunca sobrescribe el original.
+La ficha actualizada enlaza al anterior. El PDF ya enviado no cambia: hay que compartir
+el nuevo informe. El servidor comprueba que el original existe y que los UUID son distintos.

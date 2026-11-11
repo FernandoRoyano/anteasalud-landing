@@ -2,6 +2,20 @@ export const VIVIFRAIL_SOURCE = 'https://vivifrail.com/wp-content/uploads/2020/0
 export const VIVIFRAIL_MATERIALS = 'https://vivifrail.com/es/documentacion/';
 export const ASSESSMENT_VERSION = 'SPPB manual · Vivifrail 2020 · ANTEA 1';
 
+const PASSPORTS: Record<string, { label: string; range: string; file: string }> = {
+  A: { label: 'Limitación funcional importante', range: '0–3 puntos SPPB', file: 'A' },
+  B: { label: 'Fragilidad', range: '4–6 puntos SPPB', file: 'B' },
+  'B+': { label: 'Fragilidad con criterios de riesgo de caídas', range: '4–6 puntos SPPB', file: 'B-plus' },
+  C: { label: 'Prefragilidad', range: '7–9 puntos SPPB', file: 'C' },
+  'C+': { label: 'Prefragilidad con criterios de riesgo de caídas', range: '7–9 puntos SPPB', file: 'C-plus' },
+  D: { label: 'Rendimiento funcional robusto', range: '10–12 puntos SPPB', file: 'D' },
+};
+
+export function getAssessmentPassport(profile: string | null) {
+  const passport = profile ? PASSPORTS[profile] : undefined;
+  return passport ? { ...passport, profile, url: `https://vivifrail.com/wp-content/uploads/2020/02/Pasaporte-${passport.file}.pdf` } : null;
+}
+
 export const functionalTests = [
   { name: 'Equilibrio', description: 'Observa las posiciones de pies juntos, semitándem y tándem, siguiendo el orden y las condiciones del protocolo. Registra la puntuación conjunta de equilibrio, no una puntuación por posición.' },
   { name: 'Marcha de 4 metros', description: 'Prepara un recorrido medido y registra la puntuación de la prueba de marcha del protocolo SPPB. Esta prueba es distinta de la marcha de 6 metros del bloque de riesgo de caídas.' },

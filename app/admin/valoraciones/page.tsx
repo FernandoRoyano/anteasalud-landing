@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import AssessmentReportView from '@/components/admin/AssessmentReportView';
 import { useEffect, useId, useRef, useState } from 'react';
 import { ArrowLeft, ArrowRight, Check, Pause, Download } from 'lucide-react';
-import { ASSESSMENT_VERSION, VIVIFRAIL_MATERIALS, VIVIFRAIL_SOURCE, canExportAssessment, evaluateAssessment, fallCriteria, fallRiskLabel, functionalTests, type AssessmentInput } from '@/lib/functional-assessment';
+import { ASSESSMENT_VERSION, VIVIFRAIL_MATERIALS, VIVIFRAIL_SOURCE, canExportAssessment, evaluateAssessment, getAssessmentPassport, fallCriteria, fallRiskLabel, functionalTests, type AssessmentInput } from '@/lib/functional-assessment';
 
 const inputClass = 'mt-2 block min-h-12 w-full rounded-xl border border-primary/40 bg-white px-4 py-3 text-ink';
 const initialAssessment: AssessmentInput = { age: null, scores: [null, null, null], falls: [null, null, null, null], interrupted: false, suitable: false };
@@ -38,6 +38,7 @@ export default function AssessmentsPage() {
   const [proposal, setProposal] = useState('');
   const [reviewed, setReviewed] = useState(false);
   const result = evaluateAssessment(assessment);
+  const passport = getAssessmentPassport(result.profile);
   const canPrint = sessionReview.trim().length >= 10 && canExportAssessment(assessment, { reference, date, proposal, observations, reviewed });
   const completed = [!!reference.trim() && !!date && assessment.age !== null && assessment.suitable, ...assessment.scores.map(score => score !== null), assessment.falls.every(value => value !== null), canPrint];
   const completedCount = completed.filter(Boolean).length;
@@ -123,7 +124,7 @@ export default function AssessmentsPage() {
         {(step === 5) && (<section className="mt-7 rounded-2xl bg-primary-dark p-6 text-white" aria-live="polite" aria-atomic="true">
           <h2 className="font-display text-2xl font-bold">Evaluación automática orientativa</h2>
           <p className="mt-4 text-2xl font-bold">SPPB: {result.total === null ? 'pendiente' : `${result.total} / 12`}</p>
-          {result.profile && <p className="mt-3 text-xl font-bold">Perfil de referencia: {result.profile}</p>}
+          {passport ? <div className="mt-5 rounded-xl border border-white/30 bg-white/10 p-5"><p className="text-sm font-semibold uppercase tracking-wide">Carnet Vivifrail orientativo</p><p className="mt-2 text-5xl font-bold">{passport.profile}</p><p className="mt-3 text-xl font-semibold">{passport.label}</p><p className="mt-2">{passport.range}</p><a href={passport.url} target="_blank" rel="noreferrer" className="mt-4 inline-flex min-h-12 items-center rounded-xl bg-white px-5 py-3 font-bold text-primary-dark">Abrir pasaporte {passport.profile} (PDF)</a><p className="mt-3 text-sm">Revisa el resultado antes de compartirlo. El carnet orienta la propuesta de ejercicio; no sustituye la adaptación profesional.</p></div> : <p className="mt-4 font-semibold">Carnet pendiente de asignar. Revisa los datos y las condiciones indicadas a continuación.</p>}
           <p className="mt-4">{result.interpretation}</p><p className="mt-3">{fallRiskLabel(result.risk)}</p>
           <p className="mt-4 text-base text-white/90">Se calcula a partir de SPPB completa para personas de 70 años o más. No se asigna el perfil avanzado E con la SPPB sola, ni se clasifica automáticamente mediante la alternativa de marcha de 6 metros.</p>
           {result.profile && <a href={VIVIFRAIL_MATERIALS} target="_blank" rel="noreferrer" className="mt-4 inline-block font-bold underline">Consultar los ejercicios del pasaporte {result.profile} en los materiales oficiales →</a>}

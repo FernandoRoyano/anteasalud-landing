@@ -56,3 +56,16 @@ test('report export requires professional review, identification and a proposal;
   assert.equal(canExportAssessment({ ...base, interrupted: true }, { ...report, observations: 'Interrumpida por baja tolerancia; revisar antes de continuar.' }), true);
   assert.equal(canExportAssessment({ ...base, scores: [8, 4, 4] }, report), false);
 });
+
+
+test('cada carnet tiene el pasaporte oficial correspondiente y no se inventan perfiles', () => {
+  const { getAssessmentPassport } = evaluatedModule.exports;
+  for (const [profile, file] of [['A', 'A'], ['B', 'B'], ['B+', 'B-plus'], ['C', 'C'], ['C+', 'C-plus'], ['D', 'D']]) {
+    const passport = getAssessmentPassport(profile);
+    assert.equal(passport.profile, profile);
+    assert.ok(passport.label);
+    assert.ok(passport.range);
+    assert.equal(passport.url, `https://vivifrail.com/wp-content/uploads/2020/02/Pasaporte-${file}.pdf`);
+  }
+  for (const profile of [null, '', 'E', 'D+']) assert.equal(getAssessmentPassport(profile), null);
+});

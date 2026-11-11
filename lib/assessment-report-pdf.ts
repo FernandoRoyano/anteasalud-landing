@@ -1,6 +1,6 @@
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 import type { AssessmentReport } from '@/lib/assessment-reports';
-import { fallCriteria, fallRiskLabel, functionalTests, VIVIFRAIL_SOURCE } from '@/lib/functional-assessment';
+import { fallCriteria, fallRiskLabel, getAssessmentPassport, functionalTests, VIVIFRAIL_SOURCE } from '@/lib/functional-assessment';
 
 export async function buildAssessmentReportPdf(report: AssessmentReport): Promise<Uint8Array> {
   const doc = await PDFDocument.create();
@@ -64,6 +64,12 @@ export async function buildAssessmentReportPdf(report: AssessmentReport): Promis
   }
   functionalTests.forEach((test, index) => text(`${test.name}: ${report.assessment.scores[index] === null ? 'No valorado' : `${report.assessment.scores[index]} / 4`}`));
   text(`SPPB: ${report.result.total === null ? 'Incompleta' : `${report.result.total} / 12`} | ${report.result.profile ? `Perfil orientativo ${report.result.profile}` : 'Sin perfil automático'}`, true);
+  const passport = getAssessmentPassport(report.result.profile);
+  if (passport) {
+    text(`Carnet Vivifrail orientativo: ${passport.profile}`, true);
+    text(`${passport.label} | ${passport.range}`);
+    text(`Pasaporte de referencia: ${passport.url}`);
+  }
   text(report.result.interpretation);
   text('Criterios de caídas', true);
   fallCriteria.forEach((criterion, index) => text(`${criterion}: ${report.assessment.falls[index] === null ? 'Pendiente' : report.assessment.falls[index] ? 'Sí' : 'No'}`));

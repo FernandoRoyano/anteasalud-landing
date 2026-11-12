@@ -76,3 +76,8 @@ Borrado: el historial y la ficha permiten borrar una valoración con confirmaci�
 La API privada valida el UUID y vacía exclusivamente A:C de la fila identificada;
 rechaza UUID duplicados y no desplaza filas. Se borra solo esa versión, conservando
 las otras. Los PDF ya compartidos o descargados no se eliminan.
+
+Ejemplo público: la portada y la página de valoración enlazan al PDF de demostración
+en public/ejemplos/. Se genera con node scripts/generate-assessment-example.mjs a partir
+de lib/assessment-example.ts, exclusivamente con datos ficticios y sin consultar ni guardar
+informes de clientes. Cada página del PDF indica su carácter de ejemplo.

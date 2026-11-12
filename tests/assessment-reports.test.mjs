@@ -10,7 +10,7 @@ const env = { ASSESSMENT_ENCRYPTION_KEY: 'ab'.repeat(32), GOOGLE_SHEET_ID: 'synt
 function load(file, mocks = {}) {
   const code = ts.transpileModule(fs.readFileSync(file, 'utf8'), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 } }).outputText;
   const evaluatedModule = { exports: {} };
-  vm.runInNewContext(code, { module: evaluatedModule, exports: evaluatedModule.exports, Buffer, Date, process: { env }, console: { error() {} }, require: name => Object.hasOwn(mocks, name) ? mocks[name] : name.startsWith('@/lib/') ? load(`${name.replace('@/', '')}.ts`, mocks) : dependency(name) });
+  vm.runInNewContext(code, { module: evaluatedModule, exports: evaluatedModule.exports, Buffer, Date, Response, process: { env }, console: { error() {} }, require: name => Object.hasOwn(mocks, name) ? mocks[name] : name.startsWith('@/lib/') ? load(`${name.replace('@/', '')}.ts`, mocks) : dependency(name) });
   return evaluatedModule.exports;
 }
 const reports = load('lib/assessment-reports.ts');
@@ -217,4 +217,49 @@ test('el PDF usa el nombre de la persona y admite espacios y acentos sin caracte
   assert.ok(disposition.includes('filename="Antea-informe-Maria Perez.pdf"'));
   assert.ok(disposition.includes("filename*=UTF-8''Antea-informe-Mar%C3%ADa%20P%C3%A9rez.pdf"));
   assert.ok(!getAssessmentReportDisposition('Tino\r\nInjected: header').includes('\r\n'));
+});
+
+
+test('el ejemplo publico usa datos ficticios validos y un PDF identificado como demostracion', async () => {
+  const { assessmentExample } = load('lib/assessment-example.ts');
+  const { createdAt, version, result, ...input } = assessmentExample;
+  assert.equal(reports.assessmentReportSchema.safeParse(input).success, true);
+  assert.equal(result.profile, 'C');
+  const { buildAssessmentReportPdf } = load('lib/assessment-report-pdf.ts');
+  const { PDFDocument } = dependency('pdf-lib');
+  const doc = await PDFDocument.load(await buildAssessmentReportPdf(assessmentExample, { example: true }));
+  assert.equal(doc.getTitle(), 'Ejemplo ficticio de informe · ANTEA Salud');
+  assert.ok(doc.getPageCount() >= 1);
+});
+
+
+test('recorrido de API con datos ficticios: crear, corregir, obtener PDF y borrar sin perder el original', async () => {
+  const store = new Map();
+  const mocks = {
+    'next/server': { NextResponse: { json: (body, options) => ({ body, status: options?.status || 200 }) } },
+    '@/lib/auth': { isAuthenticated: async () => true },
+    '@/lib/sheets': {
+      getAssessmentReport: async id => store.has(id) ? reports.decryptAssessmentReport(id, store.get(id)) : null,
+      getAssessmentReports: async () => [...store].map(([id, value]) => reports.decryptAssessmentReport(id, value)),
+      saveAssessmentReport: async input => { const report = reports.createAssessmentReport(input); store.set(report.id, reports.encryptAssessmentReport(report)); return report; },
+      deleteAssessmentReport: async id => store.delete(id),
+    },
+  };
+  const api = load('app/api/admin/valoraciones/route.ts', mocks);
+  const pdfApi = load('app/api/admin/valoraciones/[id]/pdf/route.ts', mocks);
+  const deleteApi = load('app/api/admin/valoraciones/[id]/route.ts', mocks);
+  assert.equal((await api.POST({ json: async () => payload })).status, 200);
+  const corrected = { ...payload, id: '44444444-4444-4444-8444-444444444444', revisionOf: payload.id, sessionReview: 'Resumen ficticio corregido tras revisar la sesion.' };
+  assert.equal((await api.POST({ json: async () => corrected })).status, 200);
+  assert.equal((await api.GET()).body.reports.length, 2);
+  const params = { params: Promise.resolve({ id: corrected.id }) };
+  const response = await pdfApi.GET({}, params);
+  assert.equal(response.status, 200);
+  assert.equal(response.headers.get('Content-Type'), 'application/pdf');
+  assert.ok(response.headers.get('Content-Disposition').includes('Antea-informe-CASO SINTETICO.pdf'));
+  const { PDFDocument } = dependency('pdf-lib');
+  assert.ok((await PDFDocument.load(await response.arrayBuffer())).getPageCount() >= 1);
+  assert.equal((await deleteApi.DELETE({}, params)).status, 200);
+  assert.equal((await pdfApi.GET({}, params)).status, 404);
+  assert.equal(store.has(payload.id), true);
 });

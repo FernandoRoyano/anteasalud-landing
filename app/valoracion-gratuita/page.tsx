@@ -1,3 +1,4 @@
+import AssessmentReportExample from '@/components/AssessmentReportExample';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Check, Clock, HeartPulse, Home, ShieldCheck } from 'lucide-react';
@@ -204,6 +205,8 @@ export default function ValoracionGratuitaPage() {
           <aside className="mt-8 rounded-2xl border border-primary/20 bg-primary-50 p-6 text-muted"><strong className="text-ink">El alcance de la valoración.</strong> Valoro la capacidad funcional para orientar el ejercicio. Las enfermedades, los síntomas nuevos y las decisiones clínicas corresponden al equipo sanitario. Las pruebas no se utilizan para diagnosticar enfermedades ni para modificar tratamientos.</aside>
         </div>
       </section>
+
+      <AssessmentReportExample />
 
       <section id="decision" className="bg-primary-dark px-5 py-14 text-white sm:px-8">
         <div className="mx-auto max-w-4xl">

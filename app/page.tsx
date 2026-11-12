@@ -1,3 +1,4 @@
+import AssessmentReportExample from '@/components/AssessmentReportExample';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -119,6 +120,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <AssessmentReportExample />
 
       <section className="overflow-hidden bg-[#17372b] px-5 py-24 text-white sm:px-8 lg:py-32"><div className="mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-2 lg:gap-24">
         <div className="relative order-2 aspect-[5/4] overflow-hidden rounded-[5rem_1.5rem_1.5rem_1.5rem] lg:order-1"><Image src="/solution.webp" alt="Valoración del equilibrio de una persona mayor en su domicilio" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" /></div>

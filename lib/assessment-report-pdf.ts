@@ -3,9 +3,9 @@ import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 import type { AssessmentReport } from '@/lib/assessment-reports';
 import { fallCriteria, fallRiskLabel, getAssessmentPassport, functionalTests, VIVIFRAIL_SOURCE } from '@/lib/functional-assessment';
 
-export async function buildAssessmentReportPdf(report: AssessmentReport): Promise<Uint8Array> {
+export async function buildAssessmentReportPdf(report: AssessmentReport, { example = false }: { example?: boolean } = {}): Promise<Uint8Array> {
   const doc = await PDFDocument.create();
-  doc.setTitle('Valoración funcional · ANTEA Salud');
+  doc.setTitle(example ? 'Ejemplo ficticio de informe · ANTEA Salud' : 'Valoración funcional · ANTEA Salud');
   doc.setAuthor('Fernando Royano · ANTEA Salud');
   doc.setLanguage('es-ES');
   doc.setCreationDate(new Date(report.createdAt));
@@ -24,6 +24,7 @@ export async function buildAssessmentReportPdf(report: AssessmentReport): Promis
     page.drawRectangle({ x: 0, y: 773, width: 596, height: 69, color: green });
     page.drawText('ANTEA SALUD', { x: 44, y: 805, size: 20, font: bold, color: rgb(1, 1, 1) });
     page.drawText('Fernando Royano | Graduado en CCAFYD', { x: 44, y: 786, size: 10, font: regular, color: rgb(0.85, 0.93, 0.87) });
+    if (example) page.drawText('EJEMPLO FICTICIO - NO ES UN INFORME DE UN CLIENTE', { x: 44, y: 756, size: 10, font: bold, color: green });
   }
   header();
   function text(value: string, heading = false) {
@@ -90,6 +91,6 @@ export async function buildAssessmentReportPdf(report: AssessmentReport): Promis
   text(`${report.version}. Orientación para el ejercicio, no diagnóstico médico ni garantía de resultados. Las pruebas pendientes o interrumpidas limitan la interpretación. Programa y cargas sujetos a revisión profesional e indicaciones sanitarias.`);
   text(VIVIFRAIL_SOURCE);
   const pages = doc.getPages();
-  pages.forEach((item, index) => item.drawText(`ANTEA Salud | Informe ${report.id.slice(0, 8)} | Página ${index + 1} de ${pages.length}`, { x: 44, y: 30, size: 9, font: regular, color: green }));
+  pages.forEach((item, index) => item.drawText(`ANTEA Salud | ${example ? 'Ejemplo ficticio' : `Informe ${report.id.slice(0, 8)}`} | Página ${index + 1} de ${pages.length}`, { x: 44, y: 30, size: 9, font: regular, color: green }));
   return doc.save();
 }

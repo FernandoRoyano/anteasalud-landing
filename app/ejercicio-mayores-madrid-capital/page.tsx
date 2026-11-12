@@ -54,7 +54,7 @@ const config: LocalServiceConfig = {
   ],
   cta: {
     title: 'Empieza en tu casa de Madrid',
-    subtitle: 'Valoración gratuita en el domicilio. Sin compromiso y sin pago por adelantado.',
+    subtitle: 'Valoración gratuita en el domicilio. Sin compromiso. La primera valoración no tiene coste.',
   },
   related: [
     { href: '/ejercicio-mayores-pacifico', label: 'Pacífico · Retiro' },

@@ -54,6 +54,7 @@ const incluye = [
 ];
 
 const faqs = [
+  { q: '¿Cuándo se pagan las sesiones?', a: 'El pago se realiza a principio de mes, por las sesiones previstas para ese mes. El importe mensual depende del calendario de sesiones acordado. La primera valoración es gratuita.' },
   {
     q: '¿Cómo puedo cambiar o cancelar una sesión?',
     a: 'Avísanos el día anterior, con un mínimo de 12 horas de antelación y, si es posible, 24. Si surge una urgencia o tu familiar se encuentra mal, avísanos cuanto antes. Las cancelaciones con menos de 12 horas y su posible cobro se valoran caso por caso.',

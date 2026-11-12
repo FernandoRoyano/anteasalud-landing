@@ -38,6 +38,7 @@ const steps = [
 ] as const;
 
 const faqs = [
+  ['¿Cuándo se pagan las sesiones?', 'El pago se realiza a principio de mes, por las sesiones previstas para ese mes. El importe mensual depende del calendario de sesiones acordado. La primera valoración es gratuita.'],
   ['¿Cómo puedo cambiar o cancelar una sesión?', 'Avísanos el día anterior, con un mínimo de 12 horas de antelación y, si es posible, 24. Si surge una urgencia o tu familiar se encuentra mal, avísanos cuanto antes. Las cancelaciones con menos de 12 horas y su posible cobro se valoran caso por caso.'],
   ['¿Es adecuado si lleva mucho tiempo sin hacer ejercicio?', 'Sí. Empezamos desde su nivel actual, incluso si tiene poca movilidad o necesita apoyo. La primera valoración nos permite ajustar cada ejercicio con seguridad.'],
   ['¿Cuánto dura cada sesión?', 'Las sesiones duran entre 30 y 45 minutos, según lo que tolere cada persona. Para muchas personas, 30 minutos son suficientes. Ajustamos la intensidad, las pausas y la duración para evitar un cansancio excesivo que afecte al resto del día.'],

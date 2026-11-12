@@ -85,7 +85,7 @@ export default function Page() {
           </h2>
           <PriceLine zoneNote className="mx-auto max-w-xl" />
           <p className="text-lg font-bold text-[#2d6a4f]">
-            Sin permanencia. Pagas el mes y, si no quieres seguir, no sigues.
+            Sin permanencia. El pago se realiza a principio de mes, por las sesiones previstas para ese mes.
           </p>
         </div>
       </section>

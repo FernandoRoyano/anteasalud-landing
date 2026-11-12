@@ -92,3 +92,9 @@ Pendientes:
 
 Los informes técnicos locales están en `.vercel/site-audit.json`, `.vercel/admin-audit.json`
 y `.vercel/capture-audit-result.json` (directorio ignorado por Git, sin credenciales).
+
+Los formularios de solicitud (LeadForm y ContactForm) guardan el contacto y muestran
+confirmación sin abrir WhatsApp automáticamente. El enlace opcional posterior prepara
+un mensaje genérico, sin copiar datos personales. El asistente explícito de WhatsApp
+conserva su funcionamiento. El evento de conversión se mantiene tras guardado correcto,
+excluyendo duplicados.

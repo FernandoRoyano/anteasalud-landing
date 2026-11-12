@@ -1,11 +1,11 @@
 "use client";
 
-import { useId, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { trackLeadConversion } from "@/components/GoogleTag";
 import { ConsentCheckbox, HoneypotField } from "@/components/ConsentCheckbox";
 import { leadInputClass } from "@/components/LeadForm";
 import { postLead, useFormTimer } from "@/lib/lead-client";
-import { openWhatsAppPlaceholder, sendLeadToWhatsApp } from "@/lib/lead-whatsapp";
+import { buildWhatsAppUrl } from "@/lib/lead-whatsapp";
 
 type FormStatus = "idle" | "sending" | "success" | "error";
 
@@ -28,10 +28,14 @@ export default function ContactForm() {
   const [consent, setConsent] = useState(false);
   const [website, setWebsite] = useState("");
   const elapsed = useFormTimer();
+  const successRef = useRef<HTMLHeadingElement>(null);
+  useEffect(() => {
+    if (status === "success") successRef.current?.focus();
+  }, [status]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const whatsappWindow = openWhatsAppPlaceholder();
+    if (status === "sending") return;
     setStatus("sending");
     const lead = {
       nombre, email, telefono, zona,
@@ -45,7 +49,6 @@ export default function ContactForm() {
       if (!res.ok) throw new Error();
 
       if (!(await res.clone().json()).duplicate) trackLeadConversion();
-      sendLeadToWhatsApp(whatsappWindow, lead);
       setStatus("success");
       setNombre("");
       setEmail("");
@@ -53,10 +56,11 @@ export default function ContactForm() {
       setInteres("");
       setConsent(false);
     } catch {
-      whatsappWindow?.close();
       setStatus("error");
     }
   };
+
+  if (status === "success") return <div className="rounded-3xl border border-primary/20 bg-white p-8 text-center space-y-4"><h3 ref={successRef} tabIndex={-1} className="text-2xl font-bold text-primary-dark outline-none">Solicitud recibida</h3><p className="text-lg text-muted">Fernando te llamará en menos de 24 horas para conocer vuestra situación. No tienes que hacer nada más.</p><a href={buildWhatsAppUrl('Hola, he enviado el formulario de ANTEA Salud y prefiero continuar por WhatsApp.')} target="_blank" rel="noreferrer" className="inline-flex min-h-12 items-center rounded-xl border border-primary/30 px-5 py-3 font-semibold text-primary">Escribir por WhatsApp (opcional)</a></div>;
 
   const sending = status === "sending";
   const labelClass = "block text-base font-semibold text-[#1f2933] mb-1.5";
@@ -148,11 +152,6 @@ export default function ContactForm() {
       </button>
 
       <div aria-live="polite">
-        {status === "success" && (
-          <p className="text-center text-lg text-[#2d6a4f] font-semibold">
-            ¡Recibido! Te contactaremos pronto.
-          </p>
-        )}
         {status === "error" && (
           <p role="alert" className="text-center text-lg text-[#b91c1c] font-medium">
             Error al enviar. Revisa los datos e inténtalo de nuevo.

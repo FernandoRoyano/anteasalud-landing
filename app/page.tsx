@@ -1,3 +1,4 @@
+import SessionConditions from '@/components/SessionConditions';
 import AssessmentReportExample from '@/components/AssessmentReportExample';
 import type { Metadata } from 'next';
 import Image from 'next/image';
@@ -37,6 +38,7 @@ const steps = [
 ] as const;
 
 const faqs = [
+  ['¿Cómo puedo cambiar o cancelar una sesión?', 'Avísanos el día anterior, con un mínimo de 12 horas de antelación y, si es posible, 24. Si surge una urgencia o tu familiar se encuentra mal, avísanos cuanto antes. Las cancelaciones con menos de 12 horas y su posible cobro se valoran caso por caso.'],
   ['¿Es adecuado si lleva mucho tiempo sin hacer ejercicio?', 'Sí. Empezamos desde su nivel actual, incluso si tiene poca movilidad o necesita apoyo. La primera valoración nos permite ajustar cada ejercicio con seguridad.'],
   ['¿Cuánto dura cada sesión?', 'Las sesiones duran entre 30 y 45 minutos, según lo que tolere cada persona. Para muchas personas, 30 minutos son suficientes. Ajustamos la intensidad, las pausas y la duración para evitar un cansancio excesivo que afecte al resto del día.'],
   ['¿Trabajáis después de una operación?', 'Sí, cuando el equipo médico ha indicado que puede comenzar ejercicio. Nos coordinamos con sus recomendaciones y trabajamos la vuelta progresiva a la actividad.'],
@@ -90,6 +92,16 @@ export default function HomePage() {
       </section>
 
       <section id="servicios" className="border-y border-[#2d6a4f]/10 bg-white px-5 py-16 sm:px-8 sm:py-24 lg:py-32">
+        <nav aria-labelledby="family-situations-title" className="mx-auto mb-14 max-w-7xl border-b border-[#2d6a4f]/15 pb-10">
+          <h2 id="family-situations-title" className="font-display text-2xl font-bold">¿Te preocupa alguna de estas situaciones?</h2>
+          <ul className="mt-5 grid gap-3 md:grid-cols-3">
+            {[
+              ['/articulos/ejercicio-domicilio-mayor-apenas-camina', 'Mi familiar camina cada vez menos'],
+              ['/articulos/que-pasa-despues-de-una-caida', 'Tiene miedo después de una caída'],
+              ['/articulos/levantarse-silla-autonomia-personas-mayores', 'Le cuesta levantarse de la silla'],
+            ].map(([href, label]) => <li key={href}><Link href={href} className="flex min-h-14 items-center justify-between gap-3 rounded-xl bg-[#f3f8f4] px-4 py-3 font-semibold text-primary underline-offset-4 hover:underline">{label}<ArrowRight className="h-5 w-5 shrink-0" aria-hidden="true" /></Link></li>)}
+          </ul>
+        </nav>
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[.8fr_1.2fr] lg:gap-20">
           <div><Eyebrow>Cambios que se notan</Eyebrow><Title>Entrenamos para la vida real.</Title><p className="mt-6 max-w-md text-lg leading-relaxed text-[#4a6358]">No buscamos hacer ejercicios por hacer. Cada sesión se conecta con algo que quiere volver a conseguir.</p></div>
           <div className="divide-y divide-[#2d6a4f]/15 border-y border-[#2d6a4f]/15">
@@ -134,6 +146,7 @@ export default function HomePage() {
         <div><Eyebrow>Precios claros</Eyebrow><Title>Sin permanencia. Sin letra pequeña.</Title><p className="mt-6 text-lg leading-relaxed text-[#4a6358]">La primera valoración funcional es gratuita. Después eliges el ritmo que mejor encaja con vuestra situación.</p></div>
         <div className="overflow-hidden rounded-3xl border border-[#2d6a4f]/15"><div className="grid gap-6 border-b border-[#2d6a4f]/15 bg-[#f3f8f4] p-7 sm:grid-cols-[1fr_auto] sm:items-center sm:p-9"><div><p className="font-display text-2xl font-bold">Plan recomendado</p><p className="mt-2 text-[#4a6358]">2 sesiones semanales de 30–45 minutos</p></div><p className="font-display text-4xl font-bold text-[#2d6a4f]">90 €<span className="text-base font-normal text-[#4a6358]"> / semana</span></p></div>
           <div className="grid gap-6 p-7 sm:grid-cols-2 sm:p-9"><div><p className="font-bold">También disponible</p><p className="mt-2 text-[#4a6358]">Sesión suelta de 30–45 minutos</p><p className="mt-3 font-display text-3xl font-bold text-[#2d6a4f]">55 €</p></div><ul className="space-y-3 text-base text-[#3b5a4e]">{['Plan personalizado','Seguimiento de la evolución','Madrid capital','Mañanas hasta las 13:00'].map(item => <li key={item} className="flex gap-2"><Check className="mt-1 h-4 w-4 shrink-0 text-[#2d6a4f]" aria-hidden="true" />{item}</li>)}</ul></div>
+          <div className="px-7 pb-6 sm:px-9"><SessionConditions /></div>
           <div className="border-t border-[#2d6a4f]/15 px-7 py-6 sm:px-9"><a href="#contacto" className="inline-flex min-h-12 items-center gap-2 font-bold text-[#2d6a4f] underline underline-offset-4">Consultar disponibilidad y solicitar valoración <ArrowRight className="h-5 w-5" aria-hidden="true" /></a><p className="mt-2 text-sm leading-relaxed text-[#4a6358]">Primero conocemos vuestra situación y comprobamos si el servicio encaja. La visita no obliga a contratar.</p></div>
         </div>
       </div></section>

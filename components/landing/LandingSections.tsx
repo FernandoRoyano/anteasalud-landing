@@ -1,3 +1,4 @@
+import SessionConditions from '@/components/SessionConditions';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, Check } from 'lucide-react';
@@ -37,6 +38,7 @@ export function LandingPricing({ place, surcharge }: { place: string; surcharge:
             Solo Madrid capital. Mañanas hasta las 13:00, según disponibilidad.
             Sin permanencia: puedes pausar cuando lo necesites.
           </p>
+          <SessionConditions />
         </div>
       </div>
     </section>

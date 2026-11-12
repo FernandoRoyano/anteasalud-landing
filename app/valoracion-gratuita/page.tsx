@@ -55,6 +55,10 @@ const incluye = [
 
 const faqs = [
   {
+    q: '¿Cómo puedo cambiar o cancelar una sesión?',
+    a: 'Avísanos el día anterior, con un mínimo de 12 horas de antelación y, si es posible, 24. Si surge una urgencia o tu familiar se encuentra mal, avísanos cuanto antes. Las cancelaciones con menos de 12 horas y su posible cobro se valoran caso por caso.',
+  },
+  {
     q: '¿Es realmente gratis y sin compromiso?',
     a: 'Sí. La primera valoración a domicilio en Madrid es gratuita y sin ningún compromiso de contratación. Si después decides no continuar, no pasa nada.',
   },

@@ -5,7 +5,7 @@ import { Check } from "lucide-react";
 import { trackLeadConversion } from "@/components/GoogleTag";
 import { ConsentCheckbox, HoneypotField } from "@/components/ConsentCheckbox";
 import { postLead, useFormTimer } from "@/lib/lead-client";
-import { openWhatsAppPlaceholder, sendLeadToWhatsApp } from "@/lib/lead-whatsapp";
+import { buildWhatsAppUrl } from "@/lib/lead-whatsapp";
 
 type FormStatus = "idle" | "sending" | "success" | "error";
 
@@ -53,7 +53,7 @@ export default function LeadForm({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const whatsappWindow = openWhatsAppPlaceholder();
+    if (status === "sending") return;
     setStatus("sending");
     const lead = {
       nombre,
@@ -73,14 +73,12 @@ export default function LeadForm({
       }
 
       if (!(await res.clone().json()).duplicate) trackLeadConversion();
-      sendLeadToWhatsApp(whatsappWindow, lead);
       setStatus("success");
       setNombre("");
       setTelefono("");
       setMensaje("");
       setConsent(false);
     } catch (error) {
-      whatsappWindow?.close();
       setErrorMessage(
         error instanceof Error && error.message
           ? error.message
@@ -100,9 +98,10 @@ export default function LeadForm({
           ¡Solicitud recibida!
         </h3>
         <p className="text-lg text-[#374151]">
-          Fernando se pondrá en contacto contigo en menos de 24 horas para
-          concertar tu valoración gratuita.
+          Fernando te llamará en menos de 24 horas para conocer la situación y organizar la valoración gratuita.
         </p>
+        <p className="text-base text-muted">No tienes que hacer nada más. Si lo prefieres, también puedes escribirnos:</p>
+        <a href={buildWhatsAppUrl('Hola, he enviado el formulario de ANTEA Salud y prefiero continuar por WhatsApp.')} target="_blank" rel="noreferrer" className="inline-flex min-h-12 items-center justify-center rounded-xl border border-primary/30 px-5 py-3 font-semibold text-primary">Escribir por WhatsApp (opcional)</a>
       </div>
     );
   }
@@ -116,6 +115,7 @@ export default function LeadForm({
       className="relative bg-white shadow-[0_28px_70px_-35px_rgba(23,55,43,.45)] rounded-3xl border border-[#2d6a4f]/10 p-7 sm:p-8 space-y-4"
     >
       <h3 className="font-display text-2xl font-bold text-[#17372b]">{title}</h3>
+      <p className="text-base text-muted">Deja tus datos y Fernando te llamará en menos de 24 horas. No necesitas WhatsApp para enviar la solicitud.</p>
 
       <div>
         <label htmlFor={`${uid}-nombre`} className={labelClass}>

@@ -255,6 +255,19 @@ export async function getAssessmentReport(id: string) {
   return matches.length ? decryptAssessmentReport(id, String(matches[0][2])) : null;
 }
 
+export async function deleteAssessmentReport(id: string): Promise<boolean> {
+  const rows = await readAssessmentReportRows();
+  const matches = rows.map((row, index) => ({ row, index })).filter(({ row }) => row[0] === id);
+  if (matches.length > 1) throw new Error('[Sheets:deleteReport] Identidad de informe ambigua');
+  if (!matches.length) return false;
+  const rowNumber = matches[0].index + 2;
+  await getSheetsClient().spreadsheets.values.clear({
+    spreadsheetId: process.env.GOOGLE_SHEET_ID!,
+    range: `'${REPORTS_SHEET}'!A${rowNumber}:C${rowNumber}`,
+  });
+  return true;
+}
+
 export async function saveAssessmentReport(input: AssessmentReportInput) {
   const data = assessmentReportSchema.parse(input);
   const existing = await getAssessmentReport(data.id);

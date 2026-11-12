@@ -164,3 +164,44 @@ test('la hora de emision usa Madrid en invierno y verano y se conserva al recupe
   const pdf = await PDFDocument.load(await buildAssessmentReportPdf(report));
   assert.equal(Math.floor(pdf.getCreationDate().getTime()/1000), Math.floor(new Date(report.createdAt).getTime()/1000));
 });
+
+
+test('borrar exige sesion y UUID valido; distingue informes inexistentes y errores', async () => {
+  let authenticated = false;
+  let removed = 0;
+  const api = load('app/api/admin/valoraciones/[id]/route.ts', {
+    'next/server': { NextResponse: { json: (body, options) => ({ body, status: options?.status || 200 }) } },
+    '@/lib/auth': { isAuthenticated: async () => authenticated },
+    '@/lib/sheets': { deleteAssessmentReport: async id => { removed++; if (id === payload.id) return true; return false; } },
+  });
+  const call = id => api.DELETE({}, { params: Promise.resolve({ id }) });
+  assert.equal((await call(payload.id)).status, 401);
+  assert.equal(removed, 0);
+  authenticated = true;
+  assert.equal((await call('invalid')).status, 400);
+  assert.equal(removed, 0);
+  assert.equal((await call('22222222-2222-4222-8222-222222222222')).status, 404);
+  assert.equal((await call(payload.id)).status, 200);
+});
+
+test('borrar vacia solo la fila exacta y rechaza identidades duplicadas sin borrar', async () => {
+  let rows = [['other-id', 'date', 'encrypted-other'], [payload.id, 'date', 'encrypted-target']];
+  const cleared = [];
+  const api = load('lib/sheets.ts', {
+    react: { cache: fn => fn }, '@/lib/article-editorial': {},
+    googleapis: { google: { auth: { GoogleAuth: class {} }, sheets: () => ({ spreadsheets: {
+      get: async () => ({ data: { sheets: [{ properties: { title: 'Informes valoracion' } }] } }),
+      values: {
+        get: async ({ range }) => ({ data: { values: range.includes('1:') ? [['ID', 'Fecha creación', 'Informe cifrado']] : rows } }),
+        clear: async input => { cleared.push(input); },
+      },
+    } }) } },
+  });
+  assert.equal(await api.deleteAssessmentReport(payload.id), true);
+  assert.equal(cleared.length, 1);
+  assert.equal(cleared[0].range, "'Informes valoracion'!A3:C3");
+  assert.equal(await api.deleteAssessmentReport('missing'), false);
+  rows = [[payload.id], [payload.id]];
+  await assert.rejects(api.deleteAssessmentReport(payload.id));
+  assert.equal(cleared.length, 1);
+});

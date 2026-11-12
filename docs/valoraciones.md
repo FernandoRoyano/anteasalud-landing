@@ -71,3 +71,8 @@ El listado permite editar directamente cada valoración, además de abrirla y co
 La fecha y hora de emisión proceden de createdAt en el servidor y se muestran con segundos
 en horario Europe/Madrid en el listado, la ficha y el PDF. Cada revisión recibe su propia
 hora de emisión; la fecha de la sesión se conserva por separado.
+
+Borrado: el historial y la ficha permiten borrar una valoración con confirmación.
+La API privada valida el UUID y vacía exclusivamente A:C de la fila identificada;
+rechaza UUID duplicados y no desplaza filas. Se borra solo esa versión, conservando
+las otras. Los PDF ya compartidos o descargados no se eliminan.

@@ -1,9 +1,10 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { getAssessmentReportFilename } from '@/lib/report-filename';
 import { Download, Mail, MessageCircle, Share2 } from 'lucide-react';
 
-export default function ReportActions({ id, date }: { id: string; date: string }) {
+export default function ReportActions({ id, reference }: { id: string; reference: string }) {
   const [file, setFile] = useState<File | null>(null);
   const [message, setMessage] = useState('');
   const [sharing, setSharing] = useState(false);
@@ -13,10 +14,10 @@ export default function ReportActions({ id, date }: { id: string; date: string }
     fetch(url, { signal: controller.signal, cache: 'no-store' }).then(async response => {
       if (!response.ok) throw new Error('PDF unavailable');
       const blob = await response.blob();
-      setFile(new File([blob], `antea-informe-${date}-${id.slice(0, 8)}.pdf`, { type: 'application/pdf' }));
+      setFile(new File([blob], getAssessmentReportFilename(reference), { type: 'application/pdf' }));
     }).catch(() => { if (!controller.signal.aborted) setMessage('No se pudo preparar el PDF para compartir. Intenta descargarlo o recarga la página.'); });
     return () => controller.abort();
-  }, [url, date, id]);
+  }, [url, reference, id]);
   async function share() {
     if (!file) return;
     if (!navigator.canShare?.({ files: [file] })) { setMessage('Este navegador no permite compartir archivos. Descarga el PDF y adjúntalo en tu correo o WhatsApp.'); return; }

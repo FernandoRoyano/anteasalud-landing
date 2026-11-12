@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { getAssessmentReportFilename } from '@/lib/report-filename';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import AssessmentReportView from '@/components/admin/AssessmentReportView';
@@ -64,7 +65,7 @@ export default function AssessmentEditor({ initialReport }: { initialReport?: As
         const url = URL.createObjectURL(await pdf.blob());
         const link = document.createElement('a');
         link.href = url;
-        link.download = `antea-informe-${date}-${data.id.slice(0, 8)}.pdf`;
+        link.download = getAssessmentReportFilename(reference);
         document.body.appendChild(link);
         link.click();
         link.remove();

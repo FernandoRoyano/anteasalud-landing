@@ -205,3 +205,16 @@ test('borrar vacia solo la fila exacta y rechaza identidades duplicadas sin borr
   await assert.rejects(api.deleteAssessmentReport(payload.id));
   assert.equal(cleared.length, 1);
 });
+
+
+test('el PDF usa el nombre de la persona y admite espacios y acentos sin caracteres peligrosos', () => {
+  const { getAssessmentReportFilename, getAssessmentReportDisposition } = load('lib/report-filename.ts');
+  assert.equal(getAssessmentReportFilename('Tino 1'), 'Antea-informe-Tino 1.pdf');
+  assert.equal(getAssessmentReportFilename('  María   Pérez  '), 'Antea-informe-María Pérez.pdf');
+  assert.equal(getAssessmentReportFilename('Tino/1:prueba'), 'Antea-informe-Tino 1 prueba.pdf');
+  assert.equal(getAssessmentReportFilename('  '), 'Antea-informe-Sin nombre.pdf');
+  const disposition = getAssessmentReportDisposition('María Pérez');
+  assert.ok(disposition.includes('filename="Antea-informe-Maria Perez.pdf"'));
+  assert.ok(disposition.includes("filename*=UTF-8''Antea-informe-Mar%C3%ADa%20P%C3%A9rez.pdf"));
+  assert.ok(!getAssessmentReportDisposition('Tino\r\nInjected: header').includes('\r\n'));
+});

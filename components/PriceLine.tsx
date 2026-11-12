@@ -10,7 +10,7 @@ export default function PriceLine({
   className = '',
 }: {
   surcharge?: number;
-  /** Aclara que el precio es de Madrid capital y el recargo fuera */
+  /** Muestra la cobertura y el horario actuales */
   zoneNote?: boolean;
   className?: string;
 }) {
@@ -33,7 +33,7 @@ export default function PriceLine({
       </ul>
       <p className="mt-2 text-sm text-[#4a6358]">Sesiones de 30–45 minutos, según su tolerancia. Para muchas personas, 30 minutos son suficientes; ajustamos el trabajo para evitar un cansancio excesivo después.</p>
       {zoneNote && surcharge === 0 && (
-        <p className="mt-2 text-sm text-[#4a6358]">Precios en Madrid capital. Resto de la Comunidad: +10 € por sesión.</p>
+        <p className="mt-2 text-sm text-[#4a6358]">Solo Madrid capital. Mañanas hasta las 13:00, según disponibilidad.</p>
       )}
       {surcharge > 0 && (
         <p className="mt-2 text-sm text-[#4a6358]">Incluye {surcharge} € por sesión de desplazamiento.</p>

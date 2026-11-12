@@ -9,13 +9,13 @@ import { LandingArticles } from '@/components/landing/LandingSections';
 
 const URL = `${SITE_URL}/ejercicio-personas-mayores-madrid`;
 const DESCRIPTION =
-  'Programa de fuerza, equilibrio y movilidad a domicilio para mayores en toda la Comunidad de Madrid. Graduado en CCAFYD. Valoración gratuita.';
+  'Programa de fuerza, equilibrio y movilidad a domicilio para mayores en Madrid capital. Graduado en CCAFYD. Valoración gratuita.';
 
 // Revalida para incluir artículos nuevos en «Guías para familias»
 export const revalidate = 3600;
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Ejercicio para personas mayores en la Comunidad de Madrid',
+  title: 'Ejercicio para personas mayores en Madrid capital',
   description: DESCRIPTION,
   path: '/ejercicio-personas-mayores-madrid',
 });
@@ -24,7 +24,7 @@ const jsonLd = buildServiceSchema({
   name: 'Ejercicio adaptado para personas mayores a domicilio',
   description: DESCRIPTION,
   path: '/ejercicio-personas-mayores-madrid',
-  areaServed: ['Madrid', 'Comunidad de Madrid'],
+  areaServed: ['Madrid capital'],
 });
 
 

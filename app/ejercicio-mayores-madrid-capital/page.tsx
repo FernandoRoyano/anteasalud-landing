@@ -59,8 +59,6 @@ const config: LocalServiceConfig = {
   related: [
     { href: '/ejercicio-mayores-pacifico', label: 'Pacífico · Retiro' },
     { href: '/ejercicio-personas-mayores-madrid', label: 'Ejercicio para mayores' },
-    { href: '/ejercicio-mayores-mostoles', label: 'Móstoles' },
-    { href: '/ejercicio-mayores-getafe', label: 'Getafe' },
   ],
 };
 

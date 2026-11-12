@@ -9,14 +9,6 @@ import { openWhatsAppPlaceholder, sendLeadToWhatsApp } from "@/lib/lead-whatsapp
 
 type FormStatus = "idle" | "sending" | "success" | "error";
 
-const ZONAS = [
-  "Madrid capital",
-  "Sur (Móstoles, Fuenlabrada, Getafe, Leganés, Alcorcón...)",
-  "Oeste (Pozuelo, Las Rozas, Majadahonda, Boadilla...)",
-  "Este (Torrejón de Ardoz, Coslada, Rivas-Vaciamadrid...)",
-  "Norte (Alcobendas, Tres Cantos)",
-  "Otra zona de la Comunidad de Madrid",
-];
 
 const INTERESES = [
   "Evaluación gratuita",
@@ -31,7 +23,7 @@ export default function ContactForm() {
   const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
   const [telefono, setTelefono] = useState("");
-  const [zona, setZona] = useState("");
+  const zona = "Madrid capital";
   const [interes, setInteres] = useState("");
   const [consent, setConsent] = useState(false);
   const [website, setWebsite] = useState("");
@@ -58,7 +50,6 @@ export default function ContactForm() {
       setNombre("");
       setEmail("");
       setTelefono("");
-      setZona("");
       setInteres("");
       setConsent(false);
     } catch {
@@ -127,21 +118,7 @@ export default function ContactForm() {
         />
       </div>
 
-      <div>
-        <label htmlFor={`${uid}-zona`} className={labelClass}>Zona</label>
-        <select
-          id={`${uid}-zona`}
-          value={zona}
-          onChange={(e) => setZona(e.target.value)}
-          className={leadInputClass}
-          disabled={sending}
-        >
-          <option value="">Selecciona tu zona</option>
-          {ZONAS.map((z) => (
-            <option key={z} value={z}>{z}</option>
-          ))}
-        </select>
-      </div>
+      <p className="rounded-xl bg-primary-50 p-4 text-base text-muted">Atendemos solo en Madrid capital, en horario de mañana hasta las 13:00 y según disponibilidad.</p>
 
       <div>
         <label htmlFor={`${uid}-interes`} className={labelClass}>¿Qué te interesa?</label>

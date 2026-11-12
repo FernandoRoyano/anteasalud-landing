@@ -66,14 +66,6 @@ const GROUPS: LinkGroup[] = [
         url: 'https://anteasalud.com/ejercicio-mayores-madrid-capital',
         description: 'Sin recargo de desplazamiento',
       },
-      {
-        label: 'Móstoles',
-        url: 'https://anteasalud.com/ejercicio-mayores-mostoles',
-      },
-      {
-        label: 'Getafe',
-        url: 'https://anteasalud.com/ejercicio-mayores-getafe',
-      },
     ],
   },
   {

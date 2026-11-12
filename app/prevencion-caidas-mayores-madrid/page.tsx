@@ -24,7 +24,7 @@ const jsonLd = buildServiceSchema({
   name: 'Programa de prevención de caídas a domicilio',
   description: DESCRIPTION,
   path: '/prevencion-caidas-mayores-madrid',
-  areaServed: ['Madrid', 'Comunidad de Madrid'],
+  areaServed: ['Madrid capital'],
 });
 
 export default function Page() {

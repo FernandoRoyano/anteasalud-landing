@@ -216,9 +216,7 @@ export default function GuionVideoPage() {
               es lo que suele funcionar mejor, porque la constancia es lo que da resultados.
             </li>
             <li>
-              Si vives <strong>fuera de Madrid capital</strong> — en Móstoles, Getafe, Leganés o zonas similares
-              — se suma <strong>10 euros por sesión</strong> por el desplazamiento. Es lo único extra. No hay
-              cuotas de alta, no hay permanencia, no hay sorpresas.
+              Actualmente atendemos solo en <strong>Madrid capital, en horario de mañana hasta las 13:00</strong>, según disponibilidad. No hay cuotas de alta ni permanencia.
             </li>
           </ul>
           <p>

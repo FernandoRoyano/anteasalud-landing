@@ -85,15 +85,12 @@ const jsonLd = {
       },
       areaServed: [
         { '@type': 'City', name: 'Madrid' },
-        { '@type': 'City', name: 'Getafe' },
-        { '@type': 'City', name: 'Móstoles' },
-        { '@type': 'AdministrativeArea', name: 'Comunidad de Madrid' },
       ],
       openingHoursSpecification: {
         '@type': 'OpeningHoursSpecification',
         dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
         opens: '08:30',
-        closes: '14:00',
+        closes: '13:00',
       },
       knowsAbout: [
         'Ejercicio para personas mayores',

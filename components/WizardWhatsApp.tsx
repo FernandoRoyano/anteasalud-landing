@@ -62,10 +62,6 @@ interface Zona {
 
 const ZONAS_MADRID: Zona[] = [
   { value: 'capital', label: 'Madrid capital', recargo: 0 },
-  { value: 'sur', label: 'Sur (Móstoles, Fuenlabrada, Getafe, Leganés, Alcorcón...)', recargo: 10 },
-  { value: 'oeste', label: 'Oeste (Pozuelo, Las Rozas, Majadahonda, Boadilla...)', recargo: 10 },
-  { value: 'este', label: 'Este (Torrejón de Ardoz, Coslada, Rivas-Vaciamadrid...)', recargo: 10 },
-  { value: 'norte', label: 'Norte (Alcobendas, Tres Cantos)', recargo: 10 },
 ];
 
 // =============================================================================
@@ -350,7 +346,7 @@ Mi teléfono: ${data.telefono}`;
           )}
 
           {step === 4 && (
-            <Step headingRef={headingRef} icon={MapPin} title="¿En qué zona de Madrid?" subtitle="Vamos a domicilio en Madrid y área metropolitana">
+            <Step headingRef={headingRef} icon={MapPin} title="¿En qué zona de Madrid?" subtitle="Solo Madrid capital. Mañanas hasta las 13:00, según disponibilidad.">
               {ZONAS_MADRID.map((opt) => (
                 <OptionButton
                   key={opt.value}
@@ -362,7 +358,7 @@ Mi teléfono: ${data.telefono}`;
                 />
               ))}
               <p className="text-base text-[#4b5563] text-center mt-3">
-                El recargo cubre el desplazamiento fuera de Madrid capital.
+                Confirmamos disponibilidad y dirección antes de concertar la visita.
               </p>
             </Step>
           )}

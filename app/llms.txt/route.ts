@@ -16,14 +16,14 @@ export async function GET() {
 
   const body = `# ANTEA Salud
 
-> Entrenamiento de fuerza, equilibrio y movilidad a domicilio para personas mayores en Madrid (capital y Comunidad de Madrid). Dirigido por Fernando Royano, graduado en Ciencias de la Actividad Física y del Deporte (CCAFYD), con 14 años como entrenador personal a domicilio y especializado en personas mayores.
+> Entrenamiento de fuerza, equilibrio y movilidad a domicilio para personas mayores en Madrid capital. Dirigido por Fernando Royano, graduado en Ciencias de la Actividad Física y del Deporte (CCAFYD), con 14 años como entrenador personal a domicilio y especializado en personas mayores.
 
 ## Datos clave
 
 - Servicio: ejercicio adaptado a domicilio para personas mayores (prevención de caídas, recuperación de autonomía tras operación u hospitalización, fragilidad, mantenimiento).
-- Zona: Madrid capital (sin recargo) y municipios de la Comunidad de Madrid como Getafe o Móstoles (+10 € por sesión de desplazamiento).
+- Zona: solo Madrid capital.
 - Precios: primera valoración funcional gratuita; sesión suelta de 30–45 minutos, 55 €; plan de 2 sesiones semanales, 90 € por semana. Sin permanencia.
-- Horario: lunes a viernes, de 8:30 a 14:00, según disponibilidad (se confirma al reservar).
+- Horario: mañanas hasta las 13:00, según disponibilidad (se confirma al reservar).
 - Contacto: anteasalud@gmail.com · WhatsApp +34 633 26 19 63 · ${SITE_URL}/valoracion-gratuita
 - ANTEA Salud no es un servicio sanitario: no sustituye al médico ni al fisioterapeuta y trabaja siguiendo sus indicaciones.
 
@@ -45,8 +45,6 @@ ${familyGuides.map((guide) => `- [${guide.title}](${SITE_URL}/guias/${guide.slug
 
 - [Madrid capital](${SITE_URL}/ejercicio-mayores-madrid-capital)
 - [Pacífico, Retiro](${SITE_URL}/ejercicio-mayores-pacifico): ejercicio a domicilio sin recargo, con primera valoración gratuita.
-- [Getafe](${SITE_URL}/ejercicio-mayores-getafe)
-- [Móstoles](${SITE_URL}/ejercicio-mayores-mostoles)
 
 ## Artículos para familias
 

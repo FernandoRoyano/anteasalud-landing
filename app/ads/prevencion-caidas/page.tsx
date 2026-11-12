@@ -6,7 +6,6 @@ import {
   AdsCaseStory,
   AdsAbout,
   AdsSteps,
-  AdsTestimonials,
   AdsFinalCTA,
 } from "@/components/ads/AdsSections";
 
@@ -65,17 +64,10 @@ export default function Page() {
         ]}
       />
 
-      <AdsTestimonials
-        testimonials={[
-          { text: "Mi madre tenía pánico a caerse. En mes y medio volvió a moverse por casa con seguridad. Fernando es un profesional como pocos.", author: "Marta R., Chamartín" },
-          { text: "Tras la operación de cadera de mi padre no sabíamos cómo seguir. Nos guió paso a paso y coordinado con el médico. Recomendadísimo.", author: "Javier M., Getafe" },
-          { text: "Viene a casa, puntual, y se nota la formación que tiene. Mi suegra está más fuerte y más animada.", author: "Lucía F., Móstoles" },
-        ]}
-      />
 
       <AdsFinalCTA
         title="Recupera su confianza al caminar"
-        subtitle="Solo 5 nuevas familias al mes. Solicita la valoración gratuita y empieza esta semana."
+        subtitle="Madrid capital. Sesiones de mañana hasta las 13:00, según disponibilidad. Solicita tu valoración gratuita."
         formCta="Quiero la valoración gratuita →"
         origen={ORIGEN}
       />

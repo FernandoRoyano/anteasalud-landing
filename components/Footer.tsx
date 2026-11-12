@@ -20,8 +20,6 @@ const columns = [
     links: [
       ['/ejercicio-mayores-madrid-capital', 'Madrid capital'],
       ['/ejercicio-mayores-pacifico', 'Pacífico · Retiro'],
-      ['/ejercicio-mayores-mostoles', 'Móstoles'],
-      ['/ejercicio-mayores-getafe', 'Getafe'],
     ],
   },
   {
@@ -60,7 +58,7 @@ export default function Footer() {
                   <MessageCircle className="h-5 w-5" aria-hidden="true" /> Escribir por WhatsApp
                 </WizardButton>
               </li>
-              <li className="pt-2 text-white/75">Lunes a viernes, 8:30 - 14:00 (según disponibilidad)</li>
+              <li className="pt-2 text-white/75">Sesiones de mañana, hasta las 13:00 (según disponibilidad)</li>
             </ul>
           </div>
 

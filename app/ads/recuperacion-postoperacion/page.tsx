@@ -6,7 +6,6 @@ import {
   AdsCaseStory,
   AdsAbout,
   AdsSteps,
-  AdsTestimonials,
   AdsFinalCTA,
 } from "@/components/ads/AdsSections";
 
@@ -65,17 +64,10 @@ export default function Page() {
         ]}
       />
 
-      <AdsTestimonials
-        testimonials={[
-          { text: "Tras la operación de cadera de mi padre no sabíamos cómo seguir. Nos guió paso a paso y coordinado con el médico. Recomendadísimo.", author: "Javier M., Getafe" },
-          { text: "Mi madre tenía pánico a moverse después de la operación. En semanas recuperó la confianza y la fuerza.", author: "Marta R., Chamartín" },
-          { text: "Viene a casa, puntual, y se nota la formación que tiene. Mi suegra está más fuerte y más animada.", author: "Lucía F., Móstoles" },
-        ]}
-      />
 
       <AdsFinalCTA
         title="No pierdas las semanas más importantes"
-        subtitle="Solo 5 nuevas familias al mes. Solicita la valoración gratuita y empieza la recuperación esta semana."
+        subtitle="Madrid capital. Sesiones de mañana hasta las 13:00, según disponibilidad. Solicita tu valoración gratuita."
         formCta="Quiero la valoración gratuita →"
         origen={ORIGEN}
       />

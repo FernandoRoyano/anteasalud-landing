@@ -34,9 +34,7 @@ export function LandingPricing({ place, surcharge }: { place: string; surcharge:
             </div>
           </dl>
           <p className="mt-5 text-center text-base text-[#4a6358]">
-            {surcharge
-              ? `Fuera de Madrid capital se suman ${surcharge} € por sesión para cubrir el desplazamiento. Ya están incluidos arriba.`
-              : 'En Madrid capital no hay recargo por desplazamiento.'}{' '}
+            Solo Madrid capital. Mañanas hasta las 13:00, según disponibilidad.
             Sin permanencia: puedes pausar cuando lo necesites.
           </p>
         </div>

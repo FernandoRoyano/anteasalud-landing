@@ -7,7 +7,7 @@ import { SITE_URL } from '@/lib/seo';
 export const revalidate = 3600;
 
 // Fecha de la última revisión real del contenido de cada página (actualizar al editarla)
-const CONTENT_UPDATED = '2026-09-24';
+const CONTENT_UPDATED = '2026-11-12';
 
 const staticRoutes: Array<{ path: string; priority: number; changeFrequency: 'weekly' | 'monthly' | 'yearly' }> = [
   { path: '', priority: 1, changeFrequency: 'weekly' },
@@ -15,8 +15,6 @@ const staticRoutes: Array<{ path: string; priority: number; changeFrequency: 'we
   { path: '/prevencion-caidas-mayores-madrid', priority: 0.9, changeFrequency: 'monthly' },
   { path: '/recuperar-autonomia-mayores-madrid', priority: 0.9, changeFrequency: 'monthly' },
   { path: '/ejercicio-mayores-madrid-capital', priority: 0.8, changeFrequency: 'monthly' },
-  { path: '/ejercicio-mayores-mostoles', priority: 0.8, changeFrequency: 'monthly' },
-  { path: '/ejercicio-mayores-getafe', priority: 0.8, changeFrequency: 'monthly' },
   { path: '/valoracion-gratuita', priority: 0.8, changeFrequency: 'monthly' },
   { path: '/guia-prevencion-caidas', priority: 0.8, changeFrequency: 'monthly' },
   { path: '/articulos', priority: 0.8, changeFrequency: 'weekly' },

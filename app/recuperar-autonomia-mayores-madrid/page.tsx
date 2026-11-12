@@ -24,7 +24,7 @@ const jsonLd = buildServiceSchema({
   name: 'Recuperación de autonomía funcional a domicilio',
   description: DESCRIPTION,
   path: '/recuperar-autonomia-mayores-madrid',
-  areaServed: ['Madrid', 'Comunidad de Madrid'],
+  areaServed: ['Madrid capital'],
 });
 
 export default function Page() {

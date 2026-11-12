@@ -12,7 +12,7 @@ interface BreadcrumbItem {
  * Uso:
  *   <BreadcrumbSchema items={[
  *     { name: 'Inicio', url: 'https://anteasalud.com' },
- *     { name: 'Getafe', url: 'https://anteasalud.com/ejercicio-mayores-getafe' },
+ *     { name: 'Madrid capital', url: 'https://anteasalud.com/ejercicio-mayores-madrid-capital' },
  *   ]} />
  */
 export function BreadcrumbSchema({ items }: { items: BreadcrumbItem[] }) {

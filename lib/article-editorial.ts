@@ -210,6 +210,11 @@ Consulta también [qué aporta el ejercicio después de una fractura](/articulos
 
 const CONTENT_CORRECTIONS: Array<[string, string]> = [
   [
+    'Fuera de Madrid capital se añaden 10 € por sesión de desplazamiento.',
+    'Actualmente atendemos solo en Madrid capital, en horario de mañana hasta las 13:00 y según disponibilidad.',
+  ],
+
+  [
     'Los factores de riesgo más estudiados son la debilidad muscular del tren inferior, el deterioro del equilibrio, la velocidad de marcha reducida, el miedo a caerse y el uso de ciertos medicamentos [2]. Todos son observables. Y todos responden al ejercicio bien pautado.',
     'Entre los factores de riesgo más estudiados están la debilidad muscular del tren inferior, las alteraciones del equilibrio, una marcha más lenta, el miedo a caerse y determinados medicamentos [2]. Varios pueden observarse en el día a día y algunos mejoran con un ejercicio bien pautado; otros necesitan una revisión sanitaria.',
   ],

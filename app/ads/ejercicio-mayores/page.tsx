@@ -7,7 +7,6 @@ import {
   AdsCaseStory,
   AdsAbout,
   AdsSteps,
-  AdsTestimonials,
   AdsFinalCTA,
 } from "@/components/ads/AdsSections";
 
@@ -91,17 +90,10 @@ export default function Page() {
         </div>
       </section>
 
-      <AdsTestimonials
-        testimonials={[
-          { text: "Viene a casa, puntual, y se nota la formación que tiene. Mi suegra está más fuerte y más animada.", author: "Lucía F., Móstoles" },
-          { text: "Mi madre tenía pánico a caerse. En mes y medio volvió a moverse por casa con seguridad. Un profesional como pocos.", author: "Marta R., Chamartín" },
-          { text: "Tras la operación de mi padre nos guió paso a paso y coordinado con el médico. Recomendadísimo.", author: "Javier M., Getafe" },
-        ]}
-      />
 
       <AdsFinalCTA
         title="Que recupere su vida, desde casa"
-        subtitle="Solo 5 nuevas familias al mes. Solicita la valoración gratuita y empieza esta semana."
+        subtitle="Madrid capital. Sesiones de mañana hasta las 13:00, según disponibilidad. Solicita tu valoración gratuita."
         formCta="Quiero la valoración gratuita →"
         origen={ORIGEN}
       />

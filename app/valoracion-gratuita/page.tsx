@@ -25,7 +25,7 @@ const jsonLd = buildServiceSchema({
   name: 'Valoración funcional gratuita a domicilio',
   description: DESCRIPTION,
   path: '/valoracion-gratuita',
-  areaServed: ['Madrid', 'Comunidad de Madrid'],
+  areaServed: ['Madrid capital'],
 });
 
 
@@ -63,7 +63,7 @@ const faqs = [
   },
   {
     q: '¿En qué zonas hacéis la valoración a domicilio?',
-    a: 'Madrid capital y municipios de la Comunidad de Madrid, según disponibilidad. La primera valoración es gratuita. Para las sesiones de ejercicio posteriores, fuera de Madrid capital se añaden 10 € por sesión de desplazamiento; lo aclaramos antes de contratar.',
+    a: 'Actualmente atendemos solo en Madrid capital, en horario de mañana hasta las 13:00, según disponibilidad. La primera valoración es gratuita.',
   },
   {
     q: '¿Quién hace la valoración?',

@@ -32,7 +32,11 @@ const csp = [
 
 const nextConfig: NextConfig = {
   async redirects() {
-    return [{ source: '/pacifico', destination: '/ejercicio-mayores-pacifico', permanent: true }];
+    return [
+      { source: '/pacifico', destination: '/ejercicio-mayores-pacifico', permanent: true },
+      { source: '/ejercicio-mayores-getafe', destination: '/', permanent: true },
+      { source: '/ejercicio-mayores-mostoles', destination: '/', permanent: true },
+    ];
   },
   images: {
     formats: ['image/avif', 'image/webp'],

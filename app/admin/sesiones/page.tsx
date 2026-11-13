@@ -415,24 +415,36 @@ export default function SesionesPage() {
         </div>
         <p className="mt-4 text-4xl font-black text-[rgb(0,94,184)]">{formatMoney(totalBilling)}</p>
         <p className="mt-2 text-sm text-muted">Total a cobrar por las sesiones del mes, descontando los créditos anteriores. Incluye clientes inactivos. No indica pagos recibidos.</p>
-        <div className="mt-4 overflow-x-auto">
+        <div className="mt-4 hidden overflow-x-auto sm:block">
           <table className="w-full text-left text-sm">
             <thead><tr className="border-b"><th scope="col" className="py-3 pr-4">Cliente</th><th scope="col" className="p-3 text-right">Sesiones facturables</th><th scope="col" className="p-3 text-right">Crédito anterior</th><th scope="col" className="py-3 pl-4 text-right">A cobrar</th></tr></thead>
             <tbody>{billingRows.filter(row => row.total > 0 || row.credit > 0).map(row => <tr key={row.client.id} className="border-b"><th scope="row" className="py-3 pr-4 font-semibold">{row.client.name}{!row.client.active && ' (inactivo)'}</th><td className="p-3 text-right">{row.billable}</td><td className="p-3 text-right">{formatMoney(row.credit)}</td><td className="py-3 pl-4 text-right font-bold">{formatMoney(row.amount)}</td></tr>)}</tbody>
             <tfoot><tr><th scope="row" colSpan={3} className="py-3">Total de todos los clientes</th><td className="py-3 pl-4 text-right font-black">{formatMoney(totalBilling)}</td></tr></tfoot>
           </table>
         </div>
+        <ul className="mt-4 space-y-3 sm:hidden">
+          {billingRows.filter(row => row.total > 0 || row.credit > 0).map(row => (
+            <li key={row.client.id} className="rounded-xl bg-[rgb(232,237,238)] p-3">
+              <p className="break-words font-bold">{row.client.name}{!row.client.active && ' (inactivo)'}</p>
+              <dl className="mt-2 space-y-1 text-sm">
+                <div className="flex flex-wrap justify-between gap-x-3"><dt>Sesiones facturables</dt><dd>{row.billable}</dd></div>
+                <div className="flex flex-wrap justify-between gap-x-3"><dt>Crédito anterior</dt><dd>{formatMoney(row.credit)}</dd></div>
+                <div className="flex flex-wrap justify-between gap-x-3 font-bold"><dt>A cobrar</dt><dd>{formatMoney(row.amount)}</dd></div>
+              </dl>
+            </li>
+          ))}
+        </ul>
         {!billingRows.some(row => row.total > 0 || row.credit > 0) && <p className="mt-3 text-sm text-muted">No hay sesiones ni créditos para este mes.</p>}
       </section>
 
       {/* Selector de cliente */}
       <div className="bg-white rounded-2xl shadow-md border border-[rgb(200,207,210)] p-4 flex items-start gap-2">
-        <div className="flex-1 flex flex-wrap gap-2">
+        <div className="min-w-0 flex-1 flex flex-wrap gap-2">
           {clients.map((c) => (
             <button
               key={c.id}
               onClick={() => setSelectedClientId(c.id)}
-              className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-semibold text-sm transition ${
+              className={`inline-flex items-center gap-2 max-w-full px-4 py-2.5 rounded-xl font-semibold text-sm transition ${
                 selectedClientId === c.id
                   ? 'text-white shadow-md'
                   : 'bg-[rgb(232,237,238)] text-[rgb(31,41,51)] hover:bg-[rgb(200,207,210)]'
@@ -440,10 +452,10 @@ export default function SesionesPage() {
               style={selectedClientId === c.id ? { backgroundColor: c.color } : {}}
             >
               <span
-                className="w-3 h-3 rounded-full"
+                className="w-3 h-3 shrink-0 rounded-full"
                 style={{ backgroundColor: selectedClientId === c.id ? 'white' : c.color }}
               />
-              {c.name}
+              <span className="min-w-0 break-words">{c.name}</span>
             </button>
           ))}
         </div>

@@ -43,6 +43,7 @@ export default function AdminSidebar() {
 
   return (
     <>
+      <div aria-hidden="true" className="lg:hidden fixed inset-x-0 top-0 z-30 h-[4.5rem] border-b border-primary/10 bg-[#fbfcf8]" />
       {/* Botón móvil */}
       <button
         ref={toggleRef}

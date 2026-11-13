@@ -5,7 +5,7 @@ export default function AdminGuionLayout({ children }: { children: ReactNode }) 
   return (
     <div className="min-h-screen bg-[rgb(232,237,238)] flex">
       <AdminSidebar />
-      <main className="flex-1 lg:ml-64 p-6 md:p-10">{children}</main>
+      <main className="min-w-0 flex-1 px-4 pb-6 pt-20 sm:px-6 sm:pb-10 lg:ml-64 lg:p-10">{children}</main>
     </div>
   );
 }

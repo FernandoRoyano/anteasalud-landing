@@ -19,6 +19,7 @@ import {
   type Session,
   SESSION_STATUS_COLORS,
 } from '@/lib/types';
+import { getMonthlyBilling } from '@/lib/session-billing';
 import SessionReminders from '@/components/admin/SessionReminders';
 
 const DAY_LABELS = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
@@ -65,6 +66,8 @@ export default function SesionesPage() {
   const [selectedSession, setSelectedSession] = useState<Session | null>(null);
   const [addingDate, setAddingDate] = useState<string | null>(null);
 
+  const [allClients, setAllClients] = useState<Client[]>([]);
+
   const loadAll = useCallback(async () => {
     try {
       const responses = await Promise.all([
@@ -83,6 +86,7 @@ export default function SesionesPage() {
       }
       const activeClients = cRes.clients.filter((c: Client) => c.active);
       setClients(activeClients);
+      setAllClients(cRes.clients);
       setSessions(sRes.sessions.filter((s: Session) => s.id));
       setSelectedClientId((current) => activeClients.some((c: Client) => c.id === current)
         ? current : activeClients[0]?.id ?? null);
@@ -127,42 +131,21 @@ export default function SesionesPage() {
   );
 
   // Estadísticas del mes para el cliente seleccionado
-  const monthStats = useMemo(() => {
-    const ms = clientSessions.filter((s) => {
-      const d = new Date(s.date);
-      return d.getMonth() === month && d.getFullYear() === year;
-    });
-
-    // Sesiones falladas del mes anterior (sin recuperar) → crédito a descontar
-    const prevMonthDate = new Date(year, month - 1, 1);
-    const prevMonth = prevMonthDate.getMonth();
-    const prevYear = prevMonthDate.getFullYear();
-    const prevMissed = clientSessions.filter((s) => {
-      const d = new Date(s.date);
-      return (
-        d.getMonth() === prevMonth &&
-        d.getFullYear() === prevYear &&
-        s.status === 'missed' &&
-        s.isPending
-      );
-    });
-
-    return {
-      total: ms.length,
-      completed: ms.filter((s) => s.status === 'completed').length,
-      scheduled: ms.filter((s) => s.status === 'scheduled').length,
-      missed: ms.filter((s) => s.status === 'missed').length,
-      prevMonthMissed: prevMissed.length,
-    };
-  }, [clientSessions, month, year]);
-
+  const monthStats = useMemo(
+    () => getMonthlyBilling(clientSessions, month, year, selectedClient?.pricePerSession || 0),
+    [clientSessions, month, year, selectedClient]
+  );
+  const billingRows = useMemo(() => allClients.map(client => ({
+    client,
+    ...getMonthlyBilling(sessions.filter(session => session.clientId === client.id), month, year, client.pricePerSession),
+  })), [allClients, sessions, month, year]);
+  const totalBilling = billingRows.reduce((sum, row) => sum + row.amount, 0);
+  const formatMoney = (value: number) => value.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' });
   const price = selectedClient?.pricePerSession || 0;
-  // Modelo de compromiso: cuentan TODAS las sesiones del mes (realizadas + programadas + falladas).
-  // Las falladas del mes anterior (sin recuperar) se descuentan como crédito.
-  const sesionesDelMes = monthStats.completed + monthStats.scheduled + monthStats.missed;
+  const sesionesDelMes = monthStats.billable;
   const ingresoBruto = sesionesDelMes * price;
-  const credito = monthStats.prevMonthMissed * price;
-  const totalACobrar = Math.max(0, ingresoBruto - credito);
+  const credito = monthStats.credit;
+  const totalACobrar = monthStats.amount;
 
   const prevMonth = () => {
     if (month === 0) {
@@ -377,7 +360,7 @@ export default function SesionesPage() {
     );
   }
 
-  if (clients.length === 0) {
+  if (allClients.length === 0) {
     if (loadError) {
       return (
         <div className="max-w-5xl mx-auto space-y-4">
@@ -423,6 +406,24 @@ export default function SesionesPage() {
 
       {/* Recordatorios de sesión */}
       <SessionReminders clients={clients} sessions={sessions} />
+
+      <section aria-labelledby="billing-title" className="rounded-2xl border border-[rgb(200,207,210)] bg-white p-4 md:p-6 shadow-md">
+        <div className="flex items-center justify-between gap-3">
+          <button onClick={prevMonth} aria-label="Mes anterior" className="min-h-11 min-w-11 rounded-lg bg-[rgb(232,237,238)]"><ChevronLeft className="mx-auto w-5 h-5" /></button>
+          <h2 id="billing-title" className="text-center text-lg font-black">Facturación total - {MONTH_LABELS[month]} {year}</h2>
+          <button onClick={nextMonth} aria-label="Mes siguiente" className="min-h-11 min-w-11 rounded-lg bg-[rgb(232,237,238)]"><ChevronRight className="mx-auto w-5 h-5" /></button>
+        </div>
+        <p className="mt-4 text-4xl font-black text-[rgb(0,94,184)]">{formatMoney(totalBilling)}</p>
+        <p className="mt-2 text-sm text-muted">Total a cobrar por las sesiones del mes, descontando los créditos anteriores. Incluye clientes inactivos. No indica pagos recibidos.</p>
+        <div className="mt-4 overflow-x-auto">
+          <table className="w-full text-left text-sm">
+            <thead><tr className="border-b"><th scope="col" className="py-3 pr-4">Cliente</th><th scope="col" className="p-3 text-right">Sesiones facturables</th><th scope="col" className="p-3 text-right">Crédito anterior</th><th scope="col" className="py-3 pl-4 text-right">A cobrar</th></tr></thead>
+            <tbody>{billingRows.filter(row => row.total > 0 || row.credit > 0).map(row => <tr key={row.client.id} className="border-b"><th scope="row" className="py-3 pr-4 font-semibold">{row.client.name}{!row.client.active && ' (inactivo)'}</th><td className="p-3 text-right">{row.billable}</td><td className="p-3 text-right">{formatMoney(row.credit)}</td><td className="py-3 pl-4 text-right font-bold">{formatMoney(row.amount)}</td></tr>)}</tbody>
+            <tfoot><tr><th scope="row" colSpan={3} className="py-3">Total de todos los clientes</th><td className="py-3 pl-4 text-right font-black">{formatMoney(totalBilling)}</td></tr></tfoot>
+          </table>
+        </div>
+        {!billingRows.some(row => row.total > 0 || row.credit > 0) && <p className="mt-3 text-sm text-muted">No hay sesiones ni créditos para este mes.</p>}
+      </section>
 
       {/* Selector de cliente */}
       <div className="bg-white rounded-2xl shadow-md border border-[rgb(200,207,210)] p-4 flex items-start gap-2">

@@ -22,7 +22,7 @@ function fixture() {
   const code = ts.transpileModule(fs.readFileSync('app/admin/sesiones/page.tsx', 'utf8'), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022, jsx: ts.JsxEmit.ReactJSX } }).outputText;
   vm.runInNewContext(code, {
     module, exports: module.exports, console: { error() {} },
-    require: name => name === 'react' ? react : name === 'react/jsx-runtime' ? { jsx: () => null, jsxs: () => null } : {},
+    require: name => name === '@/lib/session-billing' ? { getMonthlyBilling: () => ({}) } : name === 'react' ? react : name === 'react/jsx-runtime' ? { jsx: () => null, jsxs: () => null } : {},
     fetch: async url => ({ status: failure || 200, ok: !failure, json: async () => failure ? { error: 'Unavailable' } : url.endsWith('clients') ? { clients } : { sessions } }),
   });
   module.exports.default();

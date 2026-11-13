@@ -89,3 +89,9 @@ clientes activos vencidas, de hoy o en los próximos 7 días. El vencimiento es 
 natural desde la fecha de la última valoración vigente (ajustado al final de mes).
 Corregir un informe conserva su fecha y no reinicia el plazo. No se agrupa por nombre.
 Los informes antiguos se vinculan manualmente al editarlos; no se migran datos solos.
+
+Comparación: «Ver evolución» permite consultar mediciones vinculadas al mismo cliente.
+Agrupa las correcciones por informe original y muestra solo la última versión, incluso
+si existen ramas de correcciones. Una nueva valoración sin revisionOf añade una medición.
+No se agrupa por nombre. Los datos incompletos, interrumpidos o sin idoneidad revisada
+no generan una variación numérica; la interpretación de las diferencias es profesional.

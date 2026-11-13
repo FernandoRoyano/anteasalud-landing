@@ -70,3 +70,20 @@ test('la API de revisiones exige sesión y no devuelve datos clínicos', async (
   assert.equal(response.body.followups[0].observations, undefined);
   assert.equal(response.body.followups[0].familyDetails, undefined);
 });
+
+
+test('el historial agrupa correcciones ramificadas y conserva mediciones distintas sin mezclar clientes', () => {
+  const { clientAssessmentHistory } = load('lib/assessment-followups.ts');
+  const base = { id: 'base', clientId: 'a', date: '2026-10-13', createdAt: '2026-10-13' };
+  const oldEdit = { ...base, id: 'edit-old', revisionOf: 'base', createdAt: '2026-10-14' };
+  const newEdit = { ...base, id: 'edit-new', revisionOf: 'base', createdAt: '2026-10-15' };
+  const monthly = { ...base, id: 'monthly', date: '2026-11-13', createdAt: '2026-11-13' };
+  const other = { ...base, id: 'other', clientId: 'b' };
+  const result = clientAssessmentHistory([monthly, oldEdit, other, base, newEdit], 'a');
+  assert.equal(result.length, 2);
+  assert.equal(result[0].id, 'edit-new');
+  assert.equal(result[1].id, 'monthly');
+  assert.equal(clientAssessmentHistory([oldEdit, newEdit, monthly], 'a').length, 2);
+  assert.equal(clientAssessmentHistory([base, { ...newEdit, clientId: 'b' }], 'a').length, 0);
+  assert.equal(clientAssessmentHistory([base, newEdit, { ...newEdit, id: 'edit-latest', revisionOf: 'edit-new', createdAt: '2026-10-16' }], 'a')[0].id, 'edit-latest');
+});

@@ -615,6 +615,11 @@ export async function getSessionsByClient(clientId: string): Promise<Session[]> 
 export async function createSession(
   data: Omit<Session, 'id' | 'row' | 'createdAt' | 'updatedAt'>
 ): Promise<Session> {
+  const existing = (await getAllSessions()).find(
+    (session) => session.clientId === data.clientId && session.date === data.date
+  );
+  if (existing) return existing;
+
   const sheets = getSheetsClient();
   const spreadsheetId = process.env.GOOGLE_SHEET_ID!;
   await ensureSheet(sheets, spreadsheetId, SESIONES_SHEET, SESIONES_HEADERS);
@@ -694,10 +699,8 @@ export async function deleteSession(id: string): Promise<void> {
   const stored = existing.find(({ session }) => session.id === id);
   const session = stored?.session;
   if (!stored || !session || !session.row) {
-    const availableIds = existing.map(({ session }) => session.id);
-    throw new Error(
-      `Sesión ${id} no encontrada en el sheet (hay ${availableIds.length} sesiones guardadas)`
-    );
+    // Una petición repetida sobre una sesión ya eliminada también está resuelta.
+    return;
   }
 
   // Limpiar la fila (dejarla vacía). No borro la fila físicamente para no mover índices.

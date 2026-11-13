@@ -49,5 +49,16 @@ test('reads displaced historical sessions and updates/deletes their own cells on
   assert.equal(writes.at(-1).range, 'Sesiones!I3:R3');
   assert.deepEqual(rows[0], untouched);
   assert.equal((await api.getAllSessions()).length, 1);
+  await api.deleteSession('sess_shifted');
+  assert.deepEqual(rows[0], untouched);
   await assert.rejects(api.updateSession('missing', { status: 'completed' }));
+});
+
+test('repeated booking returns existing normal or displaced session without appending', async () => {
+  const { api, rows } = fixture();
+  for (const [date, id] of [['2026-11-13', 'sess_normal'], ['2026-11-14', 'sess_shifted']]) {
+    const result = await api.createSession({ clientId: 'client', date, status: 'scheduled', isPending: false });
+    assert.equal(result.id, id);
+  }
+  assert.equal(rows.length, 3);
 });

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useMemo } from 'react';
+import { useCallback, useEffect, useState, useMemo } from 'react';
 import {
   Loader2,
   ChevronLeft,
@@ -58,25 +58,42 @@ export default function SesionesPage() {
   const [clients, setClients] = useState<Client[]>([]);
   const [sessions, setSessions] = useState<Session[]>([]);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState('');
   const [selectedClientId, setSelectedClientId] = useState<string | null>(null);
   const [month, setMonth] = useState(new Date().getMonth());
   const [year, setYear] = useState(new Date().getFullYear());
   const [selectedSession, setSelectedSession] = useState<Session | null>(null);
   const [addingDate, setAddingDate] = useState<string | null>(null);
 
-  const loadAll = async () => {
-    const [cRes, sRes] = await Promise.all([
-      fetch('/api/admin/clients').then((r) => r.json()),
-      fetch('/api/admin/sessions').then((r) => r.json()),
-    ]);
-    const activeClients = (cRes.clients || []).filter((c: Client) => c.active);
-    setClients(activeClients);
-    setSessions((sRes.sessions || []).filter((s: Session) => s.id));
-    if (activeClients.length > 0 && !selectedClientId) {
-      setSelectedClientId(activeClients[0].id);
+  const loadAll = useCallback(async () => {
+    try {
+      const responses = await Promise.all([
+        fetch('/api/admin/clients', { cache: 'no-store' }),
+        fetch('/api/admin/sessions', { cache: 'no-store' }),
+      ]);
+      if (responses.some((response) => response.status === 401)) {
+        throw new Error('Tu sesión ha caducado. Vuelve a iniciar sesión en el panel.');
+      }
+      if (responses.some((response) => !response.ok)) {
+        throw new Error('No se han podido cargar los datos. Reintenta en unos segundos.');
+      }
+      const [cRes, sRes] = await Promise.all(responses.map((response) => response.json()));
+      if (!Array.isArray(cRes.clients) || !Array.isArray(sRes.sessions)) {
+        throw new Error('La respuesta del servidor no contiene los datos esperados. Reintenta la carga.');
+      }
+      const activeClients = cRes.clients.filter((c: Client) => c.active);
+      setClients(activeClients);
+      setSessions(sRes.sessions.filter((s: Session) => s.id));
+      setSelectedClientId((current) => activeClients.some((c: Client) => c.id === current)
+        ? current : activeClients[0]?.id ?? null);
+      setLoadError('');
+    } catch (error) {
+      console.error('[Sesiones:loadAll] No se pudieron cargar los datos', error);
+      setLoadError(error instanceof Error ? error.message : 'No se han podido cargar los datos. Reintenta en unos segundos.');
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
-  };
+  }, []);
 
   useEffect(() => {
     loadAll();
@@ -84,8 +101,7 @@ export default function SesionesPage() {
     const onFocus = () => loadAll();
     window.addEventListener('focus', onFocus);
     return () => window.removeEventListener('focus', onFocus);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [loadAll]);
 
   // Mantener selectedSession sincronizado con la lista de sesiones.
   // Cuando una sesión optimista (temp_xxx) se reemplaza con la real tras
@@ -362,6 +378,16 @@ export default function SesionesPage() {
   }
 
   if (clients.length === 0) {
+    if (loadError) {
+      return (
+        <div className="max-w-5xl mx-auto space-y-4">
+          <h1 className="text-3xl font-black">Sesiones</h1>
+          <p role="alert">{loadError}</p>
+          <button onClick={loadAll} className="px-5 py-3 rounded-xl bg-primary text-white font-semibold">Reintentar carga</button>
+          <a href="/admin" className="block underline">Ir al acceso del panel</a>
+        </div>
+      );
+    }
     return (
       <div className="max-w-5xl mx-auto">
         <h1 className="text-3xl md:text-4xl font-black text-[rgb(31,41,51)] mb-6">Sesiones</h1>
@@ -382,6 +408,13 @@ export default function SesionesPage() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6">
+      {loadError && (
+        <div role="alert" className="rounded-xl border border-amber-300 bg-amber-50 p-4 text-amber-950">
+          <p>{loadError} Se mantienen los últimos datos cargados.</p>
+          <button onClick={loadAll} className="mt-2 underline font-semibold">Reintentar carga</button>
+          <a href="/admin" className="ml-4 underline">Ir al acceso del panel</a>
+        </div>
+      )}
       {/* Header */}
       <div>
         <h1 className="text-3xl md:text-4xl font-black text-[rgb(31,41,51)]">Sesiones</h1>

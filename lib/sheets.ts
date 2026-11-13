@@ -1,3 +1,4 @@
+import { paymentInputSchema, PaymentConflictError, type Payment, type PaymentInput } from '@/lib/payments';
 import { cache } from 'react';
 import { createHash, randomUUID } from 'node:crypto';
 import type { LeadUpdates } from '@/lib/types';
@@ -897,4 +898,69 @@ export async function deleteArticle(id: string): Promise<void> {
     valueInputOption: 'RAW',
     requestBody: { values: [['', '', '', '', '', '', '', '', '', '', '']] },
   });
+}
+
+// Historial de cobros: las anulaciones conservan los datos originales.
+const PAYMENTS_SHEET = 'Cobros';
+const PAYMENT_HEADERS = ['id', 'clientId', 'billingMonth', 'amountCents', 'paidOn', 'method', 'createdAt', 'voidedAt'];
+
+async function getPaymentRecords() {
+  const sheets = getSheetsClient();
+  const spreadsheetId = process.env.GOOGLE_SHEET_ID!;
+  await ensureSheet(sheets, spreadsheetId, PAYMENTS_SHEET, PAYMENT_HEADERS);
+  const headers = await sheets.spreadsheets.values.get({ spreadsheetId, range: `${PAYMENTS_SHEET}!A1:H1` });
+  if (PAYMENT_HEADERS.some((header, index) => headers.data.values?.[0]?.[index] !== header)) {
+    throw new Error('[Sheets:getPaymentRecords] Las columnas de Cobros no coinciden con el formato esperado');
+  }
+  const response = await sheets.spreadsheets.values.get({ spreadsheetId, range: `${PAYMENTS_SHEET}!A2:H` });
+  return (response.data.values || []).flatMap((row, index) => {
+    if (row.every(value => value === '' || value == null)) return [];
+    const input = paymentInputSchema.parse({ id: row[0], clientId: row[1], billingMonth: row[2], amountCents: Number(row[3]), paidOn: row[4], method: row[5] });
+    return [{ ...input, createdAt: String(row[6] || ''), voidedAt: String(row[7] || ''), row: index + 2 }];
+  });
+}
+
+export async function getPayments(billingMonth: string): Promise<Payment[]> {
+  const records = await getPaymentRecords();
+  const unique = new Map<string, Payment>();
+  for (const { row: _row, ...record } of records) {
+    void _row;
+    if (record.billingMonth !== billingMonth) continue;
+    const existing = unique.get(record.id);
+    if (!existing || record.voidedAt) unique.set(record.id, record);
+  }
+  return [...unique.values()];
+}
+
+export async function recordPayment(input: PaymentInput): Promise<Payment> {
+  const records = await getPaymentRecords();
+  const existing = records.find(record => record.id === input.id && record.voidedAt) || records.find(record => record.id === input.id);
+  if (existing) {
+    if (Object.keys(input).some(key => input[key as keyof PaymentInput] !== existing[key as keyof PaymentInput])) {
+      throw new PaymentConflictError('[Sheets:recordPayment] El identificador pertenece a otro cobro');
+    }
+    const { row: _row, ...payment } = existing;
+    void _row;
+    return payment;
+  }
+  const payment: Payment = { ...input, createdAt: new Date().toISOString(), voidedAt: '' };
+  await getSheetsClient().spreadsheets.values.append({
+    spreadsheetId: process.env.GOOGLE_SHEET_ID!, range: `${PAYMENTS_SHEET}!A:A`,
+    valueInputOption: 'RAW', insertDataOption: 'INSERT_ROWS',
+    requestBody: { values: [[payment.id, payment.clientId, payment.billingMonth, payment.amountCents, payment.paidOn, payment.method, payment.createdAt, '']] },
+  });
+  return payment;
+}
+
+export async function voidPayment(id: string): Promise<boolean> {
+  const records = (await getPaymentRecords()).filter(record => record.id === id);
+  if (!records.length) return false;
+  const voidedAt = records.find(record => record.voidedAt)?.voidedAt || new Date().toISOString();
+  for (const record of records.filter(record => !record.voidedAt)) {
+    await getSheetsClient().spreadsheets.values.update({
+      spreadsheetId: process.env.GOOGLE_SHEET_ID!, range: `${PAYMENTS_SHEET}!H${record.row}`,
+      valueInputOption: 'RAW', requestBody: { values: [[voidedAt]] },
+    });
+  }
+  return true;
 }

@@ -20,6 +20,7 @@ import {
   SESSION_STATUS_COLORS,
 } from '@/lib/types';
 import { getMonthlyBilling } from '@/lib/session-billing';
+import MonthlyPayments from '@/components/admin/MonthlyPayments';
 import SessionReminders from '@/components/admin/SessionReminders';
 
 const DAY_LABELS = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
@@ -436,6 +437,12 @@ export default function SesionesPage() {
         </ul>
         {!billingRows.some(row => row.total > 0 || row.credit > 0) && <p className="mt-3 text-sm text-muted">No hay sesiones ni créditos para este mes.</p>}
       </section>
+
+      <MonthlyPayments
+        key={`${year}-${month}`}
+        rows={billingRows}
+        billingMonth={`${year}-${String(month + 1).padStart(2, '0')}`}
+      />
 
       {/* Selector de cliente */}
       <div className="bg-white rounded-2xl shadow-md border border-[rgb(200,207,210)] p-4 flex items-start gap-2">

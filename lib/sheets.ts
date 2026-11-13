@@ -569,31 +569,42 @@ export async function deleteClient(id: string): Promise<void> {
 // SESIONES
 // =============================================================================
 
-export async function getAllSessions(): Promise<Session[]> {
+async function getStoredSessions(): Promise<{ session: Session; range: string }[]> {
   const sheets = getSheetsClient();
   const spreadsheetId = process.env.GOOGLE_SHEET_ID!;
   await ensureSheet(sheets, spreadsheetId, SESIONES_SHEET, SESIONES_HEADERS);
 
   const response = await sheets.spreadsheets.values.get({
     spreadsheetId,
-    range: `${SESIONES_SHEET}!A2:J`,
+    range: `${SESIONES_SHEET}!A2:R`,
   });
 
   const rows = response.data.values || [];
 
-  return rows.map((row, index) => ({
-    row: index + 2,
-    id: String(row[0] ?? '').trim(),
-    clientId: String(row[1] ?? '').trim(),
-    date: String(row[2] ?? '').trim(),
-    status: (String(row[3] ?? 'scheduled').trim() as SessionStatus) || 'scheduled',
-    isPending: String(row[4] ?? '').toUpperCase() === 'TRUE',
-    missedReason: String(row[5] ?? ''),
-    linkedToSessionId: String(row[6] ?? '').trim(),
-    notes: String(row[7] ?? ''),
-    createdAt: String(row[8] ?? ''),
-    updatedAt: String(row[9] ?? ''),
+  // El append histórico podía detectar I:J como tabla y escribir en I:R.
+  // Leemos ambos formatos sin mover ni sobrescribir los datos existentes.
+  return rows.flatMap((storedRow, index) => [0, 8].flatMap((offset) => {
+    const row = storedRow.slice(offset, offset + 10);
+    const id = String(row[0] ?? '').trim();
+    if (!id || (offset === 8 && !id.startsWith('sess_'))) return [];
+    return [{ range: `${SESIONES_SHEET}!${offset === 0 ? 'A' : 'I'}${index + 2}:${offset === 0 ? 'J' : 'R'}${index + 2}`, session: {
+      row: index + 2,
+      id: String(row[0] ?? '').trim(),
+      clientId: String(row[1] ?? '').trim(),
+      date: String(row[2] ?? '').trim(),
+      status: (String(row[3] ?? 'scheduled').trim() as SessionStatus) || 'scheduled',
+      isPending: String(row[4] ?? '').toUpperCase() === 'TRUE',
+      missedReason: String(row[5] ?? ''),
+      linkedToSessionId: String(row[6] ?? '').trim(),
+      notes: String(row[7] ?? ''),
+      createdAt: String(row[8] ?? ''),
+      updatedAt: String(row[9] ?? ''),
+    } }];
   }));
+}
+
+export async function getAllSessions(): Promise<Session[]> {
+  return (await getStoredSessions()).map(({ session }) => session);
 }
 
 export async function getSessionsByClient(clientId: string): Promise<Session[]> {
@@ -613,7 +624,7 @@ export async function createSession(
 
   const result = await sheets.spreadsheets.values.append({
     spreadsheetId,
-    range: `${SESIONES_SHEET}!A:J`,
+    range: `${SESIONES_SHEET}!A:A`,
     valueInputOption: 'RAW',
     insertDataOption: 'INSERT_ROWS',
     requestBody: {
@@ -643,9 +654,10 @@ export async function updateSession(id: string, updates: Partial<Session>): Prom
   const sheets = getSheetsClient();
   const spreadsheetId = process.env.GOOGLE_SHEET_ID!;
 
-  const existing = await getAllSessions();
-  const session = existing.find((s) => s.id === id);
-  if (!session || !session.row) {
+  const existing = await getStoredSessions();
+  const stored = existing.find(({ session }) => session.id === id);
+  const session = stored?.session;
+  if (!stored || !session || !session.row) {
     throw new Error(`[sheets:updateSession] Sesión ${id} no encontrada`);
   }
 
@@ -653,7 +665,7 @@ export async function updateSession(id: string, updates: Partial<Session>): Prom
 
   await sheets.spreadsheets.values.update({
     spreadsheetId,
-    range: `${SESIONES_SHEET}!A${session.row}:J${session.row}`,
+    range: stored.range,
     valueInputOption: 'RAW',
     requestBody: {
       values: [
@@ -678,10 +690,11 @@ export async function deleteSession(id: string): Promise<void> {
   const sheets = getSheetsClient();
   const spreadsheetId = process.env.GOOGLE_SHEET_ID!;
 
-  const existing = await getAllSessions();
-  const session = existing.find((s) => s.id === id);
-  if (!session || !session.row) {
-    const availableIds = existing.map((s) => s.id).filter(Boolean);
+  const existing = await getStoredSessions();
+  const stored = existing.find(({ session }) => session.id === id);
+  const session = stored?.session;
+  if (!stored || !session || !session.row) {
+    const availableIds = existing.map(({ session }) => session.id);
     throw new Error(
       `Sesión ${id} no encontrada en el sheet (hay ${availableIds.length} sesiones guardadas)`
     );
@@ -690,7 +703,7 @@ export async function deleteSession(id: string): Promise<void> {
   // Limpiar la fila (dejarla vacía). No borro la fila físicamente para no mover índices.
   await sheets.spreadsheets.values.update({
     spreadsheetId,
-    range: `${SESIONES_SHEET}!A${session.row}:J${session.row}`,
+    range: stored.range,
     valueInputOption: 'RAW',
     requestBody: {
       values: [['', '', '', '', '', '', '', '', '', '']],

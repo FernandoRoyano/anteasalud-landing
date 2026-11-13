@@ -54,10 +54,12 @@ const incluye = [
 ];
 
 const faqs = [
+  { q: '¿Cómo se organizan los festivos y las altas a mitad de mes?', a: 'Los festivos se reprograman para otro día o, a petición del cliente, no se incluyen en el calendario ni en el importe del mes. Si empezáis a mitad de mes, se pagan solo las sesiones previstas desde la incorporación.' },
+  { q: '¿Qué ocurre si cancelo una sesión ya pagada?', a: 'Si una sesión ya pagada se cancela con el aviso acordado o por una emergencia ajena a la persona, como una enfermedad o un ingreso hospitalario, queda como saldo pendiente y se descuenta del pago del mes siguiente. Como alternativa, podemos acordar recuperarla otro día de la semana si hay disponibilidad del profesional y del cliente.' },
   { q: '¿Cuándo se pagan las sesiones?', a: 'El pago se realiza a principio de mes, por las sesiones previstas para ese mes. El importe mensual depende del calendario de sesiones acordado. La primera valoración es gratuita.' },
   {
     q: '¿Cómo puedo cambiar o cancelar una sesión?',
-    a: 'Avísanos el día anterior, con un mínimo de 12 horas de antelación y, si es posible, 24. Si surge una urgencia o tu familiar se encuentra mal, avísanos cuanto antes. Las cancelaciones con menos de 12 horas y su posible cobro se valoran caso por caso.',
+    a: 'Avísanos el día anterior, con un mínimo de 12 horas de antelación y, si es posible, 24. Si surge una emergencia ajena a la persona, como una enfermedad o un ingreso hospitalario, avísanos cuanto antes. Las cancelaciones fuera de plazo sin causa de emergencia y su posible cobro se valoran caso por caso.',
   },
   {
     q: '¿Es realmente gratis y sin compromiso?',

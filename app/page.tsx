@@ -38,8 +38,10 @@ const steps = [
 ] as const;
 
 const faqs = [
+  ['¿Cómo se organizan los festivos y las altas a mitad de mes?', 'Los festivos se reprograman para otro día o, a petición del cliente, no se incluyen en el calendario ni en el importe del mes. Si empezáis a mitad de mes, se pagan solo las sesiones previstas desde la incorporación.'],
+  ['¿Qué ocurre si cancelo una sesión ya pagada?', 'Si una sesión ya pagada se cancela con el aviso acordado o por una emergencia ajena a la persona, como una enfermedad o un ingreso hospitalario, queda como saldo pendiente y se descuenta del pago del mes siguiente. Como alternativa, podemos acordar recuperarla otro día de la semana si hay disponibilidad del profesional y del cliente.'],
   ['¿Cuándo se pagan las sesiones?', 'El pago se realiza a principio de mes, por las sesiones previstas para ese mes. El importe mensual depende del calendario de sesiones acordado. La primera valoración es gratuita.'],
-  ['¿Cómo puedo cambiar o cancelar una sesión?', 'Avísanos el día anterior, con un mínimo de 12 horas de antelación y, si es posible, 24. Si surge una urgencia o tu familiar se encuentra mal, avísanos cuanto antes. Las cancelaciones con menos de 12 horas y su posible cobro se valoran caso por caso.'],
+  ['¿Cómo puedo cambiar o cancelar una sesión?', 'Avísanos el día anterior, con un mínimo de 12 horas de antelación y, si es posible, 24. Si surge una emergencia ajena a la persona, como una enfermedad o un ingreso hospitalario, avísanos cuanto antes. Las cancelaciones fuera de plazo sin causa de emergencia y su posible cobro se valoran caso por caso.'],
   ['¿Es adecuado si lleva mucho tiempo sin hacer ejercicio?', 'Sí. Empezamos desde su nivel actual, incluso si tiene poca movilidad o necesita apoyo. La primera valoración nos permite ajustar cada ejercicio con seguridad.'],
   ['¿Cuánto dura cada sesión?', 'Las sesiones duran entre 30 y 45 minutos, según lo que tolere cada persona. Para muchas personas, 30 minutos son suficientes. Ajustamos la intensidad, las pausas y la duración para evitar un cansancio excesivo que afecte al resto del día.'],
   ['¿Trabajáis después de una operación?', 'Sí, cuando el equipo médico ha indicado que puede comenzar ejercicio. Nos coordinamos con sus recomendaciones y trabajamos la vuelta progresiva a la actividad.'],

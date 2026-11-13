@@ -40,6 +40,7 @@ export default function LeadForm({
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const [nombre, setNombre] = useState("");
+  const [barrio, setBarrio] = useState("");
   const [telefono, setTelefono] = useState("");
   const [mensaje, setMensaje] = useState("");
   const [consent, setConsent] = useState(false);
@@ -58,7 +59,7 @@ export default function LeadForm({
     const lead = {
       nombre,
       telefono,
-      zona: zone,
+      zona: barrio.trim() ? `${zone} - ${barrio.trim()}` : zone,
       procedencia: origen.replace(/\s*\([^)]*\)$/, ""),
       formulario: "Contacto",
       interes: "Valoración gratuita",
@@ -75,6 +76,7 @@ export default function LeadForm({
       if (!(await res.clone().json()).duplicate) trackLeadConversion();
       setStatus("success");
       setNombre("");
+      setBarrio("");
       setTelefono("");
       setMensaje("");
       setConsent(false);
@@ -173,6 +175,8 @@ export default function LeadForm({
           />
         </div>
       )}
+
+      <div><label htmlFor={`${uid}-barrio`} className="block text-base font-semibold text-[#1f2933] mb-1.5">Barrio o código postal de la persona <span className="font-normal text-muted">(opcional)</span></label><input id={`${uid}-barrio`} type="text" maxLength={80} value={barrio} onChange={event => setBarrio(event.target.value)} placeholder="Ej.: Pacífico o 28007" className={leadInputClass} disabled={sending} /><p className="mt-2 text-sm text-muted">Nos ayuda a comprobar disponibilidad y organizar las visitas en Madrid capital. No hace falta la dirección completa.</p></div>
 
       <HoneypotField value={website} onChange={setWebsite} />
       <ConsentCheckbox id={`${uid}-consent`} checked={consent} onChange={setConsent} disabled={sending} />

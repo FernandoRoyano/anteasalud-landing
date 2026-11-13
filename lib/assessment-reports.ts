@@ -5,6 +5,7 @@ import { ASSESSMENT_VERSION, canExportAssessment, evaluateAssessment } from '@/l
 export const assessmentReportSchema = z.object({
   id: z.uuid(),
   revisionOf: z.uuid().optional(),
+  clientId: z.string().trim().min(1).max(64).optional(),
   reference: z.string().trim().min(1).max(100),
   date: z.iso.date(),
   observations: z.string().max(4000),

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { isAuthenticated } from '@/lib/auth';
-import { getAssessmentReports, getAssessmentReport, saveAssessmentReport } from '@/lib/sheets';
+import { getAssessmentReports, getAssessmentReport, getClientById, saveAssessmentReport } from '@/lib/sheets';
 import { assessmentReportSchema } from '@/lib/assessment-reports';
 
 export async function GET() {
@@ -19,6 +19,9 @@ export async function POST(req: NextRequest) {
   const parsed = assessmentReportSchema.safeParse(await req.json().catch(() => null));
   if (!parsed.success) return NextResponse.json({ error: 'Completa y revisa los datos antes de guardar el informe' }, { status: 400 });
   try {
+    if (parsed.data.clientId && !(await getClientById(parsed.data.clientId))) {
+      return NextResponse.json({ error: 'El cliente seleccionado ya no existe. Revisa la vinculación.' }, { status: 400 });
+    }
     if (parsed.data.revisionOf && (parsed.data.revisionOf === parsed.data.id || !(await getAssessmentReport(parsed.data.revisionOf)))) {
       return NextResponse.json({ error: 'La valoración original no existe o no es válida' }, { status: 400 });
     }

@@ -81,3 +81,11 @@ Ejemplo público: la portada y la página de valoración enlazan al PDF de demos
 en public/ejemplos/. Se genera con node scripts/generate-assessment-example.mjs a partir
 de lib/assessment-example.ts, exclusivamente con datos ficticios y sin consultar ni guardar
 informes de clientes. Cada página del PDF indica su carácter de ejemplo.
+
+Seguimiento mensual: cada valoración puede vincularse explícitamente al ID de un cliente
+del panel. Es opcional para mantener compatibilidad. El servidor valida la existencia
+del cliente y el ID queda cifrado con el informe. El historial muestra revisiones de
+clientes activos vencidas, de hoy o en los próximos 7 días. El vencimiento es un mes
+natural desde la fecha de la última valoración vigente (ajustado al final de mes).
+Corregir un informe conserva su fecha y no reinicia el plazo. No se agrupa por nombre.
+Los informes antiguos se vinculan manualmente al editarlos; no se migran datos solos.

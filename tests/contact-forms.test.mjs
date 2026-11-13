@@ -63,7 +63,9 @@ for (const file of ['components/LeadForm.tsx', 'components/ContactForm.tsx']) {
     const tree = form.render();
     find(tree, node => node.type === 'input' && node.props.autoComplete === 'name').props.onChange({ target: { value: 'Persona ficticia' } });
     find(tree, node => node.type === 'input' && node.props.type === 'tel').props.onChange({ target: { value: '600000000' } });
+    find(tree, node => node.type === 'input' && node.props.id === 'test-form-barrio').props.onChange({ target: { value: '28007' } });
     await form.render().props.onSubmit({ preventDefault() {} });
+    assert.ok(form.submissions[0].lead.zona.includes('28007'));
     assert.equal(form.submissions.length, 1);
     assert.equal(form.submissions[0].lead.nombre, 'Persona ficticia');
     assert.equal(form.submissions[0].lead.telefono, '600000000');

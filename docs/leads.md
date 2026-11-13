@@ -98,3 +98,7 @@ confirmación sin abrir WhatsApp automáticamente. El enlace opcional posterior 
 un mensaje genérico, sin copiar datos personales. El asistente explícito de WhatsApp
 conserva su funcionamiento. El evento de conversión se mantiene tras guardado correcto,
 excluyendo duplicados.
+
+Los formularios y el asistente de WhatsApp permiten indicar barrio o código postal
+opcional. Se conserva en el campo zona existente (Madrid capital - barrio/CP),
+sin nueva columna ni migración de datos. No se solicita la dirección completa.

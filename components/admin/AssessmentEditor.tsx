@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import AssessmentClientPicker from '@/components/admin/AssessmentClientPicker';
 import { getAssessmentReportFilename } from '@/lib/report-filename';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -15,7 +16,7 @@ const initialAssessment: AssessmentInput = { age: null, scores: [null, null, nul
 
 const steps = ['Preparación', 'Equilibrio', 'Marcha', 'Silla', 'Caídas', 'Informe'];
 
-export default function AssessmentEditor({ initialReport }: { initialReport?: AssessmentReport }) {
+export default function AssessmentEditor({ initialReport, initialClient }: { initialReport?: AssessmentReport; initialClient?: { id: string; name: string } }) {
   const router = useRouter();
   const [sessionReview, setSessionReview] = useState(initialReport?.sessionReview ?? '');
   const [saving, setSaving] = useState(false);
@@ -30,7 +31,8 @@ export default function AssessmentEditor({ initialReport }: { initialReport?: As
     previousStep.current = step;
   }, [step]);
   const [assessment, setAssessment] = useState<AssessmentInput>(initialReport?.assessment ?? initialAssessment);
-  const [reference, setReference] = useState(initialReport?.reference ?? '');
+  const [reference, setReference] = useState(initialReport?.reference ?? initialClient?.name ?? '');
+  const [clientId, setClientId] = useState(initialReport?.clientId ?? initialClient?.id ?? '');
   const [familyDetails, setFamilyDetails] = useState(initialReport?.familyDetails ?? '');
   const [date, setDate] = useState(initialReport?.date ?? '');
   useEffect(() => {
@@ -50,7 +52,7 @@ export default function AssessmentEditor({ initialReport }: { initialReport?: As
     if (!canPrint || saving) return;
     setSaving(true);
     setSaveError('');
-    const payload = { ...(initialReport ? { revisionOf: initialReport.id } : {}), assessment, reference, date, familyDetails, observations, sessionReview, proposal, reviewed };
+    const payload = { ...(clientId ? { clientId } : {}), ...(initialReport ? { revisionOf: initialReport.id } : {}), assessment, reference, date, familyDetails, observations, sessionReview, proposal, reviewed };
     const content = JSON.stringify(payload);
     if (savedAttempt.current.content !== content) savedAttempt.current = { content, id: crypto.randomUUID() };
     try {
@@ -103,6 +105,7 @@ export default function AssessmentEditor({ initialReport }: { initialReport?: As
 
         {(step === 0) && (<section className="mt-8 rounded-2xl border border-primary/20 bg-white p-5 sm:p-7">
           <h2 className="font-display text-2xl font-bold">Datos y preparación</h2>
+          <AssessmentClientPicker value={clientId} onChange={(id, name) => { setClientId(id); if (name) setReference(name); setReviewed(false); }} />
           <div className="mt-5 grid gap-5 sm:grid-cols-3">
             <label>Nombre de la persona a valorar<input className={inputClass} placeholder="Nombre y apellidos" maxLength={100} value={reference} onChange={e => { setReference(e.target.value); setReviewed(false); }} autoComplete="off" /></label>
             <label>Fecha<input className={inputClass} type="date" value={date} onChange={e => { setDate(e.target.value); setReviewed(false); }} /></label>

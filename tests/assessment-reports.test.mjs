@@ -263,3 +263,21 @@ test('recorrido de API con datos ficticios: crear, corregir, obtener PDF y borra
   assert.equal((await pdfApi.GET({}, params)).status, 404);
   assert.equal(store.has(payload.id), true);
 });
+
+
+test('la vinculacion requiere un cliente existente y se conserva cifrada sin exigirla a informes antiguos', async () => {
+  let saved;
+  const api = load('app/api/admin/valoraciones/route.ts', {
+    'next/server': { NextResponse: { json: (body, options) => ({ body, status: options?.status || 200 }) } },
+    '@/lib/auth': { isAuthenticated: async () => true },
+    '@/lib/sheets': {
+      getClientById: async id => id === 'client-test' ? { id, name: 'Prueba' } : null,
+      saveAssessmentReport: async input => { saved = reports.createAssessmentReport(input); return saved; },
+    },
+  });
+  assert.equal((await api.POST({ json: async () => ({ ...payload, clientId: 'missing' }) })).status, 400);
+  assert.equal(saved, undefined);
+  assert.equal((await api.POST({ json: async () => ({ ...payload, clientId: 'client-test' }) })).status, 200);
+  assert.equal(reports.decryptAssessmentReport(saved.id, reports.encryptAssessmentReport(saved)).clientId, 'client-test');
+  assert.equal(reports.assessmentReportSchema.safeParse(payload).success, true);
+});

@@ -104,6 +104,7 @@ interface FormData {
   edadCustom: string;
   situacion: string;
   zona: string;
+  barrio: string;
   nombre: string;
   telefono: string;
 }
@@ -121,6 +122,7 @@ function WizardModal({ onClose }: { onClose: () => void }) {
     edadCustom: '',
     situacion: '',
     zona: '',
+    barrio: '',
     nombre: '',
     telefono: '',
   });
@@ -185,7 +187,7 @@ function WizardModal({ onClose }: { onClose: () => void }) {
         : EDADES.find((e) => e.value === data.edad)?.label || data.edad;
     const situacionLabel = SITUACIONES.find((s) => s.value === data.situacion)?.label || data.situacion;
     const zonaObj = ZONAS_MADRID.find((z) => z.value === data.zona);
-    const zonaLabel = zonaObj?.label || data.zona;
+    const zonaLabel = `${zonaObj?.label || data.zona}${data.barrio.trim() ? ` - ${data.barrio.trim()}` : ''}`;
     const recargo = zonaObj?.recargo || 0;
     const precioSesion = PRECIO_SESION + recargo;
     const precioPlan = PRECIO_PLAN_SEMANA + recargo * 2;
@@ -357,6 +359,7 @@ Mi teléfono: ${data.telefono}`;
                   onClick={() => update('zona', opt.value)}
                 />
               ))}
+              <label className="mt-4 block text-base font-semibold">Barrio o código postal (opcional)<input value={data.barrio} onChange={event => update('barrio', event.target.value)} maxLength={80} placeholder="Ej.: Pacífico o 28007" className={leadInputClass} /></label>
               <p className="text-base text-[#4b5563] text-center mt-3">
                 Confirmamos disponibilidad y dirección antes de concertar la visita.
               </p>

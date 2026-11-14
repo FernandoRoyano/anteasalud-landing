@@ -1,14 +1,15 @@
 import { Check } from 'lucide-react';
 
-const PRICE_SESSION = 55;
-const PRICE_PLAN = 90;
+import { SINGLE_SESSION_PRICE as PRICE_SESSION, PLAN_WEEKLY_PRICE as PRICE_PLAN } from '@/lib/public-pricing';
 
 /** Precio visible en el primer pantallazo: las familias quieren saberlo antes de dejar su teléfono */
 export default function PriceLine({
+  compact = false,
   surcharge = 0,
   zoneNote = false,
   className = '',
 }: {
+  compact?: boolean;
   surcharge?: number;
   /** Muestra la cobertura y el horario actuales */
   zoneNote?: boolean;
@@ -31,7 +32,9 @@ export default function PriceLine({
           </li>
         ))}
       </ul>
+      {compact ? <p className="mt-2 text-sm text-[#4a6358]">30–45 minutos por sesión, adaptados a su tolerancia.</p> : (
       <p className="mt-2 text-sm text-[#4a6358]">Sesiones de 30–45 minutos, según su tolerancia. Para muchas personas, 30 minutos son suficientes; ajustamos el trabajo para evitar un cansancio excesivo después.</p>
+      )}
       {zoneNote && surcharge === 0 && (
         <p className="mt-2 text-sm text-[#4a6358]">Solo Madrid capital. Mañanas hasta las 13:00, según disponibilidad.</p>
       )}

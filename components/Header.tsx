@@ -8,7 +8,7 @@ const links = [
   ['Ejercicio a domicilio', '/ejercicio-personas-mayores-madrid'],
   ['Prevención de caídas', '/prevencion-caidas-mayores-madrid'],
   ['Precios', '/#precios'],
-  ['Artículos', '/articulos'],
+  ['Guías para familias', '/guias'],
   ['Quién soy', '/sobre-fernando'],
 ] as const;
 
@@ -65,7 +65,7 @@ export default function Header() {
         </button>
       </div>
       {menuOpen && (
-        <div id="mobile-menu" className="border-t border-[#2d6a4f]/10 bg-[#fbfcf8] px-5 pb-6 xl:hidden">
+        <div id="mobile-menu" className="max-h-[calc(100dvh-5rem)] overflow-y-auto border-t border-[#2d6a4f]/10 bg-[#fbfcf8] px-5 pb-6 xl:hidden">
           <nav className="mx-auto flex max-w-7xl flex-col py-3" aria-label="Menú móvil">
             {links.map(([label, href]) => (
               <Link key={href} href={href} onClick={closeMenu} className="border-b border-[#2d6a4f]/10 py-4 text-lg font-semibold text-[#3b5a4e]">

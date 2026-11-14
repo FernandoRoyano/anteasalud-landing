@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import type { Metadata } from 'next';
 import { FamilyGuideLinks } from '@/components/FamilyGuideLinks';
 import { getPublishedArticles } from '@/lib/sheets';
@@ -19,10 +20,12 @@ export const metadata: Metadata = buildMetadata({
 export const revalidate = 3600;
 
 export default async function ArticulosIndexPage() {
+  let loadFailed = false;
   let articles: Awaited<ReturnType<typeof getPublishedArticles>> = [];
   try {
     articles = await getPublishedArticles();
   } catch (error) {
+    loadFailed = true;
     console.error('[Articulos:index] No se pudieron cargar los artículos:', error);
   }
 
@@ -35,25 +38,13 @@ export default async function ArticulosIndexPage() {
         ]}
       />
 
-      <section className="relative isolate w-full overflow-hidden bg-primary-dark text-white" style={{ paddingTop: 'clamp(7rem, 12vw, 10rem)', paddingBottom: 'clamp(4rem, 8vw, 7rem)' }}>
-        <div className="absolute inset-0 antea-grid opacity-30" aria-hidden="true" />
-        <div className="absolute -right-24 -top-20 size-96 rounded-full bg-accent/20 blur-3xl" aria-hidden="true" />
-        <div className="relative max-w-6xl mx-auto px-5 sm:px-8">
-          <p className="text-fluid-sm font-semibold uppercase tracking-[0.25em] text-accent-light mb-6">Cuaderno ANTEA · Guías para familias</p>
-          <h1
-            className="max-w-4xl font-display font-black tracking-tight leading-[0.98] mb-7 text-balance"
-            style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)' }}
-          >
-            Entender el movimiento<br />
-            <span className="text-accent-light">cambia cómo cuidamos.</span>
-          </h1>
-          <p className="text-fluid-xl text-white/85 leading-relaxed max-w-2xl text-pretty">
-            Ideas prácticas para familias que quieren ayudar con criterio: qué observar, qué puede aportar el ejercicio y cuándo pedir ayuda.
-          </p>
+      <section className="bg-primary-50 px-5 pb-10 pt-28 sm:px-8 sm:pb-14 sm:pt-32">
+        <div className="mx-auto max-w-6xl">
+          <h1 className="max-w-3xl font-display text-[clamp(2rem,4.5vw,3.5rem)] font-bold leading-tight tracking-tight text-primary-dark">Guías y artículos para ayudar a tu familiar.</h1>
+          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted">Encuentra una explicación para lo que habéis notado y orientación para vuestro siguiente paso. Puedes empezar por una situación o buscar un tema concreto.</p>
         </div>
       </section>
-
-      <section className="bg-surface px-5 pt-12 sm:px-8"><div className="mx-auto max-w-6xl"><FamilyGuideLinks /></div></section>
+      <section className="bg-surface px-5 pt-10 sm:px-8"><div className="mx-auto max-w-6xl"><h2 className="mb-5 font-display text-2xl font-bold text-primary-dark">Empieza por vuestra situación</h2><FamilyGuideLinks headingLevel="h3" /></div></section>
 
       {/* Listado */}
       <section className="w-full bg-surface" style={{ paddingTop: 'clamp(3rem, 6vw, 5rem)', paddingBottom: 'clamp(5rem, 10vw, 8rem)' }}>
@@ -61,8 +52,9 @@ export default async function ArticulosIndexPage() {
           {articles.length === 0 ? (
             <div className="text-center py-16">
               <p className="text-fluid-lg text-muted">
-                Pronto publicaremos los primeros artículos.
+                {loadFailed ? 'Ahora no podemos cargar el listado de artículos. Puedes seguir consultando las guías por situación.' : 'Pronto publicaremos los primeros artículos.'}
               </p>
+              {loadFailed && <Link href="/guias" className="mt-4 inline-flex min-h-11 items-center font-semibold text-primary underline underline-offset-4">Consultar guías para familias</Link>}
             </div>
           ) : (
             <ArticlesFilter

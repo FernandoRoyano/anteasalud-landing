@@ -3,42 +3,8 @@
 import { useMemo, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { ARTICLE_CATEGORIES, CATEGORY_START_GUIDES, articleMatchesCategory, articleMatchesSearch, type CategoryId } from '@/lib/article-discovery';
 import { ArrowRight, Calendar, Clock3 } from 'lucide-react';
-
-const ARTICLE_CATEGORIES = [
-  {
-    id: 'caidas',
-    label: 'Caídas y equilibrio',
-    tags: ['prevención caídas', 'equilibrio'],
-  },
-  {
-    id: 'fuerza',
-    label: 'Fuerza y autonomía',
-    tags: ['fuerza', 'autonomía', 'fragilidad', 'sarcopenia', 'movilidad'],
-  },
-  {
-    id: 'valoracion',
-    label: 'Valoración funcional',
-    tags: ['valoración funcional', 'sppb', 'vivifrail'],
-  },
-  {
-    id: 'recuperacion',
-    label: 'Recuperación',
-    tags: ['recuperación', 'readaptación', 'hospitalización', 'cadera', 'fractura', 'post-operatorio', 'fisioterapia'],
-  },
-  {
-    id: 'ejercicio',
-    label: 'Ejercicio adaptado',
-    tags: ['ejercicio mayores', 'entrenamiento domicilio', 'entrenamiento personal', 'mayores madrid'],
-  },
-  {
-    id: 'cognicion',
-    label: 'Salud cognitiva',
-    tags: ['deterioro cognitivo', 'alzheimer'],
-  },
-] as const;
-
-type CategoryId = 'todos' | (typeof ARTICLE_CATEGORIES)[number]['id'];
 
 interface ArticlesFilterProps {
   articles: ArticleListItem[];
@@ -56,20 +22,6 @@ export interface ArticleListItem {
   readingMinutes: number;
 }
 
-function normalizeTag(value: string): string {
-  return value.trim().toLocaleLowerCase('es-ES');
-}
-
-function articleMatchesCategory(article: ArticleListItem, categoryId: CategoryId): boolean {
-  if (categoryId === 'todos') return true;
-
-  const category = ARTICLE_CATEGORIES.find((item) => item.id === categoryId);
-  if (!category) return false;
-
-  const articleTags = new Set(article.tags.map(normalizeTag));
-  return category.tags.some((tag) => articleTags.has(tag));
-}
-
 function formatDate(iso: string): string {
   if (!iso) return '';
   return new Date(iso).toLocaleDateString('es-ES', {
@@ -82,6 +34,8 @@ function formatDate(iso: string): string {
 
 export function ArticlesFilter({ articles }: ArticlesFilterProps) {
   const [activeCategory, setActiveCategory] = useState<CategoryId>('todos');
+  const [query, setQuery] = useState('');
+  const startGuide = CATEGORY_START_GUIDES[activeCategory];
 
   const availableCategories = useMemo(
     () => ARTICLE_CATEGORIES.map((category) => ({
@@ -92,8 +46,8 @@ export function ArticlesFilter({ articles }: ArticlesFilterProps) {
   );
 
   const filteredArticles = useMemo(
-    () => articles.filter((article) => articleMatchesCategory(article, activeCategory)),
-    [activeCategory, articles]
+    () => articles.filter((article) => articleMatchesCategory(article, activeCategory) && articleMatchesSearch(article, query)),
+    [activeCategory, articles, query]
   );
 
   const activeLabel = activeCategory === 'todos'
@@ -105,9 +59,6 @@ export function ArticlesFilter({ articles }: ArticlesFilterProps) {
       <div className="mb-8 sm:mb-10">
         <div className="flex items-end justify-between gap-4 mb-4">
           <div>
-            <p className="text-fluid-sm font-semibold uppercase tracking-[0.18em] text-accent-dark mb-1.5">
-              Explorar por tema
-            </p>
             <h2 className="font-display text-fluid-2xl font-bold text-ink">
               ¿Qué necesitas entender?
             </h2>
@@ -116,6 +67,10 @@ export function ArticlesFilter({ articles }: ArticlesFilterProps) {
             {filteredArticles.length} {filteredArticles.length === 1 ? 'artículo' : 'artículos'}
           </p>
         </div>
+
+        <label className="mb-5 block max-w-2xl text-base font-semibold text-primary-dark" htmlFor="article-search">Busca lo que os preocupa
+          <input id="article-search" type="search" value={query} onChange={event => setQuery(event.target.value)} placeholder="Por ejemplo: silla, caminar, cadera…" className="mt-2 min-h-12 w-full rounded-xl border border-primary/40 bg-white px-4 py-3 font-normal text-primary-dark placeholder:text-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary" />
+        </label>
 
         <div
           className="flex flex-wrap gap-2 pb-2 sm:pb-0"
@@ -156,29 +111,28 @@ export function ArticlesFilter({ articles }: ArticlesFilterProps) {
         </div>
       </div>
 
-      <div className="sr-only" aria-live="polite">
-        Mostrando {filteredArticles.length} resultados para {activeLabel}.
-      </div>
+      <p className="mb-5 text-sm text-muted" role="status">{filteredArticles.length} {filteredArticles.length === 1 ? 'artículo' : 'artículos'}{activeCategory !== 'todos' && ` en ${activeLabel}`}{query.trim() && ` para «${query.trim()}»`}.</p>
+      {startGuide && <aside className="mb-6 border-y border-primary/20 py-5"><p className="text-sm text-muted">Si no sabes qué leer primero</p><Link href={startGuide.href} className="mt-1 inline-flex min-h-11 items-center gap-2 font-semibold text-primary underline underline-offset-4">{startGuide.title}<ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" /></Link></aside>}
+      {filteredArticles.length === 0 && <div className="rounded-xl bg-primary-50 p-6"><h3 className="text-lg font-bold">No encontramos artículos con esa búsqueda.</h3><p className="mt-2 text-muted">Prueba una palabra más general o consulta todos los temas.</p><button onClick={() => { setQuery(''); setActiveCategory('todos'); }} className="mt-3 min-h-11 font-semibold text-primary underline underline-offset-4">Borrar búsqueda y ver todos</button></div>}
 
       <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
         {filteredArticles.map((article, index) => (
           <Link
             key={article.id}
             href={`/articulos/${article.slug}`}
-            className={`group flex flex-col bg-white rounded-[1.75rem] border border-border/80 overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-500 ${index === 0 ? 'md:col-span-2 md:grid md:grid-cols-[1.2fr_1fr]' : ''}`}
+            className="group flex min-w-0 flex-col overflow-hidden rounded-2xl border border-border bg-white transition-colors hover:border-primary/50 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
           >
-            <div className={`relative bg-surface-alt overflow-hidden ${index === 0 ? 'aspect-[16/10] md:aspect-auto md:min-h-[27rem]' : 'aspect-[16/10]'}`}>
+            <div className="relative aspect-[16/9] overflow-hidden bg-surface-alt">
               <Image
                 src={article.ogImage}
                 alt={article.imageAlt}
                 fill
-                sizes={index === 0 ? '(min-width: 768px) 55vw, 100vw' : '(min-width: 768px) 50vw, 100vw'}
+                sizes="(min-width: 768px) 50vw, 100vw"
                 priority={index === 0}
-                className="object-cover group-hover:scale-[1.025] transition-transform duration-700 ease-out"
+                className="object-cover motion-safe:transition-transform motion-safe:duration-300 motion-safe:group-hover:scale-[1.025]"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary-dark/20 via-transparent to-transparent" aria-hidden="true" />
             </div>
-            <div className={`flex flex-col flex-1 ${index === 0 ? 'p-7 sm:p-10 md:justify-center' : 'p-6 sm:p-7'}`}>
+            <div className="flex flex-1 flex-col p-5 sm:p-6">
               {article.tags.length > 0 && (
                 <div className="flex flex-wrap gap-2 mb-3">
                   {article.tags.slice(0, 2).map((tag) => (
@@ -191,7 +145,7 @@ export function ArticlesFilter({ articles }: ArticlesFilterProps) {
                   ))}
                 </div>
               )}
-              <h3 className={`font-display font-bold text-ink leading-[1.12] mb-3 text-balance group-hover:text-primary transition-colors ${index === 0 ? 'text-fluid-3xl' : 'text-fluid-xl'}`}>
+              <h3 className="mb-3 font-display text-fluid-xl font-bold leading-tight text-ink transition-colors group-hover:text-primary">
                 {article.title}
               </h3>
               <p className="text-muted leading-relaxed text-fluid-base mb-4 flex-1">

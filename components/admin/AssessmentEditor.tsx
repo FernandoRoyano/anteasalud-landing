@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import AssessmentClientPicker from '@/components/admin/AssessmentClientPicker';
 import { getAssessmentReportFilename } from '@/lib/report-filename';
-import Image from 'next/image';
+import AssessmentTestVisual from '@/components/admin/AssessmentTestVisual';
 import { useRouter } from 'next/navigation';
 import AssessmentReportView from '@/components/admin/AssessmentReportView';
 import type { AssessmentReport } from '@/lib/assessment-reports';
@@ -119,13 +119,13 @@ export default function AssessmentEditor({ initialReport, initialClient }: { ini
         {(step >= 1 && step <= 3) && (<section className="mt-7 rounded-2xl border border-primary/20 bg-white p-5 sm:p-7">
           <h2 className="font-display text-2xl font-bold">Prueba SPPB</h2>
           <p className="mt-3 text-muted">Introduce la puntuación de cada componente, de 0 a 4, según el protocolo. Deja «Pendiente» si no se ha valorado. Un cero debe corresponder a una puntuación válida del protocolo, no a un dato ausente.</p>
-          <div className="mt-6 space-y-6">{functionalTests.map((test, index) => step === index + 1 ? <fieldset key={test.name} className="border-t border-primary/20 pt-5"><legend className="px-1 font-display text-xl font-bold">{test.name}</legend><p className="mt-2 max-w-3xl text-muted">{test.description}</p><TestVisual index={index} /><details className="mt-4 rounded-xl border border-primary/20 bg-primary-50 p-4"><summary className="min-h-11 cursor-pointer font-semibold text-primary">Consultar instrucciones y tabla de puntos</summary><ScoreGuide index={index} /></details><a href={`${VIVIFRAIL_SOURCE}#page=${[8, 9, 10][index]}`} target="_blank" rel="noreferrer" className="mt-3 inline-block font-semibold text-primary underline">Ver instrucciones y tabla oficial de esta prueba</a><ChoiceButtons label="Puntuación obtenida" value={assessment.scores[index] === null ? '' : String(assessment.scores[index])} options={[{ value: '', label: 'Pendiente' }, ...[0, 1, 2, 3, 4].map(score => ({ value: String(score), label: `${score} puntos` }))]} onChange={value => { const scores = [...assessment.scores] as AssessmentInput['scores']; scores[index] = value === '' ? null : Number(value); update({ scores }); }} /></fieldset> : null)}</div>
+          <div className="mt-6 space-y-6">{functionalTests.map((test, index) => step === index + 1 ? <fieldset key={test.name} className="border-t border-primary/20 pt-5"><legend className="px-1 font-display text-xl font-bold">{test.name}</legend><p className="mt-2 max-w-3xl text-muted">{test.description}</p><AssessmentTestVisual index={index} /><details className="mt-4 rounded-xl border border-primary/20 bg-primary-50 p-4"><summary className="min-h-11 cursor-pointer font-semibold text-primary">Consultar instrucciones y tabla de puntos</summary><ScoreGuide index={index} /></details><a href={`${VIVIFRAIL_SOURCE}#page=${[8, 9, 10][index]}`} target="_blank" rel="noreferrer" className="mt-3 inline-block font-semibold text-primary underline">Ver instrucciones y tabla oficial de esta prueba</a><ChoiceButtons label="Puntuación obtenida" value={assessment.scores[index] === null ? '' : String(assessment.scores[index])} options={[{ value: '', label: 'Pendiente' }, ...[0, 1, 2, 3, 4].map(score => ({ value: String(score), label: `${score} puntos` }))]} onChange={value => { const scores = [...assessment.scores] as AssessmentInput['scores']; scores[index] = value === '' ? null : Number(value); update({ scores }); }} /></fieldset> : null)}</div>
         </section>)}
 
         {(step === 4) && (<section className="mt-7 rounded-2xl border border-primary/20 bg-white p-5 sm:p-7">
           <h2 className="font-display text-2xl font-bold">Criterios de riesgo de caídas</h2>
           <p className="mt-3 text-muted">Registra cada criterio por separado. «Pendiente» no se interpreta como «No». No diagnostiques deterioro cognitivo con esta herramienta.</p>
-          <div className="mt-5 space-y-5">{fallCriteria.map((criterion, index) => <div key={criterion} className="border-t border-primary/15 pt-2">{(index === 1 || index === 2) && <TestVisual index={index === 1 ? 3 : 4} />}<ChoiceButtons label={criterion} value={assessment.falls[index] === null ? '' : assessment.falls[index] ? 'yes' : 'no'} options={[{ value: '', label: 'Pendiente' }, { value: 'yes', label: 'Sí' }, { value: 'no', label: 'No' }]} onChange={value => { const falls = [...assessment.falls] as AssessmentInput['falls']; falls[index] = value === '' ? null : value === 'yes'; update({ falls }); }} /></div>)}</div>
+          <div className="mt-5 space-y-5">{fallCriteria.map((criterion, index) => <div key={criterion} className="border-t border-primary/15 pt-2">{(index === 1 || index === 2) && <AssessmentTestVisual index={index === 1 ? 3 : 4} />}<ChoiceButtons label={criterion} value={assessment.falls[index] === null ? '' : assessment.falls[index] ? 'yes' : 'no'} options={[{ value: '', label: 'Pendiente' }, { value: 'yes', label: 'Sí' }, { value: 'no', label: 'No' }]} onChange={value => { const falls = [...assessment.falls] as AssessmentInput['falls']; falls[index] = value === '' ? null : value === 'yes'; update({ falls }); }} /></div>)}</div>
         </section>)}
 
         {(step === 5) && (<section className="mt-7 rounded-2xl bg-primary-dark p-6 text-white" aria-live="polite" aria-atomic="true">
@@ -185,13 +185,4 @@ function ScoreGuide({ index }: { index: number }) {
     [['0', 'Más de 60 s'], ['1', '16,7–59 s'], ['2', '13,70–16,69 s'], ['3', '11,20–13,69 s'], ['4', 'Menos de 11,19 s']],
   ];
   return <div className="mt-4 rounded-xl border border-primary/15 bg-primary-50 p-4 sm:p-5"><p className="font-semibold text-primary-dark">Cómo realizarla</p><p className="mt-2 text-sm text-muted">{instructions[index]}</p><table className="mt-4 w-full text-left text-sm"><caption className="mb-2 text-left font-semibold">Tabla de referencia · Vivifrail 2020</caption><thead><tr><th scope="col" className="py-2 pr-4">Puntos</th><th scope="col" className="py-2">Resultado</th></tr></thead><tbody>{tables[index].map(([score, description]) => <tr key={score} className="border-t border-primary/15"><th scope="row" className="py-2 pr-4">{score}</th><td className="py-2">{description}</td></tr>)}</tbody></table>{index === 2 && <p className="mt-3 text-sm text-muted">La tabla original deja algunos límites sin especificar, como 11,19 s o 60 s. No se calculan puntos automáticamente: revisa el protocolo y documenta tu criterio. Si no has realizado la prueba, deja Pendiente.</p>}</div>;
-}
-
-
-function TestVisual({ index }: { index: number }) {
-  const images = index === 0
-    ? [{ file: 'pies-juntos', label: 'Pies juntos' }, { file: 'semitandem', label: 'Semitándem' }, { file: 'tandem', label: 'Tándem' }]
-    : index === 3 ? [{ file: 'timed-up-and-go', label: 'Levantarse, caminar 3 metros, girar y volver a sentarse' }]
-    : [{ file: index === 2 ? 'silla' : 'marcha', label: index === 2 ? 'Comenzar sentado, con los brazos cruzados' : `Caminar ${index === 4 ? 6 : 4} metros a paso habitual` }];
-  return <figure className="mt-5 rounded-xl border border-primary/20 bg-primary-50 p-4"><div className={`grid gap-4 ${index === 0 ? 'grid-cols-3' : 'grid-cols-1'}`}>{images.map(image => <div key={image.file} className="text-center"><Image src={`/valoraciones/${image.file}.png`} alt={image.label} width={180} height={210} className="mx-auto h-36 w-auto object-contain" /><p className="mt-3 text-sm font-semibold">{image.label}</p></div>)}</div><figcaption className="mt-4 text-sm text-muted">Ilustraciones del pasaporte profesional Vivifrail (2020), © Mikel Izquierdo. Referencia visual: sigue las instrucciones completas y comprueba la idoneidad de la prueba.</figcaption></figure>;
 }
